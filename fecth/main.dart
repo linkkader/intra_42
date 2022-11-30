@@ -28,7 +28,21 @@ void main() async {
   Client().initApi(cookie);
   if (read.toLowerCase() == "blackhole")
   {
+    var data = await LocaleStorage().img("cookie");
+    if(data == null)
+    {
+      cookie = stdin.readLineSync()!;
+      Client().initApi(cookie);
+      LocaleStorage().saveImg("cookie", utf8.encode(cookie));
+    }
+    else
+    {
+      cookie = utf8.decode(data.data);
+      Client().initApi(cookie);
+    }
     var completer = Completer();
+    LocaleStorage().saveImg("cookie", utf8.encode(cookie));
+
     BlackHoleManager().fetchAllBlackHole();
     return completer.future;
   }
