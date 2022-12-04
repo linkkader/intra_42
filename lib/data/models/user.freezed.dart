@@ -5478,8 +5478,20 @@ mixin _$Project {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get slug => throw _privateConstructorUsedError;
-  @JsonKey(name: "parent_id")
-  dynamic get parentId => throw _privateConstructorUsedError;
+  dynamic get parent => throw _privateConstructorUsedError;
+  List<dynamic>? get children => throw _privateConstructorUsedError;
+  List<dynamic>? get attachments => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  bool? get exam => throw _privateConstructorUsedError;
+  int? get gitId => throw _privateConstructorUsedError;
+  String? get repository => throw _privateConstructorUsedError;
+  String? get recommendation => throw _privateConstructorUsedError;
+  List<Cursus>? get cursus => throw _privateConstructorUsedError;
+  List<Campus>? get campus => throw _privateConstructorUsedError;
+  List<dynamic>? get videos => throw _privateConstructorUsedError;
+  List<ProjectSession>? get projectSessions =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -5495,7 +5507,19 @@ abstract class $ProjectCopyWith<$Res> {
       {int? id,
       String? name,
       String? slug,
-      @JsonKey(name: "parent_id") dynamic parentId});
+      dynamic parent,
+      List<dynamic>? children,
+      List<dynamic>? attachments,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      bool? exam,
+      int? gitId,
+      String? repository,
+      String? recommendation,
+      List<Cursus>? cursus,
+      List<Campus>? campus,
+      List<dynamic>? videos,
+      List<ProjectSession>? projectSessions});
 }
 
 /// @nodoc
@@ -5514,7 +5538,19 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
     Object? id = freezed,
     Object? name = freezed,
     Object? slug = freezed,
-    Object? parentId = null,
+    Object? parent = null,
+    Object? children = freezed,
+    Object? attachments = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? exam = freezed,
+    Object? gitId = freezed,
+    Object? repository = freezed,
+    Object? recommendation = freezed,
+    Object? cursus = freezed,
+    Object? campus = freezed,
+    Object? videos = freezed,
+    Object? projectSessions = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -5529,10 +5565,58 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
               as String?,
-      parentId: null == parentId
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      children: freezed == children
+          ? _value.children
+          : children // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      attachments: freezed == attachments
+          ? _value.attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      exam: freezed == exam
+          ? _value.exam
+          : exam // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      gitId: freezed == gitId
+          ? _value.gitId
+          : gitId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      repository: freezed == repository
+          ? _value.repository
+          : repository // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recommendation: freezed == recommendation
+          ? _value.recommendation
+          : recommendation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cursus: freezed == cursus
+          ? _value.cursus
+          : cursus // ignore: cast_nullable_to_non_nullable
+              as List<Cursus>?,
+      campus: freezed == campus
+          ? _value.campus
+          : campus // ignore: cast_nullable_to_non_nullable
+              as List<Campus>?,
+      videos: freezed == videos
+          ? _value.videos
+          : videos // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      projectSessions: freezed == projectSessions
+          ? _value.projectSessions
+          : projectSessions // ignore: cast_nullable_to_non_nullable
+              as List<ProjectSession>?,
     ) as $Val);
   }
 }
@@ -5548,7 +5632,19 @@ abstract class _$$_ProjectCopyWith<$Res> implements $ProjectCopyWith<$Res> {
       {int? id,
       String? name,
       String? slug,
-      @JsonKey(name: "parent_id") dynamic parentId});
+      dynamic parent,
+      List<dynamic>? children,
+      List<dynamic>? attachments,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      bool? exam,
+      int? gitId,
+      String? repository,
+      String? recommendation,
+      List<Cursus>? cursus,
+      List<Campus>? campus,
+      List<dynamic>? videos,
+      List<ProjectSession>? projectSessions});
 }
 
 /// @nodoc
@@ -5564,7 +5660,19 @@ class __$$_ProjectCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? slug = freezed,
-    Object? parentId = null,
+    Object? parent = null,
+    Object? children = freezed,
+    Object? attachments = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? exam = freezed,
+    Object? gitId = freezed,
+    Object? repository = freezed,
+    Object? recommendation = freezed,
+    Object? cursus = freezed,
+    Object? campus = freezed,
+    Object? videos = freezed,
+    Object? projectSessions = freezed,
   }) {
     return _then(_$_Project(
       id: freezed == id
@@ -5579,10 +5687,58 @@ class __$$_ProjectCopyWithImpl<$Res>
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
               as String?,
-      parentId: null == parentId
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      children: freezed == children
+          ? _value._children
+          : children // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      attachments: freezed == attachments
+          ? _value._attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      exam: freezed == exam
+          ? _value.exam
+          : exam // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      gitId: freezed == gitId
+          ? _value.gitId
+          : gitId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      repository: freezed == repository
+          ? _value.repository
+          : repository // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recommendation: freezed == recommendation
+          ? _value.recommendation
+          : recommendation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cursus: freezed == cursus
+          ? _value._cursus
+          : cursus // ignore: cast_nullable_to_non_nullable
+              as List<Cursus>?,
+      campus: freezed == campus
+          ? _value._campus
+          : campus // ignore: cast_nullable_to_non_nullable
+              as List<Campus>?,
+      videos: freezed == videos
+          ? _value._videos
+          : videos // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      projectSessions: freezed == projectSessions
+          ? _value._projectSessions
+          : projectSessions // ignore: cast_nullable_to_non_nullable
+              as List<ProjectSession>?,
     ));
   }
 }
@@ -5594,7 +5750,25 @@ class _$_Project implements _Project {
       {this.id,
       this.name,
       this.slug,
-      @JsonKey(name: "parent_id") this.parentId});
+      this.parent,
+      final List<dynamic>? children,
+      final List<dynamic>? attachments,
+      this.createdAt,
+      this.updatedAt,
+      this.exam,
+      this.gitId,
+      this.repository,
+      this.recommendation,
+      final List<Cursus>? cursus,
+      final List<Campus>? campus,
+      final List<dynamic>? videos,
+      final List<ProjectSession>? projectSessions})
+      : _children = children,
+        _attachments = attachments,
+        _cursus = cursus,
+        _campus = campus,
+        _videos = videos,
+        _projectSessions = projectSessions;
 
   factory _$_Project.fromJson(Map<String, dynamic> json) =>
       _$$_ProjectFromJson(json);
@@ -5606,12 +5780,76 @@ class _$_Project implements _Project {
   @override
   final String? slug;
   @override
-  @JsonKey(name: "parent_id")
-  final dynamic parentId;
+  final dynamic parent;
+  final List<dynamic>? _children;
+  @override
+  List<dynamic>? get children {
+    final value = _children;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<dynamic>? _attachments;
+  @override
+  List<dynamic>? get attachments {
+    final value = _attachments;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final DateTime? createdAt;
+  @override
+  final DateTime? updatedAt;
+  @override
+  final bool? exam;
+  @override
+  final int? gitId;
+  @override
+  final String? repository;
+  @override
+  final String? recommendation;
+  final List<Cursus>? _cursus;
+  @override
+  List<Cursus>? get cursus {
+    final value = _cursus;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Campus>? _campus;
+  @override
+  List<Campus>? get campus {
+    final value = _campus;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<dynamic>? _videos;
+  @override
+  List<dynamic>? get videos {
+    final value = _videos;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<ProjectSession>? _projectSessions;
+  @override
+  List<ProjectSession>? get projectSessions {
+    final value = _projectSessions;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'Project(id: $id, name: $name, slug: $slug, parentId: $parentId)';
+    return 'Project(id: $id, name: $name, slug: $slug, parent: $parent, children: $children, attachments: $attachments, createdAt: $createdAt, updatedAt: $updatedAt, exam: $exam, gitId: $gitId, repository: $repository, recommendation: $recommendation, cursus: $cursus, campus: $campus, videos: $videos, projectSessions: $projectSessions)';
   }
 
   @override
@@ -5622,13 +5860,47 @@ class _$_Project implements _Project {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.slug, slug) || other.slug == slug) &&
-            const DeepCollectionEquality().equals(other.parentId, parentId));
+            const DeepCollectionEquality().equals(other.parent, parent) &&
+            const DeepCollectionEquality().equals(other._children, _children) &&
+            const DeepCollectionEquality()
+                .equals(other._attachments, _attachments) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.exam, exam) || other.exam == exam) &&
+            (identical(other.gitId, gitId) || other.gitId == gitId) &&
+            (identical(other.repository, repository) ||
+                other.repository == repository) &&
+            (identical(other.recommendation, recommendation) ||
+                other.recommendation == recommendation) &&
+            const DeepCollectionEquality().equals(other._cursus, _cursus) &&
+            const DeepCollectionEquality().equals(other._campus, _campus) &&
+            const DeepCollectionEquality().equals(other._videos, _videos) &&
+            const DeepCollectionEquality()
+                .equals(other._projectSessions, _projectSessions));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, slug,
-      const DeepCollectionEquality().hash(parentId));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      slug,
+      const DeepCollectionEquality().hash(parent),
+      const DeepCollectionEquality().hash(_children),
+      const DeepCollectionEquality().hash(_attachments),
+      createdAt,
+      updatedAt,
+      exam,
+      gitId,
+      repository,
+      recommendation,
+      const DeepCollectionEquality().hash(_cursus),
+      const DeepCollectionEquality().hash(_campus),
+      const DeepCollectionEquality().hash(_videos),
+      const DeepCollectionEquality().hash(_projectSessions));
 
   @JsonKey(ignore: true)
   @override
@@ -5649,7 +5921,19 @@ abstract class _Project implements Project {
       {final int? id,
       final String? name,
       final String? slug,
-      @JsonKey(name: "parent_id") final dynamic parentId}) = _$_Project;
+      final dynamic parent,
+      final List<dynamic>? children,
+      final List<dynamic>? attachments,
+      final DateTime? createdAt,
+      final DateTime? updatedAt,
+      final bool? exam,
+      final int? gitId,
+      final String? repository,
+      final String? recommendation,
+      final List<Cursus>? cursus,
+      final List<Campus>? campus,
+      final List<dynamic>? videos,
+      final List<ProjectSession>? projectSessions}) = _$_Project;
 
   factory _Project.fromJson(Map<String, dynamic> json) = _$_Project.fromJson;
 
@@ -5660,10 +5944,945 @@ abstract class _Project implements Project {
   @override
   String? get slug;
   @override
-  @JsonKey(name: "parent_id")
-  dynamic get parentId;
+  dynamic get parent;
+  @override
+  List<dynamic>? get children;
+  @override
+  List<dynamic>? get attachments;
+  @override
+  DateTime? get createdAt;
+  @override
+  DateTime? get updatedAt;
+  @override
+  bool? get exam;
+  @override
+  int? get gitId;
+  @override
+  String? get repository;
+  @override
+  String? get recommendation;
+  @override
+  List<Cursus>? get cursus;
+  @override
+  List<Campus>? get campus;
+  @override
+  List<dynamic>? get videos;
+  @override
+  List<ProjectSession>? get projectSessions;
   @override
   @JsonKey(ignore: true)
   _$$_ProjectCopyWith<_$_Project> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ProjectSession _$ProjectSessionFromJson(Map<String, dynamic> json) {
+  return _ProjectSession.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ProjectSession {
+  int? get id => throw _privateConstructorUsedError;
+  bool? get solo => throw _privateConstructorUsedError;
+  dynamic get beginAt => throw _privateConstructorUsedError;
+  dynamic get endAt => throw _privateConstructorUsedError;
+  String? get estimateTime => throw _privateConstructorUsedError;
+  int? get difficulty => throw _privateConstructorUsedError;
+  List<String>? get objectives => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  dynamic get durationDays => throw _privateConstructorUsedError;
+  dynamic get terminatingAfter => throw _privateConstructorUsedError;
+  int? get projectId => throw _privateConstructorUsedError;
+  int? get campusId => throw _privateConstructorUsedError;
+  int? get cursusId => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  dynamic get maxPeople => throw _privateConstructorUsedError;
+  bool? get isSubscriptable => throw _privateConstructorUsedError;
+  List<Scale>? get scales => throw _privateConstructorUsedError;
+  List<Upload>? get uploads => throw _privateConstructorUsedError;
+  String? get teamBehaviour => throw _privateConstructorUsedError;
+  String? get commit => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ProjectSessionCopyWith<ProjectSession> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProjectSessionCopyWith<$Res> {
+  factory $ProjectSessionCopyWith(
+          ProjectSession value, $Res Function(ProjectSession) then) =
+      _$ProjectSessionCopyWithImpl<$Res, ProjectSession>;
+  @useResult
+  $Res call(
+      {int? id,
+      bool? solo,
+      dynamic beginAt,
+      dynamic endAt,
+      String? estimateTime,
+      int? difficulty,
+      List<String>? objectives,
+      String? description,
+      dynamic durationDays,
+      dynamic terminatingAfter,
+      int? projectId,
+      int? campusId,
+      int? cursusId,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      dynamic maxPeople,
+      bool? isSubscriptable,
+      List<Scale>? scales,
+      List<Upload>? uploads,
+      String? teamBehaviour,
+      String? commit});
+}
+
+/// @nodoc
+class _$ProjectSessionCopyWithImpl<$Res, $Val extends ProjectSession>
+    implements $ProjectSessionCopyWith<$Res> {
+  _$ProjectSessionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? solo = freezed,
+    Object? beginAt = null,
+    Object? endAt = null,
+    Object? estimateTime = freezed,
+    Object? difficulty = freezed,
+    Object? objectives = freezed,
+    Object? description = freezed,
+    Object? durationDays = null,
+    Object? terminatingAfter = null,
+    Object? projectId = freezed,
+    Object? campusId = freezed,
+    Object? cursusId = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? maxPeople = null,
+    Object? isSubscriptable = freezed,
+    Object? scales = freezed,
+    Object? uploads = freezed,
+    Object? teamBehaviour = freezed,
+    Object? commit = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      solo: freezed == solo
+          ? _value.solo
+          : solo // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      beginAt: null == beginAt
+          ? _value.beginAt
+          : beginAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      endAt: null == endAt
+          ? _value.endAt
+          : endAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      estimateTime: freezed == estimateTime
+          ? _value.estimateTime
+          : estimateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      difficulty: freezed == difficulty
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as int?,
+      objectives: freezed == objectives
+          ? _value.objectives
+          : objectives // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      durationDays: null == durationDays
+          ? _value.durationDays
+          : durationDays // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      terminatingAfter: null == terminatingAfter
+          ? _value.terminatingAfter
+          : terminatingAfter // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      projectId: freezed == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      campusId: freezed == campusId
+          ? _value.campusId
+          : campusId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cursusId: freezed == cursusId
+          ? _value.cursusId
+          : cursusId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      maxPeople: null == maxPeople
+          ? _value.maxPeople
+          : maxPeople // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isSubscriptable: freezed == isSubscriptable
+          ? _value.isSubscriptable
+          : isSubscriptable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      scales: freezed == scales
+          ? _value.scales
+          : scales // ignore: cast_nullable_to_non_nullable
+              as List<Scale>?,
+      uploads: freezed == uploads
+          ? _value.uploads
+          : uploads // ignore: cast_nullable_to_non_nullable
+              as List<Upload>?,
+      teamBehaviour: freezed == teamBehaviour
+          ? _value.teamBehaviour
+          : teamBehaviour // ignore: cast_nullable_to_non_nullable
+              as String?,
+      commit: freezed == commit
+          ? _value.commit
+          : commit // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ProjectSessionCopyWith<$Res>
+    implements $ProjectSessionCopyWith<$Res> {
+  factory _$$_ProjectSessionCopyWith(
+          _$_ProjectSession value, $Res Function(_$_ProjectSession) then) =
+      __$$_ProjectSessionCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      bool? solo,
+      dynamic beginAt,
+      dynamic endAt,
+      String? estimateTime,
+      int? difficulty,
+      List<String>? objectives,
+      String? description,
+      dynamic durationDays,
+      dynamic terminatingAfter,
+      int? projectId,
+      int? campusId,
+      int? cursusId,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      dynamic maxPeople,
+      bool? isSubscriptable,
+      List<Scale>? scales,
+      List<Upload>? uploads,
+      String? teamBehaviour,
+      String? commit});
+}
+
+/// @nodoc
+class __$$_ProjectSessionCopyWithImpl<$Res>
+    extends _$ProjectSessionCopyWithImpl<$Res, _$_ProjectSession>
+    implements _$$_ProjectSessionCopyWith<$Res> {
+  __$$_ProjectSessionCopyWithImpl(
+      _$_ProjectSession _value, $Res Function(_$_ProjectSession) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? solo = freezed,
+    Object? beginAt = null,
+    Object? endAt = null,
+    Object? estimateTime = freezed,
+    Object? difficulty = freezed,
+    Object? objectives = freezed,
+    Object? description = freezed,
+    Object? durationDays = null,
+    Object? terminatingAfter = null,
+    Object? projectId = freezed,
+    Object? campusId = freezed,
+    Object? cursusId = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? maxPeople = null,
+    Object? isSubscriptable = freezed,
+    Object? scales = freezed,
+    Object? uploads = freezed,
+    Object? teamBehaviour = freezed,
+    Object? commit = freezed,
+  }) {
+    return _then(_$_ProjectSession(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      solo: freezed == solo
+          ? _value.solo
+          : solo // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      beginAt: null == beginAt
+          ? _value.beginAt
+          : beginAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      endAt: null == endAt
+          ? _value.endAt
+          : endAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      estimateTime: freezed == estimateTime
+          ? _value.estimateTime
+          : estimateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      difficulty: freezed == difficulty
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as int?,
+      objectives: freezed == objectives
+          ? _value._objectives
+          : objectives // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      durationDays: null == durationDays
+          ? _value.durationDays
+          : durationDays // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      terminatingAfter: null == terminatingAfter
+          ? _value.terminatingAfter
+          : terminatingAfter // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      projectId: freezed == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      campusId: freezed == campusId
+          ? _value.campusId
+          : campusId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cursusId: freezed == cursusId
+          ? _value.cursusId
+          : cursusId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      maxPeople: null == maxPeople
+          ? _value.maxPeople
+          : maxPeople // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isSubscriptable: freezed == isSubscriptable
+          ? _value.isSubscriptable
+          : isSubscriptable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      scales: freezed == scales
+          ? _value._scales
+          : scales // ignore: cast_nullable_to_non_nullable
+              as List<Scale>?,
+      uploads: freezed == uploads
+          ? _value._uploads
+          : uploads // ignore: cast_nullable_to_non_nullable
+              as List<Upload>?,
+      teamBehaviour: freezed == teamBehaviour
+          ? _value.teamBehaviour
+          : teamBehaviour // ignore: cast_nullable_to_non_nullable
+              as String?,
+      commit: freezed == commit
+          ? _value.commit
+          : commit // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ProjectSession implements _ProjectSession {
+  const _$_ProjectSession(
+      {this.id,
+      this.solo,
+      this.beginAt,
+      this.endAt,
+      this.estimateTime,
+      this.difficulty,
+      final List<String>? objectives,
+      this.description,
+      this.durationDays,
+      this.terminatingAfter,
+      this.projectId,
+      this.campusId,
+      this.cursusId,
+      this.createdAt,
+      this.updatedAt,
+      this.maxPeople,
+      this.isSubscriptable,
+      final List<Scale>? scales,
+      final List<Upload>? uploads,
+      this.teamBehaviour,
+      this.commit})
+      : _objectives = objectives,
+        _scales = scales,
+        _uploads = uploads;
+
+  factory _$_ProjectSession.fromJson(Map<String, dynamic> json) =>
+      _$$_ProjectSessionFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final bool? solo;
+  @override
+  final dynamic beginAt;
+  @override
+  final dynamic endAt;
+  @override
+  final String? estimateTime;
+  @override
+  final int? difficulty;
+  final List<String>? _objectives;
+  @override
+  List<String>? get objectives {
+    final value = _objectives;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? description;
+  @override
+  final dynamic durationDays;
+  @override
+  final dynamic terminatingAfter;
+  @override
+  final int? projectId;
+  @override
+  final int? campusId;
+  @override
+  final int? cursusId;
+  @override
+  final DateTime? createdAt;
+  @override
+  final DateTime? updatedAt;
+  @override
+  final dynamic maxPeople;
+  @override
+  final bool? isSubscriptable;
+  final List<Scale>? _scales;
+  @override
+  List<Scale>? get scales {
+    final value = _scales;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Upload>? _uploads;
+  @override
+  List<Upload>? get uploads {
+    final value = _uploads;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? teamBehaviour;
+  @override
+  final String? commit;
+
+  @override
+  String toString() {
+    return 'ProjectSession(id: $id, solo: $solo, beginAt: $beginAt, endAt: $endAt, estimateTime: $estimateTime, difficulty: $difficulty, objectives: $objectives, description: $description, durationDays: $durationDays, terminatingAfter: $terminatingAfter, projectId: $projectId, campusId: $campusId, cursusId: $cursusId, createdAt: $createdAt, updatedAt: $updatedAt, maxPeople: $maxPeople, isSubscriptable: $isSubscriptable, scales: $scales, uploads: $uploads, teamBehaviour: $teamBehaviour, commit: $commit)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ProjectSession &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.solo, solo) || other.solo == solo) &&
+            const DeepCollectionEquality().equals(other.beginAt, beginAt) &&
+            const DeepCollectionEquality().equals(other.endAt, endAt) &&
+            (identical(other.estimateTime, estimateTime) ||
+                other.estimateTime == estimateTime) &&
+            (identical(other.difficulty, difficulty) ||
+                other.difficulty == difficulty) &&
+            const DeepCollectionEquality()
+                .equals(other._objectives, _objectives) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality()
+                .equals(other.durationDays, durationDays) &&
+            const DeepCollectionEquality()
+                .equals(other.terminatingAfter, terminatingAfter) &&
+            (identical(other.projectId, projectId) ||
+                other.projectId == projectId) &&
+            (identical(other.campusId, campusId) ||
+                other.campusId == campusId) &&
+            (identical(other.cursusId, cursusId) ||
+                other.cursusId == cursusId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            const DeepCollectionEquality().equals(other.maxPeople, maxPeople) &&
+            (identical(other.isSubscriptable, isSubscriptable) ||
+                other.isSubscriptable == isSubscriptable) &&
+            const DeepCollectionEquality().equals(other._scales, _scales) &&
+            const DeepCollectionEquality().equals(other._uploads, _uploads) &&
+            (identical(other.teamBehaviour, teamBehaviour) ||
+                other.teamBehaviour == teamBehaviour) &&
+            (identical(other.commit, commit) || other.commit == commit));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        solo,
+        const DeepCollectionEquality().hash(beginAt),
+        const DeepCollectionEquality().hash(endAt),
+        estimateTime,
+        difficulty,
+        const DeepCollectionEquality().hash(_objectives),
+        description,
+        const DeepCollectionEquality().hash(durationDays),
+        const DeepCollectionEquality().hash(terminatingAfter),
+        projectId,
+        campusId,
+        cursusId,
+        createdAt,
+        updatedAt,
+        const DeepCollectionEquality().hash(maxPeople),
+        isSubscriptable,
+        const DeepCollectionEquality().hash(_scales),
+        const DeepCollectionEquality().hash(_uploads),
+        teamBehaviour,
+        commit
+      ]);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ProjectSessionCopyWith<_$_ProjectSession> get copyWith =>
+      __$$_ProjectSessionCopyWithImpl<_$_ProjectSession>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ProjectSessionToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ProjectSession implements ProjectSession {
+  const factory _ProjectSession(
+      {final int? id,
+      final bool? solo,
+      final dynamic beginAt,
+      final dynamic endAt,
+      final String? estimateTime,
+      final int? difficulty,
+      final List<String>? objectives,
+      final String? description,
+      final dynamic durationDays,
+      final dynamic terminatingAfter,
+      final int? projectId,
+      final int? campusId,
+      final int? cursusId,
+      final DateTime? createdAt,
+      final DateTime? updatedAt,
+      final dynamic maxPeople,
+      final bool? isSubscriptable,
+      final List<Scale>? scales,
+      final List<Upload>? uploads,
+      final String? teamBehaviour,
+      final String? commit}) = _$_ProjectSession;
+
+  factory _ProjectSession.fromJson(Map<String, dynamic> json) =
+      _$_ProjectSession.fromJson;
+
+  @override
+  int? get id;
+  @override
+  bool? get solo;
+  @override
+  dynamic get beginAt;
+  @override
+  dynamic get endAt;
+  @override
+  String? get estimateTime;
+  @override
+  int? get difficulty;
+  @override
+  List<String>? get objectives;
+  @override
+  String? get description;
+  @override
+  dynamic get durationDays;
+  @override
+  dynamic get terminatingAfter;
+  @override
+  int? get projectId;
+  @override
+  int? get campusId;
+  @override
+  int? get cursusId;
+  @override
+  DateTime? get createdAt;
+  @override
+  DateTime? get updatedAt;
+  @override
+  dynamic get maxPeople;
+  @override
+  bool? get isSubscriptable;
+  @override
+  List<Scale>? get scales;
+  @override
+  List<Upload>? get uploads;
+  @override
+  String? get teamBehaviour;
+  @override
+  String? get commit;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ProjectSessionCopyWith<_$_ProjectSession> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Scale _$ScaleFromJson(Map<String, dynamic> json) {
+  return _Scale.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Scale {
+  int? get id => throw _privateConstructorUsedError;
+  int? get correctionNumber => throw _privateConstructorUsedError;
+  bool? get isPrimary => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ScaleCopyWith<Scale> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ScaleCopyWith<$Res> {
+  factory $ScaleCopyWith(Scale value, $Res Function(Scale) then) =
+      _$ScaleCopyWithImpl<$Res, Scale>;
+  @useResult
+  $Res call({int? id, int? correctionNumber, bool? isPrimary});
+}
+
+/// @nodoc
+class _$ScaleCopyWithImpl<$Res, $Val extends Scale>
+    implements $ScaleCopyWith<$Res> {
+  _$ScaleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? correctionNumber = freezed,
+    Object? isPrimary = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      correctionNumber: freezed == correctionNumber
+          ? _value.correctionNumber
+          : correctionNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isPrimary: freezed == isPrimary
+          ? _value.isPrimary
+          : isPrimary // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ScaleCopyWith<$Res> implements $ScaleCopyWith<$Res> {
+  factory _$$_ScaleCopyWith(_$_Scale value, $Res Function(_$_Scale) then) =
+      __$$_ScaleCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? id, int? correctionNumber, bool? isPrimary});
+}
+
+/// @nodoc
+class __$$_ScaleCopyWithImpl<$Res> extends _$ScaleCopyWithImpl<$Res, _$_Scale>
+    implements _$$_ScaleCopyWith<$Res> {
+  __$$_ScaleCopyWithImpl(_$_Scale _value, $Res Function(_$_Scale) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? correctionNumber = freezed,
+    Object? isPrimary = freezed,
+  }) {
+    return _then(_$_Scale(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      correctionNumber: freezed == correctionNumber
+          ? _value.correctionNumber
+          : correctionNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isPrimary: freezed == isPrimary
+          ? _value.isPrimary
+          : isPrimary // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Scale implements _Scale {
+  const _$_Scale({this.id, this.correctionNumber, this.isPrimary});
+
+  factory _$_Scale.fromJson(Map<String, dynamic> json) =>
+      _$$_ScaleFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final int? correctionNumber;
+  @override
+  final bool? isPrimary;
+
+  @override
+  String toString() {
+    return 'Scale(id: $id, correctionNumber: $correctionNumber, isPrimary: $isPrimary)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Scale &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.correctionNumber, correctionNumber) ||
+                other.correctionNumber == correctionNumber) &&
+            (identical(other.isPrimary, isPrimary) ||
+                other.isPrimary == isPrimary));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, correctionNumber, isPrimary);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ScaleCopyWith<_$_Scale> get copyWith =>
+      __$$_ScaleCopyWithImpl<_$_Scale>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ScaleToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Scale implements Scale {
+  const factory _Scale(
+      {final int? id,
+      final int? correctionNumber,
+      final bool? isPrimary}) = _$_Scale;
+
+  factory _Scale.fromJson(Map<String, dynamic> json) = _$_Scale.fromJson;
+
+  @override
+  int? get id;
+  @override
+  int? get correctionNumber;
+  @override
+  bool? get isPrimary;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ScaleCopyWith<_$_Scale> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Upload _$UploadFromJson(Map<String, dynamic> json) {
+  return _Upload.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Upload {
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $UploadCopyWith<Upload> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UploadCopyWith<$Res> {
+  factory $UploadCopyWith(Upload value, $Res Function(Upload) then) =
+      _$UploadCopyWithImpl<$Res, Upload>;
+  @useResult
+  $Res call({int? id, String? name});
+}
+
+/// @nodoc
+class _$UploadCopyWithImpl<$Res, $Val extends Upload>
+    implements $UploadCopyWith<$Res> {
+  _$UploadCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_UploadCopyWith<$Res> implements $UploadCopyWith<$Res> {
+  factory _$$_UploadCopyWith(_$_Upload value, $Res Function(_$_Upload) then) =
+      __$$_UploadCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? id, String? name});
+}
+
+/// @nodoc
+class __$$_UploadCopyWithImpl<$Res>
+    extends _$UploadCopyWithImpl<$Res, _$_Upload>
+    implements _$$_UploadCopyWith<$Res> {
+  __$$_UploadCopyWithImpl(_$_Upload _value, $Res Function(_$_Upload) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_$_Upload(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Upload implements _Upload {
+  const _$_Upload({this.id, this.name});
+
+  factory _$_Upload.fromJson(Map<String, dynamic> json) =>
+      _$$_UploadFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final String? name;
+
+  @override
+  String toString() {
+    return 'Upload(id: $id, name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Upload &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UploadCopyWith<_$_Upload> get copyWith =>
+      __$$_UploadCopyWithImpl<_$_Upload>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_UploadToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Upload implements Upload {
+  const factory _Upload({final int? id, final String? name}) = _$_Upload;
+
+  factory _Upload.fromJson(Map<String, dynamic> json) = _$_Upload.fromJson;
+
+  @override
+  int? get id;
+  @override
+  String? get name;
+  @override
+  @JsonKey(ignore: true)
+  _$$_UploadCopyWith<_$_Upload> get copyWith =>
       throw _privateConstructorUsedError;
 }

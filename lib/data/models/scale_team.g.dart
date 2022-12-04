@@ -25,11 +25,11 @@ _$_Scale _$$_ScaleFromJson(Map<String, dynamic> json) => _$_Scale(
           ? null
           : DateTime.parse(json['begin_at'] as String),
       correcteds: (json['correcteds'] as List<dynamic>?)
-          ?.map((e) => Correct.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Corrector.fromJson(e as Map<String, dynamic>))
           .toList(),
       corrector: json['corrector'] == null
           ? null
-          : Correct.fromJson(json['corrector'] as Map<String, dynamic>),
+          : Corrector.fromJson(json['corrector'] as Map<String, dynamic>),
       truant: json['truant'] == null
           ? null
           : Truant.fromJson(json['truant'] as Map<String, dynamic>),
@@ -41,7 +41,9 @@ _$_Scale _$$_ScaleFromJson(Map<String, dynamic> json) => _$_Scale(
       team: json['team'] == null
           ? null
           : Team.fromJson(json['team'] as Map<String, dynamic>),
-      feedbacks: json['feedbacks'] as List<dynamic>?,
+      feedbacks: (json['feedbacks'] as List<dynamic>?)
+          ?.map((e) => Feedback.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_ScaleToJson(_$_Scale instance) => <String, dynamic>{
@@ -64,13 +66,38 @@ Map<String, dynamic> _$$_ScaleToJson(_$_Scale instance) => <String, dynamic>{
       'feedbacks': instance.feedbacks,
     };
 
-_$_Correct _$$_CorrectFromJson(Map<String, dynamic> json) => _$_Correct(
+_$_Feedback _$$_FeedbackFromJson(Map<String, dynamic> json) => _$_Feedback(
+      id: json['id'] as int?,
+      user: json['user'] == null
+          ? null
+          : Corrector.fromJson(json['user'] as Map<String, dynamic>),
+      feedbackableType: json['feedbackable_type'] as String?,
+      feedbackableId: json['feedbackable_id'] as int?,
+      comment: json['comment'] as String?,
+      rating: json['rating'] as int?,
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+    );
+
+Map<String, dynamic> _$$_FeedbackToJson(_$_Feedback instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'user': instance.user,
+      'feedbackable_type': instance.feedbackableType,
+      'feedbackable_id': instance.feedbackableId,
+      'comment': instance.comment,
+      'rating': instance.rating,
+      'created_at': instance.createdAt?.toIso8601String(),
+    };
+
+_$_Corrector _$$_CorrectorFromJson(Map<String, dynamic> json) => _$_Corrector(
       id: json['id'] as int?,
       login: json['login'] as String?,
       url: json['url'] as String?,
     );
 
-Map<String, dynamic> _$$_CorrectToJson(_$_Correct instance) =>
+Map<String, dynamic> _$$_CorrectorToJson(_$_Corrector instance) =>
     <String, dynamic>{
       'id': instance.id,
       'login': instance.login,

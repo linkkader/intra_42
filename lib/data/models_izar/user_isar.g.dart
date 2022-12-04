@@ -15,7 +15,7 @@ extension GetUserIsarCollection on Isar {
 
 const UserIsarSchema = CollectionSchema(
   name: r'UserIsar',
-  id: 02222,
+  id: 1907786346797868586,
   properties: {
     r'achievements': PropertySchema(
       id: 0,
@@ -6846,7 +6846,7 @@ extension AchievementIsarQueryObject
 
 const CampusIsarSchema = Schema(
   name: r'CampusIsar',
-  id: -873883,
+  id: -1133415018555854153,
   properties: {
     r'active': PropertySchema(
       id: 0,
@@ -9593,7 +9593,7 @@ extension LanguageIsarQueryObject
 
 const CampusUserIsarSchema = Schema(
   name: r'CampusUserIsar',
-  id: -0998383,
+  id: -5215761031348920092,
   properties: {
     r'campusId': PropertySchema(
       id: 0,
@@ -15840,7 +15840,7 @@ extension ImageIsarQueryObject
 
 const VersionsIsarSchema = Schema(
   name: r'VersionsIsar',
-  id: 98387378,
+  id: 7818346104909990941,
   properties: {
     r'large': PropertySchema(
       id: 0,
@@ -16569,7 +16569,7 @@ extension VersionsIsarQueryObject
 
 const ExpertisesUserIsarSchema = Schema(
   name: r'ExpertisesUserIsar',
-  id: -9839983,
+  id: -8101017755448126544,
   properties: {
     r'contactMe': PropertySchema(
       id: 0,
@@ -17118,7 +17118,7 @@ extension ExpertisesUserIsarQueryObject
 
 const LanguagesUserIsarSchema = Schema(
   name: r'LanguagesUserIsar',
-  id: -0987873,
+  id: -2408494891271116365,
   properties: {
     r'createdAt': PropertySchema(
       id: 0,

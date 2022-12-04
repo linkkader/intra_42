@@ -368,10 +368,70 @@ abstract class Project with _$Project {
     int? id,
     String? name,
     String? slug,
-    @JsonKey(name: "parent_id")
-    dynamic parentId,
+    dynamic parent,
+    List<dynamic>? children,
+    List<dynamic>? attachments,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    bool? exam,
+    int? gitId,
+    String? repository,
+    String? recommendation,
+    List<Cursus>? cursus,
+    List<Campus>? campus,
+    List<dynamic>? videos,
+    List<ProjectSession>? projectSessions,
   }) = _Project;
 
   factory Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
 }
 
+@freezed
+abstract class ProjectSession with _$ProjectSession {
+  const factory ProjectSession({
+    int? id,
+    bool? solo,
+    dynamic beginAt,
+    dynamic endAt,
+    String? estimateTime,
+    int? difficulty,
+    List<String>? objectives,
+    String? description,
+    dynamic durationDays,
+    dynamic terminatingAfter,
+    int? projectId,
+    int? campusId,
+    int? cursusId,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    dynamic maxPeople,
+    bool? isSubscriptable,
+    List<Scale>? scales,
+    List<Upload>? uploads,
+    String? teamBehaviour,
+    String? commit,
+  }) = _ProjectSession;
+
+  factory ProjectSession.fromJson(Map<String, dynamic> json) => _$ProjectSessionFromJson(json);
+}
+
+@freezed
+abstract class Scale with _$Scale {
+  const factory Scale({
+    int? id,
+    int? correctionNumber,
+    bool? isPrimary,
+  }) = _Scale;
+
+  factory Scale.fromJson(Map<String, dynamic> json) => _$ScaleFromJson(json);
+}
+
+@freezed
+abstract class Upload with _$Upload {
+  const factory Upload({
+    int? id,
+    String? name,
+  }) = _Upload;
+
+  factory Upload.fromJson(Map<String, dynamic> json) => _$UploadFromJson(json);
+}

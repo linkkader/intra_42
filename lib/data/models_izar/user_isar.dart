@@ -816,7 +816,6 @@ class ProjectIsar {
     id: id,
     name: name,
     slug: slug,
-    parentId: parentId,
   );
 
 }

@@ -3,4 +3,8 @@
     <option name="filePath" value="$PROJECT_DIR$/fecth/main.dart" />
     <method v="2" />
   </configuration>
+  <configuration default="false" name="fetch" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" singleton="false">
+    <option name="filePath" value="$PROJECT_DIR$/fecth/main.dart" />
+    <method v="2" />
+  </configuration>
 </component>

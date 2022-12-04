@@ -46,6 +46,14 @@ void main() async {
     BlackHoleManager().fetchAllBlackHole();
     return completer.future;
   }
+
+  if (read.toLowerCase() == "cookie")
+  {
+    cookie = stdin.readLineSync()!;
+    Client().initApi(cookie);
+    LocaleStorage().saveImg("cookie", utf8.encode(cookie));
+    return;
+  }
   if (read.toLowerCase() == "all")
   {
     var all = LocaleStorage().allUsers();

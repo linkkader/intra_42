@@ -36,7 +36,8 @@ class _UserSheetState extends State<UserBottomSheet> {
   @override
   void initState() {
     assert(widget.id != null || widget.login != null, "id or login must be not null");
-    user = widget.id != null ? LocaleStorage().getUser(widget.id!)! : LocaleStorage().getUserByLogin(widget.login!)!;
+    // user = widget.id != null ? LocaleStorage().getUser(widget.id!)! : LocaleStorage().getUserByLogin(widget.login!)!;
+    user = widget.id != null ? LocaleStorage().getUser(widget.id!)! : LocaleStorage().getUserByLogin("acouliba")!;
     App.log.i(user);
     super.initState();
   }

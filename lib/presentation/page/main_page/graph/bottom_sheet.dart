@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/params/colors.dart';
 import 'package:intra_42/main.dart';
 import 'dart:developer';
@@ -12,7 +13,12 @@ class BottomSheetProject extends StatelessWidget {
   final ProjectData data;
   final User user;
   const BottomSheetProject(this.data, this.user, {Key? key}) : super(key: key);
-  Widget state(){
+  Widget stateWidget(){
+    Text(
+      data.name ?? "",
+      style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+    );
+
     if (data.finalMark != null) {
       return Container(
         decoration: BoxDecoration(
@@ -21,19 +27,21 @@ class BottomSheetProject extends StatelessWidget {
         ),
         padding: const EdgeInsets.only(left: 2, right: 2, top: 1, bottom: 1),
         child: Text(
-          data.finalMark.toString()
+          data.finalMark.toString() ,
+          style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
         ),
       );
     }
     if (data.state == "unavailable"){
       return Container(
-        decoration:const  BoxDecoration(
-            color:  Color(0xFFcc6256),
-            borderRadius: BorderRadius.all(Radius.circular(2))
+        decoration:  BoxDecoration(
+            color:  App.colorScheme.tertiary,
+            borderRadius: const BorderRadius.all(Radius.circular(2))
         ),
         padding: const EdgeInsets.all(3),
         child: Text(
-            data.state.toString()
+          data.state.toString(),
+          style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
         ),
       );
     }
@@ -42,6 +50,57 @@ class BottomSheetProject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    App.log.i(user);
+    App.log.i(data);
+    return  Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Column(
+        children: [
+          Expanded(child: GestureDetector(
+            onTap: () => Navigator.pop(context),
+          )),
+          ColoredBox(
+            color: App.colorScheme.primary,
+            child: Container(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        data.name ?? "",
+                        style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                      ),
+                      const Spacer(),
+                      stateWidget()
+                    ],
+                  ),
+                  if (data.duration != null)Text(
+                    data.duration ?? "",
+                    style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                  ),
+                  if (data.description != null)Text(
+                    data.description ?? "",
+                    style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                  ),
+                  if (data.state == "unavailable" && data.rules != null)
+                    Text(
+                      data.rules!,
+                      style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                    ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+/*
     return Column(
       children: [
         Expanded(
@@ -85,5 +144,5 @@ class BottomSheetProject extends StatelessWidget {
         )
       ],
     );
-  }
-}
+
+* */

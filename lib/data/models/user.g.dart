@@ -502,7 +502,29 @@ _$_Project _$$_ProjectFromJson(Map<String, dynamic> json) => _$_Project(
       id: json['id'] as int?,
       name: json['name'] as String?,
       slug: json['slug'] as String?,
-      parentId: json['parent_id'],
+      parent: json['parent'],
+      children: json['children'] as List<dynamic>?,
+      attachments: json['attachments'] as List<dynamic>?,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+      exam: json['exam'] as bool?,
+      gitId: json['gitId'] as int?,
+      repository: json['repository'] as String?,
+      recommendation: json['recommendation'] as String?,
+      cursus: (json['cursus'] as List<dynamic>?)
+          ?.map((e) => Cursus.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      campus: (json['campus'] as List<dynamic>?)
+          ?.map((e) => Campus.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      videos: json['videos'] as List<dynamic>?,
+      projectSessions: (json['projectSessions'] as List<dynamic>?)
+          ?.map((e) => ProjectSession.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_ProjectToJson(_$_Project instance) =>
@@ -510,5 +532,99 @@ Map<String, dynamic> _$$_ProjectToJson(_$_Project instance) =>
       'id': instance.id,
       'name': instance.name,
       'slug': instance.slug,
-      'parent_id': instance.parentId,
+      'parent': instance.parent,
+      'children': instance.children,
+      'attachments': instance.attachments,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'exam': instance.exam,
+      'gitId': instance.gitId,
+      'repository': instance.repository,
+      'recommendation': instance.recommendation,
+      'cursus': instance.cursus,
+      'campus': instance.campus,
+      'videos': instance.videos,
+      'projectSessions': instance.projectSessions,
+    };
+
+_$_ProjectSession _$$_ProjectSessionFromJson(Map<String, dynamic> json) =>
+    _$_ProjectSession(
+      id: json['id'] as int?,
+      solo: json['solo'] as bool?,
+      beginAt: json['beginAt'],
+      endAt: json['endAt'],
+      estimateTime: json['estimateTime'] as String?,
+      difficulty: json['difficulty'] as int?,
+      objectives: (json['objectives'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      description: json['description'] as String?,
+      durationDays: json['durationDays'],
+      terminatingAfter: json['terminatingAfter'],
+      projectId: json['projectId'] as int?,
+      campusId: json['campusId'] as int?,
+      cursusId: json['cursusId'] as int?,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+      maxPeople: json['maxPeople'],
+      isSubscriptable: json['isSubscriptable'] as bool?,
+      scales: (json['scales'] as List<dynamic>?)
+          ?.map((e) => Scale.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      uploads: (json['uploads'] as List<dynamic>?)
+          ?.map((e) => Upload.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      teamBehaviour: json['teamBehaviour'] as String?,
+      commit: json['commit'] as String?,
+    );
+
+Map<String, dynamic> _$$_ProjectSessionToJson(_$_ProjectSession instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'solo': instance.solo,
+      'beginAt': instance.beginAt,
+      'endAt': instance.endAt,
+      'estimateTime': instance.estimateTime,
+      'difficulty': instance.difficulty,
+      'objectives': instance.objectives,
+      'description': instance.description,
+      'durationDays': instance.durationDays,
+      'terminatingAfter': instance.terminatingAfter,
+      'projectId': instance.projectId,
+      'campusId': instance.campusId,
+      'cursusId': instance.cursusId,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'maxPeople': instance.maxPeople,
+      'isSubscriptable': instance.isSubscriptable,
+      'scales': instance.scales,
+      'uploads': instance.uploads,
+      'teamBehaviour': instance.teamBehaviour,
+      'commit': instance.commit,
+    };
+
+_$_Scale _$$_ScaleFromJson(Map<String, dynamic> json) => _$_Scale(
+      id: json['id'] as int?,
+      correctionNumber: json['correctionNumber'] as int?,
+      isPrimary: json['isPrimary'] as bool?,
+    );
+
+Map<String, dynamic> _$$_ScaleToJson(_$_Scale instance) => <String, dynamic>{
+      'id': instance.id,
+      'correctionNumber': instance.correctionNumber,
+      'isPrimary': instance.isPrimary,
+    };
+
+_$_Upload _$$_UploadFromJson(Map<String, dynamic> json) => _$_Upload(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$$_UploadToJson(_$_Upload instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
     };

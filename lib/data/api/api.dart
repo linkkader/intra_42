@@ -32,6 +32,9 @@ abstract class Api {
   @GET("/me/scale_teams")
   Future<List<ScaleTeam>> scales();
 
+  @GET("/scale_teams?filter[team_id]={teamId}")
+  Future<List<ScaleTeam>> scalesByTeamId(@Path("teamId") int teamId);
+
   @GET("/campus/{campus_id}/users")
   Future<List<User>> usersCampus(@Path("campus_id") int campusId,{@Query('page') int? page});
 
@@ -50,6 +53,12 @@ abstract class Api {
   @GET("https://projects.intra.42.fr/project_data.json?cursus_id={cursusId}&campus_id={campusId}&login={login}")
   Future<List<ProjectData>> projectData(@Path('cursusId') int cursusId, @Path('campusId') int campusId, @Path("login") String login);
 
+  @GET("https://api.intra.42.fr/v2/projects?filter[slug]={slug}")
+  Future<List<Project>> projectsBySlug(@Path("slug") String slug);
+
+  @GET("https://api.intra.42.fr/v2/projects?filter[id]={id}")
+  Future<List<Project>> projectsById(@Path("id") int projectId);
+
   @GET("https://meta.intra.42.fr/clusters.json")
   Future<List<ClusterItem>> clusterItems();
 
@@ -59,6 +68,6 @@ abstract class Api {
   @GET("https://profile.intra.42.fr/users/{login}/goals?cursus=42cursus")
   Future<BlackHoleData?> blackHoleLogin(@Path("login")String login);
 
-
-
+  @GET("https://api.intra.42.fr/v2/users/{user_id}/projects_users?filter[project_id]={project_id}")
+  Future<List<ProjectsUser>> projectsUser(@Path("user_id") int userId, @Path("project_id") int projectId);
 }
