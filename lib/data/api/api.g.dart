@@ -301,6 +301,31 @@ class _Api implements Api {
   }
 
   @override
+  Future<List<Project>> projectsById(projectId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Project>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'https://api.intra.42.fr/v2/projects?filter[id]=${projectId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => Project.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
   Future<List<ClusterItem>> clusterItems() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -368,6 +393,34 @@ class _Api implements Api {
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
         _result.data == null ? null : BlackHoleData.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<ProjectsUser>> projectsUser(
+    userId,
+    projectId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<ProjectsUser>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'https://api.intra.42.fr/v2/users/${userId}/projects_users?filter[project_id]=${projectId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => ProjectsUser.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
