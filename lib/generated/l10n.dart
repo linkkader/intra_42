@@ -299,6 +299,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Solo`
+  String get solo {
+    return Intl.message(
+      'Solo',
+      name: 'solo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group`
+  String get group {
+    return Intl.message(
+      'Group',
+      name: 'group',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Evaluated by`
+  String get evaluated_by {
+    return Intl.message(
+      'Evaluated by',
+      name: 'evaluated_by',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `'s feedback, `
+  String get s_feedback {
+    return Intl.message(
+      '\'s feedback, ',
+      name: 's_feedback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forbidden`
+  String get forbidden {
+    return Intl.message(
+      'Forbidden',
+      name: 'forbidden',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allowed`
+  String get allowed {
+    return Intl.message(
+      'Allowed',
+      name: 'allowed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success`
+  String get success {
+    return Intl.message(
+      'Success',
+      name: 'success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fail`
+  String get fail {
+    return Intl.message(
+      'Fail',
+      name: 'fail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `%d users fetched`
+  String get user_count_fetched {
+    return Intl.message(
+      '%d users fetched',
+      name: 'user_count_fetched',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Black hole`
+  String get black_hole {
+    return Intl.message(
+      'Black hole',
+      name: 'black_hole',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

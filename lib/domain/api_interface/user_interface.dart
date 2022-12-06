@@ -1,12 +1,8 @@
 // Created by linkkader on 11/9/22
 
-import 'package:intra_42/data/models/empty_cluster.dart';
 import 'package:intra_42/data/models/event.dart';
 import 'package:intra_42/data/models/expertise.dart';
 import 'package:intra_42/data/models/user.dart';
-
-import '../../core/utils/pair.dart';
-import '../../data/models/cluster_item.dart';
 import '../../data/models/logtime.dart';
 import '../../data/models/project_data.dart';
 import '../../data/models/scale_team.dart';
@@ -20,4 +16,5 @@ abstract class UserInterface {
   Future<List<ProjectData>> projectData(int cursusId, int campusId, String login);
   Future<List<User>> usersCampus(int campusId,{int? page, int? perPage = 100});
   Future<User> user(int id);
+  Future<User> userByLogin(String login);
 }

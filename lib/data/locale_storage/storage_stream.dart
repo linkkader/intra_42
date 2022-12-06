@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:intra_42/data/models/token_body.dart';
 import 'package:intra_42/data/models_izar/black_hole.dart';
+import 'package:intra_42/data/models_izar/notification_isar.dart';
 import 'package:intra_42/data/models_izar/token_body_isar.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:isar/isar.dart';
@@ -34,5 +35,9 @@ class StorageStream{
   }
 
   ///all user
-  Stream<List<UserIsar?>> allUser() => LocaleStorage.isar.userIsars.filter().idIsNotNull().findAll().asStream();
+  Stream<List<UserIsar?>> allUser() => LocaleStorage.isar.userIsars.filter().idIsNotNull().watch();
+
+  ///all user
+  Stream<List<NotificationIsar>> allNotifications() => LocaleStorage.isar.notificationIsars.filter().dataIsNotNull().watch();
+
 }

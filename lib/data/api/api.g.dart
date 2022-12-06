@@ -97,7 +97,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<List<ScaleTeam>> scalesByTeamId(teamId) async {
+  Future<List<ScaleTeam>> scalesByTeamId(data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -110,7 +110,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              '/scale_teams?filter[team_id]=${teamId}',
+              '/scale_teams?${data}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -195,6 +195,31 @@ class _Api implements Api {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = User.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<User>> userByLogin(login) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<User>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/users?filter[login]=${login}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => User.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

@@ -4,7 +4,9 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
+import 'package:intra_42/data/repositories/user_repository.dart';
 import '../../data/api/client.dart' as client;
+import '../../data/models/user.dart';
 
 //todo: add retry
 class Img extends StatelessWidget {
@@ -43,5 +45,27 @@ class Img extends StatelessWidget {
         }
     });
     return ExtendedImage.network(url, fit: fit, cache: true,);
+  }
+
+  static Widget defaultLogin(){
+    return ExtendedImage.asset("assets/images/default.png", fit: BoxFit.cover,);
+  }
+
+  static Future<User> getUser(String login) async {
+    var user = LocaleStorage().getUserByLogin(login);
+    user ??= await UserRepository().userByLogin(login);
+    return user;
+  }
+
+  static Widget login(String login) {
+    return FutureBuilder(
+      future: getUser(login),
+      builder: (context, AsyncSnapshot<User> snapshot) {
+        var url = snapshot.data?.image?.versions?.medium;
+        if (url == null){
+          return defaultLogin();
+        }
+        return Img(url);
+      },);
   }
 }

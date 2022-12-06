@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/extensions/map_ext.dart';
 import 'package:intra_42/core/extensions/provider_ext.dart';
+import 'package:intra_42/core/params/colors.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/models/user.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
@@ -25,7 +26,6 @@ class Graph extends ConsumerStatefulWidget {
 
 class _GraphState extends ConsumerState<Graph> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
 
-
   StateProvider<ProjectData?> notifier = StateProvider((ref) => null);
 
   StateProvider<Map<int, List<ProjectData>>> projectsDataState = StateProvider((ref) => {});
@@ -44,13 +44,52 @@ class _GraphState extends ConsumerState<Graph> with SingleTickerProviderStateMix
           ref.read(projectsDataState.notifier).state = ref.read(projectsDataState).copy;
         });
       }
-      _tabController = TabController(length: me.cursusUsers!.length, vsync: this);
+      _tabController ??= TabController(length: me.cursusUsers!.length, vsync: this);
     }
 
     super.initState();
   }
 
   Widget _cursusSelect(User user){
+    return InkWell(
+      child: SizedBox(
+        height: kToolbarHeight * 2,
+        child: PopupMenuButton(
+            color: ColorConstants.kStatusBarColor,
+            child: Row(
+              children: [
+                Text(user.cursusUsers![ref.watch(cursusProvider)].cursus!.name!, style: GoogleFonts.ptSans(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
+                user.cursusUsers!.length > 1 ? const Icon(Icons.arrow_drop_down, color: Colors.white,) : Container(),
+              ],
+            ),
+            itemBuilder: (_){
+              return List.generate(user.cursusUsers!.length, (index){
+                return PopupMenuItem(
+                  child: ColoredBox(
+                    color: App.colorScheme.background,
+                    child: Row(children: [
+                      index == ref.read(cursusProvider) ? const Icon(Icons.check, color: Colors.white,) : Container(),
+                      Text(user.cursusUsers![index].cursus!.name!, style: GoogleFonts.ptSans(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
+                    ],),
+                  ),
+                  onTap: (){
+                    ref.watch(cursusProvider.notifier).state = index;
+                    _tabController?.index = index;
+                  },
+                );
+              });
+            }),
+
+      ),
+    );
+    return SizedBox(
+      height: kToolbarHeight,
+      child: ListTile(
+        title: Container(
+          height: 40,
+        ),
+      ),
+    );
     return Column(
       children: [
         Text(App.s.cursus, style : GoogleFonts.ptSans(color: App.colorScheme.secondary)),
@@ -95,55 +134,59 @@ class _GraphState extends ConsumerState<Graph> with SingleTickerProviderStateMix
             //update
           },
         ),
-        body: Stack(
-          children: [
-            TabBarView(
-                controller: _tabController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: List.generate(
-                    _tabController!.length , (index){
-                      var data = ref.watch(projectsDataState)[index];
-                      if (data == null) {
-                        return const Center(child: CircularProgressIndicator(),);
-                      }
-                      return FittedBox(
-                        fit: BoxFit.cover,
-                        child: DecoratedBox(
-                          decoration: const BoxDecoration(
-                              gradient: RadialGradient(
-                                  colors: [
-                                    Color(0xFF002534),Color(0xFF090a0f)
-                                  ]
-                              )
-                          ),
-                          child: InteractiveViewer(
-                            panEnabled: true,
-                            boundaryMargin: const EdgeInsets.all(5000),
-                            maxScale: 15,
-                            minScale: 0.01,
-                            scaleEnabled: true,
-                            child: CanvasTouchDetector(
-                              gesturesToOverride: const [GestureType.onTapDown],
-                              builder: (context) {
-                                return CustomPaint(
-                                    size: const Size(5000, 5000),
-                                    painter: GraphPainter(
-                                      context: context,
-                                      notifier: notifier,
-                                      projects: data,
-                                      ref: ref,
-                                      user: widget.user,
-                                    )
-                                );
-                              },
-                            ),
-                          ) ,
+        // appBar: AppBar(
+        //   backgroundColor: App.colorScheme.background,
+        //   title: _cursusSelect(widget.user),
+        // ),
+        body: DecoratedBox(
+          decoration: const BoxDecoration(
+              gradient: RadialGradient(
+                  colors: [
+                    Color(0xFF002534),Color(0xFF090a0f)
+                  ]
+              )
+          ),
+          child: Stack(
+            children: [
+              TabBarView(
+                  controller: _tabController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: List.generate(
+                      _tabController!.length , (index){
+                    var data = ref.watch(projectsDataState)[index];
+                    if (data == null) {
+                      return const Center(child: CircularProgressIndicator(),);
+                    }
+                    return FittedBox(
+                      fit: BoxFit.cover,
+                      child: InteractiveViewer(
+                        panEnabled: true,
+                        boundaryMargin: const EdgeInsets.all(5000),
+                        maxScale: 15,
+                        minScale: 0.01,
+                        scaleEnabled: true,
+                        child: CanvasTouchDetector(
+                          gesturesToOverride: const [GestureType.onTapDown],
+                          builder: (context) {
+                            return CustomPaint(
+                                size: const Size(5000, 5000),
+                                painter: GraphPainter(
+                                  context: context,
+                                  notifier: notifier,
+                                  projects: data,
+                                  ref: ref,
+                                  user: widget.user,
+                                )
+                            );
+                          },
                         ),
-                      );
-                    })
-            ),
-            Positioned(left: 100, top: 100, child: _cursusSelect(LocaleStorage().getMe!),),
-          ],
+                      ),
+                    );
+                  })
+              ),
+              Positioned(right: 0, top: 0, child: _cursusSelect(LocaleStorage().getMe!),),
+            ],
+          ),
         ));
   }
 

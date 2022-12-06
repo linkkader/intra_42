@@ -27,14 +27,10 @@ class BlackHoleManager{
     App.log.i("Fetching all black holes");
     var now = DateTime.now();
     TaskRunner<UserIsar> blackHoleTask = TaskRunner(maxConcurrentTasks: 100, (item, runner) async{
-      //only update one time a day
-      if (runner.isEmpty)
-      {
-        //App.log.i("All black holes updated");
+      BlackHoleIsar? blackHole = LocaleStorage().blackHoleIsar(item.id!);
+      if (runner.isEmpty && runner.runningTasks == 1){
         onFinish?.call();
       }
-      //      BlackHoleIsar? blackHole = LocaleStorage.isar.blackHoleIsars.getSync(item.id!);
-      BlackHoleIsar? blackHole = LocaleStorage().blackHoleIsar(item.id!);
       if (blackHole != null && now.isBefore(blackHole.updatedAt!.add(const Duration(days: 1)))){
         return;
       }
@@ -45,8 +41,7 @@ class BlackHoleManager{
       }catch(_){
         App.log.e("error78 $_}");
       }
-      if (runner.isEmpty)
-      {
+      if (runner.isEmpty && runner.runningTasks == 1){
         onFinish?.call();
       }
     });
@@ -55,6 +50,7 @@ class BlackHoleManager{
   }
 
   void fetchCampusAllUser(int campusId, {Function()? onFinish}) async {
+    var usersCount = LocaleStorage().allUsers().length;
     if(runner?.isRunning == true){
       App.log.i("BlackHoleManager: fetchUser: already running");
       return;
@@ -66,7 +62,12 @@ class BlackHoleManager{
       onFinish?.call();
       return;
     }
-    int page = 0;
+    App.log.i("BlackHoleManager: fetchUser: starting $usersCount");
+    if (usersCount > 1){
+      onFinish?.call();
+    }
+    int page = LocaleStorage.getInt("page") ?? 0;
+
     //maxConcurrentTasks 1 api limit
     runner = TaskRunner(maxConcurrentTasks: 1,(item, runner) async {
       List<User> lst = [];
@@ -79,6 +80,7 @@ class BlackHoleManager{
         App.log.i("BlackHoleManager: error $_})");
       }
       if (lst.length == _userFetchCount) {
+        LocaleStorage.setInt("page", item + 1);
         runner.add(page++);
       }
       else{

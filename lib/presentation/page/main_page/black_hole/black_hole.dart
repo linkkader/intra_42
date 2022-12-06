@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/extensions/provider_ext.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/manager/black_hole_manager.dart';
@@ -13,9 +14,11 @@ import 'package:intra_42/data/manager/image_manager.dart';
 import 'package:intra_42/data/models_izar/black_hole.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/main.dart';
+import 'package:sprintf/sprintf.dart';
 import 'package:touchable/touchable.dart';
 import 'dart:ui' as ui;
 import '../../../../core/utils/pair.dart';
+import '../../../../data/locale_storage/storage_stream.dart';
 import '../../../../data/repositories/black_hole_repository.dart';
 import 'black_hole_painter.dart';
 
@@ -26,10 +29,12 @@ class BlackHoleScreen extends ConsumerStatefulWidget {
   ConsumerState<BlackHoleScreen> createState() => _ClusterState();
 }
 
+//AutomaticKeepAliveClientMixin
 class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
 
+  final StateProvider<int> userCountProvider = StateProvider((ref) => LocaleStorage().allUsers().length);
   final StateProvider<Map<String, ui.Image>> stateProvider = StateProvider((ref) => {});
-  late FutureProvider<List<Pair<int, Map<UserIsar, BlackHoleIsar>>>> futureProvider;
+  late FutureProvider<List<Pair<int, Map<UserIsar, BlackHoleIsar>>>?> futureProvider;
   late AnimationController controller;
   Map<int, double> angles = {};
   final StateProvider<bool> longPress = StateProvider((ref) => false);
@@ -39,13 +44,24 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
 
   @override
   void initState() {
+    var sub = StorageStream().allUser().listen((event) {
+      App.log.d("User count changed ${event.length}");
+      ref.read(userCountProvider.notifier).state = event.length;
+    });
+
+    futureProvider = FutureProvider((ref) {
+      return null;
+    });
+    controller = AnimationController(vsync: this, duration: const Duration(minutes: 5));
+    controller.repeat();
+
     futureProvider = FutureProvider((ref) {
       return ref.read(BlackHoleRepository().futureProvider).allBlackHoles(
           onImages: (lst) {
             for (var element in lst) {
-             if (imagesUrls.contains(element)){
-               lst.remove(element);
-             }
+              if (imagesUrls.contains(element)){
+                lst.remove(element);
+              }
             }
             ImageManager().fetchAllImage(circle: true,lst, (images) {
               images.addAll(ref.read(stateProvider));
@@ -54,20 +70,17 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
           }
       );
     });
-    controller = AnimationController(vsync: this, duration: const Duration(minutes: 5));
-    controller.repeat();
 
 
     BlackHoleManager().fetchCampusAllUser(21,
       onFinish:  () {
-      BlackHoleManager().fetchAllBlackHole(onFinish: (){
-        App.log.i("All black holes fetched");
-        angles = {};
-        ref.refresh(futureProvider);
-      });
+        BlackHoleManager().fetchAllBlackHole(onFinish: (){
+          App.log.i("All black holes fetched");
+          angles = {};
+          sub.cancel();
+          ref.refresh(futureProvider);
+        });
     },);
-
-
     const zoomFactor = 3.0;
     const xTranslate = BlackHolePainter.dx * 2;
     const yTranslate = BlackHolePainter.dx * 2;
@@ -88,28 +101,18 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
           return const Center(child: Text('Error'));
           },
         loading: (){
-          return Center(child: InkWell(
-            child: const CircularProgressIndicator(), onTap: (){
-              ref.refresh(futureProvider);
-          },));
+          return Center(
+              child: Text(sprintf(App.s.user_count_fetched, [ref.watch(userCountProvider)]), style: GoogleFonts.ptSans(fontWeight: FontWeight.bold, color: App.colorScheme.secondary),)
+          );
         },
       data: (data){
-          return  Scaffold(
-            floatingActionButton: FloatingActionButton(
-              onPressed: () async {
-                // BlackHoleManager().fetchAllBlackHole();
-                  // BlackHoleManager().fetchAllBlackHole(onFinish: (){
-                  //   App.log.i("All black holes fetched");
-                  //   angles = {};
-                  //   ref.refresh(futureProvider);
-                  // });
-                // BlackHoleManager().fetchCampusAllUser(21,
-                //   onFinish:  () {
-                //
-                //   },);
-             },
-              child: const Icon(Icons.refresh),
-            ),
+          if (data == null){
+            return Center(
+                child: Text(sprintf(App.s.user_count_fetched, [ref.watch(userCountProvider)]), style: GoogleFonts.ptSans(fontWeight: FontWeight.bold, color: App.colorScheme.secondary),)
+            );
+          }
+          return Scaffold(
+            backgroundColor: Colors.transparent,
             body: Container(
               width: double.infinity,
               height: double.infinity,

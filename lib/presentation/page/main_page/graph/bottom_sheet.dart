@@ -2,12 +2,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intra_42/core/extensions/widget_ext.dart';
 import 'package:intra_42/core/params/colors.dart';
 import 'package:intra_42/main.dart';
 import 'dart:developer';
 
 import '../../../../data/models/project_data.dart';
 import '../../../../data/models/user.dart';
+import '../../project_page/project_page.dart';
 
 class BottomSheetProject extends StatelessWidget {
   final ProjectData data;
@@ -18,7 +20,6 @@ class BottomSheetProject extends StatelessWidget {
       data.name ?? "",
       style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
     );
-
     if (data.finalMark != null) {
       return Container(
         decoration: BoxDecoration(
@@ -50,8 +51,7 @@ class BottomSheetProject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    App.log.i(user);
-    App.log.i(data);
+
     return  Scaffold(
       backgroundColor: Colors.transparent,
       body: Column(
@@ -69,9 +69,12 @@ class BottomSheetProject extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        data.name ?? "",
-                        style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                      InkWell(
+                        onTap: () => ProjectPage(user, data).navigate(context: context),
+                        child: Text(
+                          data.name ?? "",
+                          style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                        ),
                       ),
                       const Spacer(),
                       stateWidget()
@@ -99,50 +102,3 @@ class BottomSheetProject extends StatelessWidget {
     );
   }
 }
-
-/*
-    return Column(
-      children: [
-        Expanded(
-            child: InkWell(
-              onTap: (){
-
-              },
-          hoverColor: Colors.transparent,
-          focusColor: Colors.transparent,
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-        )),
-        ColoredBox(
-          color: const Color(0xFF1b242a),
-          child: Column(
-            children: [
-              const SizedBox(height: 20,),
-              Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      child: Text(data.name!),
-                      onTap: (){
-                        log(data.toString());
-                        // Get.to(() => ProjectScreen(data.project_id!, user));
-                      },
-                    ),
-                  ),
-                  state()
-                ],
-              ),
-              const SizedBox(height: 10,),
-              if (data.duration != null) Text(data.duration!),
-              const SizedBox(height: 10,),
-              if (data.description != null) Text(data.description!),
-              const SizedBox(height: 5,),
-              if (data.state == "unavailable" && data.rules != null) Text(data.rules!),
-              const SizedBox(height: 20,),
-            ],
-          ),
-        )
-      ],
-    );
-
-* */

@@ -32,8 +32,8 @@ abstract class Api {
   @GET("/me/scale_teams")
   Future<List<ScaleTeam>> scales();
 
-  @GET("/scale_teams?filter[team_id]={teamId}")
-  Future<List<ScaleTeam>> scalesByTeamId(@Path("teamId") int teamId);
+  @GET("/scale_teams?{filter}")
+  Future<List<ScaleTeam>> scalesByTeamId(@Path("filter") String data);
 
   @GET("/campus/{campus_id}/users")
   Future<List<User>> usersCampus(@Path("campus_id") int campusId,{@Query('page') int? page});
@@ -43,6 +43,9 @@ abstract class Api {
 
   @GET("/users/{id}")
   Future<User> user(@Path("id") int id);
+
+  @GET("/users?filter[login]={login}")
+  Future<List<User>> userByLogin(@Path("login") String login);
 
   @GET("https://profile.intra.42.fr/users/{login}/locations_stats.json")
   Future<Map<String, String>> locationsStats(@Path("login")  String login);

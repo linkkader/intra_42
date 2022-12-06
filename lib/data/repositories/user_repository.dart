@@ -123,4 +123,14 @@ class UserRepository extends UserInterface with ProviderInterface {
     });
   }
 
+  @override
+  Future<User> userByLogin(String login) {
+    assert(_isInit, "AuthRepository not initialized");
+    return _api.userByLogin(login).then((value) {
+      assert(value.isNotEmpty, "User not found");
+      LocaleStorage().updateUser(value.first);
+      return value.first;
+    });
+  }
+
 }

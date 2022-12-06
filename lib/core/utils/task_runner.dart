@@ -14,7 +14,7 @@ class TaskRunner<T> {
   int runningTasks = 0;
 
   ///init queue manager
-  TaskRunner (Future Function(T item, TaskRunner<T>) execution,{this.maxConcurrentTasks = 1, bool startQueue = true}) {
+  TaskRunner (Future Function(T item, TaskRunner<T> runner) execution,{this.maxConcurrentTasks = 1, bool startQueue = true}) {
     _execution = execution;
     if (startQueue == true) {
       _startExecution();
@@ -57,4 +57,6 @@ class TaskRunner<T> {
   bool get isEmpty => _input.isEmpty;
 
   bool get isNotEmpty => _input.isNotEmpty;
+
+  bool get isLast => isEmpty && runningTasks == 1;
 }

@@ -14,6 +14,7 @@ import '../manager/black_hole_manager.dart';
 import '../repositories/black_hole_repository.dart';
 import '../repositories/cluster_repository.dart';
 import '../repositories/project_repository.dart';
+import '../repositories/scale_repository.dart';
 import 'api.dart';
 import '../locale_storage/locale_storage.dart';
 import '../repositories/auth_repository.dart';
@@ -39,6 +40,7 @@ class Client {
     BlackHoleRepository().init(api);
     ClusterRepository().init(api);
     ProjectRepository().init(api);
+    ScaleRepository().init(api);
 
     BlackHoleManager().init();
     WebSocketManager().start();

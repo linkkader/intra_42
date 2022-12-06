@@ -6,6 +6,6 @@ import 'package:intra_42/data/models/user.dart';
 
 abstract class ProjectInterface {
   Future<Project> project(int projectId);
-  Future<ProjectsUser> projectUser(int userId, int projectId);
-  Future<Pair<Project, ProjectsUser>> projectFull(int userId, int projectId);
+  Future<ProjectsUser?> projectUser(int userId, int projectId);
+  Future<Pair<Project, ProjectsUser?>> projectFull(int userId, int projectId);
 }

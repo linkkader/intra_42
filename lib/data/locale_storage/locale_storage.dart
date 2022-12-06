@@ -6,6 +6,7 @@ import 'package:intra_42/data/models/token_body.dart';
 import 'package:intra_42/data/models/user.dart';
 import 'package:intra_42/data/models_izar/expertise_izar.dart';
 import 'package:intra_42/data/models_izar/img.dart';
+import 'package:intra_42/data/models_izar/notification_isar.dart';
 import 'package:intra_42/data/models_izar/pref_isar.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/main.dart';
@@ -15,7 +16,7 @@ import '../models/user.dart';
 import '../models_izar/black_hole.dart';
 import '../models_izar/token_body_isar.dart';
 
-class LocaleStorage implements SharedPreferences{
+class LocaleStorage{
   static const debug = "LocaleStorage:";
   late final SharedPreferences _prefs;
   bool _isInit = false;
@@ -28,114 +29,11 @@ class LocaleStorage implements SharedPreferences{
   Future<void> init() async {
     assert(!_isInit, "LocalStorage already initialized");
 
-    _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema], maxSizeMiB: 10000,);
+    _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema, IntIsarSchema, StringIsarSchema, NotificationIsarSchema], maxSizeMiB: 10000,);
     //init shared preferences
-    _prefs = await SharedPreferences.getInstance();
     _isInit = true;
     App.log.i("Locale Storage initialized");
 
-  }
-
-
-  @override
-  Future<bool> clear() {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.clear();
-  }
-
-  @override
-  Future<bool> commit() {
-    throw UnimplementedError();
-  }
-
-  @override
-  bool containsKey(String key) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.containsKey(key);
-  }
-
-  @override
-  Object? get(String key) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.get(key);
-  }
-
-  @override
-  bool? getBool(String key) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.getBool(key);
-  }
-
-  @override
-  double? getDouble(String key) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.getDouble(key);
-  }
-
-  @override
-  int? getInt(String key) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.getInt(key);
-  }
-
-  @override
-  Set<String> getKeys() {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.getKeys();
-  }
-
-  @override
-  String? getString(String key) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.getString(key);
-  }
-
-  @override
-  List<String>? getStringList(String key) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.getStringList(key);
-  }
-
-  @override
-  Future<void> reload() {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.reload();
-  }
-
-  @override
-  Future<bool> remove(String key) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.remove(key);
-  }
-
-  @override
-  Future<bool> setBool(String key, bool value) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.setBool(key, value);
-  }
-
-  @override
-  Future<bool> setDouble(String key, double value) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.setDouble(key, value);
-  }
-
-  @override
-  Future<bool> setInt(String key, int value) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.setInt(key, value);
-  }
-
-  @override
-  Future<bool> setString(String key, String value) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.setString(key, value);
-  }
-
-  @override
-  Future<bool> setStringList(String key, List<String> value) {
-    assert(_isInit, "LocalStorage not initialized");
-    return _prefs.setStringList(key, value);
   }
 
   String? get cookie => getString("cookie");
@@ -162,6 +60,18 @@ class LocaleStorage implements SharedPreferences{
     });
   }
 
+
+  // void updateUser(User value, {bool force = false}) async{
+  //   var user = getUser(value.id!);
+  //   var me = _isar.userIsars.getSync(0);
+  //   await _isar.writeTxn(() async{
+  //     await _isar.userIsars.put(UserIsar.fromFreezed(value));
+  //   }).onError((error, stackTrace) {
+  //     print("$debug updateUser error: $error $stackTrace");
+  //   });
+  //   print(_isar.userIsars.countSync());
+  // }
+
   //todo: need check
   void updateUser(User value, {bool force = false}) async{
     var user = getUser(value.id!);
@@ -176,6 +86,8 @@ class LocaleStorage implements SharedPreferences{
           value = value.copyWith(location: value.location ?? user.location, cursusUsers: value.cursusUsers ?? user.cursusUsers, campus: value.campus ?? user.campus);
           await _isar.userIsars.put(UserIsar.fromFreezed(value));
         }
+      }else{
+        await _isar.userIsars.put(UserIsar.fromFreezed(value));
       }
     }).onError((error, stackTrace) {
       App.log.e("$debug updateUser error: $error $stackTrace");
@@ -247,9 +159,47 @@ class LocaleStorage implements SharedPreferences{
     return _isar;
   }
 
-  static DateTime? dateTime(String key) => _isar.dateTimeIsars.where().keyEqualTo(key).findFirstSync()?.value;
-  static void setDateTime(String key, DateTime value) => _isar.writeTxn(() async{
-    _isar.dateTimeIsars.put(DateTimeIsar(key, value));
-  });
+  static DateTime? dateTime(String key) {
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.dateTimeIsars.where().keyEqualTo(key).findFirstSync()?.value;
+  }
+
+  static void setDateTime(String key, DateTime value) async {
+    assert(instance._isInit, "LocalStorage not initialized");
+    await _isar.writeTxn(() async{
+      _isar.dateTimeIsars.put(DateTimeIsar(key, value));
+    });
+  }
+
+  static int? getInt(String key) {
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.intIsars.where().keyEqualTo(key).findFirstSync()?.value;
+  }
+
+  static Future setInt(String key, int value) async {
+    assert(instance._isInit, "LocalStorage not initialized");
+    await _isar.writeTxn(() async{
+      _isar.intIsars.put(IntIsar(key, value));
+    });
+  }
+
+  static Future setString(String key, String value) async {
+   assert(instance._isInit, "LocalStorage not initialized");
+   await _isar.writeTxn(() async{
+     _isar.stringIsars.put(StringIsar(key, value));
+   });
+  }
+
+  static String? getString(String s) {
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.stringIsars.where().keyEqualTo(s).findFirstSync()?.value;
+  }
+
+  static Future setNotification(NotificationIsar value) async {
+    assert(instance._isInit, "LocalStorage not initialized");
+    await _isar.writeTxn(() async{
+      _isar.notificationIsars.put(value);
+    });
+  }
 
 }

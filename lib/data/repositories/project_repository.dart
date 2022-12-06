@@ -2,6 +2,7 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/core/utils/pair.dart';
+import 'package:intra_42/main.dart';
 import '../../domain/api_interface/project_interface.dart';
 import '../../domain/util_interface/provider_interface.dart';
 import '../api/api.dart';
@@ -31,15 +32,15 @@ class ProjectRepository extends ProjectInterface with ProviderInterface {
   }
 
   @override
-  Future<ProjectsUser> projectUser(int userId, int projectId) async {
+  Future<ProjectsUser?> projectUser(int userId, int projectId) async {
     assert(_isInit, "ProjectRepository is not initialized");
     var projects = await _api.projectsUser(userId, projectId);
-    assert(projects.length == 1, "ProjectRepository: length of projects is not 1");
+    if (projects.isEmpty) return null;
     return projects.first;
   }
 
   @override
-  Future<Pair<Project, ProjectsUser>> projectFull(int userId, int projectId) async {
+  Future<Pair<Project, ProjectsUser?>> projectFull(int userId, int projectId) async {
     assert(_isInit, "ProjectRepository is not initialized");
     var project = await this.project(projectId);
     var projectUser = await this.projectUser(userId, projectId);

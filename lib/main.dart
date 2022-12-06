@@ -1,5 +1,6 @@
 // Created by linkkader on 8/11/2022
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +9,7 @@ import 'package:intra_42/presentation/page/start_page.dart';
 import 'package:logger/logger.dart';
 import 'core/params/colors.dart';
 import 'data/locale_storage/locale_storage.dart';
+import 'data/manager/notification_manager.dart';
 import 'generated/l10n.dart';
 import 'l10n/l10n.dart';
 
@@ -16,6 +18,7 @@ void main() async{
 
   await LocaleStorage().init();
   Client().initApi();
+  NotificationManager().start();
   runApp(const App());
 }
 
@@ -24,8 +27,6 @@ class NavigationService {
 }
 
 class App extends StatelessWidget {
-
-
 
   const App({Key? key}) : super(key: key);
 

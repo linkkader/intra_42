@@ -8,6 +8,8 @@ environment:
   sdk: ">=2.17.1 <3.0.0"
 
 dependencies:
+  #background worker
+  workmanager: ^0.5.1
 
   #url launcher
   url_launcher: ^6.1.5

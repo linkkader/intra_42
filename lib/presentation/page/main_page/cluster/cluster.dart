@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/core/extensions/list.dart';
 import 'package:intra_42/core/extensions/map_ext.dart';
 import 'package:intra_42/core/extensions/provider_ext.dart';
+import 'package:intra_42/core/params/colors.dart';
 import 'package:intra_42/data/api/client.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/manager/user_manager.dart';
@@ -96,7 +97,6 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
           _.forEach((key, value) {
             map[key.first] = value.keys.where((element) => element.contains(key.first)).length;
           });
-
           _tabController ??= TabController(length: data.length, vsync: this);
           UserManger().updateUserFromCluster(data);
           return Scaffold(
@@ -104,51 +104,36 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
             drawer: ClusterDrawer(clusterItemsState, stateClusterSize,map),
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              title: PreferredSize(
-                preferredSize: const Size(double.infinity, 100),
-                child: Container(
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  color: const Color(0xFF283336),
-                  height: 40,
-                  child: TabBar(
-                    controller: _tabController,
-                    isScrollable: true,
-                    indicatorSize: TabBarIndicatorSize.label,
-                    indicatorColor: Colors.white,
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.white,
-                    tabs: List.generate(data.length, (index) => Text(data.keys.elementAt(index).first,),),
-                  ),
-                ),
+              backgroundColor: ColorConstants.kStatusBarColor,
+              title: TabBar(
+                controller: _tabController,
+                isScrollable: true,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicatorColor: Colors.white,
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.white,
+                tabs: List.generate(data.length, (index) => Text(data.keys.elementAt(index).first,),),
               ),
-            ),
-            body: Stack(
-              children: [
-                TabBarView(
-                  controller: _tabController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: List.generate(data.length, (index) {
-                    return ClusterItemScreen(data.keys.elementAt(index).second, data.values.elementAt(index), imagesProvider,
-                      onClusterSize: (_){
-                        ref.read(stateClusterSize)[data.keys.elementAt(index).first] = _;
-                        ref.read(stateClusterSize.notifier).state = ref.read(stateClusterSize).copy;
-                      },);
-                  },),
-                ),
-                Positioned(
-                  bottom: 0,
-                  top: 0,
-                  right: 0,
-                  child: MaterialButton(
-                    shape: const CircleBorder(),
-                    child: Icon(Icons.more_vert, color: App.colorScheme.secondary,),
-                    onPressed: () {
-                      _key.currentState!.openDrawer();
-                    },
-                  ),
+              actions: [
+                MaterialButton(
+                  shape: const CircleBorder(),
+                  child: Icon(Icons.more_vert, color: App.colorScheme.secondary,),
+                  onPressed: () {
+                    _key.currentState!.openDrawer();
+                  },
                 )
               ],
+            ),
+            body: TabBarView(
+              controller: _tabController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: List.generate(data.length, (index) {
+                return ClusterItemScreen(data.keys.elementAt(index).second, data.values.elementAt(index), imagesProvider,
+                  onClusterSize: (_){
+                    ref.read(stateClusterSize)[data.keys.elementAt(index).first] = _;
+                    ref.read(stateClusterSize.notifier).state = ref.read(stateClusterSize).copy;
+                  },);
+              },),
             ),
           );
         },

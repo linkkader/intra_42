@@ -30,7 +30,7 @@ mixin _$User {
   @JsonKey(name: "usual_full_name")
   String? get usualFullName => throw _privateConstructorUsedError;
   @JsonKey(name: "usual_first_name")
-  dynamic get usualFirstName => throw _privateConstructorUsedError;
+  dynamic? get usualFirstName => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   @JsonKey(name: "displayname")
@@ -59,7 +59,7 @@ mixin _$User {
   @JsonKey(name: "updated_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "alumnized_at")
-  dynamic get alumnizedAt => throw _privateConstructorUsedError;
+  dynamic? get alumnizedAt => throw _privateConstructorUsedError;
   bool? get alumni => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
   List<dynamic>? get groups => throw _privateConstructorUsedError;
@@ -101,7 +101,7 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: "first_name") String? firstName,
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "usual_full_name") String? usualFullName,
-      @JsonKey(name: "usual_first_name") dynamic usualFirstName,
+      @JsonKey(name: "usual_first_name") dynamic? usualFirstName,
       String? url,
       String? phone,
       @JsonKey(name: "displayname") String? displayname,
@@ -119,7 +119,7 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: "dataErasure_date") DateTime? dataErasureDate,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt,
-      @JsonKey(name: "alumnized_at") dynamic alumnizedAt,
+      @JsonKey(name: "alumnized_at") dynamic? alumnizedAt,
       bool? alumni,
       bool? active,
       List<dynamic>? groups,
@@ -223,7 +223,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       usualFirstName: null == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -295,7 +295,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       alumnizedAt: null == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       alumni: freezed == alumni
           ? _value.alumni
           : alumni // ignore: cast_nullable_to_non_nullable
@@ -389,7 +389,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: "first_name") String? firstName,
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "usual_full_name") String? usualFullName,
-      @JsonKey(name: "usual_first_name") dynamic usualFirstName,
+      @JsonKey(name: "usual_first_name") dynamic? usualFirstName,
       String? url,
       String? phone,
       @JsonKey(name: "displayname") String? displayname,
@@ -407,7 +407,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: "dataErasure_date") DateTime? dataErasureDate,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt,
-      @JsonKey(name: "alumnized_at") dynamic alumnizedAt,
+      @JsonKey(name: "alumnized_at") dynamic? alumnizedAt,
       bool? alumni,
       bool? active,
       List<dynamic>? groups,
@@ -508,7 +508,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       usualFirstName: null == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -580,7 +580,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       alumnizedAt: null == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       alumni: freezed == alumni
           ? _value.alumni
           : alumni // ignore: cast_nullable_to_non_nullable
@@ -749,7 +749,7 @@ class _$_User implements _User {
   final String? usualFullName;
   @override
   @JsonKey(name: "usual_first_name")
-  final dynamic usualFirstName;
+  final dynamic? usualFirstName;
   @override
   final String? url;
   @override
@@ -796,7 +796,7 @@ class _$_User implements _User {
   final DateTime? updatedAt;
   @override
   @JsonKey(name: "alumnized_at")
-  final dynamic alumnizedAt;
+  final dynamic? alumnizedAt;
   @override
   final bool? alumni;
   @override
@@ -1084,7 +1084,7 @@ abstract class _User implements User {
       @JsonKey(name: "usual_full_name")
           final String? usualFullName,
       @JsonKey(name: "usual_first_name")
-          final dynamic usualFirstName,
+          final dynamic? usualFirstName,
       final String? url,
       final String? phone,
       @JsonKey(name: "displayname")
@@ -1113,7 +1113,7 @@ abstract class _User implements User {
       @JsonKey(name: "updated_at")
           final DateTime? updatedAt,
       @JsonKey(name: "alumnized_at")
-          final dynamic alumnizedAt,
+          final dynamic? alumnizedAt,
       final bool? alumni,
       final bool? active,
       final List<dynamic>? groups,
@@ -1156,7 +1156,7 @@ abstract class _User implements User {
   String? get usualFullName;
   @override
   @JsonKey(name: "usual_first_name")
-  dynamic get usualFirstName;
+  dynamic? get usualFirstName;
   @override
   String? get url;
   @override
@@ -1203,7 +1203,7 @@ abstract class _User implements User {
   DateTime? get updatedAt;
   @override
   @JsonKey(name: "alumnized_at")
-  dynamic get alumnizedAt;
+  dynamic? get alumnizedAt;
   @override
   bool? get alumni;
   @override
@@ -3413,7 +3413,7 @@ mixin _$UserClass {
   @JsonKey(name: "usual_full_name")
   String? get usualFullName => throw _privateConstructorUsedError;
   @JsonKey(name: "usual_first_name")
-  dynamic get usualFirstName => throw _privateConstructorUsedError;
+  dynamic? get usualFirstName => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   @JsonKey(name: "displayname")
@@ -3442,7 +3442,7 @@ mixin _$UserClass {
   @JsonKey(name: "updated_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "alumnized_at")
-  dynamic get alumnizedAt => throw _privateConstructorUsedError;
+  dynamic? get alumnizedAt => throw _privateConstructorUsedError;
   bool? get alumni => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
 
@@ -3464,7 +3464,7 @@ abstract class $UserClassCopyWith<$Res> {
       @JsonKey(name: "first_name") String? firstName,
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "usual_full_name") String? usualFullName,
-      @JsonKey(name: "usual_first_name") dynamic usualFirstName,
+      @JsonKey(name: "usual_first_name") dynamic? usualFirstName,
       String? url,
       String? phone,
       @JsonKey(name: "displayname") String? displayName,
@@ -3482,7 +3482,7 @@ abstract class $UserClassCopyWith<$Res> {
       @JsonKey(name: "dataErasure_date") DateTime? dataErasureDate,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt,
-      @JsonKey(name: "alumnized_at") dynamic alumnizedAt,
+      @JsonKey(name: "alumnized_at") dynamic? alumnizedAt,
       bool? alumni,
       bool? active});
 
@@ -3558,7 +3558,7 @@ class _$UserClassCopyWithImpl<$Res, $Val extends UserClass>
       usualFirstName: null == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -3630,7 +3630,7 @@ class _$UserClassCopyWithImpl<$Res, $Val extends UserClass>
       alumnizedAt: null == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       alumni: freezed == alumni
           ? _value.alumni
           : alumni // ignore: cast_nullable_to_non_nullable
@@ -3669,7 +3669,7 @@ abstract class _$$_UserClassCopyWith<$Res> implements $UserClassCopyWith<$Res> {
       @JsonKey(name: "first_name") String? firstName,
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "usual_full_name") String? usualFullName,
-      @JsonKey(name: "usual_first_name") dynamic usualFirstName,
+      @JsonKey(name: "usual_first_name") dynamic? usualFirstName,
       String? url,
       String? phone,
       @JsonKey(name: "displayname") String? displayName,
@@ -3687,7 +3687,7 @@ abstract class _$$_UserClassCopyWith<$Res> implements $UserClassCopyWith<$Res> {
       @JsonKey(name: "dataErasure_date") DateTime? dataErasureDate,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt,
-      @JsonKey(name: "alumnized_at") dynamic alumnizedAt,
+      @JsonKey(name: "alumnized_at") dynamic? alumnizedAt,
       bool? alumni,
       bool? active});
 
@@ -3762,7 +3762,7 @@ class __$$_UserClassCopyWithImpl<$Res>
       usualFirstName: null == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -3834,7 +3834,7 @@ class __$$_UserClassCopyWithImpl<$Res>
       alumnizedAt: null == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       alumni: freezed == alumni
           ? _value.alumni
           : alumni // ignore: cast_nullable_to_non_nullable
@@ -3899,7 +3899,7 @@ class _$_UserClass implements _UserClass {
   final String? usualFullName;
   @override
   @JsonKey(name: "usual_first_name")
-  final dynamic usualFirstName;
+  final dynamic? usualFirstName;
   @override
   final String? url;
   @override
@@ -3946,7 +3946,7 @@ class _$_UserClass implements _UserClass {
   final DateTime? updatedAt;
   @override
   @JsonKey(name: "alumnized_at")
-  final dynamic alumnizedAt;
+  final dynamic? alumnizedAt;
   @override
   final bool? alumni;
   @override
@@ -4062,7 +4062,7 @@ abstract class _UserClass implements UserClass {
       @JsonKey(name: "first_name") final String? firstName,
       @JsonKey(name: "last_name") final String? lastName,
       @JsonKey(name: "usual_full_name") final String? usualFullName,
-      @JsonKey(name: "usual_first_name") final dynamic usualFirstName,
+      @JsonKey(name: "usual_first_name") final dynamic? usualFirstName,
       final String? url,
       final String? phone,
       @JsonKey(name: "displayname") final String? displayName,
@@ -4080,7 +4080,7 @@ abstract class _UserClass implements UserClass {
       @JsonKey(name: "dataErasure_date") final DateTime? dataErasureDate,
       @JsonKey(name: "created_at") final DateTime? createdAt,
       @JsonKey(name: "updated_at") final DateTime? updatedAt,
-      @JsonKey(name: "alumnized_at") final dynamic alumnizedAt,
+      @JsonKey(name: "alumnized_at") final dynamic? alumnizedAt,
       final bool? alumni,
       final bool? active}) = _$_UserClass;
 
@@ -4104,7 +4104,7 @@ abstract class _UserClass implements UserClass {
   String? get usualFullName;
   @override
   @JsonKey(name: "usual_first_name")
-  dynamic get usualFirstName;
+  dynamic? get usualFirstName;
   @override
   String? get url;
   @override
@@ -4151,7 +4151,7 @@ abstract class _UserClass implements UserClass {
   DateTime? get updatedAt;
   @override
   @JsonKey(name: "alumnized_at")
-  dynamic get alumnizedAt;
+  dynamic? get alumnizedAt;
   @override
   bool? get alumni;
   @override
@@ -5045,6 +5045,7 @@ mixin _$ProjectsUser {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: "updated_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  List<Team>? get teams => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -5071,7 +5072,8 @@ abstract class $ProjectsUserCopyWith<$Res> {
       bool? marked,
       @JsonKey(name: "retriable_at") DateTime? retriableAt,
       @JsonKey(name: "created_at") DateTime? createdAt,
-      @JsonKey(name: "updated_at") DateTime? updatedAt});
+      @JsonKey(name: "updated_at") DateTime? updatedAt,
+      List<Team>? teams});
 
   $ProjectCopyWith<$Res>? get project;
 }
@@ -5102,6 +5104,7 @@ class _$ProjectsUserCopyWithImpl<$Res, $Val extends ProjectsUser>
     Object? retriableAt = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? teams = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -5156,6 +5159,10 @@ class _$ProjectsUserCopyWithImpl<$Res, $Val extends ProjectsUser>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      teams: freezed == teams
+          ? _value.teams
+          : teams // ignore: cast_nullable_to_non_nullable
+              as List<Team>?,
     ) as $Val);
   }
 
@@ -5193,7 +5200,8 @@ abstract class _$$_ProjectsUserCopyWith<$Res>
       bool? marked,
       @JsonKey(name: "retriable_at") DateTime? retriableAt,
       @JsonKey(name: "created_at") DateTime? createdAt,
-      @JsonKey(name: "updated_at") DateTime? updatedAt});
+      @JsonKey(name: "updated_at") DateTime? updatedAt,
+      List<Team>? teams});
 
   @override
   $ProjectCopyWith<$Res>? get project;
@@ -5223,6 +5231,7 @@ class __$$_ProjectsUserCopyWithImpl<$Res>
     Object? retriableAt = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? teams = freezed,
   }) {
     return _then(_$_ProjectsUser(
       id: freezed == id
@@ -5277,6 +5286,10 @@ class __$$_ProjectsUserCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      teams: freezed == teams
+          ? _value._teams
+          : teams // ignore: cast_nullable_to_non_nullable
+              as List<Team>?,
     ));
   }
 }
@@ -5297,8 +5310,10 @@ class _$_ProjectsUser implements _ProjectsUser {
       this.marked,
       @JsonKey(name: "retriable_at") this.retriableAt,
       @JsonKey(name: "created_at") this.createdAt,
-      @JsonKey(name: "updated_at") this.updatedAt})
-      : _cursusIds = cursusIds;
+      @JsonKey(name: "updated_at") this.updatedAt,
+      final List<Team>? teams})
+      : _cursusIds = cursusIds,
+        _teams = teams;
 
   factory _$_ProjectsUser.fromJson(Map<String, dynamic> json) =>
       _$$_ProjectsUserFromJson(json);
@@ -5343,10 +5358,18 @@ class _$_ProjectsUser implements _ProjectsUser {
   @override
   @JsonKey(name: "updated_at")
   final DateTime? updatedAt;
+  final List<Team>? _teams;
+  @override
+  List<Team>? get teams {
+    final value = _teams;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'ProjectsUser(id: $id, occurrence: $occurrence, finalMark: $finalMark, status: $status, validated: $validated, currentTeamId: $currentTeamId, project: $project, cursusIds: $cursusIds, markedAt: $markedAt, marked: $marked, retriableAt: $retriableAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProjectsUser(id: $id, occurrence: $occurrence, finalMark: $finalMark, status: $status, validated: $validated, currentTeamId: $currentTeamId, project: $project, cursusIds: $cursusIds, markedAt: $markedAt, marked: $marked, retriableAt: $retriableAt, createdAt: $createdAt, updatedAt: $updatedAt, teams: $teams)';
   }
 
   @override
@@ -5375,7 +5398,8 @@ class _$_ProjectsUser implements _ProjectsUser {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            const DeepCollectionEquality().equals(other._teams, _teams));
   }
 
   @JsonKey(ignore: true)
@@ -5394,7 +5418,8 @@ class _$_ProjectsUser implements _ProjectsUser {
       marked,
       retriableAt,
       createdAt,
-      updatedAt);
+      updatedAt,
+      const DeepCollectionEquality().hash(_teams));
 
   @JsonKey(ignore: true)
   @override
@@ -5412,20 +5437,20 @@ class _$_ProjectsUser implements _ProjectsUser {
 
 abstract class _ProjectsUser implements ProjectsUser {
   const factory _ProjectsUser(
-          {final int? id,
-          final int? occurrence,
-          @JsonKey(name: "final_mark") final int? finalMark,
-          final String? status,
-          final bool? validated,
-          @JsonKey(name: "current_team_id") final int? currentTeamId,
-          final Project? project,
-          @JsonKey(name: "cursus_ids") final List<int>? cursusIds,
-          @JsonKey(name: "marked_at") final DateTime? markedAt,
-          final bool? marked,
-          @JsonKey(name: "retriable_at") final DateTime? retriableAt,
-          @JsonKey(name: "created_at") final DateTime? createdAt,
-          @JsonKey(name: "updated_at") final DateTime? updatedAt}) =
-      _$_ProjectsUser;
+      {final int? id,
+      final int? occurrence,
+      @JsonKey(name: "final_mark") final int? finalMark,
+      final String? status,
+      final bool? validated,
+      @JsonKey(name: "current_team_id") final int? currentTeamId,
+      final Project? project,
+      @JsonKey(name: "cursus_ids") final List<int>? cursusIds,
+      @JsonKey(name: "marked_at") final DateTime? markedAt,
+      final bool? marked,
+      @JsonKey(name: "retriable_at") final DateTime? retriableAt,
+      @JsonKey(name: "created_at") final DateTime? createdAt,
+      @JsonKey(name: "updated_at") final DateTime? updatedAt,
+      final List<Team>? teams}) = _$_ProjectsUser;
 
   factory _ProjectsUser.fromJson(Map<String, dynamic> json) =
       _$_ProjectsUser.fromJson;
@@ -5464,6 +5489,8 @@ abstract class _ProjectsUser implements ProjectsUser {
   @JsonKey(name: "updated_at")
   DateTime? get updatedAt;
   @override
+  List<Team>? get teams;
+  @override
   @JsonKey(ignore: true)
   _$$_ProjectsUserCopyWith<_$_ProjectsUser> get copyWith =>
       throw _privateConstructorUsedError;
@@ -5481,15 +5508,19 @@ mixin _$Project {
   dynamic get parent => throw _privateConstructorUsedError;
   List<dynamic>? get children => throw _privateConstructorUsedError;
   List<dynamic>? get attachments => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at")
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "updated_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   bool? get exam => throw _privateConstructorUsedError;
+  @JsonKey(name: "git_id")
   int? get gitId => throw _privateConstructorUsedError;
   String? get repository => throw _privateConstructorUsedError;
   String? get recommendation => throw _privateConstructorUsedError;
   List<Cursus>? get cursus => throw _privateConstructorUsedError;
   List<Campus>? get campus => throw _privateConstructorUsedError;
   List<dynamic>? get videos => throw _privateConstructorUsedError;
+  @JsonKey(name: "project_sessions")
   List<ProjectSession>? get projectSessions =>
       throw _privateConstructorUsedError;
 
@@ -5510,16 +5541,20 @@ abstract class $ProjectCopyWith<$Res> {
       dynamic parent,
       List<dynamic>? children,
       List<dynamic>? attachments,
-      DateTime? createdAt,
-      DateTime? updatedAt,
+      @JsonKey(name: "created_at")
+          DateTime? createdAt,
+      @JsonKey(name: "updated_at")
+          DateTime? updatedAt,
       bool? exam,
-      int? gitId,
+      @JsonKey(name: "git_id")
+          int? gitId,
       String? repository,
       String? recommendation,
       List<Cursus>? cursus,
       List<Campus>? campus,
       List<dynamic>? videos,
-      List<ProjectSession>? projectSessions});
+      @JsonKey(name: "project_sessions")
+          List<ProjectSession>? projectSessions});
 }
 
 /// @nodoc
@@ -5635,16 +5670,20 @@ abstract class _$$_ProjectCopyWith<$Res> implements $ProjectCopyWith<$Res> {
       dynamic parent,
       List<dynamic>? children,
       List<dynamic>? attachments,
-      DateTime? createdAt,
-      DateTime? updatedAt,
+      @JsonKey(name: "created_at")
+          DateTime? createdAt,
+      @JsonKey(name: "updated_at")
+          DateTime? updatedAt,
       bool? exam,
-      int? gitId,
+      @JsonKey(name: "git_id")
+          int? gitId,
       String? repository,
       String? recommendation,
       List<Cursus>? cursus,
       List<Campus>? campus,
       List<dynamic>? videos,
-      List<ProjectSession>? projectSessions});
+      @JsonKey(name: "project_sessions")
+          List<ProjectSession>? projectSessions});
 }
 
 /// @nodoc
@@ -5753,16 +5792,20 @@ class _$_Project implements _Project {
       this.parent,
       final List<dynamic>? children,
       final List<dynamic>? attachments,
-      this.createdAt,
-      this.updatedAt,
+      @JsonKey(name: "created_at")
+          this.createdAt,
+      @JsonKey(name: "updated_at")
+          this.updatedAt,
       this.exam,
-      this.gitId,
+      @JsonKey(name: "git_id")
+          this.gitId,
       this.repository,
       this.recommendation,
       final List<Cursus>? cursus,
       final List<Campus>? campus,
       final List<dynamic>? videos,
-      final List<ProjectSession>? projectSessions})
+      @JsonKey(name: "project_sessions")
+          final List<ProjectSession>? projectSessions})
       : _children = children,
         _attachments = attachments,
         _cursus = cursus,
@@ -5800,12 +5843,15 @@ class _$_Project implements _Project {
   }
 
   @override
+  @JsonKey(name: "created_at")
   final DateTime? createdAt;
   @override
+  @JsonKey(name: "updated_at")
   final DateTime? updatedAt;
   @override
   final bool? exam;
   @override
+  @JsonKey(name: "git_id")
   final int? gitId;
   @override
   final String? repository;
@@ -5840,6 +5886,7 @@ class _$_Project implements _Project {
 
   final List<ProjectSession>? _projectSessions;
   @override
+  @JsonKey(name: "project_sessions")
   List<ProjectSession>? get projectSessions {
     final value = _projectSessions;
     if (value == null) return null;
@@ -5924,16 +5971,20 @@ abstract class _Project implements Project {
       final dynamic parent,
       final List<dynamic>? children,
       final List<dynamic>? attachments,
-      final DateTime? createdAt,
-      final DateTime? updatedAt,
+      @JsonKey(name: "created_at")
+          final DateTime? createdAt,
+      @JsonKey(name: "updated_at")
+          final DateTime? updatedAt,
       final bool? exam,
-      final int? gitId,
+      @JsonKey(name: "git_id")
+          final int? gitId,
       final String? repository,
       final String? recommendation,
       final List<Cursus>? cursus,
       final List<Campus>? campus,
       final List<dynamic>? videos,
-      final List<ProjectSession>? projectSessions}) = _$_Project;
+      @JsonKey(name: "project_sessions")
+          final List<ProjectSession>? projectSessions}) = _$_Project;
 
   factory _Project.fromJson(Map<String, dynamic> json) = _$_Project.fromJson;
 
@@ -5950,12 +6001,15 @@ abstract class _Project implements Project {
   @override
   List<dynamic>? get attachments;
   @override
+  @JsonKey(name: "created_at")
   DateTime? get createdAt;
   @override
+  @JsonKey(name: "updated_at")
   DateTime? get updatedAt;
   @override
   bool? get exam;
   @override
+  @JsonKey(name: "git_id")
   int? get gitId;
   @override
   String? get repository;
@@ -5968,6 +6022,7 @@ abstract class _Project implements Project {
   @override
   List<dynamic>? get videos;
   @override
+  @JsonKey(name: "project_sessions")
   List<ProjectSession>? get projectSessions;
   @override
   @JsonKey(ignore: true)
@@ -5983,23 +6038,36 @@ ProjectSession _$ProjectSessionFromJson(Map<String, dynamic> json) {
 mixin _$ProjectSession {
   int? get id => throw _privateConstructorUsedError;
   bool? get solo => throw _privateConstructorUsedError;
+  @JsonKey(name: "begin_at")
   dynamic get beginAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "end_at")
   dynamic get endAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "estimate_time")
   String? get estimateTime => throw _privateConstructorUsedError;
   int? get difficulty => throw _privateConstructorUsedError;
   List<String>? get objectives => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: "duration_days")
   dynamic get durationDays => throw _privateConstructorUsedError;
+  @JsonKey(name: "terminating_after")
   dynamic get terminatingAfter => throw _privateConstructorUsedError;
+  @JsonKey(name: "project_id")
   int? get projectId => throw _privateConstructorUsedError;
+  @JsonKey(name: "campus_id")
   int? get campusId => throw _privateConstructorUsedError;
+  @JsonKey(name: "cursus_id")
   int? get cursusId => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at")
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "updated_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "max_people")
   dynamic get maxPeople => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_subscriptable")
   bool? get isSubscriptable => throw _privateConstructorUsedError;
   List<Scale>? get scales => throw _privateConstructorUsedError;
   List<Upload>? get uploads => throw _privateConstructorUsedError;
+  @JsonKey(name: "team_behaviour")
   String? get teamBehaviour => throw _privateConstructorUsedError;
   String? get commit => throw _privateConstructorUsedError;
 
@@ -6018,24 +6086,24 @@ abstract class $ProjectSessionCopyWith<$Res> {
   $Res call(
       {int? id,
       bool? solo,
-      dynamic beginAt,
-      dynamic endAt,
-      String? estimateTime,
+      @JsonKey(name: "begin_at") dynamic beginAt,
+      @JsonKey(name: "end_at") dynamic endAt,
+      @JsonKey(name: "estimate_time") String? estimateTime,
       int? difficulty,
       List<String>? objectives,
       String? description,
-      dynamic durationDays,
-      dynamic terminatingAfter,
-      int? projectId,
-      int? campusId,
-      int? cursusId,
-      DateTime? createdAt,
-      DateTime? updatedAt,
-      dynamic maxPeople,
-      bool? isSubscriptable,
+      @JsonKey(name: "duration_days") dynamic durationDays,
+      @JsonKey(name: "terminating_after") dynamic terminatingAfter,
+      @JsonKey(name: "project_id") int? projectId,
+      @JsonKey(name: "campus_id") int? campusId,
+      @JsonKey(name: "cursus_id") int? cursusId,
+      @JsonKey(name: "created_at") DateTime? createdAt,
+      @JsonKey(name: "updated_at") DateTime? updatedAt,
+      @JsonKey(name: "max_people") dynamic maxPeople,
+      @JsonKey(name: "is_subscriptable") bool? isSubscriptable,
       List<Scale>? scales,
       List<Upload>? uploads,
-      String? teamBehaviour,
+      @JsonKey(name: "team_behaviour") String? teamBehaviour,
       String? commit});
 }
 
@@ -6174,24 +6242,24 @@ abstract class _$$_ProjectSessionCopyWith<$Res>
   $Res call(
       {int? id,
       bool? solo,
-      dynamic beginAt,
-      dynamic endAt,
-      String? estimateTime,
+      @JsonKey(name: "begin_at") dynamic beginAt,
+      @JsonKey(name: "end_at") dynamic endAt,
+      @JsonKey(name: "estimate_time") String? estimateTime,
       int? difficulty,
       List<String>? objectives,
       String? description,
-      dynamic durationDays,
-      dynamic terminatingAfter,
-      int? projectId,
-      int? campusId,
-      int? cursusId,
-      DateTime? createdAt,
-      DateTime? updatedAt,
-      dynamic maxPeople,
-      bool? isSubscriptable,
+      @JsonKey(name: "duration_days") dynamic durationDays,
+      @JsonKey(name: "terminating_after") dynamic terminatingAfter,
+      @JsonKey(name: "project_id") int? projectId,
+      @JsonKey(name: "campus_id") int? campusId,
+      @JsonKey(name: "cursus_id") int? cursusId,
+      @JsonKey(name: "created_at") DateTime? createdAt,
+      @JsonKey(name: "updated_at") DateTime? updatedAt,
+      @JsonKey(name: "max_people") dynamic maxPeople,
+      @JsonKey(name: "is_subscriptable") bool? isSubscriptable,
       List<Scale>? scales,
       List<Upload>? uploads,
-      String? teamBehaviour,
+      @JsonKey(name: "team_behaviour") String? teamBehaviour,
       String? commit});
 }
 
@@ -6323,24 +6391,24 @@ class _$_ProjectSession implements _ProjectSession {
   const _$_ProjectSession(
       {this.id,
       this.solo,
-      this.beginAt,
-      this.endAt,
-      this.estimateTime,
+      @JsonKey(name: "begin_at") this.beginAt,
+      @JsonKey(name: "end_at") this.endAt,
+      @JsonKey(name: "estimate_time") this.estimateTime,
       this.difficulty,
       final List<String>? objectives,
       this.description,
-      this.durationDays,
-      this.terminatingAfter,
-      this.projectId,
-      this.campusId,
-      this.cursusId,
-      this.createdAt,
-      this.updatedAt,
-      this.maxPeople,
-      this.isSubscriptable,
+      @JsonKey(name: "duration_days") this.durationDays,
+      @JsonKey(name: "terminating_after") this.terminatingAfter,
+      @JsonKey(name: "project_id") this.projectId,
+      @JsonKey(name: "campus_id") this.campusId,
+      @JsonKey(name: "cursus_id") this.cursusId,
+      @JsonKey(name: "created_at") this.createdAt,
+      @JsonKey(name: "updated_at") this.updatedAt,
+      @JsonKey(name: "max_people") this.maxPeople,
+      @JsonKey(name: "is_subscriptable") this.isSubscriptable,
       final List<Scale>? scales,
       final List<Upload>? uploads,
-      this.teamBehaviour,
+      @JsonKey(name: "team_behaviour") this.teamBehaviour,
       this.commit})
       : _objectives = objectives,
         _scales = scales,
@@ -6354,10 +6422,13 @@ class _$_ProjectSession implements _ProjectSession {
   @override
   final bool? solo;
   @override
+  @JsonKey(name: "begin_at")
   final dynamic beginAt;
   @override
+  @JsonKey(name: "end_at")
   final dynamic endAt;
   @override
+  @JsonKey(name: "estimate_time")
   final String? estimateTime;
   @override
   final int? difficulty;
@@ -6373,22 +6444,31 @@ class _$_ProjectSession implements _ProjectSession {
   @override
   final String? description;
   @override
+  @JsonKey(name: "duration_days")
   final dynamic durationDays;
   @override
+  @JsonKey(name: "terminating_after")
   final dynamic terminatingAfter;
   @override
+  @JsonKey(name: "project_id")
   final int? projectId;
   @override
+  @JsonKey(name: "campus_id")
   final int? campusId;
   @override
+  @JsonKey(name: "cursus_id")
   final int? cursusId;
   @override
+  @JsonKey(name: "created_at")
   final DateTime? createdAt;
   @override
+  @JsonKey(name: "updated_at")
   final DateTime? updatedAt;
   @override
+  @JsonKey(name: "max_people")
   final dynamic maxPeople;
   @override
+  @JsonKey(name: "is_subscriptable")
   final bool? isSubscriptable;
   final List<Scale>? _scales;
   @override
@@ -6409,6 +6489,7 @@ class _$_ProjectSession implements _ProjectSession {
   }
 
   @override
+  @JsonKey(name: "team_behaviour")
   final String? teamBehaviour;
   @override
   final String? commit;
@@ -6504,24 +6585,24 @@ abstract class _ProjectSession implements ProjectSession {
   const factory _ProjectSession(
       {final int? id,
       final bool? solo,
-      final dynamic beginAt,
-      final dynamic endAt,
-      final String? estimateTime,
+      @JsonKey(name: "begin_at") final dynamic beginAt,
+      @JsonKey(name: "end_at") final dynamic endAt,
+      @JsonKey(name: "estimate_time") final String? estimateTime,
       final int? difficulty,
       final List<String>? objectives,
       final String? description,
-      final dynamic durationDays,
-      final dynamic terminatingAfter,
-      final int? projectId,
-      final int? campusId,
-      final int? cursusId,
-      final DateTime? createdAt,
-      final DateTime? updatedAt,
-      final dynamic maxPeople,
-      final bool? isSubscriptable,
+      @JsonKey(name: "duration_days") final dynamic durationDays,
+      @JsonKey(name: "terminating_after") final dynamic terminatingAfter,
+      @JsonKey(name: "project_id") final int? projectId,
+      @JsonKey(name: "campus_id") final int? campusId,
+      @JsonKey(name: "cursus_id") final int? cursusId,
+      @JsonKey(name: "created_at") final DateTime? createdAt,
+      @JsonKey(name: "updated_at") final DateTime? updatedAt,
+      @JsonKey(name: "max_people") final dynamic maxPeople,
+      @JsonKey(name: "is_subscriptable") final bool? isSubscriptable,
       final List<Scale>? scales,
       final List<Upload>? uploads,
-      final String? teamBehaviour,
+      @JsonKey(name: "team_behaviour") final String? teamBehaviour,
       final String? commit}) = _$_ProjectSession;
 
   factory _ProjectSession.fromJson(Map<String, dynamic> json) =
@@ -6532,10 +6613,13 @@ abstract class _ProjectSession implements ProjectSession {
   @override
   bool? get solo;
   @override
+  @JsonKey(name: "begin_at")
   dynamic get beginAt;
   @override
+  @JsonKey(name: "end_at")
   dynamic get endAt;
   @override
+  @JsonKey(name: "estimate_time")
   String? get estimateTime;
   @override
   int? get difficulty;
@@ -6544,28 +6628,38 @@ abstract class _ProjectSession implements ProjectSession {
   @override
   String? get description;
   @override
+  @JsonKey(name: "duration_days")
   dynamic get durationDays;
   @override
+  @JsonKey(name: "terminating_after")
   dynamic get terminatingAfter;
   @override
+  @JsonKey(name: "project_id")
   int? get projectId;
   @override
+  @JsonKey(name: "campus_id")
   int? get campusId;
   @override
+  @JsonKey(name: "cursus_id")
   int? get cursusId;
   @override
+  @JsonKey(name: "created_at")
   DateTime? get createdAt;
   @override
+  @JsonKey(name: "updated_at")
   DateTime? get updatedAt;
   @override
+  @JsonKey(name: "max_people")
   dynamic get maxPeople;
   @override
+  @JsonKey(name: "is_subscriptable")
   bool? get isSubscriptable;
   @override
   List<Scale>? get scales;
   @override
   List<Upload>? get uploads;
   @override
+  @JsonKey(name: "team_behaviour")
   String? get teamBehaviour;
   @override
   String? get commit;
@@ -6582,7 +6676,9 @@ Scale _$ScaleFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Scale {
   int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "correction_number")
   int? get correctionNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_primary")
   bool? get isPrimary => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -6595,7 +6691,10 @@ abstract class $ScaleCopyWith<$Res> {
   factory $ScaleCopyWith(Scale value, $Res Function(Scale) then) =
       _$ScaleCopyWithImpl<$Res, Scale>;
   @useResult
-  $Res call({int? id, int? correctionNumber, bool? isPrimary});
+  $Res call(
+      {int? id,
+      @JsonKey(name: "correction_number") int? correctionNumber,
+      @JsonKey(name: "is_primary") bool? isPrimary});
 }
 
 /// @nodoc
@@ -6638,7 +6737,10 @@ abstract class _$$_ScaleCopyWith<$Res> implements $ScaleCopyWith<$Res> {
       __$$_ScaleCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, int? correctionNumber, bool? isPrimary});
+  $Res call(
+      {int? id,
+      @JsonKey(name: "correction_number") int? correctionNumber,
+      @JsonKey(name: "is_primary") bool? isPrimary});
 }
 
 /// @nodoc
@@ -6674,7 +6776,10 @@ class __$$_ScaleCopyWithImpl<$Res> extends _$ScaleCopyWithImpl<$Res, _$_Scale>
 /// @nodoc
 @JsonSerializable()
 class _$_Scale implements _Scale {
-  const _$_Scale({this.id, this.correctionNumber, this.isPrimary});
+  const _$_Scale(
+      {this.id,
+      @JsonKey(name: "correction_number") this.correctionNumber,
+      @JsonKey(name: "is_primary") this.isPrimary});
 
   factory _$_Scale.fromJson(Map<String, dynamic> json) =>
       _$$_ScaleFromJson(json);
@@ -6682,8 +6787,10 @@ class _$_Scale implements _Scale {
   @override
   final int? id;
   @override
+  @JsonKey(name: "correction_number")
   final int? correctionNumber;
   @override
+  @JsonKey(name: "is_primary")
   final bool? isPrimary;
 
   @override
@@ -6724,16 +6831,18 @@ class _$_Scale implements _Scale {
 abstract class _Scale implements Scale {
   const factory _Scale(
       {final int? id,
-      final int? correctionNumber,
-      final bool? isPrimary}) = _$_Scale;
+      @JsonKey(name: "correction_number") final int? correctionNumber,
+      @JsonKey(name: "is_primary") final bool? isPrimary}) = _$_Scale;
 
   factory _Scale.fromJson(Map<String, dynamic> json) = _$_Scale.fromJson;
 
   @override
   int? get id;
   @override
+  @JsonKey(name: "correction_number")
   int? get correctionNumber;
   @override
+  @JsonKey(name: "is_primary")
   bool? get isPrimary;
   @override
   @JsonKey(ignore: true)

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/extensions/date_time_ext.dart';
 import 'package:intra_42/core/params/colors.dart';
+import 'package:intra_42/data/manager/notification_manager.dart';
 import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/achievement_screen.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/agenda.dart';
@@ -27,6 +28,7 @@ class Dashboard extends ConsumerStatefulWidget {
 }
 
 class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProviderStateMixin {
+  var delegateProvider = StateProvider((ref) => false);
   var stateProvider = StateProvider((ref) => LocaleStorage().getMe);
   var bgStateProvider = StateProvider((ref) => kDefaultDashboardBg);
   late TabController _tabController;
@@ -123,14 +125,20 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
         const Positioned.fill(child: ColoredBox(color: ColorConstants.kDashboardOverlay),),
         Scaffold(
           backgroundColor: Colors.transparent,
+          floatingActionButton: FloatingActionButton(
+            onPressed: (){
+              NotificationManager().test();
+            },
+          ),
           body: NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return [
                 SliverAppBar(
                   backgroundColor: Colors.transparent,
-
+                  pinned: false,
                   expandedHeight: kDashboardExpandedHeight,
                   flexibleSpace: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.parallax,
                     background: Stack(
                       children: [
                         Column(
@@ -141,7 +149,6 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                                 width: kDashboardAvatarSize,
                                 height: kDashboardAvatarSize,
                                 child: ClipOval(
-                                  //todo: default image
                                   child: Img(user.imageUrl ?? user.image?.versions?.large ?? ""),
                                 ),
                               ),
@@ -206,6 +213,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                 ),
                 SliverPersistentHeader(
                   delegate: _Delegate(
+                    ref,delegateProvider,
                     child: ColoredBox(
                       color: ColorConstants.appBar,
                       child: TabBar(
@@ -224,7 +232,14 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                           Tab(text: App.s.skills.toUpperCase()),
                         ],
                       ),
-                    )
+                    ),
+                    child2: ColoredBox(
+                      color: ColorConstants.appBar,
+                      child: AppBar(
+                        backgroundColor: ColorConstants.appBar,
+                      ),
+                    ),
+
                   ),
                   pinned: true,
                   floating: true,
@@ -279,20 +294,44 @@ class _CustomPainter extends BoxPainter {
 
 class _Delegate extends SliverPersistentHeaderDelegate{
   final Widget? child;
+  final Widget? child2;
   final double minHeight;
   final double maxHeight;
-  const _Delegate({this.child, this.minHeight = 46.0, this.maxHeight = 46.0});
+  final WidgetRef ref;
+  final StateProvider<bool> provider;
+  const _Delegate(this.ref, this.provider, {this.child, this.minHeight = 46.0, this.maxHeight = 46.0, this.child2});
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    App.log.i("shrinkOffset: $shrinkOffset");
+    if (shrinkOffset > 0) {
+      if (ref.read(provider) == false) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ref.read(provider.notifier).state = true;
+        });
+      }
+      return Column(
+        children: [
+          if (ref.read(provider))SizedBox(height: maxHeight,child: child2,),
+          SizedBox(height: maxHeight,child: child,)
+        ],
+      );
+    } else {
+      if (ref.read(provider) == true) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ref.read(provider.notifier).state = false;
+        });
+      }
+      return SizedBox(height: maxHeight,child: child,);
+    }
     return SizedBox.expand(child: child);
   }
 
   @override
-  double get maxExtent => maxHeight;
+  double get maxExtent => ref.watch(provider) ? maxHeight * 2 : maxHeight;
 
   @override
-  double get minExtent => minHeight;
+  double get minExtent => ref.watch(provider) ? maxHeight * 2 : maxHeight;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {

@@ -10,8 +10,8 @@ class ColorConstants {
   static const kDashboardOverlay = Color(0xB2171717);
   static const kProgressIndicator = Color(0xB2171717);
 
-  static const kBackgroundColor = Colors.black;
-  static const kStatusBarColor = Colors.black;
+  static const kBackgroundColor = Color(0xFF283336);
+  static const kStatusBarColor = Color(0xFF283336);
   static const kFooterLineColor = Color(0xFFDFDFDF);
   static const kFooterBackgroundColor = Color(0xFF0D0809);
 

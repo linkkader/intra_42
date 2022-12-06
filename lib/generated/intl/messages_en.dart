@@ -24,18 +24,25 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "achievements": MessageLookupByLibrary.simpleMessage("Achievements"),
         "agenda": MessageLookupByLibrary.simpleMessage("Agenda"),
+        "allowed": MessageLookupByLibrary.simpleMessage("Allowed"),
         "app_title": MessageLookupByLibrary.simpleMessage("Intra 42"),
+        "black_hole": MessageLookupByLibrary.simpleMessage("Black hole"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "count_students": MessageLookupByLibrary.simpleMessage("%d students"),
         "cursus": MessageLookupByLibrary.simpleMessage("Cursus"),
         "days_left": MessageLookupByLibrary.simpleMessage("Days left"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "evaluated_by": MessageLookupByLibrary.simpleMessage("Evaluated by"),
         "evaluation": MessageLookupByLibrary.simpleMessage("Evaluation"),
         "evaluations_points":
             MessageLookupByLibrary.simpleMessage("Evaluations Points"),
         "event_is_full":
             MessageLookupByLibrary.simpleMessage("The event is full"),
         "expertises": MessageLookupByLibrary.simpleMessage("Expertises"),
+        "fail": MessageLookupByLibrary.simpleMessage("Fail"),
+        "forbidden": MessageLookupByLibrary.simpleMessage("Forbidden"),
         "grade": MessageLookupByLibrary.simpleMessage("Grade"),
+        "group": MessageLookupByLibrary.simpleMessage("Group"),
         "info": MessageLookupByLibrary.simpleMessage("Info"),
         "live": MessageLookupByLibrary.simpleMessage("Live"),
         "logged_off": MessageLookupByLibrary.simpleMessage("logged off"),
@@ -43,12 +50,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "logtime": MessageLookupByLibrary.simpleMessage("Logtime"),
         "logtime_format":
             MessageLookupByLibrary.simpleMessage("logtime : %d:%d"),
+        "s_feedback": MessageLookupByLibrary.simpleMessage("\'s feedback, "),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),
         "skills": MessageLookupByLibrary.simpleMessage("Skills"),
+        "solo": MessageLookupByLibrary.simpleMessage("Solo"),
         "sub": MessageLookupByLibrary.simpleMessage("Subscribe"),
         "sub_to_waitlist":
             MessageLookupByLibrary.simpleMessage("Subscribe to waitlist"),
+        "success": MessageLookupByLibrary.simpleMessage("Success"),
         "unavailable": MessageLookupByLibrary.simpleMessage("Unavailable"),
+        "user_count_fetched":
+            MessageLookupByLibrary.simpleMessage("%d users fetched"),
         "vacant_post": MessageLookupByLibrary.simpleMessage("%d Vacant posts"),
         "wallet": MessageLookupByLibrary.simpleMessage("Wallet")
       };

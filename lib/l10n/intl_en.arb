@@ -24,5 +24,16 @@
   "logtime" : "Logtime",
   "expertises" : "Expertises",
   "achievements" : "Achievements",
-  "skills" : "Skills"
+  "skills" : "Skills",
+  "solo" : "Solo",
+  "group" : "Group",
+  "description" : "Description",
+  "evaluated_by" : "Evaluated by",
+  "s_feedback" : "'s feedback, ",
+  "forbidden" : "Forbidden",
+  "allowed" : "Allowed",
+  "success" : "Success",
+  "fail" : "Fail",
+  "user_count_fetched" : "%d users fetched",
+  "black_hole" : "Black hole"
 }
