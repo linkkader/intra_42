@@ -18,7 +18,8 @@ void main() async{
 
   await LocaleStorage().init();
   Client().initApi();
-  NotificationManager().start();
+  // NotificationManager().start();
+  // notificationExecution(null);
   runApp(const App());
 }
 

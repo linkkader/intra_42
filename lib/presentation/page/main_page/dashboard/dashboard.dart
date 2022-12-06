@@ -128,7 +128,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
           backgroundColor: Colors.transparent,
           floatingActionButton: FloatingActionButton(
             onPressed: (){
-              NotificationManager().test();
+              notificationExecution(null);
             },
           ),
           body: NestedScrollView(

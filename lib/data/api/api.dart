@@ -35,6 +35,12 @@ abstract class Api {
   @GET("/scale_teams?{filter}")
   Future<List<ScaleTeam>> scalesByTeamId(@Path("filter") String data);
 
+  @GET("/me/scale_teams/as_corrector")
+  Future<List<ScaleTeam>> scalesAsCorrector();
+
+  @GET("/me/scale_teams/as_corrected")
+  Future<List<ScaleTeam>> scalesAsCorrected();
+
   @GET("/campus/{campus_id}/users")
   Future<List<User>> usersCampus(@Path("campus_id") int campusId,{@Query('page') int? page});
 

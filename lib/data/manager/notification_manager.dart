@@ -8,7 +8,9 @@ import 'package:intra_42/core/extensions/int_ext.dart';
 import 'package:intra_42/data/api/client.dart';
 import 'package:intra_42/data/api/web_socket/web_manager.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
+import 'package:intra_42/data/models/scale_team.dart';
 import 'package:intra_42/data/models_izar/notification_isar.dart';
+import 'package:intra_42/data/repositories/scale_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -16,7 +18,7 @@ void _callBackDispatcher() async{
   Workmanager().executeTask((task, inputData) async {
     switch (task) {
       case "notification":{
-        await _notificationExecution(null);
+        await notificationExecution(null);
       }
       break;
     }
@@ -24,9 +26,9 @@ void _callBackDispatcher() async{
   });
 }
 
-Future _notificationExecution(void data) async {
+Future notificationExecution(void data) async {
   var completer = Completer();
-  await NotificationManager.notificationInit();
+  //await NotificationManager.notificationInit();
   var me = LocaleStorage().getMe;
   if (me != null) {
     var d = {"command":"subscribe","identifier":"{\"channel\":\"LocationChannel\",\"user_id\":${me.id}}"};
@@ -59,6 +61,18 @@ Future _notificationExecution(void data) async {
         }
     );
   }
+  ScaleRepository().scalesAsCorrector().then((correctors) {
+    for (var value in correctors) {
+      var notification = NotificationIsar(scaleTeamId: value.id, type: NotificationType.corrector);
+      LocaleStorage.setNotification(notification);
+    }
+  });
+  ScaleRepository().scalesAsCorrected().then((corrected) {
+    for (var value in corrected) {
+      var notification = NotificationIsar(scaleTeamId: value.id, type: NotificationType.corrected);
+      LocaleStorage.setNotification(notification);
+    }
+  });
   return completer.future;
 }
 
@@ -88,7 +102,7 @@ class NotificationManager {
 
 
   void test() async {
-    await compute(_notificationExecution, null);
+    await compute(notificationExecution, null);
     App.log.i("test finished");
   }
 

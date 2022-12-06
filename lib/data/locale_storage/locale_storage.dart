@@ -2,12 +2,14 @@
 
 import 'package:intra_42/data/models/black_hole_data.dart';
 import 'package:intra_42/data/models/expertise.dart';
+import 'package:intra_42/data/models/scale_team.dart';
 import 'package:intra_42/data/models/token_body.dart';
 import 'package:intra_42/data/models/user.dart';
 import 'package:intra_42/data/models_izar/expertise_izar.dart';
 import 'package:intra_42/data/models_izar/img.dart';
 import 'package:intra_42/data/models_izar/notification_isar.dart';
 import 'package:intra_42/data/models_izar/pref_isar.dart';
+import 'package:intra_42/data/models_izar/scale_team_isar.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/main.dart';
 import 'package:isar/isar.dart';
@@ -28,9 +30,7 @@ class LocaleStorage{
 
   Future<void> init() async {
     assert(!_isInit, "LocalStorage already initialized");
-
-    _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema, IntIsarSchema, StringIsarSchema, NotificationIsarSchema], maxSizeMiB: 10000,);
-    //init shared preferences
+    _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema, IntIsarSchema, StringIsarSchema, NotificationIsarSchema, ScaleTeamIsarSchema], maxSizeMiB: 10000,);
     _isInit = true;
     App.log.i("Locale Storage initialized");
 
@@ -207,4 +207,15 @@ class LocaleStorage{
     });
   }
 
+  static Future setScaleTeam(ScaleTeam scale){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.writeTxn(() async{
+      _isar.scaleTeamIsars.put(ScaleTeamIsar.fromFreezed(scale));
+    });
+  }
+
+  static ScaleTeam? getScaleTeam(int id){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.scaleTeamIsars.getSync(id)?.toFreezed();
+  }
 }

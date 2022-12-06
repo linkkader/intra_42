@@ -1,5 +1,7 @@
 // Created by linkkader on 4/12/2022
 
+import 'package:intra_42/data/locale_storage/locale_storage.dart';
+import 'package:intra_42/data/models_izar/scale_team_isar.dart';
 import 'package:intra_42/main.dart';
 
 import '../../domain/api_interface/scale_interface.dart';
@@ -30,6 +32,26 @@ class ScaleRepository extends ScaleInterface {
     }
     App.log.i(data);
     return map;
+  }
+
+  @override
+  Future<List<ScaleTeam>> scalesAsCorrected() async{
+    assert(_isInit, "ScaleRepository is not initialized");
+    var lst = await _api.scalesAsCorrected();
+    for (var element in lst) {
+      LocaleStorage.setScaleTeam(element);
+    }
+    return lst;
+  }
+
+  @override
+  Future<List<ScaleTeam>> scalesAsCorrector() async {
+    assert(_isInit, "ScaleRepository is not initialized");
+    var lst = await _api.scalesAsCorrector();
+    for (var element in lst) {
+      LocaleStorage.setScaleTeam(element);
+    }
+    return lst;
   }
 
 }
