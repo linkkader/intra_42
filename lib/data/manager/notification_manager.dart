@@ -30,14 +30,14 @@ Future _notificationExecution(void data) async {
   var me = LocaleStorage().getMe;
   if (me != null) {
     var d = {"command":"subscribe","identifier":"{\"channel\":\"LocationChannel\",\"user_id\":${me.id}}"};
-    WebSocketManager().addListener(
-        type: "LocationChannel",
-        data: json.encode(d),
-        listener: (message) async {
-          LocaleStorage.setNotification(NotificationIsar(data: message.toString()));
-          print(message);
-        }
-    );
+    // WebSocketManager().addListener(
+    //     type: "LocationChannel",
+    //     data: json.encode(d),
+    //     listener: (message) async {
+    //       LocaleStorage.setNotification(NotificationIsar(data: message.toString()));
+    //       print(message);
+    //     }
+    // );
 
     d = {"command":"subscribe","identifier":"{\"channel\":\"NotificationChannel\",\"user_id\":${me.id}}"};
     WebSocketManager().addListener(

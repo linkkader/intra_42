@@ -128,6 +128,11 @@ class LocaleStorage{
     return _isar.userIsars.where().loginEqualTo(login).findFirstSync()?.toFreezed();
   }
 
+  ///all notifications
+  List<NotificationIsar> getAllNotifications(){
+    return _isar.notificationIsars.where().findAllSync();
+  }
+
   List<Expertise> allExpertises(){
     return _isar.expertiseIsars.where().findAllSync().map((e) => e.toFreezed()).toList();
   }

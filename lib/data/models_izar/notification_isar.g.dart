@@ -69,6 +69,7 @@ NotificationIsar _notificationIsarDeserialize(
 ) {
   final object = NotificationIsar(
     data: reader.readStringOrNull(offsets[0]),
+    id: id,
   );
   return object;
 }
@@ -88,7 +89,7 @@ P _notificationIsarDeserializeProp<P>(
 }
 
 Id _notificationIsarGetId(NotificationIsar object) {
-  return object.id;
+  return object.id ?? Isar.autoIncrement;
 }
 
 List<IsarLinkBase<dynamic>> _notificationIsarGetLinks(NotificationIsar object) {
@@ -334,7 +335,25 @@ extension NotificationIsarQueryFilter
   }
 
   QueryBuilder<NotificationIsar, NotificationIsar, QAfterFilterCondition>
-      idEqualTo(Id value) {
+      idIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'id',
+      ));
+    });
+  }
+
+  QueryBuilder<NotificationIsar, NotificationIsar, QAfterFilterCondition>
+      idIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'id',
+      ));
+    });
+  }
+
+  QueryBuilder<NotificationIsar, NotificationIsar, QAfterFilterCondition>
+      idEqualTo(Id? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -345,7 +364,7 @@ extension NotificationIsarQueryFilter
 
   QueryBuilder<NotificationIsar, NotificationIsar, QAfterFilterCondition>
       idGreaterThan(
-    Id value, {
+    Id? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -359,7 +378,7 @@ extension NotificationIsarQueryFilter
 
   QueryBuilder<NotificationIsar, NotificationIsar, QAfterFilterCondition>
       idLessThan(
-    Id value, {
+    Id? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -373,8 +392,8 @@ extension NotificationIsarQueryFilter
 
   QueryBuilder<NotificationIsar, NotificationIsar, QAfterFilterCondition>
       idBetween(
-    Id lower,
-    Id upper, {
+    Id? lower,
+    Id? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {

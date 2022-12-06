@@ -6,7 +6,7 @@ part 'notification_isar.g.dart';
 
 @Collection()
 class NotificationIsar{
-  final Id id = Isar.autoIncrement;
+  final Id? id;
   final String? data;
-  const NotificationIsar({this.data});
+  const NotificationIsar({this.data, this.id = Isar.autoIncrement});
 }

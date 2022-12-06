@@ -10,6 +10,8 @@ import 'package:intra_42/data/locale_storage/storage_stream.dart';
 import 'package:intra_42/data/models_izar/notification_isar.dart';
 import 'package:intra_42/main.dart';
 
+import '../../../data/locale_storage/locale_storage.dart';
+
 class NotificationPage extends ConsumerStatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
 
@@ -20,10 +22,13 @@ class NotificationPage extends ConsumerStatefulWidget {
 class _NotificationPageState extends ConsumerState<NotificationPage> {
 
   late StreamSubscription subscription;
-  StateProvider<List<NotificationIsar>> lstProvider = StateProvider((ref) => []);
+  StateProvider<List<NotificationIsar>> lstProvider = StateProvider((ref) => LocaleStorage().getAllNotifications());
 
   @override
   void initState() {
+    for(var i in ref.read(lstProvider)){
+      App.log.d("NotificationPage initState ${i.id}");
+    }
     subscription = StorageStream().allNotifications().listen((event) {
       ref.read(lstProvider.notifier).state = event;
     });

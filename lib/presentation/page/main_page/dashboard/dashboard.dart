@@ -14,6 +14,7 @@ import 'package:intra_42/presentation/page/main_page/dashboard/page/expert_scree
 import 'package:intra_42/presentation/page/main_page/dashboard/page/info_screen.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/logtime_screen.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/skill_screen.dart';
+import 'package:intra_42/presentation/page/notification/notication_icon.dart';
 import 'package:intra_42/presentation/utils_widgets/img.dart';
 import '../../../../core/params/constants.dart';
 import '../../../../core/params/dimens.dart';
@@ -137,6 +138,9 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                   backgroundColor: Colors.transparent,
                   pinned: false,
                   expandedHeight: kDashboardExpandedHeight,
+                  actions: const [
+                    NotificationIcon()
+                  ],
                   flexibleSpace: FlexibleSpaceBar(
                     collapseMode: CollapseMode.parallax,
                     background: Stack(
