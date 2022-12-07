@@ -69,7 +69,7 @@ class _UserSheetState extends ConsumerState<UserBottomSheet> {
                         child: ClipOval(
                           child: GestureDetector(
                             onTap: () {
-                              Dashboard(user.id!).navigate(context: context);
+                              Dashboard(user.id!, isMe: false,).navigate(context: context);
                               // Graph(user).navigate(context: context);
                             },
                             child: Img(user.image?.versions?.medium ?? ""),

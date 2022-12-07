@@ -20,14 +20,13 @@ class ExpertiseScreen extends ConsumerStatefulWidget {
 
 class _ExpertiseScreenState extends ConsumerState<ExpertiseScreen> with AutomaticKeepAliveClientMixin{
 
+  StateProvider<List<ExpertisesUser>> expertisesState = StateProvider((ref) => []);
   final FutureProvider<List<Expertise>> _futureProvider = FutureProvider((ref){
     return ref.read(UserRepository().futureProvider).allExpertises();
   });
 
   Widget stars(int value){
-    // value = 5;
     var color = value <= 2 ? App.colorScheme.tertiary : value <= 4 ? App.colorScheme.secondary : App.colorScheme.primary;
-    // color = Color(value <= 2 ? 0xFFd8636f : value <= 3 ? 0xFF8a6d3b : 0xFF5cb85c);
     return Row(
       children: List.generate(5, (index){
         if (index < value) return Icon(Icons.star, color: color,);
@@ -35,11 +34,11 @@ class _ExpertiseScreenState extends ConsumerState<ExpertiseScreen> with Automati
       }),
     );
   }
-
   Widget item(Expertise ex)
   {
-    if (widget.user.expertisesUsers?.any((element) => element.expertiseId == ex.id) == true) {
-      var expertise = widget.user.expertisesUsers?.firstWhere((element) => element.expertiseId == ex.id);
+    var expertisesUsers = ref.watch(expertisesState);
+    if (expertisesUsers.any((element) => element.expertiseId == ex.id) == true) {
+      var expertise = expertisesUsers.firstWhere((element) => element.expertiseId == ex.id);
       return Card(
         color: Colors.transparent,
         child: Padding(
@@ -48,9 +47,9 @@ class _ExpertiseScreenState extends ConsumerState<ExpertiseScreen> with Automati
             children: [
               Text(ex.name ?? "", style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 16),),
               Expanded(child: Container()),
-              if (expertise?.interested == true) const Icon(Icons.thumb_up, color: ColorConstants.calendarFullColor,),
+              if (expertise.interested == true) const Icon(Icons.thumb_up, color: ColorConstants.calendarFullColor,),
               const SizedBox(width: 5,),
-              stars(expertise?.value ?? 0),
+              stars(expertise.value ?? 0),
             ],
           ),
         ),
@@ -62,7 +61,6 @@ class _ExpertiseScreenState extends ConsumerState<ExpertiseScreen> with Automati
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
     return ref.watch(_futureProvider)
         .when(data: (data){
           return ListView.builder(
@@ -79,6 +77,14 @@ class _ExpertiseScreenState extends ConsumerState<ExpertiseScreen> with Automati
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      UserRepository().userExpertises(widget.user.id!).then((value) {
+        ref.read(expertisesState.notifier).state = value;
+      });
+      if (widget.user.expertisesUsers != null){
+        ref.read(expertisesState.notifier).state = widget.user.expertisesUsers!;
+      }
+    });
     super.initState();
   }
 

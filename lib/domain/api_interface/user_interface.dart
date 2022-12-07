@@ -18,4 +18,5 @@ abstract class UserInterface {
   Future<User> user(int id);
   Future<User> userByLogin(String login);
   Future<List<CursusUser>> userCursus(int userId);
+  Future<List<ExpertisesUser>> userExpertises(int userId);
 }

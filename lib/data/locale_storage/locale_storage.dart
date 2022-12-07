@@ -75,24 +75,22 @@ class LocaleStorage{
 
   //todo: need check
   void updateUser(User value, {bool force = false}) async{
-    return;
     var user = getUser(value.id!);
     var me = _isar.userIsars.getSync(0);
     await _isar.writeTxn(() async{
       var id = await _isar.userIsars.put(UserIsar.fromFreezed(value));
-      App.log.i("$debug updateUser success $id");
-      // if (force){
-      //   if (value.id == me?.id){
-      //     await _isar.userIsars.put(me!.copyWith(location: value.location ?? me.location));
-      //   }
-      //   else if (user != null)
-      //   {
-      //     value = value.copyWith(location: value.location ?? user.location, cursusUsers: value.cursusUsers ?? user.cursusUsers, campus: value.campus ?? user.campus);
-      //     await _isar.userIsars.put(UserIsar.fromFreezed(value));
-      //   }
-      // }else{
-      //   await _isar.userIsars.put(UserIsar.fromFreezed(value));
-      // }
+      if (force){
+        if (value.id == me?.id){
+          await _isar.userIsars.put(me!.copyWith(location: value.location ?? me.location));
+        }
+        else if (user != null)
+        {
+          value = value.copyWith(location: value.location ?? user.location, cursusUsers: value.cursusUsers ?? user.cursusUsers, campus: value.campus ?? user.campus);
+          await _isar.userIsars.put(UserIsar.fromFreezed(value));
+        }
+      }else{
+        await _isar.userIsars.put(UserIsar.fromFreezed(value));
+      }
     }).onError((error, stackTrace) {
       App.log.e("$debug updateUser error: $error $stackTrace");
     });
@@ -133,12 +131,29 @@ class LocaleStorage{
   }
 
   ///update user cursus
-  void updateUserCursus(int id, List<CursusUser> cursusUsers) async{
-    var user = getUser(id);
+  Future updateUserCursus(int id, List<CursusUser> cursusUsers) async{
+    var user = _isar.userIsars.getSync(id);
+    var me = getMe;
+    if (user?.login == me?.login || cursusUsers.isEmpty) return;
     if (user != null){
-      user = user.copyWith(cursusUsers: cursusUsers);
+      user = user.copyWith(cursusUsers: cursusUsers.map((e) => CursusUserIsar.fromFreezed(e)).toList());
       await _isar.writeTxn(() async{
-        // await _isar.userIsars.put(UserIsar.fromFreezed(user));
+        await _isar.userIsars.put(user!);
+      }).onError((error, stackTrace) {
+        App.log.e("$debug updateUser error: $error $stackTrace");
+      });
+    }
+  }
+
+  ///update user cursus
+  Future updateUserExpertises(int id, List<ExpertisesUser> userExpertises) async{
+    var user = _isar.userIsars.getSync(id);
+    var me = getMe;
+    if (user?.login == me?.login || userExpertises.isEmpty) return;
+    if (user != null){
+      user = user.copyWith(expertisesUsers: userExpertises.map((e) => ExpertisesUserIsar.fromFreezed(e)).toList());
+      await _isar.writeTxn(() async{
+        await _isar.userIsars.put(user!);
       }).onError((error, stackTrace) {
         App.log.e("$debug updateUser error: $error $stackTrace");
       });

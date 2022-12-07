@@ -3,10 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
+import 'package:intra_42/data/models_izar/user_isar.dart';
+import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/main_page/black_hole/black_hole.dart';
 import 'package:intra_42/presentation/page/main_page/cluster/cluster.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/dashboard.dart';
 import 'package:intra_42/presentation/page/main_page/graph/graph.dart';
+import 'package:isar/isar.dart';
 
 class MainPage extends ConsumerStatefulWidget  {
   const MainPage({Key? key}) : super(key: key);
@@ -25,7 +28,7 @@ class _MainPageState extends ConsumerState<MainPage> with SingleTickerProviderSt
   void initState() {
     var user = LocaleStorage().getMe;
     views =  [
-      Dashboard(user?.id ?? 0),
+      Dashboard(user?.id ?? 0, isMe: true),
       user != null ? Graph(LocaleStorage().getMe!) : Container(),
       const Cluster(),
       const BlackHoleScreen(),

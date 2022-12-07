@@ -85,4 +85,7 @@ abstract class Api {
 
   @GET("https://api.intra.42.fr/v2/users/{user_id}/cursus_users")
   Future<List<CursusUser>> userCursus(@Path("user_id") int userId);
+
+  @GET("https://api.intra.42.fr/v2/users/{user_id}/expertises_users")
+  Future<List<ExpertisesUser>> userExpertises(@Path("user_id") int userId);
 }

@@ -21,10 +21,12 @@ import '../../../../core/params/constants.dart';
 import '../../../../core/params/dimens.dart';
 import '../../../../data/locale_storage/locale_storage.dart';
 import '../../../../data/locale_storage/storage_stream.dart';
+import '../../../../data/models/user.dart';
 
 class Dashboard extends ConsumerStatefulWidget {
   final int id;
-  const Dashboard(this.id, {Key? key}) : super(key: key);
+  final bool isMe;
+  const Dashboard(this.id, {Key? key, this.isMe = true}) : super(key: key);
 
   @override
   ConsumerState<Dashboard> createState() => _DashboardState();
@@ -32,10 +34,11 @@ class Dashboard extends ConsumerStatefulWidget {
 
 class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProviderStateMixin {
   var delegateProvider = StateProvider((ref) => false);
-  var stateProvider = StateProvider((ref) => LocaleStorage().getMe);
+  StateProvider<User?> stateProvider = StateProvider((ref) => null);
   var bgStateProvider = StateProvider((ref) => kDefaultDashboardBg);
   late TabController _tabController;
   var currentCursusProvider = StateProvider((ref) => 0);
+  List<Widget> tabs = [];
 
   Widget _selectCursus(){
     var allCursus = ref.watch(stateProvider)?.cursusUsers;
@@ -103,11 +106,24 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
   @override
   void initState() {
     App.log.i("Dashboard: user id: ${widget.id}");
-    StorageStream().user(widget.id)?.listen((event) {
-      ref.read(stateProvider.notifier).state = event?.toFreezed();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      var user = LocaleStorage().getUser(widget.id)!;
+      tabs = [
+        InfoScreen(user),
+        if (widget.isMe)const EvaluationScreen(),
+        if (widget.isMe)Agenda(user),
+        LogTimeScreen(user.login!),
+        ExpertiseScreen(user),
+        if (widget.isMe)AchievementScreen(user),
+        SkillScreen(user, currentCursusProvider),
+      ];
+      _tabController = TabController(length: tabs.length, vsync: this);
+      ref.read(stateProvider.notifier).state = user;
     });
-    UserRepository().userCursus(widget.id);
-    _tabController = TabController(length: 7, vsync: this);
+    UserRepository().userCursus(widget.id).then((value) {
+      ref.read(stateProvider.notifier).state = ref.read(stateProvider)?.copyWith(cursusUsers: value);
+    });
+
     super.initState();
   }
 
@@ -116,7 +132,10 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
 
 
     var user = ref.watch(stateProvider);
-    if (user == null) return const SizedBox.shrink();
+    if (user == null) {
+      App.log.i("Dashboard: user is null");
+      return const SizedBox.shrink();
+    }
     return Stack(
       children: [
         Container(
@@ -232,12 +251,13 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                         labelStyle: GoogleFonts.ptSans(fontSize: 16, color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
                         labelColor: App.colorScheme.secondary,
                         tabs: [
+
                           Tab(text: App.s.info.toUpperCase()),
-                          Tab(text: App.s.evaluation.toUpperCase()),
-                          Tab(text: App.s.agenda.toUpperCase()),
+                          if (widget.isMe)Tab(text: App.s.evaluation.toUpperCase()),
+                          if (widget.isMe)Tab(text: App.s.agenda.toUpperCase()),
                           Tab(text: App.s.logtime.toUpperCase()),
                           Tab(text: App.s.expertises.toUpperCase()),
-                          Tab(text: App.s.achievements.toUpperCase()),
+                          if (widget.isMe)Tab(text: App.s.achievements.toUpperCase()),
                           Tab(text: App.s.skills.toUpperCase()),
                         ],
                       ),
@@ -258,15 +278,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
             body: TabBarView(
               controller: _tabController,
               physics: const NeverScrollableScrollPhysics(),
-              children: [
-                InfoScreen(user),
-                const EvaluationScreen(),
-                Agenda(user),
-                LogTimeScreen(user.login!),
-                ExpertiseScreen(user),
-                AchievementScreen(user),
-                SkillScreen(user, currentCursusProvider),
-              ],
+              children: tabs,
             ),
           )
         )

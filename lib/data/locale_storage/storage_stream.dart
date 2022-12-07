@@ -36,7 +36,7 @@ class StorageStream{
 
     App.log.i("StorageStream: user: $id $isarId");
     if (isarId == null){
-      return LocaleStorage.isar.userIsars.watchObject(isarId!, fireImmediately: true);
+      return LocaleStorage.isar.userIsars.watchObject(isarId!);
     }
     return null;
   }

@@ -124,20 +124,26 @@ class UserRepository extends UserInterface with ProviderInterface {
   }
 
   @override
-  Future<User> userByLogin(String login) {
+  Future<User> userByLogin(String login) async {
     assert(_isInit, "AuthRepository not initialized");
-    return _api.userByLogin(login).then((value) {
-      assert(value.isNotEmpty, "User not found");
-      LocaleStorage().updateUser(value.first);
-      return value.first;
-    });
+    var users = await _api.userByLogin(login);
+    assert(users.isNotEmpty, "User not found");
+    return user(users.first.id!);
   }
 
   @override
   Future<List<CursusUser>> userCursus(int userId) async {
     assert(_isInit, "AuthRepository not initialized");
     var cursusUser = await _api.userCursus(userId);
-    LocaleStorage().updateUserCursus(userId, cursusUser);
+    await LocaleStorage().updateUserCursus(userId, cursusUser);
+    return cursusUser;
+  }
+
+  @override
+  Future<List<ExpertisesUser>> userExpertises(int userId) async {
+    assert(_isInit, "AuthRepository not initialized");
+    var cursusUser = await _api.userExpertises(userId);
+    await LocaleStorage().updateUserExpertises(userId, cursusUser);
     return cursusUser;
   }
 

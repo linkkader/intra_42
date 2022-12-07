@@ -81,7 +81,7 @@ class _LogTimeScreenState extends ConsumerState<LogTimeScreen> with AutomaticKee
                 Positioned(
                   top: 10,
                   right: 0,
-                  child: Text(sprintf(App.s.logtime_format, [ref.watch(sumState) ~/ 60, ref.watch(sumState) ~/ 60]), style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),),)
+                  child: Text(sprintf(App.s.logtime_format, [ref.watch(sumState) ~/ 60, ref.read(sumState) % 60]), style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),),)
               ],
             ),
           );
