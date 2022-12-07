@@ -251,7 +251,6 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                         labelStyle: GoogleFonts.ptSans(fontSize: 16, color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
                         labelColor: App.colorScheme.secondary,
                         tabs: [
-
                           Tab(text: App.s.info.toUpperCase()),
                           if (widget.isMe)Tab(text: App.s.evaluation.toUpperCase()),
                           if (widget.isMe)Tab(text: App.s.agenda.toUpperCase()),

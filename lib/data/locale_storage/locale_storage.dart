@@ -5,11 +5,13 @@ import 'package:intra_42/data/models/expertise.dart';
 import 'package:intra_42/data/models/scale_team.dart';
 import 'package:intra_42/data/models/token_body.dart';
 import 'package:intra_42/data/models/user.dart';
+import 'package:intra_42/data/models/user_2.dart';
 import 'package:intra_42/data/models_izar/expertise_izar.dart';
 import 'package:intra_42/data/models_izar/img.dart';
 import 'package:intra_42/data/models_izar/notification_isar.dart';
 import 'package:intra_42/data/models_izar/pref_isar.dart';
 import 'package:intra_42/data/models_izar/scale_team_isar.dart';
+import 'package:intra_42/data/models_izar/user2_isar.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/main.dart';
 import 'package:isar/isar.dart';
@@ -30,7 +32,7 @@ class LocaleStorage{
 
   Future<void> init() async {
     assert(!_isInit, "LocalStorage already initialized");
-    _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema, IntIsarSchema, StringIsarSchema, NotificationIsarSchema, ScaleTeamIsarSchema], maxSizeMiB: 10000,);
+    _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema, IntIsarSchema, StringIsarSchema, NotificationIsarSchema, ScaleTeamIsarSchema, User2IsarSchema], maxSizeMiB: 10000,);
     _isInit = true;
     App.log.i("Locale Storage initialized");
 
@@ -260,5 +262,27 @@ class LocaleStorage{
   static ScaleTeam? getScaleTeam(int id){
     assert(instance._isInit, "LocalStorage not initialized");
     return _isar.scaleTeamIsars.getSync(id)?.toFreezed();
+  }
+
+  static Future setUser2(User2 user){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.writeTxn(() async{
+      _isar.user2Isars.put(User2Isar.fromFreezed(user));
+    });
+  }
+
+  static User2? getUser2(int id){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.user2Isars.getSync(id)?.toFreezed();
+  }
+
+  static User2? getUser2ByLogin(String login){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.user2Isars.where().loginEqualTo(login).findFirstSync()?.toFreezed();
+  }
+
+  static List<User2> allUser2(){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.user2Isars.where().findAllSync().map((e) => e.toFreezed()).toList();
   }
 }

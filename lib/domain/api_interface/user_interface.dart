@@ -6,6 +6,7 @@ import 'package:intra_42/data/models/user.dart';
 import '../../data/models/logtime.dart';
 import '../../data/models/project_data.dart';
 import '../../data/models/scale_team.dart';
+import '../../data/models/user_2.dart';
 
 abstract class UserInterface {
   Future<User> me();
@@ -19,4 +20,5 @@ abstract class UserInterface {
   Future<User> userByLogin(String login);
   Future<List<CursusUser>> userCursus(int userId);
   Future<List<ExpertisesUser>> userExpertises(int userId);
+  Future<List<User2>> blackHoleUsers();
 }

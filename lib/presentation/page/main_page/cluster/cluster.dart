@@ -1,28 +1,18 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intra_42/core/extensions/list.dart';
 import 'package:intra_42/core/extensions/map_ext.dart';
 import 'package:intra_42/core/extensions/provider_ext.dart';
 import 'package:intra_42/core/params/colors.dart';
-import 'package:intra_42/data/api/client.dart';
-import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/manager/user_manager.dart';
-import 'package:intra_42/data/models_izar/img.dart';
 import 'package:intra_42/data/repositories/cluster_repository.dart';
-import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/main_page/cluster/drawer.dart';
-import 'package:touchable/touchable.dart';
 import 'dart:ui' as ui;
 import '../../../../core/utils/pair.dart';
-import '../../../../data/api/web_socket/web_manager.dart';
 import '../../../../data/manager/image_manager.dart';
 import '../../../../data/models/cluster_item.dart';
-import '../../../../data/models/empty_cluster.dart';
 import 'cluster_item.dart';
-import 'cluster_painter.dart';
 
 class Cluster extends ConsumerStatefulWidget {
   const Cluster({Key? key}) : super(key: key);

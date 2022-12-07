@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:html/parser.dart';
@@ -17,6 +18,7 @@ import 'package:intra_42/data/models/expertise.dart';
 import 'package:intra_42/data/models/project_data.dart';
 import 'package:intra_42/data/models/scale_team.dart';
 import 'package:intra_42/data/models/user.dart';
+import 'package:intra_42/data/models_izar/user2_isar.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/domain/api_interface/user_interface.dart';
 import '../../core/utils/task_runner.dart';
@@ -24,6 +26,8 @@ import '../../domain/util_interface/provider_interface.dart';
 import '../api/api.dart';
 import '../models/logtime.dart';
 import 'package:intra_42/core/extensions/element_ext.dart';
+
+import '../models/user_2.dart';
 
 ///todo: too many functions, split into smaller classes
 class UserRepository extends UserInterface with ProviderInterface {
@@ -145,6 +149,28 @@ class UserRepository extends UserInterface with ProviderInterface {
     var cursusUser = await _api.userExpertises(userId);
     await LocaleStorage().updateUserExpertises(userId, cursusUser);
     return cursusUser;
+  }
+
+  Future<List<User2>> blackHoleUsers() async {
+    var dio = Dio();
+    var data = json.decode((await dio.get("https://raw.githubusercontent.com/linkkader/Intra_42/main/last_update.json")).data);
+    var update = DateTime.parse(data["update"]);
+    var lastUpdate = LocaleStorage.dateTime("last");
+    if (lastUpdate != null && !(update.isAfter(lastUpdate))) {
+      // print("data from locale");
+      // data = json.decode(String.fromCharCodes((await LocaleStorage().img("linkkader"))!));
+    }
+    else{
+      var h = (await dio.get("https://raw.githubusercontent.com/linkkader/Intra_42/main/users.json")).data;
+      LocaleStorage.setDateTime("last", update);
+      data = json.decode(h);
+      for (var d in data) {
+        try{
+         await  LocaleStorage.setUser2(User2.fromJson(d));
+        }catch(_){}
+      }
+    }
+    return LocaleStorage.allUser2();
   }
 
 }
