@@ -40,6 +40,14 @@ class ProjectRepository extends ProjectInterface with ProviderInterface {
   }
 
   @override
+  Future<ProjectsUser?> projectUserById(int userId, int id) async {
+    assert(_isInit, "ProjectRepository is not initialized");
+    var projects = await _api.projectsUserById(userId, id);
+    if (projects.isEmpty) return null;
+    return projects.first;
+  }
+
+  @override
   Future<Pair<Project, ProjectsUser?>> projectFull(int userId, int projectId) async {
     assert(_isInit, "ProjectRepository is not initialized");
     var project = await this.project(projectId);

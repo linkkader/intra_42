@@ -14,6 +14,7 @@ enum NotificationType {
 class NotificationIsar{
   final Id? id;
   final String? data;
+  @Index()
   final int? scaleTeamId;
   final DateTime? lastNotify;
   @enumerated

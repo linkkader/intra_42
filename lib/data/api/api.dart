@@ -79,4 +79,10 @@ abstract class Api {
 
   @GET("https://api.intra.42.fr/v2/users/{user_id}/projects_users?filter[project_id]={project_id}")
   Future<List<ProjectsUser>> projectsUser(@Path("user_id") int userId, @Path("project_id") int projectId);
+
+  @GET("users/{user_id}/projects_users?filter[id]={id}")
+  Future<List<ProjectsUser>> projectsUserById(@Path("user_id") int userId, @Path("id") int id);
+
+  @GET("https://api.intra.42.fr/v2/users/{user_id}/cursus_users")
+  Future<List<CursusUser>> userCursus(@Path("user_id") int userId);
 }

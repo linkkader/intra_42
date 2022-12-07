@@ -14,6 +14,7 @@ import 'package:intra_42/presentation/utils_widgets/img.dart';
 import '../../core/params/dimens.dart';
 import '../../data/locale_storage/locale_storage.dart';
 import '../../data/models_izar/black_hole.dart';
+import 'main_page/dashboard/dashboard.dart';
 
 class UserBottomSheet extends ConsumerStatefulWidget {
   final int? id;
@@ -67,7 +68,10 @@ class _UserSheetState extends ConsumerState<UserBottomSheet> {
                         width: kBlackHoleBottomImgSize,
                         child: ClipOval(
                           child: GestureDetector(
-                            onTap: () => Graph(user).navigate(context: context),
+                            onTap: () {
+                              Dashboard(user.id!).navigate(context: context);
+                              // Graph(user).navigate(context: context);
+                            },
                             child: Img(user.image?.versions?.medium ?? ""),
                           ),
                         ),

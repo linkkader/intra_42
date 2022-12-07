@@ -53,8 +53,9 @@ class LocaleStorage{
     App.log.i("$debug updateMe: $value");
     await _isar.writeTxn(() async{
       var v = UserIsar.fromFreezed(value);
-      await _isar.userIsars.put(v.copyWith(isarId: 0));
-      App.log.i("$debug updateUser success");
+      v = v.copyWith(isarId: 0);
+      var id = await _isar.userIsars.put(v);
+      App.log.i("$debug me updateUser success $id vid ${v.isarId}");
     }).onError((error, stackTrace) {
       App.log.e("$debug updateUser error: $error $stackTrace");
     });
@@ -74,21 +75,24 @@ class LocaleStorage{
 
   //todo: need check
   void updateUser(User value, {bool force = false}) async{
+    return;
     var user = getUser(value.id!);
     var me = _isar.userIsars.getSync(0);
     await _isar.writeTxn(() async{
-      if (force){
-        if (value.id == me?.id){
-          await _isar.userIsars.put(me!.copyWith(location: value.location ?? me.location));
-        }
-        else if (user != null)
-        {
-          value = value.copyWith(location: value.location ?? user.location, cursusUsers: value.cursusUsers ?? user.cursusUsers, campus: value.campus ?? user.campus);
-          await _isar.userIsars.put(UserIsar.fromFreezed(value));
-        }
-      }else{
-        await _isar.userIsars.put(UserIsar.fromFreezed(value));
-      }
+      var id = await _isar.userIsars.put(UserIsar.fromFreezed(value));
+      App.log.i("$debug updateUser success $id");
+      // if (force){
+      //   if (value.id == me?.id){
+      //     await _isar.userIsars.put(me!.copyWith(location: value.location ?? me.location));
+      //   }
+      //   else if (user != null)
+      //   {
+      //     value = value.copyWith(location: value.location ?? user.location, cursusUsers: value.cursusUsers ?? user.cursusUsers, campus: value.campus ?? user.campus);
+      //     await _isar.userIsars.put(UserIsar.fromFreezed(value));
+      //   }
+      // }else{
+      //   await _isar.userIsars.put(UserIsar.fromFreezed(value));
+      // }
     }).onError((error, stackTrace) {
       App.log.e("$debug updateUser error: $error $stackTrace");
     });
@@ -126,6 +130,19 @@ class LocaleStorage{
   User? getUser(int id) => _isar.userIsars.where().idEqualTo(id).findFirstSync()?.toFreezed();
   User? getUserByLogin(String login) {
     return _isar.userIsars.where().loginEqualTo(login).findFirstSync()?.toFreezed();
+  }
+
+  ///update user cursus
+  void updateUserCursus(int id, List<CursusUser> cursusUsers) async{
+    var user = getUser(id);
+    if (user != null){
+      user = user.copyWith(cursusUsers: cursusUsers);
+      await _isar.writeTxn(() async{
+        // await _isar.userIsars.put(UserIsar.fromFreezed(user));
+      }).onError((error, stackTrace) {
+        App.log.e("$debug updateUser error: $error $stackTrace");
+      });
+    }
   }
 
   ///all notifications
@@ -206,6 +223,17 @@ class LocaleStorage{
       _isar.notificationIsars.put(value);
     });
   }
+
+  static NotificationIsar? getNotification(int value) {
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.notificationIsars.where().scaleTeamIdEqualTo(value).findFirstSync();
+  }
+
+  static List<NotificationIsar> getAllNotification() {
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.notificationIsars.where().scaleTeamIdIsNotNull().findAllSync();
+  }
+
 
   static Future setScaleTeam(ScaleTeam scale){
     assert(instance._isInit, "LocalStorage not initialized");

@@ -28,12 +28,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_title": MessageLookupByLibrary.simpleMessage("Intra 42"),
         "black_hole": MessageLookupByLibrary.simpleMessage("Black hole"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
+        "correction_phrase": MessageLookupByLibrary.simpleMessage(
+            "Someone will evaluate you on %s %s"),
+        "correction_phrase2": MessageLookupByLibrary.simpleMessage(
+            "%s will evaluate you on %s %s"),
         "count_students": MessageLookupByLibrary.simpleMessage("%d students"),
         "cursus": MessageLookupByLibrary.simpleMessage("Cursus"),
         "days_left": MessageLookupByLibrary.simpleMessage("Days left"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "evaluated_by": MessageLookupByLibrary.simpleMessage("Evaluated by"),
         "evaluation": MessageLookupByLibrary.simpleMessage("Evaluation"),
+        "evaluation_phrase": MessageLookupByLibrary.simpleMessage(
+            "You will evaluate someone on %s %s"),
+        "evaluation_phrase2": MessageLookupByLibrary.simpleMessage(
+            "You will evaluate %s on %s %s"),
         "evaluations_points":
             MessageLookupByLibrary.simpleMessage("Evaluations Points"),
         "event_is_full":

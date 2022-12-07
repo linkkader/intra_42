@@ -409,6 +409,46 @@ class S {
       args: [],
     );
   }
+
+  /// `You will evaluate someone on %s %s`
+  String get evaluation_phrase {
+    return Intl.message(
+      'You will evaluate someone on %s %s',
+      name: 'evaluation_phrase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You will evaluate %s on %s %s`
+  String get evaluation_phrase2 {
+    return Intl.message(
+      'You will evaluate %s on %s %s',
+      name: 'evaluation_phrase2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Someone will evaluate you on %s %s`
+  String get correction_phrase {
+    return Intl.message(
+      'Someone will evaluate you on %s %s',
+      name: 'correction_phrase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `%s will evaluate you on %s %s`
+  String get correction_phrase2 {
+    return Intl.message(
+      '%s will evaluate you on %s %s',
+      name: 'correction_phrase2',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -133,4 +133,12 @@ class UserRepository extends UserInterface with ProviderInterface {
     });
   }
 
+  @override
+  Future<List<CursusUser>> userCursus(int userId) async {
+    assert(_isInit, "AuthRepository not initialized");
+    var cursusUser = await _api.userCursus(userId);
+    LocaleStorage().updateUserCursus(userId, cursusUser);
+    return cursusUser;
+  }
+
 }

@@ -25,7 +25,7 @@ class _MainPageState extends ConsumerState<MainPage> with SingleTickerProviderSt
   void initState() {
     var user = LocaleStorage().getMe;
     views =  [
-      const Dashboard(),
+      Dashboard(user?.id ?? 0),
       user != null ? Graph(LocaleStorage().getMe!) : Container(),
       const Cluster(),
       const BlackHoleScreen(),

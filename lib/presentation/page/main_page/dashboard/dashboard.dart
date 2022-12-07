@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/extensions/date_time_ext.dart';
 import 'package:intra_42/core/params/colors.dart';
 import 'package:intra_42/data/manager/notification_manager.dart';
+import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/achievement_screen.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/agenda.dart';
@@ -22,7 +23,8 @@ import '../../../../data/locale_storage/locale_storage.dart';
 import '../../../../data/locale_storage/storage_stream.dart';
 
 class Dashboard extends ConsumerStatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  final int id;
+  const Dashboard(this.id, {Key? key}) : super(key: key);
 
   @override
   ConsumerState<Dashboard> createState() => _DashboardState();
@@ -100,9 +102,11 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
 
   @override
   void initState() {
-    StorageStream().me().listen((event) {
+    App.log.i("Dashboard: user id: ${widget.id}");
+    StorageStream().user(widget.id)?.listen((event) {
       ref.read(stateProvider.notifier).state = event?.toFreezed();
     });
+    UserRepository().userCursus(widget.id);
     _tabController = TabController(length: 7, vsync: this);
     super.initState();
   }
@@ -128,6 +132,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
           backgroundColor: Colors.transparent,
           floatingActionButton: FloatingActionButton(
             onPressed: (){
+              // UserRepository().me();
               notificationExecution(null);
             },
           ),
@@ -184,7 +189,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                               ),
                             ),
                             if (user.cursusUsers?.isNotEmpty == true) Text("${user.cursusUsers?[ref.watch(currentCursusProvider)].blackholedAt?.formattedBlackHole ?? ""} ${user.cursusUsers?[ref.watch(currentCursusProvider)].blackholedAt?.formattedBlackHole2 ?? ""}", style: GoogleFonts.ptSans(fontSize: 16, color: App.colorScheme.secondary, fontWeight: FontWeight.bold)),
-                            Container(
+                            if (user.cursusUsers != null)Container(
                               margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
                               width: double.infinity,
                               height: 30,
@@ -192,7 +197,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                                 borderRadius: BorderRadius.circular(8),
                                 child: Stack(
                                   children: [
-                                    Positioned.fill(
+                                    if (user.cursusUsers != null)Positioned.fill(
                                         child: LinearProgressIndicator(
                                           minHeight: 25,
                                           value: (user.cursusUsers![ref.watch(currentCursusProvider)].level! - user.cursusUsers![ref.read(currentCursusProvider)].level!.toInt()).toDouble(),
@@ -341,5 +346,4 @@ class _Delegate extends SliverPersistentHeaderDelegate{
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
     return true;
   }
-
 }

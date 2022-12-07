@@ -6,6 +6,7 @@ part 'user_isar.g.dart';
 
 @collection
 class UserIsar {
+  @Index(unique: true, replace: true)
   final Id isarId;
   @Index(unique: true, replace: true)
   final int? id;
@@ -62,8 +63,8 @@ class UserIsar {
 
   const UserIsar({this.email, this.login, this.firstName, this.lastName, this.usualFullName, this.usualFirstName, this.url, this.phone, this.displayname, this.kind, this.imageUrl, this.image, this.newImageUrl, this.staff, this.correctionPoint, this.poolMonth, this.poolYear, this.location, this.wallet, this.anonymizeDate, this.dataErasureDate, this.createdAt, this.updatedAt, this.alumnizedAt, this.alumni, this.active, this.groups, this.cursusUsers, this.projectsUsers, this.languagesUsers, this.achievements, this.titles, this.titlesUsers, this.partnerships, this.patroned, this.patroning, this.expertisesUsers, this.roles, this.campus, this.campusUsers, this.id, this.isarId = 0});
 
-  factory UserIsar.fromFreezed(User? objet) => UserIsar (
-    isarId: objet?.id ?? 0,
+  factory UserIsar.fromFreezed(User? objet, {int? isarId}) => UserIsar (
+    isarId: isarId ?? objet?.id ?? 0,
     id: objet?.id ?? 0,
     email: objet?.email,
     login: objet?.login,
@@ -186,6 +187,7 @@ class UserIsar {
     List<CampusIsar>? campus,
     List<CampusUserIsar>? campusUsers,
   }) => UserIsar(
+    isarId: isarId ?? this.isarId,
     id: id ?? this.id,
     email: email ?? this.email,
     login: login ?? this.login,
@@ -227,7 +229,6 @@ class UserIsar {
     roles: roles ?? this.roles,
     campus: campus ?? this.campus,
     campusUsers: campusUsers ?? this.campusUsers,
-    isarId: isarId ?? this.isarId,
   );
 
 

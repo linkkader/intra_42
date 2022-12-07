@@ -103,8 +103,9 @@ class AuthRepository extends AuthInterface with ProviderInterface {
   
   @override
   Future<bool> validateCode(String code) async {
-    if (_neverDuplicate) return Future.value(false);
-    _neverDuplicate = true;
+    // if (_neverDuplicate) return Future.value(false);
+    // _neverDuplicate = true;
+    Client.clearHeaders();
     return _api.token(_tokenBody(code)).then((value) async {
           _neverDuplicate = false;
           App.log.i("renewToken: $value");

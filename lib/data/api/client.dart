@@ -61,7 +61,7 @@ class Client {
     _dio.options.headers.remove(key);
   }
 
-  static clearHeaders() {
+  static void clearHeaders() {
     _dio.options.headers.clear();
   }
 

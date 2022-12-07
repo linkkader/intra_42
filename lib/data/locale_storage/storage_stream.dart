@@ -7,6 +7,7 @@ import 'package:intra_42/data/models_izar/black_hole.dart';
 import 'package:intra_42/data/models_izar/notification_isar.dart';
 import 'package:intra_42/data/models_izar/token_body_isar.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
+import 'package:intra_42/main.dart';
 import 'package:isar/isar.dart';
 import 'locale_storage.dart';
 
@@ -28,6 +29,16 @@ class StorageStream{
 
   Stream<UserIsar?> me(){
     return LocaleStorage.isar.userIsars.watchObject(0, fireImmediately: true);
+  }
+
+  Stream<UserIsar?>? user(int id){
+    var isarId = LocaleStorage.isar.userIsars.where().idEqualTo(id).findFirstSync()?.isarId;
+
+    App.log.i("StorageStream: user: $id $isarId");
+    if (isarId == null){
+      return LocaleStorage.isar.userIsars.watchObject(isarId!, fireImmediately: true);
+    }
+    return null;
   }
 
   Stream<TokenBodyIsar?> token(){

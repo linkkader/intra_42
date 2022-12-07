@@ -17,4 +17,5 @@ abstract class UserInterface {
   Future<List<User>> usersCampus(int campusId,{int? page, int? perPage = 100});
   Future<User> user(int id);
   Future<User> userByLogin(String login);
+  Future<List<CursusUser>> userCursus(int userId);
 }

@@ -44,7 +44,21 @@ const NotificationIsarSchema = CollectionSchema(
   deserialize: _notificationIsarDeserialize,
   deserializeProp: _notificationIsarDeserializeProp,
   idName: r'id',
-  indexes: {},
+  indexes: {
+    r'scaleTeamId': IndexSchema(
+      id: 8191298470120953533,
+      name: r'scaleTeamId',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'scaleTeamId',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
+    )
+  },
   links: {},
   embeddedSchemas: {},
   getId: _notificationIsarGetId,
@@ -149,6 +163,15 @@ extension NotificationIsarQueryWhereSort
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
+
+  QueryBuilder<NotificationIsar, NotificationIsar, QAfterWhere>
+      anyScaleTeamId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'scaleTeamId'),
+      );
+    });
+  }
 }
 
 extension NotificationIsarQueryWhere
@@ -215,6 +238,121 @@ extension NotificationIsarQueryWhere
         lower: lowerId,
         includeLower: includeLower,
         upper: upperId,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<NotificationIsar, NotificationIsar, QAfterWhereClause>
+      scaleTeamIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'scaleTeamId',
+        value: [null],
+      ));
+    });
+  }
+
+  QueryBuilder<NotificationIsar, NotificationIsar, QAfterWhereClause>
+      scaleTeamIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'scaleTeamId',
+        lower: [null],
+        includeLower: false,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<NotificationIsar, NotificationIsar, QAfterWhereClause>
+      scaleTeamIdEqualTo(int? scaleTeamId) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'scaleTeamId',
+        value: [scaleTeamId],
+      ));
+    });
+  }
+
+  QueryBuilder<NotificationIsar, NotificationIsar, QAfterWhereClause>
+      scaleTeamIdNotEqualTo(int? scaleTeamId) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'scaleTeamId',
+              lower: [],
+              upper: [scaleTeamId],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'scaleTeamId',
+              lower: [scaleTeamId],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'scaleTeamId',
+              lower: [scaleTeamId],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'scaleTeamId',
+              lower: [],
+              upper: [scaleTeamId],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<NotificationIsar, NotificationIsar, QAfterWhereClause>
+      scaleTeamIdGreaterThan(
+    int? scaleTeamId, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'scaleTeamId',
+        lower: [scaleTeamId],
+        includeLower: include,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<NotificationIsar, NotificationIsar, QAfterWhereClause>
+      scaleTeamIdLessThan(
+    int? scaleTeamId, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'scaleTeamId',
+        lower: [],
+        upper: [scaleTeamId],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<NotificationIsar, NotificationIsar, QAfterWhereClause>
+      scaleTeamIdBetween(
+    int? lowerScaleTeamId,
+    int? upperScaleTeamId, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'scaleTeamId',
+        lower: [lowerScaleTeamId],
+        includeLower: includeLower,
+        upper: [upperScaleTeamId],
         includeUpper: includeUpper,
       ));
     });
