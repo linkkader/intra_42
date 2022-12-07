@@ -11,6 +11,7 @@ import 'package:intra_42/core/extensions/provider_ext.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/manager/black_hole_manager.dart';
 import 'package:intra_42/data/manager/image_manager.dart';
+import 'package:intra_42/data/models/user_2.dart';
 import 'package:intra_42/data/models_izar/black_hole.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/main.dart';
@@ -34,9 +35,9 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
 
   final StateProvider<int> userCountProvider = StateProvider((ref) => LocaleStorage().allUsers().length);
   final StateProvider<Map<String, ui.Image>> stateProvider = StateProvider((ref) => {});
-  late FutureProvider<List<Pair<int, Map<UserIsar, BlackHoleIsar>>>?> futureProvider;
+  late FutureProvider<List<Pair<int, List<User2>>>> futureProvider;
   late AnimationController controller;
-  Map<int, double> angles = {};
+  Map<String, double> angles = {};
   final StateProvider<bool> longPress = StateProvider((ref) => false);
   List<String> imagesUrls = [];
   final viewTransformationController = TransformationController();
@@ -44,14 +45,7 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
 
   @override
   void initState() {
-    var sub = StorageStream().allUser().listen((event) {
-      App.log.d("User count changed ${event.length}");
-      ref.read(userCountProvider.notifier).state = event.length;
-    });
 
-    futureProvider = FutureProvider((ref) {
-      return null;
-    });
     controller = AnimationController(vsync: this, duration: const Duration(minutes: 5));
     controller.repeat();
 
@@ -72,15 +66,6 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
     });
 
 
-    BlackHoleManager().fetchCampusAllUser(21,
-      onFinish:  () {
-        BlackHoleManager().fetchAllBlackHole(onFinish: (){
-          App.log.i("All black holes fetched");
-          angles = {};
-          sub.cancel();
-          ref.refresh(futureProvider);
-        });
-    },);
     const zoomFactor = 3.0;
     const xTranslate = BlackHolePainter.dx * 2;
     const yTranslate = BlackHolePainter.dx * 2;

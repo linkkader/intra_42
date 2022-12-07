@@ -13,6 +13,7 @@ class User2Isar {
   final String? login;
   final String? img;
   final DateTime? bhDate;
+  @Index()
   final String? campusName;
 
   const User2Isar({this.name, this.login, this.img, this.bhDate, this.campusName, });

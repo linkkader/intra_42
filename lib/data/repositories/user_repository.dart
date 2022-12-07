@@ -151,14 +151,14 @@ class UserRepository extends UserInterface with ProviderInterface {
     return cursusUser;
   }
 
-  Future<List<User2>> blackHoleUsers() async {
+  @override
+  Future<List<User2>> blackHoleUsers({String campusName = "1337 Benguerir/Morocco"}) async {
     var dio = Dio();
     var data = json.decode((await dio.get("https://raw.githubusercontent.com/linkkader/Intra_42/main/last_update.json")).data);
     var update = DateTime.parse(data["update"]);
     var lastUpdate = LocaleStorage.dateTime("last");
     if (lastUpdate != null && !(update.isAfter(lastUpdate))) {
-      // print("data from locale");
-      // data = json.decode(String.fromCharCodes((await LocaleStorage().img("linkkader"))!));
+
     }
     else{
       var h = (await dio.get("https://raw.githubusercontent.com/linkkader/Intra_42/main/users.json")).data;
@@ -170,7 +170,6 @@ class UserRepository extends UserInterface with ProviderInterface {
         }catch(_){}
       }
     }
-    return LocaleStorage.allUser2();
+    return LocaleStorage.allUser2ByCampus(campusName);
   }
-
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intra_42/core/extensions/double_ext.dart';
+import 'package:intra_42/data/models/user_2.dart';
 import 'package:intra_42/presentation/page/bottom_sheet.dart';
 import 'package:riverpod/src/state_controller.dart';
 import 'package:touchable/touchable.dart';
@@ -14,11 +15,11 @@ class BlackHolePainter extends CustomPainter {
   static const dx = 20000.0;
   static const dy = 20000.0;
 
-  final List<Pair<int, Map<UserIsar, BlackHoleIsar>>> items;
+  final List<Pair<int, List<User2>>>  items;
   final BuildContext context;
   final Map<String, ui.Image> images;
   final int animationValue;
-  final Map<int, double> angleMap;
+  final Map<String, double> angleMap;
   final bool longPress;
   const BlackHolePainter(this.items, this.context, this.images, this.animationValue, this.angleMap, this.longPress);
 
@@ -40,21 +41,21 @@ class BlackHolePainter extends CustomPainter {
       int j = 0;
       drawCore(canvas, radius);
       var angle = 360.0 / item.second.length;
-      for (var element in item.second.entries) {
+      for (var element in item.second) {
         //animationValue
-        angleMap[element.key.id!] ??= j * angle;
+        angleMap[element.login!] ??= j * angle;
         if (!longPress) {
-          angleMap[element.key.id!] = (1 / (i / 2)) + angleMap[element.key.id]!;
+          angleMap[element.login!] = (1 / (i / 2)) + angleMap[element.login!]!;
         }
-        var a = angleMap[element.key.id]!.toRadians;
+        var a = angleMap[element.login!]!.toRadians;
         // a = (angle * j + this.animationValue).toRadians;
         var x = radius * math.sin(a) + dx;
         var y = radius * math.cos(a) + dy;
         var paint = Paint();
         paint.color = Colors.red;
-        if (element.key.image?.versions?.medium != null){
-          drawImage(x, y, 100, element.key.image!.versions!.medium!, canvas, myCanvas, angleMap[element.key.id]!.toRadians, element.value);
-        }
+        try{
+          drawImage(x, y, 100, canvas, myCanvas, angleMap[element.login!]!.toRadians, element);
+        }catch(_){}
         j++;
       }
     }
@@ -68,9 +69,9 @@ class BlackHolePainter extends CustomPainter {
     return images[url];
   }
 
-  void drawImage(double x, double y, double size, String url, Canvas canvas, TouchyCanvas myCanvas, double angle, BlackHoleIsar value) {
+  void drawImage(double x, double y, double size, Canvas canvas, TouchyCanvas myCanvas, double angle, User2 value) {
     var paint = Paint();
-    var img = getImg(url);
+    var img = getImg(value.img!);
     if (img != null){
       //draw image
       final Size imageSize = Size(img.width.toDouble(), img.height.toDouble());
@@ -88,7 +89,7 @@ class BlackHolePainter extends CustomPainter {
       canvas.restore();
       //rotate image
       myCanvas.drawCircle(Offset(x.toDouble(), y.toDouble()), size * 2, paint..color = Colors.transparent, onTapUp: (details) {
-        UserBottomSheet.show(value.id!, context: context);
+        UserBottomSheet.show(null, login: value.login!, context: context);
       });
 
       ///wtf

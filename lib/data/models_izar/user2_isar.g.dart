@@ -61,6 +61,19 @@ const User2IsarSchema = CollectionSchema(
           caseSensitive: true,
         )
       ],
+    ),
+    r'campusName': IndexSchema(
+      id: -6701211917998082448,
+      name: r'campusName',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'campusName',
+          type: IndexType.hash,
+          caseSensitive: true,
+        )
+      ],
     )
   },
   links: {},
@@ -354,6 +367,71 @@ extension User2IsarQueryWhere
               indexName: r'login',
               lower: [],
               upper: [login],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<User2Isar, User2Isar, QAfterWhereClause> campusNameIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'campusName',
+        value: [null],
+      ));
+    });
+  }
+
+  QueryBuilder<User2Isar, User2Isar, QAfterWhereClause> campusNameIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'campusName',
+        lower: [null],
+        includeLower: false,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<User2Isar, User2Isar, QAfterWhereClause> campusNameEqualTo(
+      String? campusName) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'campusName',
+        value: [campusName],
+      ));
+    });
+  }
+
+  QueryBuilder<User2Isar, User2Isar, QAfterWhereClause> campusNameNotEqualTo(
+      String? campusName) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'campusName',
+              lower: [],
+              upper: [campusName],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'campusName',
+              lower: [campusName],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'campusName',
+              lower: [campusName],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'campusName',
+              lower: [],
+              upper: [campusName],
               includeUpper: false,
             ));
       }

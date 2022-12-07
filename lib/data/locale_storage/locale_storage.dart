@@ -285,4 +285,9 @@ class LocaleStorage{
     assert(instance._isInit, "LocalStorage not initialized");
     return _isar.user2Isars.where().findAllSync().map((e) => e.toFreezed()).toList();
   }
+
+  static List<User2> allUser2ByCampus(String campus){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.user2Isars.where().campusNameEqualTo(campus).findAllSync().map((e) => e.toFreezed()).toList();
+  }
 }

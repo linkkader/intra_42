@@ -4,6 +4,8 @@ import 'dart:async';
 
 import 'package:intra_42/data/api/api.dart';
 import 'package:intra_42/data/models/black_hole_data.dart';
+import 'package:intra_42/data/models/user_2.dart';
+import 'package:intra_42/data/repositories/user_repository.dart';
 import '../../core/utils/pair.dart';
 import '../../domain/api_interface/black_hole_repository.dart';
 import '../locale_storage/storage_stream.dart';
@@ -44,41 +46,38 @@ class BlackHoleRepository extends BlackHoleInterface{
 
 
   @override
-  Future<List<Pair<int, Map<UserIsar, BlackHoleIsar>>>> allBlackHoles({Function(List<String> lst)? onImages}) async{
+  Future<List<Pair<int, List<User2>>>> allBlackHoles({Function(List<String> lst)? onImages}) async{
     assert(_isInit, "BlackHoleRepository not initialized");
     var now = DateTime.now();
     var imagesUrls = <String>[];
     Completer<List<Pair<int, Map<UserIsar, BlackHoleIsar>>>> completer = Completer();
-    _subscriptionBlackHole?.cancel();
-    _subscriptionBlackHoleUsers?.cancel();
-    _subscriptionBlackHole = StorageStream().allBlackHole.listen((event) {
-      _subscriptionBlackHoleUsers = StorageStream().allBlackHoleUsers(event).listen((users) {
-        List<Pair<int, Map<UserIsar, BlackHoleIsar>>> lst = [];
-        int i = 0;
-        for (var blackHole in event) {
-          var weeks = blackHole.bhDate!.difference(now).inDays ~/ 7;
-          var a = now.difference(blackHole.bhDate!);
-          if (weeks < 0) {
-            continue;
-          }
-          if (a.inDays > 0) {
-            weeks = 1;
-          }
-          while (lst.length < weeks + 1) {
-            lst.add(Pair(weeks, {}));
-          }
-          var user = users.firstWhere((element) => element?.id == blackHole.id, orElse: () => null);
-          if (user != null){
-            lst[weeks].second[user] = blackHole;
-            if (user.image?.versions?.medium != null)imagesUrls.add(user.image!.versions!.medium!);
-          }
-          i++;
-        }
-        onImages?.call(imagesUrls);
-        completer.complete(lst);
-      });
-    });
-    return completer.future;
+    var allUser2s = await UserRepository().blackHoleUsers();
+    List<Pair<int, List<User2>>> lst = [];
+    for (var user in allUser2s) {
+      var weeks = user.bhDate!.difference(now).inDays ~/ 7;
+      var a = now.difference(user.bhDate!);
+      if (weeks < 0) {
+        continue;
+      }
+      if (a.inDays > 0) {
+        weeks = 1;
+      }
+      while (lst.length < weeks + 1) {
+        lst.add(Pair(weeks, []));
+      }
+      // var user = users.firstWhere((element) => element?.id == blackHole.id, orElse: () => null);
+      // if (user != null){
+        // lst[weeks].second[user] = blackHole;
+        // lst[weeks].second[user] = blackHole;
+      lst[weeks].second.add(user);
+        if (user.img != null)imagesUrls.add(user.img!);
+      // }
+      lst[weeks].second.add(user);
+    }
+    onImages?.call(imagesUrls);
+    // completer.complete(lst);
+    return lst;
+    // return completer.future;
   }
 
 }
