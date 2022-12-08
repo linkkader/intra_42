@@ -46,14 +46,16 @@ class BlackHoleRepository extends BlackHoleInterface{
 
 
   @override
-  Future<List<Pair<int, List<User2>>>> allBlackHoles({Function(List<String> lst)? onImages}) async{
+  Future<List<Pair<int, List<User2>>>> allBlackHoles(String campusName, {Function(List<String> lst)? onImages, Function(List<String> lst)? onCampusName}) async{
     assert(_isInit, "BlackHoleRepository not initialized");
+    Set<String> campusNames = {};
     var now = DateTime.now();
     var imagesUrls = <String>[];
-    Completer<List<Pair<int, Map<UserIsar, BlackHoleIsar>>>> completer = Completer();
     var allUser2s = await UserRepository().blackHoleUsers();
     List<Pair<int, List<User2>>> lst = [];
     for (var user in allUser2s) {
+      campusNames.add(user.campusName!);
+      if (campusName != user.campusName!) continue;
       var weeks = user.bhDate!.difference(now).inDays ~/ 7;
       var a = now.difference(user.bhDate!);
       if (weeks < 0) {
@@ -65,19 +67,15 @@ class BlackHoleRepository extends BlackHoleInterface{
       while (lst.length < weeks + 1) {
         lst.add(Pair(weeks, []));
       }
-      // var user = users.firstWhere((element) => element?.id == blackHole.id, orElse: () => null);
-      // if (user != null){
-        // lst[weeks].second[user] = blackHole;
-        // lst[weeks].second[user] = blackHole;
       lst[weeks].second.add(user);
         if (user.img != null)imagesUrls.add(user.img!);
-      // }
       lst[weeks].second.add(user);
     }
+    var cn = campusNames.toList();
+    cn.sort((a, b) => a.compareTo(b),);
+    onCampusName?.call(cn);
     onImages?.call(imagesUrls);
-    // completer.complete(lst);
     return lst;
-    // return completer.future;
   }
 
 }

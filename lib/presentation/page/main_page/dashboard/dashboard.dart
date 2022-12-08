@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/extensions/date_time_ext.dart';
+import 'package:intra_42/core/extensions/widget_ext.dart';
 import 'package:intra_42/core/params/colors.dart';
 import 'package:intra_42/data/manager/notification_manager.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
+import 'package:intra_42/presentation/page/main_page/black_hole/black_hole.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/achievement_screen.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/agenda.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/evaluation_screen.dart';
@@ -15,6 +17,7 @@ import 'package:intra_42/presentation/page/main_page/dashboard/page/expert_scree
 import 'package:intra_42/presentation/page/main_page/dashboard/page/info_screen.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/logtime_screen.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/skill_screen.dart';
+import 'package:intra_42/presentation/page/main_page/graph/graph.dart';
 import 'package:intra_42/presentation/page/notification/notication_icon.dart';
 import 'package:intra_42/presentation/utils_widgets/img.dart';
 import '../../../../core/params/constants.dart';
@@ -162,8 +165,14 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                   backgroundColor: Colors.transparent,
                   pinned: false,
                   expandedHeight: kDashboardExpandedHeight,
-                  actions: const [
-                    NotificationIcon()
+                  actions: [
+                    if (widget.isMe) const NotificationIcon()
+                    else IconButton(
+                        onPressed: (){
+                          Graph(user).navigate(context : context);
+                        },
+                        icon: const Icon(Icons.graphic_eq)
+                    ),
                   ],
                   flexibleSpace: FlexibleSpaceBar(
                     collapseMode: CollapseMode.parallax,
@@ -239,39 +248,41 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                     ),
                   ),
                 ),
-                SliverPersistentHeader(
-                  delegate: _Delegate(
-                    ref,delegateProvider,
-                    child: ColoredBox(
-                      color: ColorConstants.appBar,
-                      child: TabBar(
-                        controller: _tabController,
-                        indicator: const _Indicator(6),
-                        isScrollable: true,
-                        labelStyle: GoogleFonts.ptSans(fontSize: 16, color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
-                        labelColor: App.colorScheme.secondary,
-                        tabs: [
-                          Tab(text: App.s.info.toUpperCase()),
-                          if (widget.isMe)Tab(text: App.s.evaluation.toUpperCase()),
-                          if (widget.isMe)Tab(text: App.s.agenda.toUpperCase()),
-                          Tab(text: App.s.logtime.toUpperCase()),
-                          Tab(text: App.s.expertises.toUpperCase()),
-                          if (widget.isMe)Tab(text: App.s.achievements.toUpperCase()),
-                          Tab(text: App.s.skills.toUpperCase()),
-                        ],
+                Consumer(builder: (context, ref, child) {
+                  return SliverPersistentHeader(
+                    delegate: _Delegate(
+                      ref,delegateProvider,
+                      child: ColoredBox(
+                        color: ColorConstants.appBar,
+                        child: TabBar(
+                          controller: _tabController,
+                          indicator: const _Indicator(6),
+                          isScrollable: true,
+                          labelStyle: GoogleFonts.ptSans(fontSize: 16, color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                          labelColor: App.colorScheme.secondary,
+                          tabs: [
+                            Tab(text: App.s.info.toUpperCase()),
+                            if (widget.isMe)Tab(text: App.s.evaluation.toUpperCase()),
+                            if (widget.isMe)Tab(text: App.s.agenda.toUpperCase()),
+                            Tab(text: App.s.logtime.toUpperCase()),
+                            Tab(text: App.s.expertises.toUpperCase()),
+                            if (widget.isMe)Tab(text: App.s.achievements.toUpperCase()),
+                            Tab(text: App.s.skills.toUpperCase()),
+                          ],
+                        ),
                       ),
-                    ),
-                    child2: ColoredBox(
-                      color: ColorConstants.appBar,
-                      child: AppBar(
-                        backgroundColor: ColorConstants.appBar,
+                      child2: ColoredBox(
+                        color: ColorConstants.appBar,
+                        child: AppBar(
+                          backgroundColor: ColorConstants.appBar,
+                        ),
                       ),
-                    ),
 
-                  ),
-                  pinned: true,
-                  floating: true,
-                )
+                    ),
+                    pinned: true,
+                    floating: true,
+                  );
+                },)
               ];
             },
             body: TabBarView(

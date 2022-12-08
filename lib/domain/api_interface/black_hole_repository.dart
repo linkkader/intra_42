@@ -9,5 +9,5 @@ import '../../data/models_izar/user_isar.dart';
 
 abstract class BlackHoleInterface {
   Future<BlackHoleData?> blackHoleLogin(String login);
-  Future<List<Pair<int, List<User2>>>> allBlackHoles({Function(List<String> lst)? onImages});
+  Future<List<Pair<int, List<User2>>>> allBlackHoles(String campusName,{Function(List<String> lst)? onImages});
 }

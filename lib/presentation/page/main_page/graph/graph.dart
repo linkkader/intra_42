@@ -34,17 +34,14 @@ class _GraphState extends ConsumerState<Graph> with SingleTickerProviderStateMix
 
   @override
   void initState() {
-    var me = LocaleStorage().getMe;
-    App.log.i(me?.cursusUsers?.isNotEmpty);
-    App.log.i(me?.campus?.isNotEmpty);
-    if (me?.cursusUsers?.isNotEmpty == true && me?.campus?.isNotEmpty == true) {
-      for (var i = 0; i < me!.cursusUsers!.length; i++) {
-        UserRepository().projectData(me.cursusUsers![i].cursusId!, me.campus!.first.id!, widget.user.login!).then((value) {
+    if (widget.user.cursusUsers?.isNotEmpty == true && widget.user.campus?.isNotEmpty == true) {
+      for (var i = 0; i < widget.user.cursusUsers!.length; i++) {
+        UserRepository().projectData(widget.user.cursusUsers![i].cursusId!, widget.user.campus!.first.id!, widget.user.login!).then((value) {
           ref.read(projectsDataState)[i] = value;
           ref.read(projectsDataState.notifier).state = ref.read(projectsDataState).copy;
         });
       }
-      _tabController ??= TabController(length: me.cursusUsers!.length, vsync: this);
+      _tabController ??= TabController(length: widget.user.cursusUsers!.length, vsync: this);
     }
 
     super.initState();
@@ -82,41 +79,6 @@ class _GraphState extends ConsumerState<Graph> with SingleTickerProviderStateMix
 
       ),
     );
-    return SizedBox(
-      height: kToolbarHeight,
-      child: ListTile(
-        title: Container(
-          height: 40,
-        ),
-      ),
-    );
-    return Column(
-      children: [
-        Text(App.s.cursus, style : GoogleFonts.ptSans(color: App.colorScheme.secondary)),
-        PopupMenuButton(
-            color: const Color(0xFF283336),
-            child: Row(
-              children: [
-                Text(user.cursusUsers![ref.watch(cursusProvider)].cursus!.name!),
-                user.cursusUsers!.length > 1 ? const Icon(Icons.arrow_drop_down, color: Colors.white,) : Container(),
-              ],
-            ),
-            itemBuilder: (_){
-              return List.generate(user.cursusUsers!.length, (index){
-                return PopupMenuItem(
-                  child: Row(children: [
-                    index == ref.read(cursusProvider) ? const Icon(Icons.check, color: Colors.white,) : Container(),
-                    Text(user.cursusUsers![index].cursus!.name!),
-                  ],),
-                  onTap: (){
-                    ref.watch(cursusProvider.notifier).state = index;
-                    _tabController?.index = index;
-                  },
-                );
-              });
-            }),
-      ],
-    );
   }
 
   @override
@@ -129,15 +91,6 @@ class _GraphState extends ConsumerState<Graph> with SingleTickerProviderStateMix
       );
     }
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){
-            //update
-          },
-        ),
-        // appBar: AppBar(
-        //   backgroundColor: App.colorScheme.background,
-        //   title: _cursusSelect(widget.user),
-        // ),
         body: DecoratedBox(
           decoration: const BoxDecoration(
               gradient: RadialGradient(

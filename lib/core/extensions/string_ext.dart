@@ -135,4 +135,14 @@ extension StringExtension on String {
       return false;
     }
   }
+
+  String get urlName {
+    var str = substringAfter("//").substringBefore("/");
+    var split = str.split(".");
+    if (split.length < 3) {
+      return split[0];
+    } else {
+      return split[1];
+    }
+  }
 }
