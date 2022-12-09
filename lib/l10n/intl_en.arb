@@ -43,6 +43,7 @@
   "points_sales" : "Points sales",
   "notification" : "Notifications",
   "logout" : "Logout",
-  "language" : "Language"
+  "language" : "Language",
+  "search" : "Search"
 
 }

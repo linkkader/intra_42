@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("Notifications"),
         "points_sales": MessageLookupByLibrary.simpleMessage("Points sales"),
         "s_feedback": MessageLookupByLibrary.simpleMessage("\'s feedback, "),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),
         "skills": MessageLookupByLibrary.simpleMessage("Skills"),
         "solo": MessageLookupByLibrary.simpleMessage("Solo"),

@@ -16,6 +16,7 @@ abstract class UserInterface {
   Future<List<Expertise>> allExpertises();
   Future<List<ProjectData>> projectData(int cursusId, int campusId, String login);
   Future<List<User>> usersCampus(int campusId,{int? page, int? perPage = 100});
+  Future<List<User>> searchUser(String search);
   Future<User> user(int id);
   Future<User> userByLogin(String login);
   Future<List<CursusUser>> userCursus(int userId);

@@ -53,6 +53,9 @@ abstract class Api {
   @GET("/users?filter[login]={login}")
   Future<List<User>> userByLogin(@Path("login") String login);
 
+  @GET("/users?filter[login]={login}&filter[first_name]={login}&filter[first_name]={last_name}")
+  Future<List<User>> usersSearch(@Path("login") String login);
+
   @GET("https://profile.intra.42.fr/users/{login}/locations_stats.json")
   Future<Map<String, String>> locationsStats(@Path("login")  String login);
 

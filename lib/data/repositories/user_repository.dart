@@ -173,4 +173,10 @@ class UserRepository extends UserInterface with ProviderInterface {
     // return LocaleStorage.allUser2ByCampus(campusName);
     return LocaleStorage.allUser2();
   }
+
+  @override
+  Future<List<User>> searchUser(String search) {
+    assert(_isInit, "AuthRepository not initialized");
+    return _api.usersSearch(search);
+  }
 }

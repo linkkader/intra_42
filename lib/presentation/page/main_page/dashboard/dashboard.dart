@@ -134,8 +134,6 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-
-
     var user = ref.watch(stateProvider);
     if (user == null) {
       App.log.i("Dashboard: user is null");

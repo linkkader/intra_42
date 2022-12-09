@@ -274,6 +274,31 @@ class _Api implements Api {
   }
 
   @override
+  Future<List<User>> usersSearch(login) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<User>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/users?filter[login]=${login}&filter[first_name]={login}&filter[first_name]={last_name}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => User.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
   Future<Map<String, String>> locationsStats(login) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
