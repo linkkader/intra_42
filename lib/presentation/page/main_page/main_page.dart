@@ -9,6 +9,7 @@ import 'package:intra_42/presentation/page/main_page/black_hole/black_hole.dart'
 import 'package:intra_42/presentation/page/main_page/cluster/cluster.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/dashboard.dart';
 import 'package:intra_42/presentation/page/main_page/graph/graph.dart';
+import 'package:intra_42/presentation/page/main_page/search/search.dart';
 import 'package:isar/isar.dart';
 
 import 'dashboard/drawer/drawer.dart';
@@ -35,6 +36,7 @@ class _MainPageState extends ConsumerState<MainPage> with SingleTickerProviderSt
       user != null ? Graph(LocaleStorage().getMe!) : Container(),
       const Cluster(),
       const BlackHoleScreen(),
+      const Search()
     ];
     _tabController = TabController(length: views.length, vsync: this);
     super.initState();
@@ -52,23 +54,27 @@ class _MainPageState extends ConsumerState<MainPage> with SingleTickerProviderSt
           ref.watch(currentPage.notifier).state = index;
           _tabController.index = index;
         },
-        items: const [
-          BottomNavigationBarItem(
+        items: [
+          const BottomNavigationBarItem(
             backgroundColor: Colors.black,
             icon: Icon(Icons.dashboard),
             label: 'Dashboard',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.graphic_eq),
             label: 'Graph',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.group),
             label: 'Cluster',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.report_problem),
             label: 'BlackHole',
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.search),
+            label: App.s.search,
           ),
         ],
       ),

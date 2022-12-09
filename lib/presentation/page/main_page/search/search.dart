@@ -29,6 +29,8 @@ class _SearchState extends ConsumerState<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: TextField(
           style: GoogleFonts.ptSans(
             color: App.colorScheme.secondary,
@@ -39,15 +41,32 @@ class _SearchState extends ConsumerState<Search> {
           },
           controller: _searchController,
           decoration: InputDecoration(
-            hintText: App.s.search,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: App.colorScheme.secondary),
+            ),
+            disabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: App.colorScheme.secondary),
+            ),
+            errorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: App.colorScheme.secondary),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: App.colorScheme.secondary),
+            ),
+            focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: App.colorScheme.secondary),
+            ),
+            hintText: '${App.s.search.toLowerCase()}...',
             hintStyle: GoogleFonts.ptSans(
-              color: App.colorScheme.secondary,
+              color: App.colorScheme.secondary.withOpacity(0.5),
               fontWeight: FontWeight.bold,
             ),
-            icon: Icon(
-              Icons.search,
-              color: App.colorScheme.secondary,
-            ),
+            suffixIcon: IconButton(
+                onPressed: (){
+                  _searchController.clear();
+                  ref.refresh(usersProvider);
+                },
+                icon: Icon(Icons.search, color: App.colorScheme.secondary,)),
             border: InputBorder.none,
           ),
         ),
