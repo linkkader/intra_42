@@ -32,7 +32,7 @@ class LocaleStorage{
 
   Future<void> init() async {
     assert(!_isInit, "LocalStorage already initialized");
-    _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema, IntIsarSchema, StringIsarSchema, NotificationIsarSchema, ScaleTeamIsarSchema, User2IsarSchema], maxSizeMiB: 10000,);
+    _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema, IntIsarSchema, StringIsarSchema, NotificationIsarSchema, ScaleTeamIsarSchema, User2IsarSchema, ProjectsUserIsarCollectionSchema], maxSizeMiB: 10000,);
     _isInit = true;
     App.log.i("Locale Storage initialized");
 
@@ -248,7 +248,7 @@ class LocaleStorage{
 
   static List<NotificationIsar> getAllNotification() {
     assert(instance._isInit, "LocalStorage not initialized");
-    return _isar.notificationIsars.where().scaleTeamIdIsNotNull().findAllSync();
+    return _isar.notificationIsars.where().findAllSync();
   }
 
 
@@ -289,5 +289,23 @@ class LocaleStorage{
   static List<User2> allUser2ByCampus(String campus){
     assert(instance._isInit, "LocalStorage not initialized");
     return _isar.user2Isars.where().campusNameEqualTo(campus).findAllSync().map((e) => e.toFreezed()).toList();
+  }
+
+  static ProjectsUser? getProjectsUser(int id){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.projectsUserIsarCollections.getSync(id)?.toProjectUserIsar().toFreezed();
+  }
+
+  static Future setProjectsUser(ProjectsUser user){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.writeTxn(() async{
+      _isar.projectsUserIsarCollections.put(ProjectsUserIsarCollection.projectUserIsar(ProjectsUserIsar.fromFreezed(user)));
+    });
+  }
+
+  static Future clearTokenIsar() async {
+    await _isar.writeTxn(() async{
+      await _isar.tokenBodyIsars.clear();
+    });
   }
 }

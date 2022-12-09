@@ -10,7 +10,6 @@ import 'package:intra_42/core/extensions/widget_ext.dart';
 import 'package:intra_42/core/params/colors.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/locale_storage/storage_stream.dart';
-import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/data/repositories/auth_repository.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
@@ -35,9 +34,6 @@ class _StartPageState extends ConsumerState<StartPage> {
 
   @override
   void initState() {
-    // LocaleStorage.isar.userIsars.watchObjectLazy(0, fireImmediately: true,).listen((event) {
-    //   App.log.d('StartPage1: me changed');
-    // });
     sub = StorageStream().token().listen((event) {
       ref.refresh(futureProviderAuth);
     });
@@ -51,7 +47,7 @@ class _StartPageState extends ConsumerState<StartPage> {
       body: ref.watch(futureProviderAuth).when(
           data: (data){
             if (data == true) {
-              sub.cancel();
+
               return const MainPage();
             }
             else {

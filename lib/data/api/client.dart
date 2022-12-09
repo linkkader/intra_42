@@ -7,6 +7,7 @@ import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:intra_42/core/extensions/string_ext.dart';
 import 'package:intra_42/data/api/web_socket/web_manager.dart';
+import 'package:intra_42/data/repositories/notification_repository.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
 import '../../core/params/constants.dart';
@@ -41,6 +42,7 @@ class Client {
     ClusterRepository().init(api);
     ProjectRepository().init(api);
     ScaleRepository().init(api);
+    NotificationRepository().init(api);
 
     BlackHoleManager().init();
     WebSocketManager().start();

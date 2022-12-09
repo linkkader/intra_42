@@ -41,8 +41,8 @@ class StorageStream{
     return null;
   }
 
-  Stream<TokenBodyIsar?> token(){
-    return LocaleStorage.isar.tokenBodyIsars.watchObject(0, fireImmediately: true);
+  Stream token(){
+    return LocaleStorage.isar.tokenBodyIsars.watchLazy();
   }
 
   ///all user

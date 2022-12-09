@@ -449,6 +449,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Points sales`
+  String get points_sales {
+    return Intl.message(
+      'Points sales',
+      name: 'points_sales',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notification {
+    return Intl.message(
+      'Notifications',
+      name: 'notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

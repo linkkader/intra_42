@@ -1,16 +1,12 @@
 // Created by linkkader on 6/12/2022
 
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:intra_42/core/extensions/int_ext.dart';
 import 'package:intra_42/data/api/client.dart';
-import 'package:intra_42/data/api/web_socket/web_manager.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
-import 'package:intra_42/data/models/scale_team.dart';
 import 'package:intra_42/data/models_izar/notification_isar.dart';
+import 'package:intra_42/data/repositories/notification_repository.dart';
 import 'package:intra_42/data/repositories/project_repository.dart';
-import 'package:intra_42/data/repositories/scale_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:workmanager/workmanager.dart';
@@ -25,15 +21,13 @@ void _callBackDispatcher() async{
       }
       break;
     }
+    NotificationManager.showNotification();
     return Future.value(true);
   });
 }
 
-Future notificationExecution(void data) async {
-  var completer = Completer();
-  //await NotificationManager.notificationInit();
-  var me = LocaleStorage().getMe;
-  if (me != null) {
+/**
+    if (me != null) {
     var d = {"command":"subscribe","identifier":"{\"channel\":\"LocationChannel\",\"user_id\":${me.id}}"};
     // WebSocketManager().addListener(
     //     type: "LocationChannel",
@@ -46,37 +40,30 @@ Future notificationExecution(void data) async {
 
     d = {"command":"subscribe","identifier":"{\"channel\":\"NotificationChannel\",\"user_id\":${me.id}}"};
     WebSocketManager().addListener(
-        type: "NotificationChannel",
-        data: json.encode(d),
-        listener: (message) async {
-          LocaleStorage.setNotification(NotificationIsar(data: message.toString()));
-          print(message);
-        }
+    type: "NotificationChannel",
+    data: json.encode(d),
+    listener: (message) async {
+    LocaleStorage.setNotification(NotificationIsar(data: message.toString()));
+    print(message);
+    }
     );
 
     d = {"command":"subscribe","identifier":"{\"channel\":\"FlashChannel\",\"user_id\":${me.id}}"};
     WebSocketManager().addListener(
-        type: "FlashChannel",
-        data: json.encode(d),
-        listener: (message) async {
-          LocaleStorage.setNotification(NotificationIsar(data: message.toString()));
-          print(message);
-        }
+    type: "FlashChannel",
+    data: json.encode(d),
+    listener: (message) async {
+    LocaleStorage.setNotification(NotificationIsar(data: message.toString()));
+    print(message);
+    }
     );
-  }
-  ScaleRepository().scalesAsCorrector().then((correctors) {
-    for (var value in correctors) {
-      var notification = NotificationIsar(scaleTeamId: value.id, type: NotificationType.corrector);
-      LocaleStorage.setNotification(notification);
     }
-  });
-  ScaleRepository().scalesAsCorrected().then((corrected) {
-    for (var value in corrected) {
-      var notification = NotificationIsar(scaleTeamId: value.id, type: NotificationType.corrected);
-      LocaleStorage.setNotification(notification);
-    }
-  });
-  return completer.future;
+
+ */
+
+
+Future notificationExecution(void data) async {
+  await NotificationRepository().notifications();
 }
 
 class NotificationManager {
@@ -92,7 +79,17 @@ class NotificationManager {
     Client().initApi();
   }
 
-  void start() {
+  static start() {
+
+    var androidSettings = const AndroidInitializationSettings("waifu");
+    final initializationSettingsIOS =
+    DarwinInitializationSettings(
+      onDidReceiveLocalNotification: (id, title, body, payload) {
+
+      },);
+    var notificationPlugin = FlutterLocalNotificationsPlugin();
+    var initSettings = InitializationSettings(android: androidSettings, iOS: initializationSettingsIOS);
+    notificationPlugin.initialize(initSettings);
     Workmanager().initialize(
         _callBackDispatcher,
         isInDebugMode: true
@@ -104,7 +101,7 @@ class NotificationManager {
   }
 
 
-  void showNotification() {
+  static showNotification() async {
     var androidDetail = const AndroidNotificationDetails("Notification",
         "Notification",priority: Priority.max,playSound: true,enableVibration: true,indeterminate: true,
         importance: Importance.max,
@@ -114,20 +111,17 @@ class NotificationManager {
     final notificationPlugin = FlutterLocalNotificationsPlugin();
     var allNotifications = LocaleStorage.getAllNotification();
     for (var element in allNotifications) {
+      App.log.i(element.type);
       switch(element.type){
-        case NotificationType.corrector:
-          _correctorNotification(element, notificationPlugin, channelSpecific);
-          break;
-        case NotificationType.corrected:
-          _correctEdNotification(element, notificationPlugin, channelSpecific);
-          break;
-        case NotificationType.nullType:
-          break;
-      }
+          case NotificationType.corrector: _correctorNotification(element, notificationPlugin, channelSpecific);break;
+          case NotificationType.corrected: _correctEdNotification(element, notificationPlugin, channelSpecific);break;
+          case NotificationType.nullType:break;
+          default: await _defaultNotification(element, notificationPlugin, channelSpecific); break;
+        }
     }
   }
 
-  Future<void> _correctorNotification(NotificationIsar notificationIsar, FlutterLocalNotificationsPlugin plugin, NotificationDetails details) async {
+  static Future<void> _correctorNotification(NotificationIsar notificationIsar, FlutterLocalNotificationsPlugin plugin, NotificationDetails details) async {
     var now = DateTime.now();
     var scale = LocaleStorage.getScaleTeam(notificationIsar.scaleTeamId!)!;
     if (scale.beginAt!.isBefore(now)) {
@@ -142,7 +136,14 @@ class NotificationManager {
     }
   }
 
-  Future<void> _correctEdNotification(NotificationIsar notificationIsar, FlutterLocalNotificationsPlugin plugin, NotificationDetails details) async {
+  static Future<void> _defaultNotification(NotificationIsar notificationIsar, FlutterLocalNotificationsPlugin plugin, NotificationDetails details) async {
+    if (notificationIsar.notifData == null || notificationIsar.id == null) return;
+    await plugin.show(notificationIsar.id!, notificationIsar.notifData!.title, notificationIsar.notifData!.text , details);
+    await LocaleStorage.setNotification(notificationIsar.copyWith(read: true));
+
+  }
+
+  static Future<void> _correctEdNotification(NotificationIsar notificationIsar, FlutterLocalNotificationsPlugin plugin, NotificationDetails details) async {
     var now = DateTime.now();
     var scale = LocaleStorage.getScaleTeam(notificationIsar.scaleTeamId!)!;
     if (scale.beginAt!.isBefore(now)) {

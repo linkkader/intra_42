@@ -745,6 +745,58 @@ class LanguagesUserIsar {
 
 }
 
+@Collection()
+class ProjectsUserIsarCollection {
+  final Id? id;
+  final int? occurrence;
+  final int? finalMark;
+  final String? status;
+  final bool? validated;
+  final int? currentTeamId;
+  final ProjectIsar? project;
+  final List<int>? cursusIds;
+  final DateTime? markedAt;
+  final bool? marked;
+  final DateTime? retriableAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+
+  const ProjectsUserIsarCollection({this.id, this.occurrence, this.finalMark, this.status, this.validated, this.currentTeamId, this.project, this.cursusIds, this.markedAt, this.marked, this.retriableAt, this.createdAt, this.updatedAt, });
+
+  factory ProjectsUserIsarCollection.projectUserIsar(ProjectsUserIsar? objet) => ProjectsUserIsarCollection  (
+    id: objet?.id,
+    occurrence: objet?.occurrence,
+    finalMark: objet?.finalMark,
+    status: objet?.status,
+    validated: objet?.validated,
+    currentTeamId: objet?.currentTeamId,
+    project: objet?.project,
+    cursusIds: objet?.cursusIds?.map((e) => e).toList(),
+    markedAt: objet?.markedAt,
+    marked: objet?.marked,
+    retriableAt: objet?.retriableAt,
+    createdAt: objet?.createdAt,
+    updatedAt: objet?.updatedAt,
+  );
+
+  ProjectsUserIsar toProjectUserIsar() => ProjectsUserIsar(
+    id: id,
+    occurrence: occurrence,
+    finalMark: finalMark,
+    status: status,
+    validated: validated,
+    currentTeamId: currentTeamId,
+    project: project,
+    cursusIds: cursusIds?.map((e) => e).toList(),
+    markedAt: markedAt,
+    marked: marked,
+    retriableAt: retriableAt,
+    createdAt: createdAt,
+    updatedAt: updatedAt,
+  );
+
+}
+
 @embedded
 class ProjectsUserIsar {
   final int? id;

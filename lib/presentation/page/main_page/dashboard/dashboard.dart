@@ -10,6 +10,7 @@ import 'package:intra_42/data/manager/notification_manager.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/main_page/black_hole/black_hole.dart';
+import 'package:intra_42/presentation/page/main_page/dashboard/drawer/drawer.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/achievement_screen.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/agenda.dart';
 import 'package:intra_42/presentation/page/main_page/dashboard/page/evaluation_screen.dart';
@@ -51,6 +52,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
         Text(App.s.cursus, style: GoogleFonts.ptSans(fontSize: 16, color: App.colorScheme.secondary, fontWeight: FontWeight.bold)),
         if (allCursus.length > 1)
           PopupMenuButton(
+            color: App.colorScheme.background,
             itemBuilder: (context) {
               return List.generate(
                   allCursus.length,
@@ -61,7 +63,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                       child: Row(
                         children: [
                           if (index == ref.read(currentCursusProvider)) Icon(Icons.check, color: App.colorScheme.secondary),
-                          Text(cursus.cursus?.name ?? "", style: GoogleFonts.ptSans(fontSize: 24, color: App.colorScheme.secondary))
+                          Text(cursus.cursus?.name ?? "", style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold)),
                         ],
                       ),
                       onTap: () {
@@ -156,6 +158,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
             onPressed: (){
               // UserRepository().me();
               notificationExecution(null);
+              // NotificationManager.showNotification();
             },
           ),
           body: NestedScrollView(
@@ -165,6 +168,12 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
                   backgroundColor: Colors.transparent,
                   pinned: false,
                   expandedHeight: kDashboardExpandedHeight,
+                  leading: widget.isMe ? IconButton(
+                    icon: const Icon(Icons.menu),
+                    onPressed: () {
+                      MyDrawer.closeDrawer.call();
+                    },
+                  ) : null,
                   actions: [
                     if (widget.isMe) const NotificationIcon()
                     else IconButton(

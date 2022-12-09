@@ -18,8 +18,7 @@ void main() async{
 
   await LocaleStorage().init();
   Client().initApi();
-  // NotificationManager().start();
-  // notificationExecution(null);
+  NotificationManager.start();
   runApp(const App());
 }
 
@@ -28,36 +27,49 @@ class NavigationService {
 }
 
 class App extends StatelessWidget {
+  static StateProvider<bool> restartState = StateProvider((ref) => false);
+  static late WidgetRef ref;
 
   const App({Key? key}) : super(key: key);
+
+
+  static void restart(){
+    ref.read(restartState.notifier).state = !ref.read(restartState);
+  }
 
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-      child: MaterialApp(
-          themeMode: ThemeMode.light,
-          navigatorKey: NavigationService.navigatorKey,
-          supportedLocales: L10n.all,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate
-          ],
-          theme: ThemeData(
-            scaffoldBackgroundColor: ColorConstants.kBackgroundColor,
-            backgroundColor: ColorConstants.kBackgroundColor,
-            colorScheme: const ColorScheme.light().copyWith(
-              primary: ColorConstants.primary,
-              secondary: ColorConstants.secondary,
-              tertiary: ColorConstants.tertiary,
-              background: ColorConstants.kBackgroundColor,
-              onPrimary: Colors.white,
-            ),
-            primaryColor: Colors.white,
-          ),
-          home: const StartPage()),
+      child: Consumer(
+        builder: (context, ref, child) {
+          App.ref = ref;
+          ref.watch(restartState);
+          return MaterialApp(
+              themeMode: ThemeMode.light,
+              navigatorKey: NavigationService.navigatorKey,
+              supportedLocales: L10n.all,
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate
+              ],
+              theme: ThemeData(
+                scaffoldBackgroundColor: ColorConstants.kBackgroundColor,
+                backgroundColor: ColorConstants.kBackgroundColor,
+                colorScheme: const ColorScheme.light().copyWith(
+                  primary: ColorConstants.primary,
+                  secondary: ColorConstants.secondary,
+                  tertiary: ColorConstants.tertiary,
+                  background: ColorConstants.kBackgroundColor,
+                  onPrimary: Colors.white,
+                ),
+                primaryColor: Colors.white,
+              ),
+              home: const StartPage());
+        },
+      ),
     );
   }
 

@@ -1,5 +1,5 @@
 // Created by linkkader on 9/11/2022
-
+import 'package:timeago/timeago.dart' as timeago;
 import 'dart:io';
 
 import 'ext/string.dart';
@@ -8,6 +8,8 @@ class Pair<T1, T2> {
   final T2 b;
   Pair(this.a, this.b);
 }
+
+
 
 void main() {
   var file = File('convert_freeze_to_izar/file.dart');

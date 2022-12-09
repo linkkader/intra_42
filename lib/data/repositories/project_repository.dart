@@ -2,6 +2,7 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/core/utils/pair.dart';
+import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/main.dart';
 import '../../domain/api_interface/project_interface.dart';
 import '../../domain/util_interface/provider_interface.dart';
@@ -44,6 +45,7 @@ class ProjectRepository extends ProjectInterface with ProviderInterface {
     assert(_isInit, "ProjectRepository is not initialized");
     var projects = await _api.projectsUserById(userId, id);
     if (projects.isEmpty) return null;
+    LocaleStorage.setProjectsUser(projects.first);
     return projects.first;
   }
 

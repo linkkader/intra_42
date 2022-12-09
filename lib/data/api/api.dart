@@ -88,4 +88,10 @@ abstract class Api {
 
   @GET("https://api.intra.42.fr/v2/users/{user_id}/expertises_users")
   Future<List<ExpertisesUser>> userExpertises(@Path("user_id") int userId);
+
+  @GET("https://profile.intra.42.fr/notifications/fetch_all")
+  Future<dynamic> allNotif();
+
+  @GET("https://profile.intra.42.fr/notifications/read_all")
+  Future<bool> readAll();
 }

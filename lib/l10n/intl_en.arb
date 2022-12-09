@@ -39,5 +39,10 @@
   "evaluation_phrase" : "You will evaluate someone on %s %s",
   "evaluation_phrase2" : "You will evaluate %s on %s %s",
   "correction_phrase" : "Someone will evaluate you on %s %s",
-  "correction_phrase2" : "%s will evaluate you on %s %s"
+  "correction_phrase2" : "%s will evaluate you on %s %s",
+  "points_sales" : "Points sales",
+  "notification" : "Notifications",
+  "logout" : "Logout",
+  "language" : "Language"
+
 }

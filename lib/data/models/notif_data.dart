@@ -19,16 +19,20 @@ abstract class NotifData with _$NotifData {
     String? title,
     String? text,
     String? kind,
-    dynamic? image,
+    dynamic image,
     DateTime? expireAt,
     String? link,
+    @JsonKey(name: 'created_at')
     DateTime? createdAt,
+    @JsonKey(name: 'updated_at')
     DateTime? updatedAt,
     dynamic concern,
+    @JsonKey(name: 'notification_id')
     int? notificationId,
+    @JsonKey(name: 'user_id')
     int? userId,
     bool? read,
   }) = _NotifData;
 
-  factory NotifData.fromJson(Map<String, dynamic> json) => _$NotifData(json);
+  factory NotifData.fromJson(Map<String, dynamic> json) => _$NotifDataFromJson(json);
 }

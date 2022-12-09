@@ -55,9 +55,13 @@ class AuthRepository extends AuthInterface with ProviderInterface {
 
 
   @override
-  Future signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future signOut() async {
+    App.log.i("Logged start");
+    inapp.CookieManager cookieManager = inapp.CookieManager.instance();
+    await cookieManager.deleteAllCookies();
+    await LocaleStorage.clearTokenIsar();
+    App.restart();
+    App.log.i("Logged out successfully");
   }
 
   @override

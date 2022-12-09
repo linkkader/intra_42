@@ -1,7 +1,6 @@
 // Created by linkkader on 6/10/2022
 
 class NetworkError {
-
   static const int kErrorBadRequest = 400;
   static const int kErrorDuplicateRecordFound = 409;
   static const int kErrorConversationLimit = 483;
