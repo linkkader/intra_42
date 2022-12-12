@@ -27,8 +27,10 @@ class BlackHoleManager{
 
   void fetchAllBlackHole({Function? onFinish})
   {
+    var i = 0;
     var now = DateTime.now();
     TaskRunner<UserIsar> blackHoleTask = TaskRunner(maxConcurrentTasks: 500, (item, runner) async{
+      i++;
       //only update one time a day
       // if (runner.isEmpty)
       // {
@@ -36,14 +38,13 @@ class BlackHoleManager{
       //   onFinish?.call();
       // }
       //      BlackHoleIsar? blackHole = LocaleStorage.isar.blackHoleIsars.getSync(item.id!);
-      print(item.login);
+      print(item.login.toString() + " " + i.toString());
       BlackHoleIsar? blackHole = LocaleStorage().blackHoleIsar(item.id!);
       if (blackHole != null && now.isBefore(blackHole.updatedAt!.add(const Duration(days: 1)))){
         return;
       }
       if (item.login?.contains("3b3") == true){
         blackHole = BlackHoleIsar(id : item.id, updatedAt: now,);
-        print("blachole length1 ${LocaleStorage.isar.blackHoleIsars.countSync()} / ${LocaleStorage.isar.userIsars.countSync()} ${runner.length}");
         // print("blachole ${runner.runningTasksCount}");
         await LocaleStorage().updateBlackHole(blackHole);
         return;
@@ -51,11 +52,10 @@ class BlackHoleManager{
       try{
         var data = await BlackHoleRepository().blackHoleLogin(item.login!);
         blackHole = BlackHoleIsar.fromFreezed(data).copyWith(id : item.id, updatedAt: now);
-        print("blachole length1 ${LocaleStorage.isar.blackHoleIsars.countSync()} / ${LocaleStorage.isar.userIsars.countSync()} ${runner.length}");
         // print("blachole ${runner.runningTasksCount}");
         await LocaleStorage().updateBlackHole(blackHole);
       }catch(_){
-        // App.log.e("error78 $_}");
+        if (!_.toString().contains("subtype of typ")) print("blachole $_");
       }
     });
     var all = LocaleStorage.isar.userIsars.where().findAllSync();

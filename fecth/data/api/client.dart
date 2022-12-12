@@ -27,7 +27,7 @@ class Client {
       Client.addHeader('Authorization', '${value.tokenType?.capitalize()} ${value.accessToken}');
     }
 
-    _dio.interceptors.add(log.LogInterceptor());
+    // _dio.interceptors.add(log.LogInterceptor());
 
 
     _dio.options.headers["Cookie"] = cookie;

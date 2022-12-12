@@ -1,7 +1,10 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
+
+import '../convert_freeze_to_izar/ext/string.dart';
 import 'core/params/constants.dart';
 import 'data/api/client.dart';
 import 'data/locale_storage/locale_storage.dart';
@@ -15,6 +18,8 @@ import 'data/repositories/user_repository.dart';
 
 
 void main() async {
+
+
   var cookie = "";
 
   var read = stdin.readLineSync()!;
@@ -75,11 +80,24 @@ void main() async {
         // users.add(User(blackHole: blackhole!.toFreezed(), firstName: value.firstName, lastName: value.lastName, login: value.login, id: value.id, updatedAt: value.updatedAt, image: Image(versions: Versions(medium: value.image?.versions?.medium)), campusName: value.campusName,));
       }
     }
+    Map<String, int> campusName = {};
+    for (var element in users) {
+      campusName[element.campusName] ??= campusName.length;
+    }
+    print(campusName);
     var data = {"update" : now.toIso8601String()};
     var file2 = File("last_update.json");
     file2.writeAsStringSync(jsonEncode(data));
     var file = File("users.json");
     file.writeAsStringSync(jsonEncode(users));
+    var file3 = File("users2.json");
+    dynamic data2 = [];
+    for (var element in users) {
+      data2.add({"0" : element.name, "1" : element.login, "2" : element.img.substringAfter("https://cdn.intra.42.fr/users/").substringBefore("/"), "3" : element.bhDate.toIso8601String(), "4" : campusName[element.campusName]});
+    }
+
+    // file3.writeAsStringSync(jsonEncode({"campus" : campusName, "users" : data2}));
+    // file3.writeAsBytesSync(lst);
     return;
   }
   if (read.toLowerCase() == "clear")

@@ -9,6 +9,8 @@ environment:
 
 dependencies:
 
+  es_compression: 2.0.7
+
   #notifications
   flutter_local_notifications: ^12.0.4
 
