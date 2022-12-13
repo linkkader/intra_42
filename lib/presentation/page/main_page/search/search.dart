@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/extensions/provider_ext.dart';
+import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/models/user.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
+import 'package:intra_42/presentation/page/bottom_sheet.dart';
+
+import '../../../../data/models/user_2.dart';
 
 class Search extends ConsumerStatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -17,11 +21,16 @@ class Search extends ConsumerStatefulWidget {
 class _SearchState extends ConsumerState<Search> {
   final _searchController = TextEditingController();
   late FutureProvider<List<User>> usersProvider;
-  final isSearching = StateProvider((ref) => false);
+  StateProvider<List<User2>> searchProvider  = StateProvider((ref) => []);
+  late List<User2> users;
 
   @override
   void initState() {
+    users = LocaleStorage.allUser2();
     usersProvider = FutureProvider((ref) => ref.read(UserRepository().futureProvider).searchUser(_searchController.text));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(searchProvider.notifier).state = users;
+    });
     super.initState();
   }
 
@@ -36,8 +45,12 @@ class _SearchState extends ConsumerState<Search> {
             color: App.colorScheme.secondary,
             fontWeight: FontWeight.bold,
           ),
-          onSubmitted: (value) {
-            ref.read(isSearching.notifier).state = true;
+          onChanged: (value) {
+            value = value.toLowerCase();
+            var users = this.users.where((element) => (element.login!.toLowerCase().contains(value) || (element.name!.toLowerCase().contains(value))) ).toList();
+            users.sort((a, b) => a.login?.compareTo(b.login ?? "") ?? 0);
+            ref.read(searchProvider.notifier).state = users;
+            App.log.d("searching for $value ${users.length}");
           },
           controller: _searchController,
           decoration: InputDecoration(
@@ -61,57 +74,30 @@ class _SearchState extends ConsumerState<Search> {
               color: App.colorScheme.secondary.withOpacity(0.5),
               fontWeight: FontWeight.bold,
             ),
-            suffixIcon: IconButton(
-                onPressed: (){
-                  _searchController.clear();
-                  ref.refresh(usersProvider);
-                },
-                icon: Icon(Icons.search, color: App.colorScheme.secondary,)),
             border: InputBorder.none,
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ref.watch(usersProvider).when(
-              data: (users) {
-                return Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          App.s.user_count_fetched,
-                          style: GoogleFonts.ptSans(
-                            color: App.colorScheme.secondary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Spacer(),
-                        IconButton(
-                            onPressed: (){
-
-                            },
-                            icon: Icon(Icons.arrow_right_alt_sharp, color: App.colorScheme.secondary,)),
-                      ],
-                    ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: users.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(users[index].login ?? 'login'),
-                        );
-                      },
-                    )
-                  ],
-                );
-              },
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stack) => const Center(child: Text('Error')),
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(child: Consumer(
+            builder: (context, ref, child) {
+              var lst = ref.watch(searchProvider);
+              // return const SizedBox.shrink();
+              return ListView.builder(
+                itemCount: lst.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  App.log.d("searching for ${lst[index].name}");
+                  return ListTile(
+                    title: Text(lst[index].login ?? '', style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),),
+                    onTap: () {
+                      UserBottomSheet.show(null, login: lst[index].login);
+                    },
+                  );
+                },);
+            },))
+        ],
       ),
     );
   }

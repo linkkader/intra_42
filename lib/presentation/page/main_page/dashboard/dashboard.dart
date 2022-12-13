@@ -154,8 +154,9 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
           backgroundColor: Colors.transparent,
           floatingActionButton: FloatingActionButton(
             onPressed: (){
+              UserRepository().blackHoleUsers();
               // UserRepository().me();
-              notificationExecution(null);
+              // notificationExecution(null);
               // NotificationManager.showNotification();
             },
           ),

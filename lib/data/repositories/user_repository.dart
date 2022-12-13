@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_brotli/flutter_brotli.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:html/parser.dart';
 import 'package:intra_42/core/extensions/string_ext.dart';
@@ -21,6 +22,7 @@ import 'package:intra_42/data/models/user.dart';
 import 'package:intra_42/data/models_izar/user2_isar.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/domain/api_interface/user_interface.dart';
+import 'package:intra_42/main.dart';
 import '../../core/utils/task_runner.dart';
 import '../../domain/util_interface/provider_interface.dart';
 import '../api/api.dart';
@@ -161,9 +163,15 @@ class UserRepository extends UserInterface with ProviderInterface {
 
     }
     else{
-      var h = (await dio.get("https://raw.githubusercontent.com/linkkader/Intra_42/main/users.json")).data;
+      var h = (await dio.get<List<int>>("https://raw.githubusercontent.com/linkkader/Intra_42/main/users.json.br", options: Options(responseType: ResponseType.bytes))).data;
+      App.log.d(h!.length);
       LocaleStorage.setDateTime("last", update);
-      data = json.decode(h);
+      try{
+        FlutterBrotli.init();
+      } catch(_) {
+        App.log.d("FlutterBrotli.init() failed");
+      }
+      data = json.decode(await FlutterBrotli.decompress(Uint8List.fromList(h)));
       for (var d in data) {
         try{
          await  LocaleStorage.setUser2(User2.fromJson(d));
