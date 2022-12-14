@@ -17,11 +17,12 @@ void _callBackDispatcher() async{
   Workmanager().executeTask((task, inputData) async {
     switch (task) {
       case "notification":{
-        await notificationExecution(null);
+        try{
+          await notificationExecution(null);
+        }catch(_){}
       }
       break;
     }
-    NotificationManager.showNotification();
     return Future.value(true);
   });
 }
@@ -63,7 +64,11 @@ void _callBackDispatcher() async{
 
 
 Future notificationExecution(void data) async {
+  await LocaleStorage().init();
+  Client().initApi();
   await NotificationRepository().notifications();
+  await NotificationManager.showNotification();
+
 }
 
 class NotificationManager {
@@ -80,7 +85,6 @@ class NotificationManager {
   }
 
   static start() {
-
     var androidSettings = const AndroidInitializationSettings("waifu");
     final initializationSettingsIOS =
     DarwinInitializationSettings(
@@ -96,12 +100,12 @@ class NotificationManager {
     );
     Workmanager().registerPeriodicTask(
       "notification", "notification",
-      frequency: const Duration(minutes: 30),
+      frequency: const Duration(minutes: 16),
     );
   }
 
 
-  static showNotification() async {
+  static Future showNotification() async {
     var androidDetail = const AndroidNotificationDetails("Notification",
         "Notification",priority: Priority.max,playSound: true,enableVibration: true,indeterminate: true,
         importance: Importance.max,
@@ -115,7 +119,7 @@ class NotificationManager {
       switch(element.type){
           case NotificationType.corrector: _correctorNotification(element, notificationPlugin, channelSpecific);break;
           case NotificationType.corrected: _correctEdNotification(element, notificationPlugin, channelSpecific);break;
-          case NotificationType.nullType:break;
+          // case NotificationType.nullType:break;
           default: await _defaultNotification(element, notificationPlugin, channelSpecific); break;
         }
     }

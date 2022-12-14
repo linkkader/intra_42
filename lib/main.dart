@@ -15,7 +15,6 @@ import 'l10n/l10n.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-
   await LocaleStorage().init();
   Client().initApi();
   NotificationManager.start();
