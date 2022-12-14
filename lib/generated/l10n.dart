@@ -410,41 +410,41 @@ class S {
     );
   }
 
-  /// `You will evaluate someone on %s %s`
+  /// `You will evaluate someone at %s`
   String get evaluation_phrase {
     return Intl.message(
-      'You will evaluate someone on %s %s',
+      'You will evaluate someone at %s',
       name: 'evaluation_phrase',
       desc: '',
       args: [],
     );
   }
 
-  /// `You will evaluate %s on %s %s`
-  String get evaluation_phrase2 {
+  /// `You will evaluate %s on %s at %s`
+  String get evaluation_phrase_project {
     return Intl.message(
-      'You will evaluate %s on %s %s',
-      name: 'evaluation_phrase2',
+      'You will evaluate %s on %s at %s',
+      name: 'evaluation_phrase_project',
       desc: '',
       args: [],
     );
   }
 
-  /// `Someone will evaluate you on %s %s`
+  /// `Someone will evaluate you at %s`
   String get correction_phrase {
     return Intl.message(
-      'Someone will evaluate you on %s %s',
+      'Someone will evaluate you at %s',
       name: 'correction_phrase',
       desc: '',
       args: [],
     );
   }
 
-  /// `%s will evaluate you on %s %s`
-  String get correction_phrase2 {
+  /// `%s will evaluate you on %s at %s`
+  String get correction_phrase_project {
     return Intl.message(
-      '%s will evaluate you on %s %s',
-      name: 'correction_phrase2',
+      '%s will evaluate you on %s at %s',
+      name: 'correction_phrase_project',
       desc: '',
       args: [],
     );

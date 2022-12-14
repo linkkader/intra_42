@@ -26,7 +26,7 @@ abstract class ScaleTeam with _$ScaleTeam {
     @JsonKey(name: 'begin_at')
     DateTime? beginAt,
     @JsonKey(name: 'correcteds')
-    List<Corrector>? correcteds,
+    dynamic correcteds,
     Corrector? corrector,
     Truant? truant,
     @JsonKey(name: 'filled_at')

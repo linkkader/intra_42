@@ -5,13 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/extensions/date_time_ext.dart';
+import 'package:intra_42/core/extensions/notification_isar_ext.dart';
 import 'package:intra_42/data/locale_storage/storage_stream.dart';
 import 'package:intra_42/data/models/scale_team.dart';
 import 'package:intra_42/data/models_izar/notification_isar.dart';
 import 'package:intra_42/main.dart';
 import 'package:sprintf/sprintf.dart';
-
+import '../../../core/extensions/string_ext.dart';
 import '../../../data/locale_storage/locale_storage.dart';
+import '../../../data/models/user.dart';
 
 class NotificationPage extends ConsumerStatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -83,17 +85,6 @@ class _ItemState extends State<_Item> {
     super.initState();
   }
 
-  String _text(NotificationIsar notification){
-    var scale = scaleTeam!;
-    var projectUser = LocaleStorage.getProjectsUser(scale.team!.users!.first.projectsUserId!);
-    if (notification.type != NotificationType.corrector){
-      return sprintf(App.s.evaluation_phrase, [projectUser!.project!.name, scale.beginAt!.toIso8601String()]);
-    }
-    else{
-      return sprintf(App.s.correction_phrase2, [scale.corrector!.login, projectUser!.project!.name, scale.beginAt!.toIso8601String()]);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     if (widget.notification.type == NotificationType.corrector || widget.notification.type == NotificationType.corrected){
@@ -102,6 +93,8 @@ class _ItemState extends State<_Item> {
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Row(
                 children: [
@@ -110,7 +103,7 @@ class _ItemState extends State<_Item> {
                   Text(scaleTeam?.createdAt?.timeAgo ?? "", style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),),
                 ],
               ),
-              Text(_text(widget.notification), style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),),
+              Text(scaleTeam != null ? widget.notification.text(scaleTeam!) : "", style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),),
             ],
           ),
         ),
@@ -121,6 +114,8 @@ class _ItemState extends State<_Item> {
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Row(
                 children: [

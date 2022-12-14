@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'package:intra_42/core/extensions/notification_isar_ext.dart';
 import 'package:intra_42/data/api/client.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/models_izar/notification_isar.dart';
@@ -68,7 +69,6 @@ Future notificationExecution(void data) async {
   Client().initApi();
   await NotificationRepository().notifications();
   await NotificationManager.showNotification();
-
 }
 
 class NotificationManager {
@@ -96,7 +96,7 @@ class NotificationManager {
     notificationPlugin.initialize(initSettings);
     Workmanager().initialize(
         _callBackDispatcher,
-        isInDebugMode: true
+        isInDebugMode: kDebugMode
     );
     Workmanager().registerPeriodicTask(
       "notification", "notification",
@@ -126,40 +126,43 @@ class NotificationManager {
   }
 
   static Future<void> _correctorNotification(NotificationIsar notificationIsar, FlutterLocalNotificationsPlugin plugin, NotificationDetails details) async {
-    var now = DateTime.now();
-    var scale = LocaleStorage.getScaleTeam(notificationIsar.scaleTeamId!)!;
-    if (scale.beginAt!.isBefore(now)) {
-      if (scale.beginAt!.subtract(const Duration(minutes: 15)).isBefore(now)) {
-        var projectUser = await ProjectRepository().projectUserById(scale.team!.users!.first.id!, scale.team!.users!.first.projectsUserId!);
-        await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, sprintf(App.s.evaluation_phrase, [projectUser!.project!.name, scale.beginAt!.toIso8601String()]), details);
-      }else{
-        //todo : need add more details
-        var projectUser = await ProjectRepository().projectUserById(scale.team!.users!.first.id!, scale.team!.users!.first.projectsUserId!);
-        await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, sprintf(App.s.evaluation_phrase2, [scale.corrector!.login, projectUser!.project!.name, scale.beginAt!.toIso8601String()]), details);
-      }
-    }
+     var scale = LocaleStorage.getScaleTeam(notificationIsar.scaleTeamId!)!;
+    await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, notificationIsar.text(scale), details);
+
+    // var scale = LocaleStorage.getScaleTeam(notificationIsar.scaleTeamId!)!;
+    // if (scale.beginAt!.isBefore(now)) {
+    //   if (scale.beginAt!.subtract(const Duration(minutes: 15)).isBefore(now)) {
+    //     var projectUser = await ProjectRepository().projectUserById(scale.team!.users!.first.id!, scale.team!.users!.first.projectsUserId!);
+    //     await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, sprintf(App.s.evaluation_phrase, [projectUser!.project!.name, scale.beginAt!.toIso8601String()]), details);
+    //   }else{
+    //     //todo : need add more details
+    //     var projectUser = await ProjectRepository().projectUserById(scale.team!.users!.first.id!, scale.team!.users!.first.projectsUserId!);
+    //     await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, sprintf(App.s.evaluation_phrase2, [scale.corrector!.login, projectUser!.project!.name, scale.beginAt!.toIso8601String()]), details);
+    //   }
+    // }
   }
 
   static Future<void> _defaultNotification(NotificationIsar notificationIsar, FlutterLocalNotificationsPlugin plugin, NotificationDetails details) async {
     if (notificationIsar.notifData == null || notificationIsar.id == null) return;
     await plugin.show(notificationIsar.id!, notificationIsar.notifData!.title, notificationIsar.notifData!.text , details);
-    await LocaleStorage.setNotification(notificationIsar.copyWith(read: true));
-
+    // await LocaleStorage.setNotification(notificationIsar.copyWith(read: true));
   }
 
   static Future<void> _correctEdNotification(NotificationIsar notificationIsar, FlutterLocalNotificationsPlugin plugin, NotificationDetails details) async {
-    var now = DateTime.now();
     var scale = LocaleStorage.getScaleTeam(notificationIsar.scaleTeamId!)!;
-    if (scale.beginAt!.isBefore(now)) {
-      if (scale.beginAt!.subtract(const Duration(minutes: 15)).isBefore(now)) {
-        var projectUser = await ProjectRepository().projectUserById(scale.team!.users!.first.id!, scale.team!.users!.first.projectsUserId!);
-        await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, sprintf(App.s.correction_phrase, [projectUser!.project!.name, scale.beginAt!.toIso8601String()]), details);
-      }else{
-        //todo : need add more details
-        var projectUser = await ProjectRepository().projectUserById(scale.team!.users!.first.id!, scale.team!.users!.first.projectsUserId!);
-        await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, sprintf(App.s.correction_phrase2, [scale.corrector!.login, projectUser!.project!.name, scale.beginAt!.toIso8601String()]), details);
-      }
-    }
+    await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, notificationIsar.text(scale), details);
+    // var now = DateTime.now();
+    // var scale = LocaleStorage.getScaleTeam(notificationIsar.scaleTeamId!)!;
+    // if (scale.beginAt!.isBefore(now)) {
+    //   if (scale.beginAt!.subtract(const Duration(minutes: 15)).isBefore(now)) {
+    //     var projectUser = await ProjectRepository().projectUserById(scale.team!.users!.first.id!, scale.team!.users!.first.projectsUserId!);
+    //     await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, sprintf(App.s.correction_phrase, [projectUser!.project!.name, scale.beginAt!.toIso8601String()]), details);
+    //   }else{
+    //     //todo : need add more details
+    //     var projectUser = await ProjectRepository().projectUserById(scale.team!.users!.first.id!, scale.team!.users!.first.projectsUserId!);
+    //     await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, sprintf(App.s.correction_phrase2, [scale.corrector!.login, projectUser!.project!.name, scale.beginAt!.toIso8601String()]), details);
+    //   }
+    // }
   }
 
   void test() async {

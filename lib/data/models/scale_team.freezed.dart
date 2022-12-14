@@ -35,7 +35,7 @@ mixin _$ScaleTeam {
   @JsonKey(name: 'begin_at')
   DateTime? get beginAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'correcteds')
-  List<Corrector>? get correcteds => throw _privateConstructorUsedError;
+  dynamic get correcteds => throw _privateConstructorUsedError;
   Corrector? get corrector => throw _privateConstructorUsedError;
   Truant? get truant => throw _privateConstructorUsedError;
   @JsonKey(name: 'filled_at')
@@ -73,7 +73,7 @@ abstract class $ScaleTeamCopyWith<$Res> {
       @JsonKey(name: 'begin_at')
           DateTime? beginAt,
       @JsonKey(name: 'correcteds')
-          List<Corrector>? correcteds,
+          dynamic correcteds,
       Corrector? corrector,
       Truant? truant,
       @JsonKey(name: 'filled_at')
@@ -113,7 +113,7 @@ class _$ScaleTeamCopyWithImpl<$Res, $Val extends ScaleTeam>
     Object? finalMark = null,
     Object? flag = freezed,
     Object? beginAt = freezed,
-    Object? correcteds = freezed,
+    Object? correcteds = null,
     Object? corrector = freezed,
     Object? truant = freezed,
     Object? filledAt = null,
@@ -159,10 +159,10 @@ class _$ScaleTeamCopyWithImpl<$Res, $Val extends ScaleTeam>
           ? _value.beginAt
           : beginAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      correcteds: freezed == correcteds
+      correcteds: null == correcteds
           ? _value.correcteds
           : correcteds // ignore: cast_nullable_to_non_nullable
-              as List<Corrector>?,
+              as dynamic,
       corrector: freezed == corrector
           ? _value.corrector
           : corrector // ignore: cast_nullable_to_non_nullable
@@ -277,7 +277,7 @@ abstract class _$$_ScaleCopyWith<$Res> implements $ScaleTeamCopyWith<$Res> {
       @JsonKey(name: 'begin_at')
           DateTime? beginAt,
       @JsonKey(name: 'correcteds')
-          List<Corrector>? correcteds,
+          dynamic correcteds,
       Corrector? corrector,
       Truant? truant,
       @JsonKey(name: 'filled_at')
@@ -319,7 +319,7 @@ class __$$_ScaleCopyWithImpl<$Res>
     Object? finalMark = null,
     Object? flag = freezed,
     Object? beginAt = freezed,
-    Object? correcteds = freezed,
+    Object? correcteds = null,
     Object? corrector = freezed,
     Object? truant = freezed,
     Object? filledAt = null,
@@ -365,10 +365,10 @@ class __$$_ScaleCopyWithImpl<$Res>
           ? _value.beginAt
           : beginAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      correcteds: freezed == correcteds
-          ? _value._correcteds
+      correcteds: null == correcteds
+          ? _value.correcteds
           : correcteds // ignore: cast_nullable_to_non_nullable
-              as List<Corrector>?,
+              as dynamic,
       corrector: freezed == corrector
           ? _value.corrector
           : corrector // ignore: cast_nullable_to_non_nullable
@@ -420,7 +420,7 @@ class _$_Scale implements _Scale {
       @JsonKey(name: 'begin_at')
           this.beginAt,
       @JsonKey(name: 'correcteds')
-          final List<Corrector>? correcteds,
+          this.correcteds,
       this.corrector,
       this.truant,
       @JsonKey(name: 'filled_at')
@@ -430,8 +430,7 @@ class _$_Scale implements _Scale {
       this.scale,
       this.team,
       final List<Feedback>? feedbacks})
-      : _correcteds = correcteds,
-        _questionsWithAnswers = questionsWithAnswers,
+      : _questionsWithAnswers = questionsWithAnswers,
         _feedbacks = feedbacks;
 
   factory _$_Scale.fromJson(Map<String, dynamic> json) =>
@@ -460,16 +459,9 @@ class _$_Scale implements _Scale {
   @override
   @JsonKey(name: 'begin_at')
   final DateTime? beginAt;
-  final List<Corrector>? _correcteds;
   @override
   @JsonKey(name: 'correcteds')
-  List<Corrector>? get correcteds {
-    final value = _correcteds;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  final dynamic correcteds;
   @override
   final Corrector? corrector;
   @override
@@ -522,7 +514,7 @@ class _$_Scale implements _Scale {
             (identical(other.flag, flag) || other.flag == flag) &&
             (identical(other.beginAt, beginAt) || other.beginAt == beginAt) &&
             const DeepCollectionEquality()
-                .equals(other._correcteds, _correcteds) &&
+                .equals(other.correcteds, correcteds) &&
             (identical(other.corrector, corrector) ||
                 other.corrector == corrector) &&
             (identical(other.truant, truant) || other.truant == truant) &&
@@ -548,7 +540,7 @@ class _$_Scale implements _Scale {
       const DeepCollectionEquality().hash(finalMark),
       flag,
       beginAt,
-      const DeepCollectionEquality().hash(_correcteds),
+      const DeepCollectionEquality().hash(correcteds),
       corrector,
       truant,
       const DeepCollectionEquality().hash(filledAt),
@@ -588,7 +580,7 @@ abstract class _Scale implements ScaleTeam {
       @JsonKey(name: 'begin_at')
           final DateTime? beginAt,
       @JsonKey(name: 'correcteds')
-          final List<Corrector>? correcteds,
+          final dynamic correcteds,
       final Corrector? corrector,
       final Truant? truant,
       @JsonKey(name: 'filled_at')
@@ -626,7 +618,7 @@ abstract class _Scale implements ScaleTeam {
   DateTime? get beginAt;
   @override
   @JsonKey(name: 'correcteds')
-  List<Corrector>? get correcteds;
+  dynamic get correcteds;
   @override
   Corrector? get corrector;
   @override

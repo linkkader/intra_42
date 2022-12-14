@@ -24,9 +24,7 @@ _$_Scale _$$_ScaleFromJson(Map<String, dynamic> json) => _$_Scale(
       beginAt: json['begin_at'] == null
           ? null
           : DateTime.parse(json['begin_at'] as String),
-      correcteds: (json['correcteds'] as List<dynamic>?)
-          ?.map((e) => Corrector.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      correcteds: json['correcteds'],
       corrector: json['corrector'] == null
           ? null
           : Corrector.fromJson(json['corrector'] as Map<String, dynamic>),
