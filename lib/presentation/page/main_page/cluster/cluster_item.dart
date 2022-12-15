@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/core/extensions/provider_ext.dart';
 import 'package:intra_42/main.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:touchable/touchable.dart';
 import 'dart:ui' as ui;
 import '../../../../data/models/cluster_item.dart';
@@ -22,7 +23,7 @@ class ClusterItemScreen  extends ConsumerStatefulWidget {
   ConsumerState<ClusterItemScreen> createState() =>  _ClusterItemState();
 }
 
-class _ClusterItemState extends ConsumerState<ClusterItemScreen> with AutomaticKeepAliveClientMixin{
+class _ClusterItemState extends ConsumerState<ClusterItemScreen> {
   late FutureProvider<List<EmptyCluster>> futureProvider;
 
 
@@ -39,7 +40,7 @@ class _ClusterItemState extends ConsumerState<ClusterItemScreen> with AutomaticK
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    // super.build(context;
     return ref.watch(futureProvider).when(
         data: (data){
           // App.log.i("Loaded ${ref.read(widget.imagesProvider).length} images");
@@ -75,7 +76,9 @@ class _ClusterItemState extends ConsumerState<ClusterItemScreen> with AutomaticK
           );
         },
         error: (_, __) => Text(_.toString()),
-        loading: () => const CircularProgressIndicator()
+        loading: () => Center(
+          child: LoadingAnimationWidget.prograssiveDots(color: App.colorScheme.primary, size: 100,),
+        )
     );
   }
 

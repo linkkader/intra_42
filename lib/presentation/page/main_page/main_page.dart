@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/main.dart';
@@ -49,6 +50,7 @@ class _MainPageState extends ConsumerState<MainPage> with SingleTickerProviderSt
       drawer: const MyDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
+        selectedLabelStyle: GoogleFonts.ptSans(fontWeight: FontWeight.bold),
         currentIndex: ref.watch(currentPage),
         onTap: (index){
           ref.watch(currentPage.notifier).state = index;

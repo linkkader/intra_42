@@ -45,7 +45,7 @@ class BlackHolePainter extends CustomPainter {
         //animationValue
         angleMap[element.login!] ??= j * angle;
         if (!longPress) {
-          angleMap[element.login!] = (1 / (i / 2)) + angleMap[element.login!]!;
+          angleMap[element.login!] = (1 / 3 / (i / 2)) + angleMap[element.login!]!;
         }
         var a = angleMap[element.login!]!.toRadians;
         // a = (angle * j + this.animationValue).toRadians;

@@ -160,12 +160,12 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
               floatingActionButton: kDebugMode ? FloatingActionButton(
                 onPressed: () async {
                   // var correctors = await ScaleRepository().scalesAsCorrector();
-                  NotificationRepository().notifications();
+                  // NotificationRepository().notifications();
                   // NotificationManager.start();
                   // NotificationManager().test();
                   // UserRepository().blackHoleUsers();
                   // UserRepository().me();
-                  // notificationExecution(null);
+                  notificationExecution(null);
                   // NotificationManager.showNotification();
                 },
               ) : null,

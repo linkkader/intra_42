@@ -34,7 +34,7 @@ class _ClusterDrawerState extends ConsumerState<ClusterDrawer> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       scrollController.jumpTo(0);
     });
-    return Scaffold(
+    return SafeArea(child: Scaffold(
       backgroundColor: Colors.black,
       body: Column(
         children: [
@@ -73,6 +73,6 @@ class _ClusterDrawerState extends ConsumerState<ClusterDrawer> {
           )
         ],
       ),
-    );
+    ));
   }
 }

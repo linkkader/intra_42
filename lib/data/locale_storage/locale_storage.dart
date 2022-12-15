@@ -30,9 +30,11 @@ class LocaleStorage{
   factory LocaleStorage() => instance;
   static late final Isar _isar;
 
+  static isInit() => instance._isInit;
+
   Future<void> init() async {
     assert(!_isInit, "LocalStorage already initialized");
-    _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema, IntIsarSchema, StringIsarSchema, NotificationIsarSchema, ScaleTeamIsarSchema, User2IsarSchema, ProjectsUserIsarCollectionSchema], maxSizeMiB: 10000,);
+    _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema, IntIsarSchema, StringIsarSchema, NotificationIsarSchema, ScaleTeamIsarSchema, User2IsarSchema, ProjectsUserIsarCollectionSchema],);
     _isInit = true;
     App.log.i("Locale Storage initialized");
 

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/extensions/map_ext.dart';
 import 'package:intra_42/core/extensions/provider_ext.dart';
 import 'package:intra_42/core/params/colors.dart';
@@ -13,6 +14,8 @@ import '../../../../core/utils/pair.dart';
 import '../../../../data/manager/image_manager.dart';
 import '../../../../data/models/cluster_item.dart';
 import 'cluster_item.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 
 class Cluster extends ConsumerStatefulWidget {
   const Cluster({Key? key}) : super(key: key);
@@ -91,6 +94,13 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
           UserManger().updateUserFromCluster(data);
           return Scaffold(
             key: _key,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                ref.refresh(futureProvider);
+              },
+              child: const Icon(Icons.menu),
+              backgroundColor: Colors.white,
+            ),
             drawer: ClusterDrawer(clusterItemsState, stateClusterSize,map),
             appBar: AppBar(
               automaticallyImplyLeading: false,
@@ -102,7 +112,10 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
                 indicatorColor: Colors.white,
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.white,
-                tabs: List.generate(data.length, (index) => Text(data.keys.elementAt(index).first,),),
+                tabs: List.generate(data.length, (index) => Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(data.keys.elementAt(index).first, style: GoogleFonts.ptSans(fontWeight: FontWeight.bold,))),
+                ),
               ),
               actions: [
                 MaterialButton(
@@ -130,7 +143,9 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
         error: (_, __){
           return Container();
         },
-        loading: () => const CircularProgressIndicator()
+        loading: () => Center(
+          child: LoadingAnimationWidget.prograssiveDots(color: App.colorScheme.primary, size: 100,),
+        ),
     );
   }
 }

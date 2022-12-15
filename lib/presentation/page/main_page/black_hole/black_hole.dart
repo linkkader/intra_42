@@ -16,6 +16,7 @@ import 'package:intra_42/data/models/user_2.dart';
 import 'package:intra_42/data/models_izar/black_hole.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/main.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:touchable/touchable.dart';
 import 'dart:ui' as ui;
@@ -152,7 +153,7 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
           },
         loading: (){
           return Center(
-              child: Text(sprintf(App.s.user_count_fetched, [ref.watch(userCountProvider)]), style: GoogleFonts.ptSans(fontWeight: FontWeight.bold, color: App.colorScheme.secondary),)
+            child: LoadingAnimationWidget.prograssiveDots(color: App.colorScheme.primary, size: 100,),
           );
         },
       data: (data){

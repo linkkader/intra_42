@@ -61,39 +61,41 @@ class BottomSheetProject extends StatelessWidget {
           )),
           ColoredBox(
             color: App.colorScheme.primary,
-            child: Container(
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () => ProjectPage(user, data).navigate(context: context),
-                        child: Text(
-                          data.name ?? "",
-                          style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+            child: SafeArea(
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () => ProjectPage(user, data).navigate(context: context),
+                          child: Text(
+                            data.name ?? "",
+                            style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      const Spacer(),
-                      stateWidget()
-                    ],
-                  ),
-                  if (data.duration != null)Text(
-                    data.duration ?? "",
-                    style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
-                  ),
-                  if (data.description != null)Text(
-                    data.description ?? "",
-                    style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
-                  ),
-                  if (data.state == "unavailable" && data.rules != null)
-                    Text(
-                      data.rules!,
+                        const Spacer(),
+                        stateWidget()
+                      ],
+                    ),
+                    if (data.duration != null)Text(
+                      data.duration ?? "",
                       style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
                     ),
-                ],
+                    if (data.description != null)Text(
+                      data.description ?? "",
+                      style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                    ),
+                    if (data.state == "unavailable" && data.rules != null)
+                      Text(
+                        data.rules!,
+                        style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                      ),
+                  ],
+                ),
               ),
             ),
           )

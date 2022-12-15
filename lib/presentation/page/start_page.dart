@@ -13,7 +13,9 @@ import 'package:intra_42/data/locale_storage/storage_stream.dart';
 import 'package:intra_42/data/repositories/auth_repository.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
+import 'package:intra_42/presentation/page/main_page/black_hole/black_hole.dart';
 import 'package:intra_42/presentation/page/main_page/main_page.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import 'auth/sign_in_page_web.dart';
 
@@ -60,38 +62,76 @@ class _StartPageState extends ConsumerState<StartPage> {
                   body: Column(
                     children: [
                       const Spacer(),
-                      if (ref.watch(loadingProvider.notifier).state)
-                        const CircularProgressIndicator()
-                      else
-                        InkWell(
-                          onTap: (){
-                            SignInPage(
-                              onCodeIntercepted: (code, context) async {
-                                AuthRepository().validateCode(code)
-                                    .then((value) {
-                                      ref.watch(loadingProvider.notifier).state = false;
-                                      ref.refresh(futureProviderAuth);
-                                      App.log.i("Code validated");
-                                }).catchError((e) {
-                                  App.log.e(e);
-                                  ref.watch(loadingProvider.notifier).state = false;
-                                });
-                                Navigator.pop(context);
-                                ref.watch(loadingProvider.notifier).state = true;
-                              },
-                            ).navigate(context: context);
-                          },
-                          onLongPress: () {
-                            UserRepository().me();
-                          },
-                          onDoubleTap: (){
-                            App.log.i('token ${LocaleStorage().tokenBody}');
-                          },
-                          child: Text(
-                            App.s.sign_in,
-                            style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontSize: 30),
+                      Row(
+                        children: [
+                          MaterialButton(
+                            onPressed: (){
+                              launchUrlString("https://github.com/linkkader/Intra_42");
+                            },
+                            child: Text(
+                              App.s.api_settings,
+                              style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
                           ),
-                        ),
+                          const Spacer(),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Spacer(),
+                          MaterialButton(
+                            onPressed: (){
+                              launchUrlString("https://github.com/linkkader/Intra_42");
+                            },
+                            child: Text(
+                              App.s.github,
+                              style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          MaterialButton(
+                            onPressed: (){
+                              SignInPage(
+                                onCodeIntercepted: (code, context) async {
+                                  AuthRepository().validateCode(code)
+                                      .then((value) {
+                                    ref.watch(loadingProvider.notifier).state = false;
+                                    ref.refresh(futureProviderAuth);
+                                    App.log.i("Code validated");
+                                  }).catchError((e) {
+                                    App.log.e(e);
+                                    ref.watch(loadingProvider.notifier).state = false;
+                                  });
+                                  Navigator.pop(context);
+                                  ref.watch(loadingProvider.notifier).state = true;
+                                },
+                              ).navigate(context: context);
+                            },
+                            child: Text(
+                              App.s.sign_in,
+                              style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const Spacer(),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Spacer(),
+                          MaterialButton(
+                            onPressed: (){
+                              const BlackHoleScreen().navigate(context: context);
+                            },
+                            child: Text(
+                              App.s.black_hole,
+                              style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 100,),
                     ],
                   )

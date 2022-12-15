@@ -44,6 +44,8 @@
   "notification" : "Notifications",
   "logout" : "Logout",
   "language" : "Language",
-  "search" : "Search"
+  "search" : "Search",
+  "github" : "Github",
+  "api_settings" : "API Settings"
 
 }

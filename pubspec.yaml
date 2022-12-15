@@ -8,7 +8,8 @@ environment:
   sdk: ">=2.17.1 <3.0.0"
 
 dependencies:
-
+  #loading
+  loading_animation_widget: ^1.2.0+3
 
   #brotli
   flutter_brotli: ^0.0.2

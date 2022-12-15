@@ -60,71 +60,73 @@ class _UserSheetState extends ConsumerState<UserBottomSheet> {
                 )),
                 ColoredBox(
                   color: App.colorScheme.primary,
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 16,),
-                      SizedBox(
-                        height: kBlackHoleBottomImgSize,
-                        width: kBlackHoleBottomImgSize,
-                        child: ClipOval(
-                          child: GestureDetector(
-                            onTap: () {
-                              Dashboard(user.id!, isMe: false,).navigate(context: context);
-                              // Graph(user).navigate(context: context);
-                            },
-                            child: Img(user.image?.versions?.medium ?? ""),
+                  child: SafeArea(
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 16,),
+                        SizedBox(
+                          height: kBlackHoleBottomImgSize,
+                          width: kBlackHoleBottomImgSize,
+                          child: ClipOval(
+                            child: GestureDetector(
+                              onTap: () {
+                                Dashboard(user.id!, isMe: false,).navigate(context: context);
+                                // Graph(user).navigate(context: context);
+                              },
+                              child: Img(user.image?.versions?.medium ?? ""),
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 8,),
-                      Expanded(
-                          child: Column(
-                            children: [
-                              Text(
-                                user.displayname ?? "",
-                                style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                user.login ?? "",
-                                style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
-                              ),
-                              if (user.location != null)
+                        const SizedBox(width: 8,),
+                        Expanded(
+                            child: Column(
+                              children: [
                                 Text(
-                                  user.location!,
+                                  user.displayname ?? "",
                                   style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
                                 ),
-                              if (user.cursusUsers != null && user.cursusUsers!.isNotEmpty && user.cursusUsers!.first.blackholedAt != null)
                                 Text(
-                                  user.cursusUsers!.first.blackholedAt!.formattedBlackHole,
+                                  user.login ?? "",
                                   style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
                                 ),
-                              if (user.cursusUsers != null && user.cursusUsers!.isNotEmpty && user.cursusUsers!.first.blackholedAt != null)
-                                Text(
-                                  user.cursusUsers!.first.blackholedAt!.formattedBlackHole2,
-                                  style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
-                                ),
-                              SizedBox(
-                                height: 20,
-                                child: ListView.builder(
-                                    itemCount: user.cursusUsers?.length ?? 0,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) {
-                                      if (user.cursusUsers?[index].cursus?.name == null) {
-                                        return const SizedBox.shrink();
+                                if (user.location != null)
+                                  Text(
+                                    user.location!,
+                                    style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                                  ),
+                                if (user.cursusUsers != null && user.cursusUsers!.isNotEmpty && user.cursusUsers!.first.blackholedAt != null)
+                                  Text(
+                                    user.cursusUsers!.first.blackholedAt!.formattedBlackHole,
+                                    style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                                  ),
+                                if (user.cursusUsers != null && user.cursusUsers!.isNotEmpty && user.cursusUsers!.first.blackholedAt != null)
+                                  Text(
+                                    user.cursusUsers!.first.blackholedAt!.formattedBlackHole2,
+                                    style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                                  ),
+                                SizedBox(
+                                  height: 20,
+                                  child: ListView.builder(
+                                      itemCount: user.cursusUsers?.length ?? 0,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        if (user.cursusUsers?[index].cursus?.name == null) {
+                                          return const SizedBox.shrink();
+                                        }
+                                        return Text(
+                                          "${user.cursusUsers![index].cursus!.name!} : ${user.cursusUsers?[index].level ?? 0}",
+                                          style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                                        );
                                       }
-                                      return Text(
-                                        "${user.cursusUsers![index].cursus!.name!} : ${user.cursusUsers?[index].level ?? 0}",
-                                        style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
-                                      );
-                                    }
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )
-                      ),
-                      const SizedBox(width: 16,),
-                    ],
+                              ],
+                            )
+                        ),
+                        const SizedBox(width: 16,),
+                      ],
+                    ),
                   ),
                 )
               ],

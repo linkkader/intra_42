@@ -499,6 +499,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Github`
+  String get github {
+    return Intl.message(
+      'Github',
+      name: 'github',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `API Settings`
+  String get api_settings {
+    return Intl.message(
+      'API Settings',
+      name: 'api_settings',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

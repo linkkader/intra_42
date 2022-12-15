@@ -1,6 +1,7 @@
 // Created by linkkader on 6/12/2022
 
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:intra_42/core/extensions/notification_isar_ext.dart';
 import 'package:intra_42/data/api/client.dart';
@@ -65,10 +66,17 @@ void _callBackDispatcher() async{
 
 
 Future notificationExecution(void data) async {
-  await LocaleStorage().init();
-  Client().initApi();
-  await NotificationRepository().notifications();
-  await NotificationManager.showNotification();
+  if (LocaleStorage.isInit() == false)
+  {
+    await LocaleStorage().init();
+    Client().initApi();
+  }
+  // await NotificationRepository().notifications();
+  try{
+    await NotificationManager.showNotification();
+  }catch(_){
+    App.log.e("NotificationManager.showNotification() failed");
+  }
 }
 
 class NotificationManager {
@@ -98,10 +106,19 @@ class NotificationManager {
         _callBackDispatcher,
         isInDebugMode: kDebugMode
     );
-    Workmanager().registerPeriodicTask(
-      "notification", "notification",
-      frequency: const Duration(minutes: 16),
-    );
+    if (Platform.isAndroid){
+      Workmanager().registerPeriodicTask(
+        "notification", "notification",
+        frequency: const Duration(minutes: 16),
+      );
+    }else{
+      Workmanager().registerOneOffTask(
+        "notification", "notification",
+        initialDelay: const Duration(minutes: 1),
+      ).then((value) {
+        print("workmanager registered success");
+      });
+    }
   }
 
 
