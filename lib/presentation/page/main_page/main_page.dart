@@ -57,9 +57,9 @@ class _MainPageState extends ConsumerState<MainPage> with SingleTickerProviderSt
           _tabController.index = index;
         },
         items: [
-          const BottomNavigationBarItem(
-            backgroundColor: Colors.black,
-            icon: Icon(Icons.dashboard),
+          BottomNavigationBarItem(
+            backgroundColor: App.colorScheme.background,
+            icon: const Icon(Icons.dashboard),
             label: 'Dashboard',
           ),
           const BottomNavigationBarItem(

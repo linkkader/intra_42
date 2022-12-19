@@ -3,8 +3,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intra_42/core/extensions/widget_ext.dart';
 import 'package:intra_42/data/repositories/auth_repository.dart';
 import 'package:intra_42/main.dart';
+import 'package:intra_42/presentation/page/settings/open_source.dart';
 
 class MyDrawer extends StatelessWidget {
   static final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -25,6 +27,12 @@ class MyDrawer extends StatelessWidget {
           child: Column(
             children: [
               Expanded(child: Container()),
+              ListTile(
+                title: Text("Open Sources Licence", style: GoogleFonts.openSans(fontWeight: FontWeight.bold, color: App.colorScheme.secondary),),
+                onTap: () {
+                  const OpenSources().navigate(context: context);
+                },
+              ),
               ListTile(
                 leading: Icon(Icons.language, color: App.colorScheme.secondary),
                 title: Text(App.s.language, style: GoogleFonts.openSans(fontWeight: FontWeight.bold, color: App.colorScheme.secondary),),

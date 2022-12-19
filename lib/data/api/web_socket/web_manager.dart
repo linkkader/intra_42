@@ -48,7 +48,15 @@ class WebSocketManager {
     });
     _subscription?.onError((error) {
       _connected = false;
-      App.log.e(error);
+      App.log.e("WebSocket error: $error");
+    });
+    Timer.periodic(const Duration(seconds: 30), (timer) {
+      App.log.i("WebSocket ping");
+      if(!_connected) {
+        App.log.i("WebSocket reconnecting");
+        start();
+        timer.cancel();
+      }
     });
   }
 

@@ -1,5 +1,6 @@
 // Created by linkkader on 4/12/2022
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +9,9 @@ import 'package:intra_42/core/extensions/provider_ext.dart';
 import 'package:intra_42/data/models/project_data.dart';
 import 'package:intra_42/data/models/user.dart';
 import 'package:intra_42/data/repositories/project_repository.dart';
+import 'package:intra_42/presentation/page/bottom_sheet.dart';
 import 'package:intra_42/presentation/utils_widgets/img.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../core/params/colors.dart';
 import '../../../core/utils/pair.dart';
 import '../../../data/models/scale_team.dart';
@@ -180,7 +183,9 @@ class _ProjectPageState extends ConsumerState<ProjectPage> {
             ),
           );
         },
-        loading: () => const CupertinoActivityIndicator(),
+        loading: () => Center(
+          child: LoadingAnimationWidget.prograssiveDots(color: App.colorScheme.primary, size: 100,),
+        ),
         error: (e, s) => Material(child: Center(child: Text(e.toString()))),
       ),
     );
@@ -217,7 +222,10 @@ class _PeerEvaluationState extends ConsumerState<PeerEvaluation> {
   }
 
   ExpansionPanel item(Team team, List<ScaleTeam> scales) {
+
     scales.sort((a, b) => a.createdAt!.compareTo(b.createdAt!) > 0 ? -1 : 1);
+    // return ExpansionPanel(headerBuilder: (context, isExpanded) => Container(), body: Container());
+
     expandedMapProvider[team.id!] ??= StateProvider((ref) => false);
     return ExpansionPanel(
         headerBuilder: (context, isExpanded) {
@@ -247,6 +255,14 @@ class _PeerEvaluationState extends ConsumerState<PeerEvaluation> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(scales.length, (index) {
+                  List<Corrector> correcteds = [];
+                  try{
+                    for(var element in scales[index].correcteds!){
+                      correcteds.add(Corrector.fromJson(element));
+                    }
+                  }catch(_){
+                    App.log.e("error $_");
+                  }
                   if (scales[index].comment == null || scales[index].comment!.isEmpty || scales[index].feedback == null || scales[index].feedback.toString().isEmpty) return Container();
                   return Column(
                     children: [
@@ -261,7 +277,10 @@ class _PeerEvaluationState extends ConsumerState<PeerEvaluation> {
                             child: ClipRRect(
                               borderRadius: const BorderRadius.all(Radius.circular(20)),
                               child: Builder(builder: (context) {
-                                return Img.login(scales[index].corrector?.login ?? "");
+                                return InkWell(
+                                  onTap: () => UserBottomSheet.show(null, login: scales[index].corrector?.login ?? "",context: context),
+                                  child: Img.login(scales[index].corrector?.login ?? ""),
+                                );
                               },),
                             ),
                           ),
@@ -275,7 +294,7 @@ class _PeerEvaluationState extends ConsumerState<PeerEvaluation> {
                                   RichText(text: TextSpan(
                                       children: [
                                         TextSpan(text: "${App.s.evaluated_by} ", style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold)),
-                                        TextSpan(text: scales[index].corrector?.login, style: GoogleFonts.ptSans(color: App.colorScheme.primary, fontWeight: FontWeight.bold,)),
+                                        TextSpan(text: scales[index].corrector?.login, style: GoogleFonts.ptSans(color: App.colorScheme.primary, fontWeight: FontWeight.bold,), recognizer: TapGestureRecognizer()..onTap = () => UserBottomSheet.show(null, login: scales[index].corrector?.login ?? "",context: context)),
                                         TextSpan(text: " ", style: GoogleFonts.ptSans(color: App.colorScheme.primary, fontWeight: FontWeight.bold)),
                                         TextSpan(text: scales[index].createdAt?.timeAgo, style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold)),
                                       ]
@@ -289,7 +308,8 @@ class _PeerEvaluationState extends ConsumerState<PeerEvaluation> {
                               const SizedBox(height: 2),
                               RichText(text: TextSpan(
                                   children: [
-                                    TextSpan(text: scales[index].correcteds?.isNotEmpty == true ? scales[index].correcteds?.first.login : null, style: GoogleFonts.ptSans(color: App.colorScheme.primary, fontWeight: FontWeight.bold)),
+                                    TextSpan(text: correcteds.isNotEmpty == true ? correcteds.first.login : null, style: GoogleFonts.ptSans(color: App.colorScheme.primary, fontWeight: FontWeight.bold,),
+                                        recognizer: TapGestureRecognizer()..onTap = () => UserBottomSheet.show(null, login: correcteds.isNotEmpty == true ? correcteds.first.login : null, context: context)),
                                     TextSpan(text: App.s.s_feedback, style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold)),
                                     TextSpan(text: scales[index].createdAt?.timeAgo, style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold)),
                                   ]
@@ -307,7 +327,7 @@ class _PeerEvaluationState extends ConsumerState<PeerEvaluation> {
               )
             ],
           ),
-    ));
+        ));
   }
   
   @override
@@ -324,7 +344,9 @@ class _PeerEvaluationState extends ConsumerState<PeerEvaluation> {
           }),
         );
       },
-      loading: () => const CupertinoActivityIndicator(),
+      loading: () => Center(
+        child: LoadingAnimationWidget.prograssiveDots(color: App.colorScheme.primary, size: 100,),
+      ),
       error: (e, s) => Text(e.toString()),
     );
   }

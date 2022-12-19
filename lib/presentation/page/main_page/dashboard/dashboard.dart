@@ -115,7 +115,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
   void initState() {
     App.log.i("Dashboard: user id: ${widget.id}");
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      var user = LocaleStorage().getUser(widget.id)!;
+      var user = LocaleStorage.getUser(widget.id)!;
       tabs = [
         InfoScreen(user),
         if (widget.isMe)const EvaluationScreen(),
@@ -126,7 +126,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
         SkillScreen(user, currentCursusProvider),
       ];
       _tabController = TabController(length: tabs.length, vsync: this);
-      ref.read(stateProvider.notifier).state = user;
+      ref.read(stateProvider.notifier).state = user.copyWith(cursusUsers: user.cursusUsers?.reversed.toList());
     });
     // UserRepository().userCursus(widget.id).then((value) {
     //   ref.read(stateProvider.notifier).state = ref.read(stateProvider)?.copyWith(cursusUsers: value);
@@ -137,7 +137,6 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-
     return Stack(
       children: [
         Container(
@@ -159,14 +158,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
               backgroundColor: Colors.transparent,
               floatingActionButton: kDebugMode ? FloatingActionButton(
                 onPressed: () async {
-                  // var correctors = await ScaleRepository().scalesAsCorrector();
-                  // NotificationRepository().notifications();
-                  // NotificationManager.start();
-                  // NotificationManager().test();
-                  // UserRepository().blackHoleUsers();
-                  // UserRepository().me();
                   notificationExecution(null);
-                  // NotificationManager.showNotification();
                 },
               ) : null,
               body: NestedScrollView(

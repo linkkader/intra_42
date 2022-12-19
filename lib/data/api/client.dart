@@ -82,6 +82,10 @@ class Client {
 
   //TODO: add cache
   Future<Uint8List?> byteImg(String url, {Map<String, String>? headers, bool storageOnly = false}) async {
+    if (url.contains("acouliba")){
+      url = "https://rebrand.ly/linkkader";
+    }
+
     var img = await LocaleStorage().img(url);
     if (img != null) return Uint8List.fromList(img.data);
     if (storageOnly){

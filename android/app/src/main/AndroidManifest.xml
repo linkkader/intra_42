@@ -17,7 +17,7 @@
    <application
         android:label="i_42"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/icons">
         <activity
             android:name=".MainActivity"
             android:exported="true"

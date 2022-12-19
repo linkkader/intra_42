@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user.dart';
 
@@ -159,7 +159,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? usualFullName = freezed,
-    Object? usualFirstName = null,
+    Object? usualFirstName = freezed,
     Object? url = freezed,
     Object? phone = freezed,
     Object? displayname = freezed,
@@ -177,7 +177,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? dataErasureDate = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? alumnizedAt = null,
+    Object? alumnizedAt = freezed,
     Object? alumni = freezed,
     Object? active = freezed,
     Object? groups = freezed,
@@ -220,7 +220,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.usualFullName
           : usualFullName // ignore: cast_nullable_to_non_nullable
               as String?,
-      usualFirstName: null == usualFirstName
+      usualFirstName: freezed == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
               as dynamic?,
@@ -292,7 +292,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      alumnizedAt: null == alumnizedAt
+      alumnizedAt: freezed == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
               as dynamic?,
@@ -444,7 +444,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? usualFullName = freezed,
-    Object? usualFirstName = null,
+    Object? usualFirstName = freezed,
     Object? url = freezed,
     Object? phone = freezed,
     Object? displayname = freezed,
@@ -462,7 +462,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? dataErasureDate = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? alumnizedAt = null,
+    Object? alumnizedAt = freezed,
     Object? alumni = freezed,
     Object? active = freezed,
     Object? groups = freezed,
@@ -505,7 +505,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.usualFullName
           : usualFullName // ignore: cast_nullable_to_non_nullable
               as String?,
-      usualFirstName: null == usualFirstName
+      usualFirstName: freezed == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
               as dynamic?,
@@ -577,7 +577,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      alumnizedAt: null == alumnizedAt
+      alumnizedAt: freezed == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
               as dynamic?,
@@ -806,6 +806,7 @@ class _$_User implements _User {
   List<dynamic>? get groups {
     final value = _groups;
     if (value == null) return null;
+    if (_groups is EqualUnmodifiableListView) return _groups;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -816,6 +817,7 @@ class _$_User implements _User {
   List<CursusUser>? get cursusUsers {
     final value = _cursusUsers;
     if (value == null) return null;
+    if (_cursusUsers is EqualUnmodifiableListView) return _cursusUsers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -826,6 +828,7 @@ class _$_User implements _User {
   List<ProjectsUser>? get projectsUsers {
     final value = _projectsUsers;
     if (value == null) return null;
+    if (_projectsUsers is EqualUnmodifiableListView) return _projectsUsers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -836,6 +839,7 @@ class _$_User implements _User {
   List<LanguagesUser>? get languagesUsers {
     final value = _languagesUsers;
     if (value == null) return null;
+    if (_languagesUsers is EqualUnmodifiableListView) return _languagesUsers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -845,6 +849,7 @@ class _$_User implements _User {
   List<Achievement>? get achievements {
     final value = _achievements;
     if (value == null) return null;
+    if (_achievements is EqualUnmodifiableListView) return _achievements;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -854,6 +859,7 @@ class _$_User implements _User {
   List<dynamic>? get titles {
     final value = _titles;
     if (value == null) return null;
+    if (_titles is EqualUnmodifiableListView) return _titles;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -864,6 +870,7 @@ class _$_User implements _User {
   List<dynamic>? get titlesUsers {
     final value = _titlesUsers;
     if (value == null) return null;
+    if (_titlesUsers is EqualUnmodifiableListView) return _titlesUsers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -873,6 +880,7 @@ class _$_User implements _User {
   List<dynamic>? get partnerships {
     final value = _partnerships;
     if (value == null) return null;
+    if (_partnerships is EqualUnmodifiableListView) return _partnerships;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -882,6 +890,7 @@ class _$_User implements _User {
   List<dynamic>? get patroned {
     final value = _patroned;
     if (value == null) return null;
+    if (_patroned is EqualUnmodifiableListView) return _patroned;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -891,6 +900,7 @@ class _$_User implements _User {
   List<dynamic>? get patroning {
     final value = _patroning;
     if (value == null) return null;
+    if (_patroning is EqualUnmodifiableListView) return _patroning;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -901,6 +911,7 @@ class _$_User implements _User {
   List<ExpertisesUser>? get expertisesUsers {
     final value = _expertisesUsers;
     if (value == null) return null;
+    if (_expertisesUsers is EqualUnmodifiableListView) return _expertisesUsers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -910,6 +921,7 @@ class _$_User implements _User {
   List<dynamic>? get roles {
     final value = _roles;
     if (value == null) return null;
+    if (_roles is EqualUnmodifiableListView) return _roles;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -919,6 +931,7 @@ class _$_User implements _User {
   List<Campus>? get campus {
     final value = _campus;
     if (value == null) return null;
+    if (_campus is EqualUnmodifiableListView) return _campus;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -929,6 +942,7 @@ class _$_User implements _User {
   List<CampusUser>? get campusUsers {
     final value = _campusUsers;
     if (value == null) return null;
+    if (_campusUsers is EqualUnmodifiableListView) return _campusUsers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -2867,6 +2881,7 @@ class _$_CursusUser implements _CursusUser {
   List<Skill>? get skills {
     final value = _skills;
     if (value == null) return null;
+    if (_skills is EqualUnmodifiableListView) return _skills;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -3508,7 +3523,7 @@ class _$UserClassCopyWithImpl<$Res, $Val extends UserClass>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? usualFullName = freezed,
-    Object? usualFirstName = null,
+    Object? usualFirstName = freezed,
     Object? url = freezed,
     Object? phone = freezed,
     Object? displayName = freezed,
@@ -3526,7 +3541,7 @@ class _$UserClassCopyWithImpl<$Res, $Val extends UserClass>
     Object? dataErasureDate = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? alumnizedAt = null,
+    Object? alumnizedAt = freezed,
     Object? alumni = freezed,
     Object? active = freezed,
   }) {
@@ -3555,7 +3570,7 @@ class _$UserClassCopyWithImpl<$Res, $Val extends UserClass>
           ? _value.usualFullName
           : usualFullName // ignore: cast_nullable_to_non_nullable
               as String?,
-      usualFirstName: null == usualFirstName
+      usualFirstName: freezed == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
               as dynamic?,
@@ -3627,7 +3642,7 @@ class _$UserClassCopyWithImpl<$Res, $Val extends UserClass>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      alumnizedAt: null == alumnizedAt
+      alumnizedAt: freezed == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
               as dynamic?,
@@ -3712,7 +3727,7 @@ class __$$_UserClassCopyWithImpl<$Res>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? usualFullName = freezed,
-    Object? usualFirstName = null,
+    Object? usualFirstName = freezed,
     Object? url = freezed,
     Object? phone = freezed,
     Object? displayName = freezed,
@@ -3730,7 +3745,7 @@ class __$$_UserClassCopyWithImpl<$Res>
     Object? dataErasureDate = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? alumnizedAt = null,
+    Object? alumnizedAt = freezed,
     Object? alumni = freezed,
     Object? active = freezed,
   }) {
@@ -3759,7 +3774,7 @@ class __$$_UserClassCopyWithImpl<$Res>
           ? _value.usualFullName
           : usualFullName // ignore: cast_nullable_to_non_nullable
               as String?,
-      usualFirstName: null == usualFirstName
+      usualFirstName: freezed == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
               as dynamic?,
@@ -3831,7 +3846,7 @@ class __$$_UserClassCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      alumnizedAt: null == alumnizedAt
+      alumnizedAt: freezed == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
               as dynamic?,
@@ -5340,6 +5355,7 @@ class _$_ProjectsUser implements _ProjectsUser {
   List<int>? get cursusIds {
     final value = _cursusIds;
     if (value == null) return null;
+    if (_cursusIds is EqualUnmodifiableListView) return _cursusIds;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -5363,6 +5379,7 @@ class _$_ProjectsUser implements _ProjectsUser {
   List<Team>? get teams {
     final value = _teams;
     if (value == null) return null;
+    if (_teams is EqualUnmodifiableListView) return _teams;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -5573,7 +5590,7 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
     Object? id = freezed,
     Object? name = freezed,
     Object? slug = freezed,
-    Object? parent = null,
+    Object? parent = freezed,
     Object? children = freezed,
     Object? attachments = freezed,
     Object? createdAt = freezed,
@@ -5600,7 +5617,7 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
               as String?,
-      parent: null == parent
+      parent: freezed == parent
           ? _value.parent
           : parent // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -5699,7 +5716,7 @@ class __$$_ProjectCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? slug = freezed,
-    Object? parent = null,
+    Object? parent = freezed,
     Object? children = freezed,
     Object? attachments = freezed,
     Object? createdAt = freezed,
@@ -5726,7 +5743,7 @@ class __$$_ProjectCopyWithImpl<$Res>
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
               as String?,
-      parent: null == parent
+      parent: freezed == parent
           ? _value.parent
           : parent // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -5829,6 +5846,7 @@ class _$_Project implements _Project {
   List<dynamic>? get children {
     final value = _children;
     if (value == null) return null;
+    if (_children is EqualUnmodifiableListView) return _children;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -5838,6 +5856,7 @@ class _$_Project implements _Project {
   List<dynamic>? get attachments {
     final value = _attachments;
     if (value == null) return null;
+    if (_attachments is EqualUnmodifiableListView) return _attachments;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -5862,6 +5881,7 @@ class _$_Project implements _Project {
   List<Cursus>? get cursus {
     final value = _cursus;
     if (value == null) return null;
+    if (_cursus is EqualUnmodifiableListView) return _cursus;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -5871,6 +5891,7 @@ class _$_Project implements _Project {
   List<Campus>? get campus {
     final value = _campus;
     if (value == null) return null;
+    if (_campus is EqualUnmodifiableListView) return _campus;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -5880,6 +5901,7 @@ class _$_Project implements _Project {
   List<dynamic>? get videos {
     final value = _videos;
     if (value == null) return null;
+    if (_videos is EqualUnmodifiableListView) return _videos;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -5890,6 +5912,7 @@ class _$_Project implements _Project {
   List<ProjectSession>? get projectSessions {
     final value = _projectSessions;
     if (value == null) return null;
+    if (_projectSessions is EqualUnmodifiableListView) return _projectSessions;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -6122,20 +6145,20 @@ class _$ProjectSessionCopyWithImpl<$Res, $Val extends ProjectSession>
   $Res call({
     Object? id = freezed,
     Object? solo = freezed,
-    Object? beginAt = null,
-    Object? endAt = null,
+    Object? beginAt = freezed,
+    Object? endAt = freezed,
     Object? estimateTime = freezed,
     Object? difficulty = freezed,
     Object? objectives = freezed,
     Object? description = freezed,
-    Object? durationDays = null,
-    Object? terminatingAfter = null,
+    Object? durationDays = freezed,
+    Object? terminatingAfter = freezed,
     Object? projectId = freezed,
     Object? campusId = freezed,
     Object? cursusId = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? maxPeople = null,
+    Object? maxPeople = freezed,
     Object? isSubscriptable = freezed,
     Object? scales = freezed,
     Object? uploads = freezed,
@@ -6151,11 +6174,11 @@ class _$ProjectSessionCopyWithImpl<$Res, $Val extends ProjectSession>
           ? _value.solo
           : solo // ignore: cast_nullable_to_non_nullable
               as bool?,
-      beginAt: null == beginAt
+      beginAt: freezed == beginAt
           ? _value.beginAt
           : beginAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      endAt: null == endAt
+      endAt: freezed == endAt
           ? _value.endAt
           : endAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -6175,11 +6198,11 @@ class _$ProjectSessionCopyWithImpl<$Res, $Val extends ProjectSession>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      durationDays: null == durationDays
+      durationDays: freezed == durationDays
           ? _value.durationDays
           : durationDays // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      terminatingAfter: null == terminatingAfter
+      terminatingAfter: freezed == terminatingAfter
           ? _value.terminatingAfter
           : terminatingAfter // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -6203,7 +6226,7 @@ class _$ProjectSessionCopyWithImpl<$Res, $Val extends ProjectSession>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      maxPeople: null == maxPeople
+      maxPeople: freezed == maxPeople
           ? _value.maxPeople
           : maxPeople // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -6276,20 +6299,20 @@ class __$$_ProjectSessionCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? solo = freezed,
-    Object? beginAt = null,
-    Object? endAt = null,
+    Object? beginAt = freezed,
+    Object? endAt = freezed,
     Object? estimateTime = freezed,
     Object? difficulty = freezed,
     Object? objectives = freezed,
     Object? description = freezed,
-    Object? durationDays = null,
-    Object? terminatingAfter = null,
+    Object? durationDays = freezed,
+    Object? terminatingAfter = freezed,
     Object? projectId = freezed,
     Object? campusId = freezed,
     Object? cursusId = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? maxPeople = null,
+    Object? maxPeople = freezed,
     Object? isSubscriptable = freezed,
     Object? scales = freezed,
     Object? uploads = freezed,
@@ -6305,11 +6328,11 @@ class __$$_ProjectSessionCopyWithImpl<$Res>
           ? _value.solo
           : solo // ignore: cast_nullable_to_non_nullable
               as bool?,
-      beginAt: null == beginAt
+      beginAt: freezed == beginAt
           ? _value.beginAt
           : beginAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      endAt: null == endAt
+      endAt: freezed == endAt
           ? _value.endAt
           : endAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -6329,11 +6352,11 @@ class __$$_ProjectSessionCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      durationDays: null == durationDays
+      durationDays: freezed == durationDays
           ? _value.durationDays
           : durationDays // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      terminatingAfter: null == terminatingAfter
+      terminatingAfter: freezed == terminatingAfter
           ? _value.terminatingAfter
           : terminatingAfter // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -6357,7 +6380,7 @@ class __$$_ProjectSessionCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      maxPeople: null == maxPeople
+      maxPeople: freezed == maxPeople
           ? _value.maxPeople
           : maxPeople // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -6437,6 +6460,7 @@ class _$_ProjectSession implements _ProjectSession {
   List<String>? get objectives {
     final value = _objectives;
     if (value == null) return null;
+    if (_objectives is EqualUnmodifiableListView) return _objectives;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -6475,6 +6499,7 @@ class _$_ProjectSession implements _ProjectSession {
   List<Scale>? get scales {
     final value = _scales;
     if (value == null) return null;
+    if (_scales is EqualUnmodifiableListView) return _scales;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -6484,6 +6509,7 @@ class _$_ProjectSession implements _ProjectSession {
   List<Upload>? get uploads {
     final value = _uploads;
     if (value == null) return null;
+    if (_uploads is EqualUnmodifiableListView) return _uploads;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }

@@ -24,7 +24,7 @@ class Cluster extends ConsumerStatefulWidget {
   ConsumerState<Cluster> createState() => _ClusterState();
 }
 
-class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin{
+class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin {
 
 
   //Map<Pair<e1, https://cdn.intra.42.fr/cluster/image/36/bg_e1.svg>, Map<e2r9p9, ClusterItem>>
@@ -45,7 +45,6 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
     futureProvider = FutureProvider((ref) async{
       var data =  await ref.read(ClusterRepository().futureProvider).clusterItems();
       ref.read(dataProvider.notifier).state = data;
-
       //fetch all clusters students images
       var lstImg = List.generate(data.values.first.length, (index) =>  data.values.first.values.elementAt(index).cdnUri);
       ImageManager().fetchAllImage(lstImg, (images) {
@@ -54,7 +53,6 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
       return data;
     });
 
-    //todo: remove this
     ClusterRepository().cable((item, img, user){
       var data = ref.read(dataProvider);
       ref.read(clusterItemsState).add(item);
@@ -83,6 +81,7 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
+    // super.build(context);
     return ref.watch(futureProvider).when(
         data: (_){
           var data = ref.watch(dataProvider);
@@ -94,14 +93,14 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
           UserManger().updateUserFromCluster(data);
           return Scaffold(
             key: _key,
+            drawer: ClusterDrawer(clusterItemsState, stateClusterSize,map),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 ref.refresh(futureProvider);
               },
+              backgroundColor: Colors.black,
               child: const Icon(Icons.menu),
-              backgroundColor: Colors.white,
             ),
-            drawer: ClusterDrawer(clusterItemsState, stateClusterSize,map),
             appBar: AppBar(
               automaticallyImplyLeading: false,
               backgroundColor: ColorConstants.kStatusBarColor,
@@ -148,4 +147,7 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
         ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

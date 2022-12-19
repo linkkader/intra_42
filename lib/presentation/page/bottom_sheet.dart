@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/extensions/date_time_ext.dart';
+import 'package:intra_42/core/extensions/list.dart';
 import 'package:intra_42/core/extensions/widget_ext.dart';
 import 'package:intra_42/data/models/user.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
@@ -40,7 +41,7 @@ class _UserSheetState extends ConsumerState<UserBottomSheet> {
   void initState() {
     assert(widget.id != null || widget.login != null, "id or login must be not null");
     userProvider = FutureProvider((ref) async {
-      var user = widget.id != null ? LocaleStorage().getUser(widget.id!)! : LocaleStorage().getUserByLogin(widget.login!);
+      var user = widget.id != null ? LocaleStorage.getUser(widget.id!)! : LocaleStorage.getUserByLogin(widget.login!);
       user ??= await (widget.id != null ? UserRepository().user(widget.id!) : UserRepository().userByLogin(widget.login!));
       return user;
     });
@@ -51,6 +52,8 @@ class _UserSheetState extends ConsumerState<UserBottomSheet> {
   Widget build(BuildContext context) {
     return ref.watch(userProvider).when(
         data: (user){
+          List<CursusUser>? cursusUsers = user.cursusUsers != null ? List.from(user.cursusUsers!) : null;
+          cursusUsers?.sort((a, b) => a.blackholedAt != null ? -1 : 1);
           return Scaffold(
             backgroundColor: Colors.transparent,
             body: Column(
@@ -94,33 +97,30 @@ class _UserSheetState extends ConsumerState<UserBottomSheet> {
                                     user.location!,
                                     style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
                                   ),
-                                if (user.cursusUsers != null && user.cursusUsers!.isNotEmpty && user.cursusUsers!.first.blackholedAt != null)
+                                if (cursusUsers != null && user.cursusUsers!.isNotEmpty && cursusUsers.first.blackholedAt != null)
                                   Text(
-                                    user.cursusUsers!.first.blackholedAt!.formattedBlackHole,
+                                    cursusUsers.first.blackholedAt!.formattedBlackHole,
                                     style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
                                   ),
-                                if (user.cursusUsers != null && user.cursusUsers!.isNotEmpty && user.cursusUsers!.first.blackholedAt != null)
+                                if (cursusUsers != null && user.cursusUsers!.isNotEmpty && cursusUsers.first.blackholedAt != null)
                                   Text(
-                                    user.cursusUsers!.first.blackholedAt!.formattedBlackHole2,
+                                    cursusUsers.first.blackholedAt!.formattedBlackHole2,
                                     style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
                                   ),
-                                SizedBox(
-                                  height: 20,
-                                  child: ListView.builder(
-                                      itemCount: user.cursusUsers?.length ?? 0,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        if (user.cursusUsers?[index].cursus?.name == null) {
-                                          return const SizedBox.shrink();
-                                        }
-                                        return Text(
-                                          "${user.cursusUsers![index].cursus!.name!} : ${user.cursusUsers?[index].level ?? 0}",
-                                          style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
-                                        );
+                                ListView.builder(
+                                    itemCount: user.cursusUsers?.length ?? 0,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) {
+                                      if (user.cursusUsers?[index].cursus?.name == null) {
+                                        return const SizedBox.shrink();
                                       }
-                                  ),
-                                ),
+                                      return Text(
+                                        "${user.cursusUsers![index].cursus!.name!} : ${user.cursusUsers?[index].level?.toStringAsFixed(2) ?? 0}",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.ptSansNarrow(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),
+                                      );
+                                    }
+                                )
                               ],
                             )
                         ),

@@ -16,13 +16,13 @@ import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/main.dart';
 import 'package:isar/isar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/params/constants.dart';
 import '../models/user.dart';
 import '../models_izar/black_hole.dart';
 import '../models_izar/token_body_isar.dart';
 
 class LocaleStorage{
   static const debug = "LocaleStorage:";
-  late final SharedPreferences _prefs;
   bool _isInit = false;
   LocaleStorage._internal();
   static final instance = LocaleStorage._internal();
@@ -36,6 +36,22 @@ class LocaleStorage{
     assert(!_isInit, "LocalStorage already initialized");
     _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema, IntIsarSchema, StringIsarSchema, NotificationIsarSchema, ScaleTeamIsarSchema, User2IsarSchema, ProjectsUserIsarCollectionSchema],);
     _isInit = true;
+
+    try{
+      var endpoint = LocaleStorage.getString("endpoint");
+      var redirectUrl = LocaleStorage.getString("redirectUrl");
+      var clientId =  LocaleStorage.getString("clientId");
+      var clientSecret = LocaleStorage.getString("clientSecret");
+      if (endpoint != null && redirectUrl != null && clientId != null && clientSecret != null) {
+        kSignInEndpoint = endpoint;
+        kRedirectUrl = redirectUrl;
+        kClientId = clientId;
+        kSecret = clientSecret;
+        App.log.d("$debug Custom endpoint loaded");
+      }
+    }catch(_){
+      App.log.i("$debug error ${_.toString()}");
+    }
     App.log.i("Locale Storage initialized");
 
   }
@@ -129,9 +145,32 @@ class LocaleStorage{
   List<User> allUsers(){
     return _isar.userIsars.where().findAllSync().map((e) => e.toFreezed()).toList();
   }
-  User? getUser(int id) => _isar.userIsars.where().idEqualTo(id).findFirstSync()?.toFreezed();
-  User? getUserByLogin(String login) {
+  static User? getUser(int id) => _isar.userIsars.where().idEqualTo(id).findFirstSync()?.toFreezed();
+  static User? getUserByLogin(String login) {
     return _isar.userIsars.where().loginEqualTo(login).findFirstSync()?.toFreezed();
+  }
+
+
+  static Future setUser(User user){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.writeTxn(() async{
+      _isar.userIsars.put(UserIsar.fromFreezed(user));
+    }).catchError((error, stackTrace) {
+      App.log.e("$debug setUser error: $error $stackTrace");
+    });
+  }
+
+  static Future updateUserLocation(int id, String? location) async {
+    assert(instance._isInit, "LocalStorage not initialized");
+    var user = getUser(id);
+    if (user != null){
+      return _isar.writeTxn(() async{
+        _isar.userIsars.put(UserIsar.fromFreezed(user.copyWith(location: location)));
+        App.log.i("$debug updateUserLocation success");
+      }).catchError((error, stackTrace) {
+        App.log.e("$debug updateUserLocation error: $error $stackTrace");
+      });
+    }
   }
 
   ///update user cursus
@@ -236,6 +275,11 @@ class LocaleStorage{
     return _isar.stringIsars.where().keyEqualTo(s).findFirstSync()?.value;
   }
 
+  static Future<bool> deleteString(String s) {
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.stringIsars.where().keyEqualTo(s).deleteFirst();
+  }
+
   static Future setNotification(NotificationIsar value) async {
     assert(instance._isInit, "LocalStorage not initialized");
     await _isar.writeTxn(() async{
@@ -265,6 +309,7 @@ class LocaleStorage{
     assert(instance._isInit, "LocalStorage not initialized");
     return _isar.scaleTeamIsars.getSync(id)?.toFreezed();
   }
+
 
   static Future setUser2(User2 user){
     assert(instance._isInit, "LocalStorage not initialized");

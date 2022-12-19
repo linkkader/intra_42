@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:intra_42/core/extensions/string_ext.dart';
+import 'package:intra_42/main.dart';
 import '../../../core/params/constants.dart';
 
 class SignInPage extends StatefulWidget {
@@ -15,6 +16,13 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+
+  @override
+  void initState() {
+    App.log.i('endpoints: $kSignInEndpoint');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return InAppWebView(

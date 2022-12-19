@@ -16,7 +16,6 @@ class Img extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // precachePicture(NetworkPicture(SvgPicture.svgByteDecoderBuilder, ), context)
     if (url.endsWith("svg")) {
       return FutureBuilder(
         future: LocaleStorage().img(url),
@@ -48,24 +47,31 @@ class Img extends StatelessWidget {
   }
 
   static Widget defaultLogin(){
-    return ExtendedImage.asset("assets/images/default.png", fit: BoxFit.cover,);
+    return ExtendedImage.asset("assets/img/default.png", fit: BoxFit.cover,);
   }
 
-  static Future<User> getUser(String login) async {
-    var user = LocaleStorage().getUserByLogin(login);
+  static Future<String?> _getUser(String login) async {
+    var user = LocaleStorage.getUserByLogin(login);
+    if (user == null){
+      var user2 = LocaleStorage.getUser2ByLogin(login);
+      if (user2 != null){
+        return user2.img;
+      }
+    }
     user ??= await UserRepository().userByLogin(login);
-    return user;
+    return user.image?.versions?.medium;
   }
 
   static Widget login(String login) {
     return FutureBuilder(
-      future: getUser(login),
-      builder: (context, AsyncSnapshot<User> snapshot) {
-        var url = snapshot.data?.image?.versions?.medium;
+      future: _getUser(login),
+      builder: (context, AsyncSnapshot<String?> snapshot) {
+        var url = snapshot.data;
         if (url == null){
           return defaultLogin();
         }
         return Img(url);
       },);
   }
+
 }

@@ -51,16 +51,7 @@ class ImageManager {
 
   void decodeAll(Map<String, Uint8List> data, bool circle, Function(Map<String, ui.Image> images) onData) async {
     Map<String, ui.Image> images = {};
-    App.log.d("Start decoding ${data.length} images");
-    // data = {data.keys.first : data.values.first};
-    // if (circle){
-    //   data = await compute(cropImageMap, data);
-    // }
-    // App.log.d("decoding finished ${data.length} images");
-    // for (var key in data.keys) {
-    //   images[key] = await decodeImageFromList(data[key]!);
-    // }
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < data.length; ) {
       Map<String, Uint8List>  newData = {};
       for(var key in data.keys.skip(i).take(10)) {
         newData[key] = data[key]!;
@@ -76,6 +67,7 @@ class ImageManager {
     }
   }
 
+  //todo need protect to many isolate crash
   Future fetchAllImage(List<String?> values, Function(Map<String, ui.Image> images) onData, {bool circle = false}) async {
     List<String> urls = [];
     Map<String, ui.Image> images = {};

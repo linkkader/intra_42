@@ -36,7 +36,7 @@ abstract class By with _$By {
   const factory By({
     @JsonKey(name: 'parent_id')
     int? parentId,
-    List<List<int>>? points,
+    List<List<double>>? points,
   }) = _By;
 
   factory By.fromJson(Map<String, dynamic> json) => _$ByFromJson(json);

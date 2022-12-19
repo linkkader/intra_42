@@ -519,6 +519,76 @@ class S {
       args: [],
     );
   }
+
+  /// `required`
+  String get required_field {
+    return Intl.message(
+      'required',
+      name: 'required_field',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Endpoint`
+  String get endpoint {
+    return Intl.message(
+      'Endpoint',
+      name: 'endpoint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Client ID`
+  String get client_id {
+    return Intl.message(
+      'Client ID',
+      name: 'client_id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Secret`
+  String get secret {
+    return Intl.message(
+      'Secret',
+      name: 'secret',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Redirect URL`
+  String get redirect_url {
+    return Intl.message(
+      'Redirect URL',
+      name: 'redirect_url',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get reset {
+    return Intl.message(
+      'Reset',
+      name: 'reset',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

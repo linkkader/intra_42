@@ -77,7 +77,7 @@ class _Item extends StatelessWidget {
                       left: 0,
                       bottom: 0,
                       right: 0,
-                      child: Center(child: Text("${skill.level}/21", style: GoogleFonts.ptSans(fontSize: 16, color: App.colorScheme.secondary, fontWeight: FontWeight.bold), textAlign: TextAlign.center,)),
+                      child: Center(child: Text("${skill.level?.toStringAsFixed(2)}/21", style: GoogleFonts.ptSans(fontSize: 16, color: App.colorScheme.secondary, fontWeight: FontWeight.bold), textAlign: TextAlign.center,)),
                     )
                   ],
                 ),

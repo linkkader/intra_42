@@ -47,7 +47,8 @@ Map<String, dynamic> _$$_ProjectDataToJson(_$_ProjectData instance) =>
 _$_By _$$_ByFromJson(Map<String, dynamic> json) => _$_By(
       parentId: json['parent_id'] as int?,
       points: (json['points'] as List<dynamic>?)
-          ?.map((e) => (e as List<dynamic>).map((e) => e as int).toList())
+          ?.map((e) =>
+              (e as List<dynamic>).map((e) => (e as num).toDouble()).toList())
           .toList(),
     );
 

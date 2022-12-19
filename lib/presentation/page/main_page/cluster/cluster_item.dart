@@ -23,7 +23,7 @@ class ClusterItemScreen  extends ConsumerStatefulWidget {
   ConsumerState<ClusterItemScreen> createState() =>  _ClusterItemState();
 }
 
-class _ClusterItemState extends ConsumerState<ClusterItemScreen> {
+class _ClusterItemState extends ConsumerState<ClusterItemScreen> with AutomaticKeepAliveClientMixin {
   late FutureProvider<List<EmptyCluster>> futureProvider;
 
 
@@ -40,10 +40,9 @@ class _ClusterItemState extends ConsumerState<ClusterItemScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // super.build(context;
+    super.build(context);
     return ref.watch(futureProvider).when(
         data: (data){
-          // App.log.i("Loaded ${ref.read(widget.imagesProvider).length} images");
           return Container(
             width: double.infinity,
             height: double.infinity,

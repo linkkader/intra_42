@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'project_data.dart';
 
@@ -310,6 +310,7 @@ class _$_ProjectData implements _ProjectData {
   List<By>? get by {
     final value = _by;
     if (value == null) return null;
+    if (_by is EqualUnmodifiableListView) return _by;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -456,7 +457,7 @@ By _$ByFromJson(Map<String, dynamic> json) {
 mixin _$By {
   @JsonKey(name: 'parent_id')
   int? get parentId => throw _privateConstructorUsedError;
-  List<List<int>>? get points => throw _privateConstructorUsedError;
+  List<List<double>>? get points => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -469,7 +470,7 @@ abstract class $ByCopyWith<$Res> {
       _$ByCopyWithImpl<$Res, By>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'parent_id') int? parentId, List<List<int>>? points});
+      {@JsonKey(name: 'parent_id') int? parentId, List<List<double>>? points});
 }
 
 /// @nodoc
@@ -495,7 +496,7 @@ class _$ByCopyWithImpl<$Res, $Val extends By> implements $ByCopyWith<$Res> {
       points: freezed == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as List<List<int>>?,
+              as List<List<double>>?,
     ) as $Val);
   }
 }
@@ -507,7 +508,7 @@ abstract class _$$_ByCopyWith<$Res> implements $ByCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'parent_id') int? parentId, List<List<int>>? points});
+      {@JsonKey(name: 'parent_id') int? parentId, List<List<double>>? points});
 }
 
 /// @nodoc
@@ -530,7 +531,7 @@ class __$$_ByCopyWithImpl<$Res> extends _$ByCopyWithImpl<$Res, _$_By>
       points: freezed == points
           ? _value._points
           : points // ignore: cast_nullable_to_non_nullable
-              as List<List<int>>?,
+              as List<List<double>>?,
     ));
   }
 }
@@ -540,7 +541,7 @@ class __$$_ByCopyWithImpl<$Res> extends _$ByCopyWithImpl<$Res, _$_By>
 class _$_By implements _By {
   const _$_By(
       {@JsonKey(name: 'parent_id') this.parentId,
-      final List<List<int>>? points})
+      final List<List<double>>? points})
       : _points = points;
 
   factory _$_By.fromJson(Map<String, dynamic> json) => _$$_ByFromJson(json);
@@ -548,11 +549,12 @@ class _$_By implements _By {
   @override
   @JsonKey(name: 'parent_id')
   final int? parentId;
-  final List<List<int>>? _points;
+  final List<List<double>>? _points;
   @override
-  List<List<int>>? get points {
+  List<List<double>>? get points {
     final value = _points;
     if (value == null) return null;
+    if (_points is EqualUnmodifiableListView) return _points;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -594,7 +596,7 @@ class _$_By implements _By {
 abstract class _By implements By {
   const factory _By(
       {@JsonKey(name: 'parent_id') final int? parentId,
-      final List<List<int>>? points}) = _$_By;
+      final List<List<double>>? points}) = _$_By;
 
   factory _By.fromJson(Map<String, dynamic> json) = _$_By.fromJson;
 
@@ -602,7 +604,7 @@ abstract class _By implements By {
   @JsonKey(name: 'parent_id')
   int? get parentId;
   @override
-  List<List<int>>? get points;
+  List<List<double>>? get points;
   @override
   @JsonKey(ignore: true)
   _$$_ByCopyWith<_$_By> get copyWith => throw _privateConstructorUsedError;

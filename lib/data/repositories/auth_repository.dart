@@ -5,6 +5,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart' as inapp;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/core/extensions/string_ext.dart';
 import 'package:intra_42/core/params/constants.dart';
+import 'package:intra_42/core/utils/pair.dart';
 import 'package:intra_42/data/api/api.dart';
 import 'package:intra_42/data/api/client.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
@@ -143,5 +144,42 @@ class AuthRepository extends AuthInterface with ProviderInterface {
   }
 
 
-
+  @override
+  Future<Pair<bool, String>> checkApiAccess(String endpoint, String redirectUrl, String clientId, String clientSecret) async{
+    var dio = Dio();
+    dio.interceptors.add(LogInterceptor());
+    var newApi = Api(dio);
+    var fakeCode = "ufrjhfrjfrjrfjhfbffbejeff";
+    fakeCode = "6a59f94a07c20b3374a582c23d2b8f10a4ec377d93315eedaf2c6d538cec3d7a";
+    var body = {
+      'grant_type': "authorization_code",
+      'client_id': clientId,
+      'client_secret': clientSecret,
+      'code': "fakeCode",
+      'redirect_uri': redirectUrl,
+    };
+    App.log.i(body.toString());
+    try{
+      var a = await newApi.token(body);
+    }on DioError catch(_){
+      App.log.i(_.response?.headers["www-authenticate"]);
+      
+      if (_.response?.headers["www-authenticate"]?.toString().contains("he provided authorization grant is invalid, expired") ?? false){
+        LocaleStorage.setString("endpoint", endpoint);
+        LocaleStorage.setString("redirectUrl", redirectUrl);
+        LocaleStorage.setString("clientId", clientId);
+        LocaleStorage.setString("clientSecret", clientSecret);
+        kSignInEndpoint = endpoint;
+        kRedirectUrl = redirectUrl;
+        kClientId = clientId;
+        kSecret = clientSecret;
+        return const Pair(true, "saved");
+      }
+      return Pair(false, _.response?.headers["www-authenticate"]?.toString() ?? _.message);
+    }
+    return const Pair(false, "Something went wrong");
+  }
 }
+
+// Bearer realm="42 API", error="invalid_grant", error_description="The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."
+// Bearer realm="42 API", error="invalid_client", error_description="Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method."

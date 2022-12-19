@@ -46,6 +46,12 @@
   "language" : "Language",
   "search" : "Search",
   "github" : "Github",
-  "api_settings" : "API Settings"
-
+  "api_settings" : "API Settings",
+  "required_field" : "required",
+  "endpoint" : "Endpoint",
+  "client_id" : "Client ID",
+  "secret" : "Secret",
+  "redirect_url" : "Redirect URL",
+  "save" : "Save",
+  "reset" : "Reset"
 }

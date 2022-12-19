@@ -43,6 +43,12 @@ class ClusterRepository extends ClusterInterface with ProviderInterface {
   Future<Map<Pair<String, String>, Map<String, ClusterItem>>> clusterItems() {
     assert(_isInit, "AuthRepository not initialized");
     return _api.clusterItems().then((value) async {
+      for (var element in value) {
+        var student = LocaleStorage.getUserByLogin(element.login ?? "");
+        if (student != null) {
+          LocaleStorage.updateUserLocation(student.id!, element.host);
+        }
+      }
       List<Pair<String, String>> lst = [];
       var doc = parse(await _api.clusters());
       for(var element in doc.querySelectorAll('div.map-container')){
@@ -79,8 +85,8 @@ class ClusterRepository extends ClusterInterface with ProviderInterface {
 
   ///listen 42 cable websocket and update cluster
   void cable(Function(ClusterItem item, ui.Image? img, User user) onNew, ) {
-    var user = LocaleStorage().getMe;
-    var d = {"command":"subscribe","identifier":"{\"channel\":\"LocationChannel\",\"user_id\":${user?.id}}"};
+    var me = LocaleStorage().getMe;
+    var d = {"command":"subscribe","identifier":"{\"channel\":\"LocationChannel\",\"user_id\":${me?.id}}"};
     WebSocketManager().addListener(
         type: "LocationChannel",
         data: json.encode(d),
@@ -91,21 +97,24 @@ class ClusterRepository extends ClusterInterface with ProviderInterface {
               beginAt: location["begin_at"],
               campusId: location["campus_id"],
               cdnUri: location["image"],
-              // cdnUri: "https://cdn.intra.42.fr/users/31614ff60a430545303830a4bec37360/small_acouliba.jpg",
               host: location["host"],
               endAt: location["end_at"],
               login: location["login"],
               image: location["image"]
           );
-
-          if (clusterItem.campusId == user?.campus?.first.id) {
+          //if (user?.campus?.any((element) => element.id == clusterItem?.campusId && element.id != null) ?? false) {
+          if (clusterItem.campusId == me?.campus?.first.id) {
             App.log.d("Cluster: $message");
             if (clusterItem.endAt != null){
-              onNew(clusterItem, null, user!);
+              var student = LocaleStorage.getUser(location["user_id"] ?? "");
+              if (student != null){
+                LocaleStorage.updateUserLocation(student.id ?? -1, location);
+              }
+              onNew(clusterItem, null, me!);
               return;
             }
             else if (clusterItem.cdnUri == null && location["user_id"] != null) {
-              var u = LocaleStorage().getUser(location["user_id"]!);
+              var u = LocaleStorage.getUser(location["user_id"]!);
               u ??= await UserRepository().user(location["user_id"]!);
               clusterItem = clusterItem.copyWith(
                   cdnUri: u.image?.versions?.medium
@@ -114,13 +123,15 @@ class ClusterRepository extends ClusterInterface with ProviderInterface {
             ImageManager().fetchAllImage([clusterItem.cdnUri], (images) {
               if (images.length > 1)
               {
-                onNew(clusterItem!, images.values.elementAt(1), user!);
+                var student = LocaleStorage.getUser(location["user_id"] ?? "");
+                if (student != null){
+                  LocaleStorage.updateUserLocation(student.id ?? -1, location);
+                }
+                onNew(clusterItem!, images.values.elementAt(1), me!);
               }
             });
           }
-
-          ///when user logout
-
+          ///todo when user logout
           else{
 
           }

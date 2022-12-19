@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'scale_team.dart';
 
@@ -106,17 +106,17 @@ class _$ScaleTeamCopyWithImpl<$Res, $Val extends ScaleTeam>
   $Res call({
     Object? id = freezed,
     Object? scaleId = freezed,
-    Object? comment = null,
+    Object? comment = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? feedback = null,
-    Object? finalMark = null,
+    Object? feedback = freezed,
+    Object? finalMark = freezed,
     Object? flag = freezed,
     Object? beginAt = freezed,
-    Object? correcteds = null,
+    Object? correcteds = freezed,
     Object? corrector = freezed,
     Object? truant = freezed,
-    Object? filledAt = null,
+    Object? filledAt = freezed,
     Object? questionsWithAnswers = freezed,
     Object? scale = freezed,
     Object? team = freezed,
@@ -131,7 +131,7 @@ class _$ScaleTeamCopyWithImpl<$Res, $Val extends ScaleTeam>
           ? _value.scaleId
           : scaleId // ignore: cast_nullable_to_non_nullable
               as int?,
-      comment: null == comment
+      comment: freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -143,11 +143,11 @@ class _$ScaleTeamCopyWithImpl<$Res, $Val extends ScaleTeam>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      feedback: null == feedback
+      feedback: freezed == feedback
           ? _value.feedback
           : feedback // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      finalMark: null == finalMark
+      finalMark: freezed == finalMark
           ? _value.finalMark
           : finalMark // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -159,7 +159,7 @@ class _$ScaleTeamCopyWithImpl<$Res, $Val extends ScaleTeam>
           ? _value.beginAt
           : beginAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      correcteds: null == correcteds
+      correcteds: freezed == correcteds
           ? _value.correcteds
           : correcteds // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -171,7 +171,7 @@ class _$ScaleTeamCopyWithImpl<$Res, $Val extends ScaleTeam>
           ? _value.truant
           : truant // ignore: cast_nullable_to_non_nullable
               as Truant?,
-      filledAt: null == filledAt
+      filledAt: freezed == filledAt
           ? _value.filledAt
           : filledAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -312,17 +312,17 @@ class __$$_ScaleCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? scaleId = freezed,
-    Object? comment = null,
+    Object? comment = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? feedback = null,
-    Object? finalMark = null,
+    Object? feedback = freezed,
+    Object? finalMark = freezed,
     Object? flag = freezed,
     Object? beginAt = freezed,
-    Object? correcteds = null,
+    Object? correcteds = freezed,
     Object? corrector = freezed,
     Object? truant = freezed,
-    Object? filledAt = null,
+    Object? filledAt = freezed,
     Object? questionsWithAnswers = freezed,
     Object? scale = freezed,
     Object? team = freezed,
@@ -337,7 +337,7 @@ class __$$_ScaleCopyWithImpl<$Res>
           ? _value.scaleId
           : scaleId // ignore: cast_nullable_to_non_nullable
               as int?,
-      comment: null == comment
+      comment: freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -349,11 +349,11 @@ class __$$_ScaleCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      feedback: null == feedback
+      feedback: freezed == feedback
           ? _value.feedback
           : feedback // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      finalMark: null == finalMark
+      finalMark: freezed == finalMark
           ? _value.finalMark
           : finalMark // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -365,7 +365,7 @@ class __$$_ScaleCopyWithImpl<$Res>
           ? _value.beginAt
           : beginAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      correcteds: null == correcteds
+      correcteds: freezed == correcteds
           ? _value.correcteds
           : correcteds // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -377,7 +377,7 @@ class __$$_ScaleCopyWithImpl<$Res>
           ? _value.truant
           : truant // ignore: cast_nullable_to_non_nullable
               as Truant?,
-      filledAt: null == filledAt
+      filledAt: freezed == filledAt
           ? _value.filledAt
           : filledAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -475,6 +475,8 @@ class _$_Scale implements _Scale {
   List<dynamic>? get questionsWithAnswers {
     final value = _questionsWithAnswers;
     if (value == null) return null;
+    if (_questionsWithAnswers is EqualUnmodifiableListView)
+      return _questionsWithAnswers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -488,6 +490,7 @@ class _$_Scale implements _Scale {
   List<Feedback>? get feedbacks {
     final value = _feedbacks;
     if (value == null) return null;
+    if (_feedbacks is EqualUnmodifiableListView) return _feedbacks;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1668,6 +1671,7 @@ class _$_ScaleClass implements _ScaleClass {
   List<Language>? get languages {
     final value = _languages;
     if (value == null) return null;
+    if (_languages is EqualUnmodifiableListView) return _languages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1677,6 +1681,7 @@ class _$_ScaleClass implements _ScaleClass {
   List<Flag>? get flags {
     final value = _flags;
     if (value == null) return null;
+    if (_flags is EqualUnmodifiableListView) return _flags;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -2131,15 +2136,15 @@ class _$TeamCopyWithImpl<$Res, $Val extends Team>
     Object? id = freezed,
     Object? name = freezed,
     Object? url = freezed,
-    Object? finalMark = null,
+    Object? finalMark = freezed,
     Object? projectId = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? status = freezed,
-    Object? terminatingAt = null,
+    Object? terminatingAt = freezed,
     Object? users = freezed,
     Object? locked = freezed,
-    Object? validated = null,
+    Object? validated = freezed,
     Object? closed = freezed,
     Object? repoUrl = freezed,
     Object? repoUuid = freezed,
@@ -2161,7 +2166,7 @@ class _$TeamCopyWithImpl<$Res, $Val extends Team>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String?,
-      finalMark: null == finalMark
+      finalMark: freezed == finalMark
           ? _value.finalMark
           : finalMark // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -2181,7 +2186,7 @@ class _$TeamCopyWithImpl<$Res, $Val extends Team>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      terminatingAt: null == terminatingAt
+      terminatingAt: freezed == terminatingAt
           ? _value.terminatingAt
           : terminatingAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -2193,7 +2198,7 @@ class _$TeamCopyWithImpl<$Res, $Val extends Team>
           ? _value.locked
           : locked // ignore: cast_nullable_to_non_nullable
               as bool?,
-      validated: null == validated
+      validated: freezed == validated
           ? _value.validated
           : validated // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -2269,15 +2274,15 @@ class __$$_TeamCopyWithImpl<$Res> extends _$TeamCopyWithImpl<$Res, _$_Team>
     Object? id = freezed,
     Object? name = freezed,
     Object? url = freezed,
-    Object? finalMark = null,
+    Object? finalMark = freezed,
     Object? projectId = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? status = freezed,
-    Object? terminatingAt = null,
+    Object? terminatingAt = freezed,
     Object? users = freezed,
     Object? locked = freezed,
-    Object? validated = null,
+    Object? validated = freezed,
     Object? closed = freezed,
     Object? repoUrl = freezed,
     Object? repoUuid = freezed,
@@ -2299,7 +2304,7 @@ class __$$_TeamCopyWithImpl<$Res> extends _$TeamCopyWithImpl<$Res, _$_Team>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String?,
-      finalMark: null == finalMark
+      finalMark: freezed == finalMark
           ? _value.finalMark
           : finalMark // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -2319,7 +2324,7 @@ class __$$_TeamCopyWithImpl<$Res> extends _$TeamCopyWithImpl<$Res, _$_Team>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      terminatingAt: null == terminatingAt
+      terminatingAt: freezed == terminatingAt
           ? _value.terminatingAt
           : terminatingAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -2331,7 +2336,7 @@ class __$$_TeamCopyWithImpl<$Res> extends _$TeamCopyWithImpl<$Res, _$_Team>
           ? _value.locked
           : locked // ignore: cast_nullable_to_non_nullable
               as bool?,
-      validated: null == validated
+      validated: freezed == validated
           ? _value.validated
           : validated // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -2422,6 +2427,7 @@ class _$_Team implements _Team {
   List<ScaleUser>? get users {
     final value = _users;
     if (value == null) return null;
+    if (_users is EqualUnmodifiableListView) return _users;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }

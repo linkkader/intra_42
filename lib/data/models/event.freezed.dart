@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'event.dart';
 
@@ -393,6 +393,7 @@ class _$_Event implements _Event {
   List<int>? get campusIds {
     final value = _campusIds;
     if (value == null) return null;
+    if (_campusIds is EqualUnmodifiableListView) return _campusIds;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -403,6 +404,7 @@ class _$_Event implements _Event {
   List<int>? get cursusIds {
     final value = _cursusIds;
     if (value == null) return null;
+    if (_cursusIds is EqualUnmodifiableListView) return _cursusIds;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -423,6 +425,7 @@ class _$_Event implements _Event {
   List<Theme>? get themes {
     final value = _themes;
     if (value == null) return null;
+    if (_themes is EqualUnmodifiableListView) return _themes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }

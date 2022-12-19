@@ -5,18 +5,18 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/extensions/widget_ext.dart';
+import 'package:intra_42/core/params/app_icons_svg.dart';
 import 'package:intra_42/core/params/colors.dart';
-import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/locale_storage/storage_stream.dart';
 import 'package:intra_42/data/repositories/auth_repository.dart';
-import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/main_page/black_hole/black_hole.dart';
 import 'package:intra_42/presentation/page/main_page/main_page.dart';
+import 'package:intra_42/presentation/page/settings/api_settings.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 import 'auth/sign_in_page_web.dart';
 
 class StartPage extends ConsumerStatefulWidget {
@@ -49,47 +49,16 @@ class _StartPageState extends ConsumerState<StartPage> {
       body: ref.watch(futureProviderAuth).when(
           data: (data){
             if (data == true) {
-
               return const MainPage();
             }
             else {
               return Scaffold(
-                  floatingActionButton: FloatingActionButton(
-                    onPressed: () async {
-                      AuthRepository().refreshToken();
-                    },
-                  ),
                   body: Column(
                     children: [
-                      const Spacer(),
-                      Row(
-                        children: [
-                          MaterialButton(
-                            onPressed: (){
-                              launchUrlString("https://github.com/linkkader/Intra_42");
-                            },
-                            child: Text(
-                              App.s.api_settings,
-                              style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ),
-                          const Spacer(),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Spacer(),
-                          MaterialButton(
-                            onPressed: (){
-                              launchUrlString("https://github.com/linkkader/Intra_42");
-                            },
-                            child: Text(
-                              App.s.github,
-                              style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                          ),
-                        ],
-                      ),
+                      Expanded(child: Padding(
+                        padding: const EdgeInsets.all(70.0),
+                        child: SvgPicture.asset(AppSvg.logo, height: double.infinity, width: double.infinity,),
+                      )),
                       Row(
                         children: [
                           MaterialButton(
@@ -119,6 +88,34 @@ class _StartPageState extends ConsumerState<StartPage> {
                         ],
                       ),
                       Row(
+                        children: [                          const Spacer(),
+                          const Spacer(),
+                          MaterialButton(
+                            onPressed: (){
+                              const ApiSettings().navigate(context: context);
+                            },
+                            child: Text(
+                              App.s.api_settings,
+                              style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Spacer(),
+                          MaterialButton(
+                            onPressed: (){
+                              launchUrlString("https://github.com/linkkader/Intra_42");
+                            },
+                            child: Text(
+                              App.s.github,
+                              style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
                         children: [
                           const Spacer(),
                           MaterialButton(
@@ -132,7 +129,6 @@ class _StartPageState extends ConsumerState<StartPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 100,),
                     ],
                   )
               );

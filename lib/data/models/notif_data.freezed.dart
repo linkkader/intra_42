@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'notif_data.dart';
 
@@ -85,12 +85,12 @@ class _$NotifDataCopyWithImpl<$Res, $Val extends NotifData>
     Object? title = freezed,
     Object? text = freezed,
     Object? kind = freezed,
-    Object? image = null,
+    Object? image = freezed,
     Object? expireAt = freezed,
     Object? link = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? concern = null,
+    Object? concern = freezed,
     Object? notificationId = freezed,
     Object? userId = freezed,
     Object? read = freezed,
@@ -116,7 +116,7 @@ class _$NotifDataCopyWithImpl<$Res, $Val extends NotifData>
           ? _value.kind
           : kind // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -136,7 +136,7 @@ class _$NotifDataCopyWithImpl<$Res, $Val extends NotifData>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      concern: null == concern
+      concern: freezed == concern
           ? _value.concern
           : concern // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -196,12 +196,12 @@ class __$$_NotifDataCopyWithImpl<$Res>
     Object? title = freezed,
     Object? text = freezed,
     Object? kind = freezed,
-    Object? image = null,
+    Object? image = freezed,
     Object? expireAt = freezed,
     Object? link = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? concern = null,
+    Object? concern = freezed,
     Object? notificationId = freezed,
     Object? userId = freezed,
     Object? read = freezed,
@@ -227,7 +227,7 @@ class __$$_NotifDataCopyWithImpl<$Res>
           ? _value.kind
           : kind // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -247,7 +247,7 @@ class __$$_NotifDataCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      concern: null == concern
+      concern: freezed == concern
           ? _value.concern
           : concern // ignore: cast_nullable_to_non_nullable
               as dynamic,

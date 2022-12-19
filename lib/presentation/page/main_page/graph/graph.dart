@@ -42,6 +42,7 @@ class _GraphState extends ConsumerState<Graph> with SingleTickerProviderStateMix
           ref.read(projectsDataState.notifier).state = ref.read(projectsDataState).copy;
         });
       }
+      App.log.d("Graph: init state ${widget.user.cursusUsers!.length}");
       _tabController ??= TabController(length: widget.user.cursusUsers!.length, vsync: this);
     }
 
@@ -138,7 +139,7 @@ class _GraphState extends ConsumerState<Graph> with SingleTickerProviderStateMix
                     );
                   })
               ),
-              Positioned(right: 0, top: 0, child: _cursusSelect(LocaleStorage().getMe!),),
+              Positioned(right: 0, top: 0, child: _cursusSelect(widget.user),),
             ],
           ),
         ));
