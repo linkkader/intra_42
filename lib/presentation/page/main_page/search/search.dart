@@ -40,6 +40,7 @@ class _SearchState extends ConsumerState<Search> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        automaticallyImplyLeading: false,
         title: TextField(
           style: GoogleFonts.ptSans(
             color: App.colorScheme.secondary,

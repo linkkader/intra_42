@@ -1,6 +1,7 @@
 // Created by linkkader on 18/11/2022
 
 import 'dart:async';
+import 'dart:isolate';
 import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as image;
@@ -14,11 +15,54 @@ import '../../core/utils/pair.dart';
 import '../../core/utils/task_runner.dart';
 
 class ImageManager {
+  int computeCount = 0;
+  final Map<int, Function(Uint8List)> _callbacks = {};
+  late final SendPort _sendPort;
+  bool _isInit = false;
   static final ImageManager _instance = ImageManager._();
   ImageManager._();
 
   factory ImageManager() {
     return _instance;
+  }
+
+
+  Future init() async {
+    assert(!_isInit, "ImageManager is already initialized");
+    await _createIsolate();
+    _isInit = true;
+  }
+
+  Future _createIsolate() async{
+    var receivePort = ReceivePort();
+    Completer<SendPort> completer = Completer();
+    await Isolate.spawn((SendPort sendPort) async {
+      ReceivePort receivePort = ReceivePort();
+      sendPort.send(receivePort.sendPort);
+      receivePort.listen((message) async {
+        var data = message as Pair<int, Uint8List>;
+        var newData = await cropImage(data.second);
+        sendPort.send(Pair(data.first, newData));
+      });
+    }, receivePort.sendPort);
+    receivePort.listen((message) {
+      if (message is Pair<int, Uint8List>) {
+        _callbacks[message.first]!(message.second);
+        _callbacks.remove(message.first);
+      }
+      if (message is SendPort) {
+        completer.complete(message);
+      }
+    });
+    _sendPort = await completer.future;
+  }
+
+  Future<Uint8List> decodeIsolate(Uint8List data) async {
+    var completer = Completer<Uint8List>();
+    var id = UniqueKey().hashCode;
+    _callbacks[id] = (Uint8List data) => completer.complete(data);
+    _sendPort.send(Pair(id,  data));
+    return completer.future;
   }
 
   Future<Uint8List> cropImage(Uint8List data) async {
@@ -32,7 +76,7 @@ class ImageManager {
     var runner = TaskRunner<String>(
       (item, runner) async{
         try{
-          result[item] = await cropImage(data[item]!);
+          result[item] = await decodeIsolate(data[item]!);
         }catch(_){}
         if(runner.isLast) completer.complete(result);
       },maxConcurrentTasks: data.length
@@ -45,7 +89,7 @@ class ImageManager {
     if (circle == false){
       return await decodeImageFromList(img);
     }
-    var decode = await isolate.compute(cropImage, img);
+    var decode = await decodeIsolate(img);
     return decodeImageFromList(decode);
   }
 
@@ -57,7 +101,7 @@ class ImageManager {
         newData[key] = data[key]!;
       }
       if (circle){
-        newData = await compute(cropImageMap, newData);
+        newData = await cropImageMap(newData);
       }
       for (var key in newData.keys) {
         images[key] = await decodeImageFromList(newData[key]!);
@@ -101,7 +145,6 @@ class ImageManager {
     });
     runner.addAll(urls);
   }
-
 
   //todo: add retry
   // Future fetchAllImage(List<String?> values, Function(Map<String, ui.Image> images) onData, {bool circle = false}) async {

@@ -8,6 +8,8 @@ import 'package:intra_42/data/repositories/auth_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/settings/open_source.dart';
 
+import '../../../start_page.dart';
+
 class MyDrawer extends StatelessWidget {
   static final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   const MyDrawer({Key? key}) : super(key: key);
@@ -45,7 +47,9 @@ class MyDrawer extends StatelessWidget {
                 title: Text(App.s.logout, style: GoogleFonts.openSans(fontWeight: FontWeight.bold, color: App.colorScheme.secondary),),
                 onTap: () async {
                   App.log.i("Logout");
-                  await AuthRepository().signOut();
+                  if (await AuthRepository().signOut() == true){
+                    const StartPage().navigate(context: App.context, clearStack: true);
+                  }
                 },
               ),
             ],

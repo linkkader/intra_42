@@ -13,10 +13,13 @@ import 'data/manager/notification_manager.dart';
 import 'generated/l10n.dart';
 import 'l10n/l10n.dart';
 
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  //todo: properly check this
   await LocaleStorage().init();
-  Client().initApi();
+  //todo: properly check this
+  await Client().initApi();
   NotificationManager.start();
   runApp(const App());
 }
@@ -26,23 +29,15 @@ class NavigationService {
 }
 
 class App extends StatelessWidget {
-  static StateProvider<bool> restartState = StateProvider((ref) => false);
-  static late WidgetRef ref;
 
   const App({Key? key}) : super(key: key);
 
-
-  static void restart(){
-    ref.read(restartState.notifier).state = !ref.read(restartState);
-  }
 
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
       child: Consumer(
         builder: (context, ref, child) {
-          App.ref = ref;
-          ref.watch(restartState);
           return MaterialApp(
               themeMode: ThemeMode.light,
               navigatorKey: NavigationService.navigatorKey,
@@ -80,7 +75,7 @@ class App extends StatelessWidget {
 
   static ColorScheme get colorScheme => theme.colorScheme;
 
-  static S get s => S.of(context);
+  static S get s =>  NavigationService.navigatorKey.currentContext != null ? S.of(context) : S.current;
 
   static Logger get log => Logger();
 

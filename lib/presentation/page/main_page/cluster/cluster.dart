@@ -11,6 +11,7 @@ import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/main_page/cluster/drawer.dart';
 import 'dart:ui' as ui;
 import '../../../../core/utils/pair.dart';
+import '../../../../data/api/web_socket/web_manager.dart';
 import '../../../../data/manager/image_manager.dart';
 import '../../../../data/models/cluster_item.dart';
 import 'cluster_item.dart';
@@ -24,9 +25,7 @@ class Cluster extends ConsumerStatefulWidget {
   ConsumerState<Cluster> createState() => _ClusterState();
 }
 
-class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin {
-
-
+class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   //Map<Pair<e1, https://cdn.intra.42.fr/cluster/image/36/bg_e1.svg>, Map<e2r9p9, ClusterItem>>
   late StateProvider<Map<Pair<String, String>, Map<String, ClusterItem>>> dataProvider = StateProvider((ref) => {});
   late FutureProvider<Map<Pair<String, String>, Map<String, ClusterItem>>> futureProvider ;
@@ -37,22 +36,7 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
   TabController? _tabController;
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
 
-
-  @override
-  void initState() {
-    super.initState();
-
-    futureProvider = FutureProvider((ref) async{
-      var data =  await ref.read(ClusterRepository().futureProvider).clusterItems();
-      ref.read(dataProvider.notifier).state = data;
-      //fetch all clusters students images
-      var lstImg = List.generate(data.values.first.length, (index) =>  data.values.first.values.elementAt(index).cdnUri);
-      ImageManager().fetchAllImage(lstImg, (images) {
-        ref.read(imagesProvider.notifier).state = images;
-      });
-      return data;
-    });
-
+  void connectCable(){
     ClusterRepository().cable((item, img, user){
       var data = ref.read(dataProvider);
       ref.read(clusterItemsState).add(item);
@@ -76,12 +60,28 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
       ref.read(imagesProvider.notifier).state = all;
       ref.read(dataProvider.notifier).state = data.copy;
     });
+  }
 
+  @override
+  void initState() {
+
+    futureProvider = FutureProvider((ref) async{
+      var data =  await ref.read(ClusterRepository().futureProvider).clusterItems();
+      ref.read(dataProvider.notifier).state = data;
+      var lstImg = List.generate(data.values.first.length, (index) =>  data.values.first.values.elementAt(index).cdnUri);
+      ImageManager().fetchAllImage(lstImg, (images) {
+        ref.read(imagesProvider.notifier).state = images;
+      });
+      return data;
+    });
+    connectCable();
+
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // super.build(context);
+    super.build(context);
     return ref.watch(futureProvider).when(
         data: (_){
           var data = ref.watch(dataProvider);
@@ -96,13 +96,16 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
             drawer: ClusterDrawer(clusterItemsState, stateClusterSize,map),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
+                WebSocketManager().restart();
+                connectCable();
                 ref.refresh(futureProvider);
               },
-              backgroundColor: Colors.black,
-              child: const Icon(Icons.menu),
+              backgroundColor: App.colorScheme.background,
+              child: Icon(Icons.refresh,color: App.colorScheme.secondary,),
             ),
             appBar: AppBar(
               automaticallyImplyLeading: false,
+              elevation: 0,
               backgroundColor: ColorConstants.kStatusBarColor,
               title: TabBar(
                 controller: _tabController,

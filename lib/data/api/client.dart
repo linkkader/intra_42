@@ -3,15 +3,18 @@
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:intra_42/core/extensions/string_ext.dart';
+import 'package:intra_42/data/api/client_interceptor/limiter_interceptor.dart';
 import 'package:intra_42/data/api/web_socket/web_manager.dart';
 import 'package:intra_42/data/repositories/notification_repository.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
 import '../../core/params/constants.dart';
 import '../manager/black_hole_manager.dart';
+import '../manager/image_manager.dart';
 import '../repositories/black_hole_repository.dart';
 import '../repositories/cluster_repository.dart';
 import '../repositories/project_repository.dart';
@@ -27,9 +30,9 @@ class Client {
 
   factory Client() => _instance;
 
-  void initApi()
-  {
-    _dio.interceptors.add(log.LogInterceptor());
+  Future<void> initApi() async {
+    if (kDebugMode)_dio.interceptors.add(log.LogInterceptor());
+    _dio.interceptors.add(LimiterInterceptor());
     if (LocaleStorage().tokenBody != null) {
       var value = LocaleStorage().tokenBody!;
       Client.addHeader('Authorization', '${value.tokenType?.capitalize()} ${value.accessToken}');
@@ -46,7 +49,7 @@ class Client {
 
     BlackHoleManager().init();
     WebSocketManager().start();
-
+    await ImageManager().init();
 
   }
 

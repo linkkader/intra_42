@@ -69,7 +69,7 @@ class LocaleStorage{
     });
   }
 
-  void updateMe(User value) async{
+  Future updateMe(User value) async{
     App.log.i("$debug updateMe: $value");
     await _isar.writeTxn(() async{
       var v = UserIsar.fromFreezed(value);

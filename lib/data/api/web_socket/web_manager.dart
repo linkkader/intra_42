@@ -23,10 +23,8 @@ class WebSocketManager {
   void start() {
     var headers = <String, String>{};
     Client().headers().forEach((key, value) => headers[key] = value.toString());
-    // headers["Cookie"] = "user.id=OTUyNjQ%3D--9e23b2689fa01ab8bb5efaeef824f109971864fa";
     headers["Origin"] = " https://profile.intra.42.fr";
     headers["Upgrade"] = "websocket";
-    // headers = {};
     _channel = IOWebSocketChannel.connect('wss://profile.intra.42.fr/cable', headers: headers);
     _subscription = _channel.stream.listen((data) {
       var event = json.decode(data);
@@ -50,17 +48,10 @@ class WebSocketManager {
       _connected = false;
       App.log.e("WebSocket error: $error");
     });
-    Timer.periodic(const Duration(seconds: 30), (timer) {
-      App.log.i("WebSocket ping");
-      if(!_connected) {
-        App.log.i("WebSocket reconnecting");
-        start();
-        timer.cancel();
-      }
-    });
   }
 
   void stop() {
+    _listeners.clear();
     _channel.sink.close();
     _subscription?.cancel();
   }

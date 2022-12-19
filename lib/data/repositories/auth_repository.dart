@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart' as inapp;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/core/extensions/string_ext.dart';
+import 'package:intra_42/core/extensions/widget_ext.dart';
 import 'package:intra_42/core/params/constants.dart';
 import 'package:intra_42/core/utils/pair.dart';
 import 'package:intra_42/data/api/api.dart';
@@ -11,6 +12,7 @@ import 'package:intra_42/data/api/client.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
+import 'package:intra_42/presentation/page/start_page.dart';
 import '../../domain/auth_interface/auth_interface.dart';
 import '../../domain/util_interface/provider_interface.dart';
 
@@ -54,17 +56,18 @@ class AuthRepository extends AuthInterface with ProviderInterface {
     }
   }
 
-
+  //clear webview cache and cookies and all tokens
   @override
   Future signOut() async {
     App.log.i("Logged start");
     inapp.CookieManager cookieManager = inapp.CookieManager.instance();
     await cookieManager.deleteAllCookies();
     await LocaleStorage.clearTokenIsar();
-    App.restart();
     App.log.i("Logged out successfully");
+    return true;
   }
 
+  //save user cookies
   @override
   Future<bool> updateCookies() async {
     inapp.CookieManager cookieManager = inapp.CookieManager.instance();
@@ -84,17 +87,29 @@ class AuthRepository extends AuthInterface with ProviderInterface {
     return true;
   }
 
+  //check if user is logged in
   @override
   Future<bool> isUserLoggedIn() async {
     assert(_isInit, "AuthRepository not initialized");
     App.log.i("isUserLoggedIn");
     if (LocaleStorage().tokenBody == null) return false;
+    var allUsers = LocaleStorage().allUsers();
+    var me =  LocaleStorage().getMe;
+    for (var element in allUsers) {
+      if (element.id == me?.id) {
+        await LocaleStorage().updateMe(element.copyWith(location: null));
+      }
+      else{
+        await LocaleStorage.setUser(element.copyWith(location: null));
+      }
+    }
     return UserRepository().me().then((value) => true).catchError((e) => false);
   }
 
   @override
   Provider get provider => _pr ??= Provider((ref) => this);
-  
+
+
   Map<String, String> _tokenBody(String code, {authorizationCode = "authorization_code"}) {
     return {
       'grant_type': authorizationCode,
@@ -105,11 +120,10 @@ class AuthRepository extends AuthInterface with ProviderInterface {
       'redirect_uri': kRedirectUrl,
     };
   }
-  
+
+  //get token from 42 api
   @override
   Future<bool> validateCode(String code) async {
-    // if (_neverDuplicate) return Future.value(false);
-    // _neverDuplicate = true;
     Client.clearHeaders();
     return _api.token(_tokenBody(code)).then((value) async {
           _neverDuplicate = false;
@@ -125,6 +139,7 @@ class AuthRepository extends AuthInterface with ProviderInterface {
     });
   }
 
+  //refresh token
   Future<bool> refreshToken() {
     if (_neverDuplicate) return Future.value(false);
     var body = LocaleStorage().tokenBody;
