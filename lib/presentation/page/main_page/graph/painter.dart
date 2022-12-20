@@ -99,6 +99,11 @@ class GraphPainter extends CustomPainter {
         rect, paint,
         onTapDown: (_){
           ref.read(notifier.notifier).state = project;
+          showModalBottomSheet(
+              context: context,
+              backgroundColor: Colors.transparent,
+              builder: (_) => BottomSheetProject(project, user,)
+          );
           // notif.update(project, glowColor!);
         }
     );

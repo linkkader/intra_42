@@ -1,5 +1,4 @@
 
-import 'package:extended_tabs/extended_tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -116,6 +115,9 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
                 indicatorColor: Colors.white,
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.white,
+                onTap: (index) {
+                  ref.read(currentTab.notifier).state = index;
+                },
                 tabs: List.generate(data.length, (index) => Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(data.keys.elementAt(index).first, style: GoogleFonts.ptSans(fontWeight: FontWeight.bold,))),
@@ -131,17 +133,19 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
                 )
               ],
             ),
-            body: ExtendedTabBarView(
-              controller: _tabController,
-              cacheExtent: 10,
-              physics: const NeverScrollableScrollPhysics(),
-              children: List.generate(data.length, (index) {
-                return ClusterItemScreen(data.keys.elementAt(index).second, data.values.elementAt(index), imagesProvider,
-                  onClusterSize: (_){
-                    ref.read(stateClusterSize)[data.keys.elementAt(index).first] = _;
-                    ref.read(stateClusterSize.notifier).state = ref.read(stateClusterSize).copy;
-                  },);
-              },),
+            body: Consumer(
+              builder: (context, ref, child) {
+                return IndexedStack(
+                  index: ref.watch(currentTab),
+                  children: List.generate(data.length, (index) {
+                    return ClusterItemScreen(data.keys.elementAt(index).second, data.values.elementAt(index), imagesProvider,
+                      onClusterSize: (_){
+                        ref.read(stateClusterSize)[data.keys.elementAt(index).first] = _;
+                        ref.read(stateClusterSize.notifier).state = ref.read(stateClusterSize).copy;
+                      },);
+                  },),
+                );
+              },
             ),
           );
         },

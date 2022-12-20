@@ -51,8 +51,8 @@ class UserRepository extends UserInterface with ProviderInterface {
   @override
   Future<User> me() {
     assert(_isInit, "UserRepository not initialized");
-    return _api.me().then((value) {
-      LocaleStorage().updateMe(value);
+    return _api.me().then((value) async {
+      await LocaleStorage().updateMe(value);
       return value;
     });
   }

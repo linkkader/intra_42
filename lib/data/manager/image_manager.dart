@@ -40,14 +40,17 @@ class ImageManager {
     await Isolate.spawn((SendPort sendPort) async {
       ReceivePort receivePort = ReceivePort();
       sendPort.send(receivePort.sendPort);
-      receivePort.listen((message) async {
+      TaskRunner<Pair<int, Uint8List>> taskRunner = TaskRunner((data, runner) async {
         try{
-          var data = message as Pair<int, Uint8List>;
           var newData = await cropImage(data.second);
           sendPort.send(Pair(data.first, newData));
         }catch(_){
-          App.log.e(_);
+
         }
+      },);
+      receivePort.listen((message) async {
+        var data = message as Pair<int, Uint8List>;
+        taskRunner.add(data);
       });
     }, receivePort.sendPort);
     receivePort.listen((message) {

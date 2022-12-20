@@ -22,7 +22,7 @@ class _WorkMangerSettingsState extends State<WorkMangerSettings> {
   @override
   void initState() {
 
-    lst.add(const Pair("15 minutes Default", Duration(minutes: 15)));
+    lst.add(const Pair("16 minutes Default", Duration(minutes: 16)));
     lst.add(const Pair("30 minutes", Duration(minutes: 30)));
     lst.add(const Pair("1 hour", Duration(hours: 1)));
     lst.add(const Pair("2 hours", Duration(hours: 2)));

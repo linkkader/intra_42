@@ -21,7 +21,8 @@ class BlackHolePainter extends CustomPainter {
   final int animationValue;
   final Map<String, double> angleMap;
   final bool longPress;
-  const BlackHolePainter(this.items, this.context, this.images, this.animationValue, this.angleMap, this.longPress);
+  final double speed;
+  const BlackHolePainter(this.items, this.context, this.images, this.animationValue, this.angleMap, this.longPress, this.speed);
 
   void drawCore(Canvas canvas, double radius){
     var paint = Paint();
@@ -45,7 +46,7 @@ class BlackHolePainter extends CustomPainter {
         //animationValue
         angleMap[element.login!] ??= j * angle;
         if (!longPress) {
-          angleMap[element.login!] = (1 / 3 / (i / 2)) + angleMap[element.login!]!;
+          angleMap[element.login!] = (speed / 3 / (i / 2)) + angleMap[element.login!]!;
         }
         var a = angleMap[element.login!]!.toRadians;
         // a = (angle * j + this.animationValue).toRadians;

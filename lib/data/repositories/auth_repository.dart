@@ -19,7 +19,6 @@ import '../../domain/util_interface/provider_interface.dart';
 
 class AuthRepository extends AuthInterface with ProviderInterface {
   bool _isInit = false;
-  bool _neverDuplicate = false;
   late Api _api;
   Provider<AuthRepository>? _pr;
 
@@ -129,34 +128,31 @@ class AuthRepository extends AuthInterface with ProviderInterface {
   Future<bool> validateCode(String code) async {
     Client.clearHeaders();
     return _api.token(_tokenBody(code)).then((value) async {
-          _neverDuplicate = false;
           App.log.i("renewToken: $value");
           await LocaleStorage().updateTokenBody(value);
           Client.addHeader('Authorization', '${value.tokenType?.capitalize()} ${value.accessToken}');
           await updateCookies();
-          return true;
+          // return true;
+          return UserRepository().me().then((value) async {
+            return true;
+          });
         }
     ).catchError((e) {
-      _neverDuplicate = false;
       return false;
     });
   }
 
   //refresh token
   Future<bool> refreshToken() {
-    if (_neverDuplicate) return Future.value(false);
     var body = LocaleStorage().tokenBody;
     if (body?.refreshToken == null) return Future.value(false);
-    _neverDuplicate = true;
     return _api.token(_tokenBody(body!.refreshToken!, authorizationCode: "refresh_token")).then((value){
-      _neverDuplicate = false;
       App.log.i("renewToken: $value");
       LocaleStorage().updateTokenBody(value);
       Client.addHeader('Authorization', '${value.tokenType?.capitalize()} ${value.accessToken}');
       return true;
     }
     ).catchError((e){
-      _neverDuplicate = false;
       return false;
     });
   }

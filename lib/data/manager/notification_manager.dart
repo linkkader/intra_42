@@ -17,11 +17,14 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void _callBackDispatcher() async{
   Workmanager().executeTask((task, inputData) async {
+    print("callBackDispatcher: $task");
     switch (task) {
-      case "notification":{
+    case "notification":{
         try{
           await notificationExecution(null);
-        }catch(_){}
+        }catch(_){
+          print("callBackDispatcher: $_");
+        }
       }
       break;
     }
@@ -105,14 +108,18 @@ class NotificationManager {
     notificationPlugin.initialize(initSettings);
     Workmanager().initialize(
         _callBackDispatcher,
-        isInDebugMode: kDebugMode
+        isInDebugMode: true
     );
     if (Platform.isAndroid){
-      var duration = LocaleStorage.getDuration("work_manager") ?? const Duration(minutes: 15);
+      var duration = LocaleStorage.getDuration("work_manager") ?? const Duration(minutes: 16);
       Workmanager().registerPeriodicTask(
-        "notification", "notification",
+        "intra", "intra",
         frequency: duration,
-      );
+      ).then((value) {
+        App.log.i("Workmanager registered");
+      }).catchError((_){
+        App.log.e("Workmanager register failed $_");
+      });
     }else{
       Timer.periodic(const Duration(minutes: 15), (timer) {
         //boring ios
@@ -120,9 +127,9 @@ class NotificationManager {
       });
       Workmanager().registerOneOffTask(
         "notification", "notification",
-        initialDelay: const Duration(minutes: 1),
+        initialDelay: const Duration(minutes: 15),
       ).then((value) {
-        print("workmanager registered success");
+        App.log.i("Workmanager registered");
       });
     }
   }
@@ -195,8 +202,16 @@ class NotificationManager {
   }
 
   void test() async {
-    await compute(notificationExecution, null);
-    App.log.i("test finished");
+    App.log.i("test");
+    Workmanager().registerOneOffTask(
+      "notification344", "notification344",
+    ).then((value) {
+      App.log.i("Workmanager registered");
+    }).catchError((_){
+      App.log.e("Workmanager register failed $_");
+    }).onError((error, stackTrace){
+      App.log.e("Workmanager register failed $error");
+    });
   }
 
 }

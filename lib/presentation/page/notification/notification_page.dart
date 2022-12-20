@@ -14,6 +14,8 @@ import 'package:sprintf/sprintf.dart';
 import '../../../core/extensions/string_ext.dart';
 import '../../../data/locale_storage/locale_storage.dart';
 import '../../../data/models/user.dart';
+import '../../../data/repositories/notification_repository.dart';
+import '../../utils_widgets/refresh.dart';
 
 class NotificationPage extends ConsumerStatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -48,13 +50,21 @@ class _NotificationPageState extends ConsumerState<NotificationPage> {
         backgroundColor: App.colorScheme.background,
         elevation: 0,
       ),
-      body: ListView.builder(
-        itemCount: lst.length,
-        itemBuilder: (context, index) {
-          index = lst.length - 1 - index;
-          if (lst[index].notifData == null && lst[index].scaleTeamId == null) return const SizedBox.shrink();
-          return _Item(lst[index]);
-        },),
+      body: Refresh(
+        onRefresh: () async {
+          try{
+           var lst = await NotificationRepository().notifications();
+          }catch(_){}
+          ref.read(lstProvider.notifier).state = LocaleStorage().getAllNotifications();
+        },
+        child: ListView.builder(
+          itemCount: lst.length,
+          itemBuilder: (context, index) {
+            index = lst.length - 1 - index;
+            if (lst[index].notifData == null && lst[index].scaleTeamId == null) return const SizedBox.shrink();
+            return _Item(lst[index]);
+          },),
+      ),
     );
   }
 

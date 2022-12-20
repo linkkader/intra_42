@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/data/api/client.dart';
 import 'package:intra_42/presentation/page/start_page.dart';
 import 'package:logger/logger.dart';
+import 'core/log/log_filter.dart';
 import 'core/params/colors.dart';
 import 'data/locale_storage/locale_storage.dart';
 import 'data/manager/notification_manager.dart';
@@ -29,6 +30,8 @@ class NavigationService {
 }
 
 class App extends StatelessWidget {
+
+  static final Logger _logger = Logger(filter: LoggerFilter(), printer: PrettyPrinter());
 
   const App({Key? key}) : super(key: key);
 
@@ -77,7 +80,7 @@ class App extends StatelessWidget {
 
   static S get s =>  NavigationService.navigatorKey.currentContext != null ? S.of(context) : S.current;
 
-  static Logger get log => Logger();
+  static Logger get log => _logger;
 
   static double get width => MediaQuery.of(context).size.width;
 

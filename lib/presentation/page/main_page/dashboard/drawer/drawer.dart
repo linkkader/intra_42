@@ -14,7 +14,7 @@ import 'package:intra_42/presentation/page/settings/work_manager_settings.dart';
 import '../../../start_page.dart';
 
 class MyDrawer extends StatelessWidget {
-  static final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  static GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   const MyDrawer({Key? key}) : super(key: key);
 
   static void closeDrawer(){

@@ -39,6 +39,9 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
 
   List<String> _campusNames = [];
   final StateProvider<int> campusSelect = StateProvider((ref) => 0);
+  final StateProvider<int> speedSelect = StateProvider((ref) => 2);
+  List<Pair<String, double>> speedLst = const [Pair("0.25", 0.25), Pair("0.5", 0.5), Pair("1", 1), Pair("2", 2), Pair("4", 4), Pair("42", 42), Pair("1337", 1337)];
+
   final StateProvider<int> userCountProvider = StateProvider((ref) => LocaleStorage().allUsers().length);
   final StateProvider<Map<String, ui.Image>> stateProvider = StateProvider((ref) => {});
   late FutureProvider<List<Pair<int, List<User2>>>> futureProvider;
@@ -47,6 +50,7 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
   final StateProvider<bool> longPress = StateProvider((ref) => false);
   List<String> imagesUrls = [];
   final viewTransformationController = TransformationController();
+
 
   Widget _campusSelect(){
     return InkWell(
@@ -90,6 +94,39 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
                           }
                       );
                     });
+
+                  },
+                );
+              });
+            }),
+      ),
+    );
+  }
+
+  Widget _speedSelect(){
+    return InkWell(
+      child: SizedBox(
+        height: kToolbarHeight * 2,
+        child: PopupMenuButton(
+            color: ColorConstants.kStatusBarColor,
+            child: Row(
+              children: [
+                Text( speedLst[ref.watch(speedSelect)].first, style: GoogleFonts.ptSans(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
+                speedLst.length > 1 ? const Icon(Icons.arrow_drop_down, color: Colors.white,) : Container(),
+              ],
+            ),
+            itemBuilder: (_){
+              return List.generate(speedLst .length, (index){
+                return PopupMenuItem(
+                  child: ColoredBox(
+                    color: App.colorScheme.background,
+                    child: Row(children: [
+                      index == ref.read(speedSelect) ? const Icon(Icons.check, color: Colors.white,) : Container(),
+                      Expanded(child: Text(speedLst[index].first, style: GoogleFonts.ptSans(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold))),
+                    ],),
+                  ),
+                  onTap: (){
+                    ref.read(speedSelect.notifier).state = index;
 
                   },
                 );
@@ -205,7 +242,7 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
                                   builder: (context) {
                                     return CustomPaint(
                                         size:  const Size(BlackHolePainter.dx * 2, BlackHolePainter.dy * 2),
-                                        painter: BlackHolePainter(data, context, ref.watch(stateProvider), (controller.value * 360).toInt(), angles,ref.read(longPress))
+                                        painter: BlackHolePainter(data, context, ref.watch(stateProvider), (controller.value * 360).toInt(), angles,ref.read(longPress), speedLst[ref.read(speedSelect)].second)
                                     );
                                   },
                                 ),
@@ -216,6 +253,7 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
                     ),
                   )),
                   Positioned(right: 0, top: 0, child: _campusSelect(),),
+                  Positioned(right: 0, top: 100, child: _speedSelect(),),
                 ],
               ),
             ),

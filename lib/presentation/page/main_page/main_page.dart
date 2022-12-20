@@ -1,6 +1,6 @@
 // Created by linkkader on 11/11/22
 
-import 'package:extended_tabs/extended_tabs.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,6 +32,7 @@ class _MainPageState extends ConsumerState<MainPage> with SingleTickerProviderSt
 
   @override
   void initState() {
+
     var user = LocaleStorage().getMe;
     views =  [
       Dashboard(user?.id ?? 0, isMe: true),
@@ -50,43 +51,50 @@ class _MainPageState extends ConsumerState<MainPage> with SingleTickerProviderSt
       child: Scaffold(
       key: MyDrawer.scaffoldKey,
       drawer: const MyDrawer(),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        selectedLabelStyle: GoogleFonts.ptSans(fontWeight: FontWeight.bold),
-        currentIndex: ref.watch(currentPage),
-        onTap: (index){
-          ref.watch(currentPage.notifier).state = index;
-          _tabController.index = index;
+      bottomNavigationBar: Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+          return BottomNavigationBar(
+            backgroundColor: Colors.black,
+            selectedLabelStyle: GoogleFonts.ptSans(fontWeight: FontWeight.bold),
+            currentIndex: ref.watch(currentPage),
+            onTap: (index){
+              ref.read(currentPage.notifier).state = index;
+              _tabController.index = index;
+              ref.read(currentPage.notifier).state = index;
+            },
+            items: [
+              BottomNavigationBarItem(
+                backgroundColor: App.colorScheme.background,
+                icon: const Icon(Icons.dashboard),
+                label: 'Dashboard',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.graphic_eq),
+                label: 'Graph',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.group),
+                label: 'Cluster',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.report_problem),
+                label: 'BlackHole',
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.search),
+                label: App.s.search,
+              ),
+            ],
+          );
         },
-        items: [
-          BottomNavigationBarItem(
-            backgroundColor: App.colorScheme.background,
-            icon: const Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.graphic_eq),
-            label: 'Graph',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: 'Cluster',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.report_problem),
-            label: 'BlackHole',
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.search),
-            label: App.s.search,
-          ),
-        ],
       ),
-      body: ExtendedTabBarView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _tabController,
-        cacheExtent: 10,
-        children: views,
+      body: Consumer(
+        builder: (context, ref, child) {
+          return IndexedStack(
+            index: ref.watch(currentPage),
+            children: views,
+          );
+        },
       ),
     ),
       onWillPop: () async {
