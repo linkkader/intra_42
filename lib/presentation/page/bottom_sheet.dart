@@ -12,6 +12,7 @@ import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/main_page/graph/graph.dart';
 import 'package:intra_42/presentation/utils_widgets/img.dart';
+import 'package:intra_42/presentation/utils_widgets/retry_btn.dart';
 import '../../core/params/dimens.dart';
 import '../../data/locale_storage/locale_storage.dart';
 import '../../data/models_izar/black_hole.dart';
@@ -133,7 +134,7 @@ class _UserSheetState extends ConsumerState<UserBottomSheet> {
             ),
           );
         },
-        error: (e, s) => Center(child: Text(e.toString())),
+        error: (e, s) => RetryButton(onTap: () => ref.refresh(userProvider),),
         loading: () => const SizedBox(
           height: 100,
           width: 100,

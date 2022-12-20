@@ -9,6 +9,7 @@ import 'package:intra_42/data/manager/user_manager.dart';
 import 'package:intra_42/data/repositories/cluster_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/main_page/cluster/drawer.dart';
+import 'package:intra_42/presentation/utils_widgets/retry_btn.dart';
 import 'dart:ui' as ui;
 import '../../../../core/utils/pair.dart';
 import '../../../../data/api/web_socket/web_manager.dart';
@@ -143,7 +144,7 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
           );
         },
         error: (_, __){
-          return Container();
+          return RetryButton(onTap: () => ref.refresh(futureProvider),);
         },
         loading: () => Center(
           child: LoadingAnimationWidget.prograssiveDots(color: App.colorScheme.primary, size: 100,),

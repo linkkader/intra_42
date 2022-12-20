@@ -4,6 +4,7 @@ import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/models/notif_data.dart';
 import 'package:intra_42/data/models_izar/notification_isar.dart';
 import 'package:intra_42/data/repositories/scale_repository.dart';
+import 'package:intra_42/main.dart';
 import '../../domain/api_interface/notification.dart';
 import '../api/api.dart';
 
@@ -29,29 +30,43 @@ class NotificationRepository extends NotificationInterface{
     return _api.readAll();
   }
 
+  //todo: manage error
   @override
   Future<List<NotificationIsar>> notifications() async{
     assert(_isInit, 'NotificationRepository is not initialized');
-    var data = await _api.allNotif();
-    for(var value in data["read"]) {
-      var notif = NotifData.fromJson(value);
-      var notifIsar = NotificationIsar(notifData: NotifDataIsar.fromFreezed(notif), id: notif.id, read: true);
-      await LocaleStorage.setNotification(notifIsar);
+    try{
+      var data = await _api.allNotif();
+      for(var value in data["read"]) {
+        var notif = NotifData.fromJson(value);
+        var notifIsar = NotificationIsar(notifData: NotifDataIsar.fromFreezed(notif), id: notif.id, read: true);
+        await LocaleStorage.setNotification(notifIsar);
+      }
+      for(var value in data["unread"]) {
+        var notif = NotifData.fromJson(value);
+        var notifIsar = NotificationIsar(notifData: NotifDataIsar.fromFreezed(notif), id: notif.id, read: true);
+        await LocaleStorage.setNotification(notifIsar);
+      }
+    }catch(_){
+      App.log.i("NotificationRepository notifications  $_");
     }
-    for(var value in data["unread"]) {
-      var notif = NotifData.fromJson(value);
-      var notifIsar = NotificationIsar(notifData: NotifDataIsar.fromFreezed(notif), id: notif.id, read: true);
-      await LocaleStorage.setNotification(notifIsar);
+
+    try{
+      var correctors = await ScaleRepository().scalesAsCorrector();
+      for (var value in correctors) {
+        var notification = NotificationIsar(scaleTeamId: value.id, type: NotificationType.corrector);
+        await LocaleStorage.setNotification(notification);
+      }
+    }catch(_){
+      App.log.i("NotificationRepository notifications  $_");
     }
-    var correctors = await ScaleRepository().scalesAsCorrector();
-    for (var value in correctors) {
-      var notification = NotificationIsar(scaleTeamId: value.id, type: NotificationType.corrector);
-      await LocaleStorage.setNotification(notification);
-    }
-    var corrected = await ScaleRepository().scalesAsCorrected();
-    for (var value in corrected) {
-      var notification = NotificationIsar(scaleTeamId: value.id, type: NotificationType.corrected);
-      await LocaleStorage.setNotification(notification);
+    try{
+      var corrected = await ScaleRepository().scalesAsCorrected();
+      for (var value in corrected) {
+        var notification = NotificationIsar(scaleTeamId: value.id, type: NotificationType.corrected);
+        await LocaleStorage.setNotification(notification);
+      }
+    }catch(_){
+      App.log.i("NotificationRepository notifications  $_");
     }
 
     return LocaleStorage.getAllNotification();

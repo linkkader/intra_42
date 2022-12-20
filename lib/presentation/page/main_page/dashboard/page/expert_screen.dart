@@ -7,6 +7,7 @@ import 'package:intra_42/core/extensions/provider_ext.dart';
 import 'package:intra_42/core/params/colors.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
+import 'package:intra_42/presentation/utils_widgets/retry_btn.dart';
 import '../../../../../data/models/expertise.dart';
 import '../../../../../data/models/user.dart';
 
@@ -69,7 +70,7 @@ class _ExpertiseScreenState extends ConsumerState<ExpertiseScreen> with Automati
               }, itemCount: data.length,);
           },
         error: (_, __){
-          return const Center(child: Text('Error'),);
+          return RetryButton(onTap: () => ref.refresh(_futureProvider));
         }, loading: (){
           return const Center(child: CircularProgressIndicator(),);
         });

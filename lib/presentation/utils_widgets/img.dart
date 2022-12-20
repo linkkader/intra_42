@@ -34,16 +34,11 @@ class Img extends StatelessWidget {
         future: client.Client().byteImg(url),
         builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return ExtendedImage.network(url, fit: fit, cache: true, loadStateChanged: (ExtendedImageState state) {
-            return ExtendedImage.memory(snapshot.data!, fit: fit,);
-          },);
+          return ExtendedImage.memory(snapshot.data!, fit: fit,);
         } else {
-          return Container(
-            color: Colors.black12,
-          );
+          return defaultLogin();
         }
     });
-    return ExtendedImage.network(url, fit: fit, cache: true,);
   }
 
   static Widget defaultLogin(){

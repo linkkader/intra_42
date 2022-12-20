@@ -89,7 +89,6 @@ class _SearchState extends ConsumerState<Search> {
                 itemCount: lst.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  App.log.d("searching for ${lst[index].name}");
                   return ListTile(
                     title: Text(lst[index].login ?? '', style: GoogleFonts.ptSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold),),
                     onTap: () {

@@ -71,11 +71,12 @@ Future notificationExecution(void data) async {
     await LocaleStorage().init();
     Client().initApi();
   }
-  // await NotificationRepository().notifications();
+  await NotificationRepository().notifications();
   try{
+
     await NotificationManager.showNotification();
   }catch(_){
-    App.log.e("NotificationManager.showNotification() failed");
+    App.log.e("NotificationManager.showNotification() failed $_" );
   }
 }
 
@@ -107,11 +108,16 @@ class NotificationManager {
         isInDebugMode: kDebugMode
     );
     if (Platform.isAndroid){
+      var duration = LocaleStorage.getDuration("work_manager") ?? const Duration(minutes: 15);
       Workmanager().registerPeriodicTask(
         "notification", "notification",
-        frequency: const Duration(minutes: 16),
+        frequency: duration,
       );
     }else{
+      Timer.periodic(const Duration(minutes: 15), (timer) {
+        //boring ios
+        notificationExecution(null);
+      });
       Workmanager().registerOneOffTask(
         "notification", "notification",
         initialDelay: const Duration(minutes: 1),
@@ -132,20 +138,25 @@ class NotificationManager {
     final notificationPlugin = FlutterLocalNotificationsPlugin();
     var allNotifications = LocaleStorage.getAllNotification();
     for (var element in allNotifications) {
+      if (element.read == true) continue;
       App.log.i(element.type);
-      switch(element.type){
+      try{
+        switch(element.type){
           case NotificationType.corrector: _correctorNotification(element, notificationPlugin, channelSpecific);break;
           case NotificationType.corrected: _correctEdNotification(element, notificationPlugin, channelSpecific);break;
-          // case NotificationType.nullType:break;
+        // case NotificationType.nullType:break;
           default: await _defaultNotification(element, notificationPlugin, channelSpecific); break;
         }
+      }catch(_){
+        App.log.e("NotificationManager.showNotification() failed $_" );
+      }
     }
   }
 
   static Future<void> _correctorNotification(NotificationIsar notificationIsar, FlutterLocalNotificationsPlugin plugin, NotificationDetails details) async {
      var scale = LocaleStorage.getScaleTeam(notificationIsar.scaleTeamId!)!;
-    await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, notificationIsar.text(scale), details);
-
+     await plugin.show(notificationIsar.scaleTeamId!, "Evaluation", notificationIsar.text(scale), details);
+     await LocaleStorage.setNotification(notificationIsar.copyWith(read: true));
     // var scale = LocaleStorage.getScaleTeam(notificationIsar.scaleTeamId!)!;
     // if (scale.beginAt!.isBefore(now)) {
     //   if (scale.beginAt!.subtract(const Duration(minutes: 15)).isBefore(now)) {
@@ -162,12 +173,13 @@ class NotificationManager {
   static Future<void> _defaultNotification(NotificationIsar notificationIsar, FlutterLocalNotificationsPlugin plugin, NotificationDetails details) async {
     if (notificationIsar.notifData == null || notificationIsar.id == null) return;
     await plugin.show(notificationIsar.id!, notificationIsar.notifData!.title, notificationIsar.notifData!.text , details);
-    // await LocaleStorage.setNotification(notificationIsar.copyWith(read: true));
+    await LocaleStorage.setNotification(notificationIsar.copyWith(read: true));
   }
 
   static Future<void> _correctEdNotification(NotificationIsar notificationIsar, FlutterLocalNotificationsPlugin plugin, NotificationDetails details) async {
     var scale = LocaleStorage.getScaleTeam(notificationIsar.scaleTeamId!)!;
-    await plugin.show(notificationIsar.scaleTeamId!, App.s.evaluation, notificationIsar.text(scale), details);
+    await plugin.show(notificationIsar.scaleTeamId!, "Evaluation", notificationIsar.text(scale), details);
+    await LocaleStorage.setNotification(notificationIsar.copyWith(read: true));
     // var now = DateTime.now();
     // var scale = LocaleStorage.getScaleTeam(notificationIsar.scaleTeamId!)!;
     // if (scale.beginAt!.isBefore(now)) {

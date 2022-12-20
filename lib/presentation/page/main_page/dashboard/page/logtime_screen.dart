@@ -7,6 +7,7 @@ import 'package:intra_42/core/extensions/provider_ext.dart';
 import 'package:intra_42/core/params/colors.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
+import 'package:intra_42/presentation/utils_widgets/retry_btn.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../../../../../data/models/logtime.dart';
@@ -87,7 +88,7 @@ class _LogTimeScreenState extends ConsumerState<LogTimeScreen> with AutomaticKee
           );
           },
         error: (_, __){
-          return const Center(child: Text("Error"));
+          return RetryButton(onTap: () => ref.refresh(futureProvider!),);
         },
         loading: (){
           return const Center(child: CircularProgressIndicator());

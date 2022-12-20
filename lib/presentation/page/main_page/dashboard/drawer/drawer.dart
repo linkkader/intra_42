@@ -1,5 +1,7 @@
 // Created by linkkader on 8/12/2022
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +9,7 @@ import 'package:intra_42/core/extensions/widget_ext.dart';
 import 'package:intra_42/data/repositories/auth_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/settings/open_source.dart';
+import 'package:intra_42/presentation/page/settings/work_manager_settings.dart';
 
 import '../../../start_page.dart';
 
@@ -35,6 +38,14 @@ class MyDrawer extends StatelessWidget {
                   const OpenSources().navigate(context: context);
                 },
               ),
+              if (Platform.isAndroid)
+                ListTile(
+                  leading: Icon(Icons.timelapse, color: App.colorScheme.secondary),
+                  title: Text("Notification Sync", style: GoogleFonts.openSans(fontWeight: FontWeight.bold, color: App.colorScheme.secondary),),
+                  onTap: () {
+                    const WorkMangerSettings().navigate(context: context);
+                  },
+                ),
               ListTile(
                 leading: Icon(Icons.language, color: App.colorScheme.secondary),
                 title: Text(App.s.language, style: GoogleFonts.openSans(fontWeight: FontWeight.bold, color: App.colorScheme.secondary),),

@@ -18,6 +18,7 @@ class ImageManager {
   int computeCount = 0;
   final Map<int, Function(Uint8List)> _callbacks = {};
   late final SendPort _sendPort;
+  ui.Image? _default ;
   bool _isInit = false;
   static final ImageManager _instance = ImageManager._();
   ImageManager._();
@@ -40,9 +41,13 @@ class ImageManager {
       ReceivePort receivePort = ReceivePort();
       sendPort.send(receivePort.sendPort);
       receivePort.listen((message) async {
-        var data = message as Pair<int, Uint8List>;
-        var newData = await cropImage(data.second);
-        sendPort.send(Pair(data.first, newData));
+        try{
+          var data = message as Pair<int, Uint8List>;
+          var newData = await cropImage(data.second);
+          sendPort.send(Pair(data.first, newData));
+        }catch(_){
+          App.log.e(_);
+        }
       });
     }, receivePort.sendPort);
     receivePort.listen((message) {
@@ -117,11 +122,17 @@ class ImageManager {
     Map<String, ui.Image> images = {};
     Map<String, Uint8List> data = {};
     try{
-      await rootBundle.load('assets/img/default.png').then((value) async {
-        var img = value.buffer.asUint8List();
-        images['default'] = await decodeImage(img, circle);
+      if (_default == null){
+        await rootBundle.load('assets/img/default.png').then((value) async {
+          var img = value.buffer.asUint8List();
+          images['default'] = await decodeImage(img, circle);
+          onData(images.copy);
+        });
+      }
+      else{
+        images['default'] = _default!;
         onData(images.copy);
-      });
+      }
     }catch(_){}
     for (var value in values) {
       if (value == null){

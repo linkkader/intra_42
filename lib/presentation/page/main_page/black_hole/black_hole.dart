@@ -16,6 +16,7 @@ import 'package:intra_42/data/models/user_2.dart';
 import 'package:intra_42/data/models_izar/black_hole.dart';
 import 'package:intra_42/data/models_izar/user_isar.dart';
 import 'package:intra_42/main.dart';
+import 'package:intra_42/presentation/utils_widgets/retry_btn.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:touchable/touchable.dart';
@@ -149,7 +150,7 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
     return ref.watch(futureProvider)
         .when(
         error: (_, __){
-          return const Center(child: Text('Error'));
+          return RetryButton(onTap: () => ref.refresh(futureProvider),);
           },
         loading: (){
           return Center(

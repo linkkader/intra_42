@@ -93,6 +93,8 @@ class AuthRepository extends AuthInterface with ProviderInterface {
     assert(_isInit, "AuthRepository not initialized");
     App.log.i("isUserLoggedIn");
     if (LocaleStorage().tokenBody == null) return false;
+    var bool = await refreshToken();
+    if (bool == false) return false;
     var allUsers = LocaleStorage().allUsers();
     var me =  LocaleStorage().getMe;
     for (var element in allUsers) {

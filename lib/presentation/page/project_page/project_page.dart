@@ -11,6 +11,7 @@ import 'package:intra_42/data/models/user.dart';
 import 'package:intra_42/data/repositories/project_repository.dart';
 import 'package:intra_42/presentation/page/bottom_sheet.dart';
 import 'package:intra_42/presentation/utils_widgets/img.dart';
+import 'package:intra_42/presentation/utils_widgets/retry_btn.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../core/params/colors.dart';
 import '../../../core/utils/pair.dart';
@@ -186,7 +187,7 @@ class _ProjectPageState extends ConsumerState<ProjectPage> {
         loading: () => Center(
           child: LoadingAnimationWidget.prograssiveDots(color: App.colorScheme.primary, size: 100,),
         ),
-        error: (e, s) => Material(child: Center(child: Text(e.toString()))),
+        error: (e, s) => RetryButton(onTap: () => ref.refresh(data),),
       ),
     );
   }
@@ -347,7 +348,7 @@ class _PeerEvaluationState extends ConsumerState<PeerEvaluation> {
       loading: () => Center(
         child: LoadingAnimationWidget.prograssiveDots(color: App.colorScheme.primary, size: 100,),
       ),
-      error: (e, s) => Text(e.toString()),
+      error: (e, s) => RetryButton(onTap: () => ref.refresh(scales),),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/core/extensions/provider_ext.dart';
 import 'package:intra_42/main.dart';
+import 'package:intra_42/presentation/utils_widgets/retry_btn.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:touchable/touchable.dart';
 import 'dart:ui' as ui;
@@ -74,7 +75,7 @@ class _ClusterItemState extends ConsumerState<ClusterItemScreen> with AutomaticK
             ),
           );
         },
-        error: (_, __) => Text(_.toString()),
+        error: (_, __) => RetryButton(onTap: () => ref.refresh(futureProvider),),
         loading: () => Center(
           child: LoadingAnimationWidget.prograssiveDots(color: App.colorScheme.primary, size: 100,),
         )

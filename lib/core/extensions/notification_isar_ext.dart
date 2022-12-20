@@ -10,15 +10,39 @@ extension NotificationIsarExt on NotificationIsar {
   {
     if (type == NotificationType.corrector){
       if (scale.team?.projectSessionId != null){
-        return sprintf(App.s.evaluation_phrase_project, [scale.team?.repoUrl?.substringAfterLast("-"), scale.team?.projectGitlabPath?.substringAfterLast("/") ?? "",scale.beginAt!.toIso8601String()]);
+        var str = "";
+        try{
+          str = App.s.evaluation_phrase_project;
+        }catch(_){
+          str = "You will evaluate %s on %s at %s";
+        }
+        return sprintf(str, [scale.team?.repoUrl?.substringAfterLast("-"), scale.team?.projectGitlabPath?.substringAfterLast("/") ?? "",scale.beginAt!.toIso8601String()]);
       }
-      return sprintf(App.s.evaluation_phrase, [scale.beginAt!.toIso8601String()]);
+      var str = "";
+      try{
+        str = App.s.evaluation_phrase;
+      }catch(_){
+        str = "You will evaluate someone at %s";
+      }
+      return sprintf(str, [scale.beginAt!.toIso8601String()]);
     }
     else{
       if (scale.team?.projectSessionId != null){
-        return sprintf(App.s.correction_phrase_project, ["linkkader", scale.team?.projectGitlabPath?.substringAfterLast("/") ?? "",scale.beginAt!.toIso8601String()]);
+        var str = "";
+        try{
+          str = App.s.correction_phrase_project;
+        }catch(_){
+          str = "%s will evaluate you on %s at %s";
+        }
+        return sprintf(str, ["linkkader", scale.team?.projectGitlabPath?.substringAfterLast("/") ?? "",scale.beginAt!.toIso8601String()]);
       }
-      return sprintf(App.s.correction_phrase, [scale.beginAt!.toIso8601String()]);
+      var str = "";
+      try{
+        str = App.s.correction_phrase;
+      }catch(_){
+        str = "Someone will evaluate you at %s";
+      }
+      return sprintf(str, [scale.beginAt!.toIso8601String()]);
     }
   }
 }

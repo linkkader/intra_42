@@ -11,7 +11,6 @@ import 'package:sprintf/sprintf.dart';
 import '../../../../core/utils/pair.dart';
 import '../../../../data/models/cluster_item.dart';
 
-//todo:[ERROR:flutter/runtime/dart_vm_initializer.cc(41)] Unhandled Exception: Looking up a deactivated widget's ancestor is unsafe.
 class ClusterDrawer extends ConsumerStatefulWidget {
   final StateProvider<Map<String, int>> stateClusterSize;
   final StateProvider<List<ClusterItem>> clusterItemsState;

@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/core/extensions/provider_ext.dart';
 import 'package:intra_42/data/models/scale_team.dart';
 import 'package:intra_42/main.dart';
+import 'package:intra_42/presentation/utils_widgets/retry_btn.dart';
 import '../../../../../data/repositories/user_repository.dart';
 
 class EvaluationScreen extends ConsumerStatefulWidget {
@@ -37,7 +38,7 @@ class _EvaluationScreenState extends ConsumerState<EvaluationScreen> with Automa
           },
           error: (error, stack){
             App.log.e(error, stack);
-            return Text(error.toString());
+            return RetryButton(onTap: () => ref.refresh(provider),);
           },
           loading: () => const LinearProgressIndicator(),
       ),

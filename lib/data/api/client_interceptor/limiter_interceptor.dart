@@ -16,6 +16,10 @@ class LimiterInterceptor extends InterceptorsWrapper{
       var completer = Completer();
       _queue.add(Pair(_queue.length, completer));
       if (_queue.length > 1) {
+        () async{
+          await 30.sleep();
+          if (completer.isCompleted == false) completer.complete();
+        }();
         await completer.future;
       }
     }
@@ -25,7 +29,8 @@ class LimiterInterceptor extends InterceptorsWrapper{
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
     if (err.requestOptions.uri.toString().startsWith(kApiBaseUrl) && _queue.isNotEmpty) {
-      await 1.sleep();
+      //todo: pouf
+      await Future.delayed(const Duration(milliseconds: 100));
       var value = _queue.removeFirst();
       value.second.complete();
       if (value.first == 0 && _queue.isNotEmpty) {

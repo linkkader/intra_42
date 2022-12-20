@@ -15,7 +15,6 @@ import 'package:touchable/touchable.dart';
 import '../../../../data/models/project_data.dart';
 
 //TODO: add cache
-//TODO: cursus from dashboard
 class Graph extends ConsumerStatefulWidget {
   final User user;
   const Graph(this.user, {Key? key}) : super(key: key);

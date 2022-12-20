@@ -68,7 +68,6 @@ class Client {
   }
 
 
-  //TODO: add cache
   Future<Uint8List?> byteImg(String url, {Map<String, String>? headers, bool storageOnly = false}) async {
     var img = await LocaleStorage().img(url);
     if (img != null) return Uint8List.fromList(img.data);

@@ -8,7 +8,6 @@ class ImageManager {
     return _instance;
   }
 
-  //todo: add retry
   // Future fetchAllImage(List<String?> values, Function(Map<String, ui.Image> images) onData, {bool circle = false}) async {
   //   List<String> urls = [];
   //   Map<String, ui.Image> images = {};

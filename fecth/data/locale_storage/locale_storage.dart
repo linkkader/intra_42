@@ -47,7 +47,6 @@ class LocaleStorage {
   }
 
 
-  //todo: need check
   void updateUser(User value, {bool force = false}) async{
     var user = getUser(value.id!);
     var me = _isar.userIsars.getSync(0);

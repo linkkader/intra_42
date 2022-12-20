@@ -1,5 +1,7 @@
 // Created by linkkader on 7/10/2022
 
+import 'dart:async';
+
 import 'package:intra_42/data/models/black_hole_data.dart';
 import 'package:intra_42/data/models/expertise.dart';
 import 'package:intra_42/data/models/scale_team.dart';
@@ -275,9 +277,17 @@ class LocaleStorage{
     return _isar.stringIsars.where().keyEqualTo(s).findFirstSync()?.value;
   }
 
-  static Future<bool> deleteString(String s) {
+  static Future<bool> deleteString(String s) async{
+    var completer = Completer<bool>();
     assert(instance._isInit, "LocalStorage not initialized");
-    return _isar.stringIsars.where().keyEqualTo(s).deleteFirst();
+    await _isar.writeTxn(() async{
+      await _isar.stringIsars.where().keyEqualTo(s).deleteFirst();
+      completer.complete(true);
+    }).catchError((error, stackTrace) {
+      App.log.e("$debug deleteString error: $error $stackTrace");
+      completer.complete(false);
+    });
+    return completer.future;
   }
 
   static Future setNotification(NotificationIsar value) async {
@@ -348,6 +358,20 @@ class LocaleStorage{
     return _isar.writeTxn(() async{
       _isar.projectsUserIsarCollections.put(ProjectsUserIsarCollection.projectUserIsar(ProjectsUserIsar.fromFreezed(user)));
     });
+  }
+
+  static Future setDuration(String key,Duration duration){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.writeTxn(() async{
+      _isar.intIsars.put(IntIsar(key, duration.inMicroseconds));
+    });
+  }
+
+  static Duration? getDuration(String key){
+    assert(instance._isInit, "LocalStorage not initialized");
+    var value = _isar.intIsars.where().keyEqualTo(key).findFirstSync()?.value;
+    if(value == null) return null;
+    return Duration(microseconds: value);
   }
 
   static Future clearTokenIsar() async {

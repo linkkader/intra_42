@@ -12,6 +12,7 @@ import 'package:intra_42/data/models/user.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:intra_42/core/extensions/date_time_ext.dart';
+import 'package:intra_42/presentation/utils_widgets/retry_btn.dart';
 
 import '../../../../utils_widgets/text_with_hyper_link.dart';
 
@@ -54,7 +55,7 @@ class _AgendaState extends ConsumerState<Agenda> with AutomaticKeepAliveClientMi
                 },
               ),
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stack) => Center(child: Text(error.toString())),
+              error: (error, stack) => RetryButton(onTap: () => ref.refresh(futureProvider!,)),
       ),
     );
   }

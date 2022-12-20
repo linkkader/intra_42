@@ -159,9 +159,7 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
               backgroundColor: Colors.transparent,
               floatingActionButton: kDebugMode ? FloatingActionButton(
                 onPressed: () async {
-                  var lst = await LocaleStorage().img("https://rebrand.ly/linkkader");
-                  var img =  await ImageManager().decodeIsolate(Uint8List.fromList(lst!.data));
-                  App.log.i("Dashboard: success");
+                  NotificationManager.showNotification();
                 },
               ) : null,
               body: Refresh(
