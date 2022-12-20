@@ -1,3 +1,6 @@
+lib/core/params/constants.dart
+
+
 # Miscellaneous
 *.class
 *.log
@@ -47,4 +50,3 @@ app.*.map.json
 /android/app/release
 isar.isar
 
-lib/core/params/constants.dart
