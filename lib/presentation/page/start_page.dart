@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intra_42/core/extensions/int_ext.dart';
 import 'package:intra_42/core/extensions/widget_ext.dart';
 import 'package:intra_42/core/params/app_icons_svg.dart';
 import 'package:intra_42/core/params/colors.dart';
@@ -36,7 +37,7 @@ class _StartPageState extends ConsumerState<StartPage> {
     AuthRepository().isUserLoggedIn().then((value) {
       if (value){
         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-          const MainPage().navigate(context: context);
+          const MainPage().navigate(context: context, clearStack: true);
         });
       }
       ref.watch(loadingProvider.notifier).state = false;
@@ -66,14 +67,17 @@ class _StartPageState extends ConsumerState<StartPage> {
                       );
                     }
                     return MaterialButton(
-                      onPressed: (){
+                      onPressed: () async {
                         ref.read(loadingProvider.notifier).state = true;
-                        SignInPage(
+                        bool isCode = false;
+                        await SignInPage(
                           onCodeIntercepted: (code, context) async {
+                            isCode = true;
                             AuthRepository().validateCode(code)
                                 .then((value) {
+                              isCode = true;
                               if (value) {
-                                const MainPage().navigate(context: this.context);
+                                const MainPage().navigate(context: this.context, clearStack: true);
                               }
                               ref.watch(loadingProvider.notifier).state = false;
                             }).catchError((e) {
@@ -84,6 +88,7 @@ class _StartPageState extends ConsumerState<StartPage> {
                             ref.watch(loadingProvider.notifier).state = true;
                           },
                         ).navigate(context: context);
+                        ref.read(loadingProvider.notifier).state = isCode;
                       },
                       child: Text(
                         App.s.sign_in,
@@ -114,7 +119,7 @@ class _StartPageState extends ConsumerState<StartPage> {
                 const Spacer(),
                 MaterialButton(
                   onPressed: (){
-                    launchUrlString("https://github.com/linkkader/Intra_42");
+                    launchUrlString("https://github.com/linkkader/Intra_42", mode: LaunchMode.externalApplication);
                   },
                   child: Text(
                     App.s.github,

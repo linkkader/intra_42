@@ -147,6 +147,7 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     return ref.watch(futureProvider)
         .when(
         error: (_, __){

@@ -1,4 +1,5 @@
 
+import 'package:extended_tabs/extended_tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -130,8 +131,9 @@ class _ClusterState extends ConsumerState<Cluster> with TickerProviderStateMixin
                 )
               ],
             ),
-            body: TabBarView(
+            body: ExtendedTabBarView(
               controller: _tabController,
+              cacheExtent: 10,
               physics: const NeverScrollableScrollPhysics(),
               children: List.generate(data.length, (index) {
                 return ClusterItemScreen(data.keys.elementAt(index).second, data.values.elementAt(index), imagesProvider,

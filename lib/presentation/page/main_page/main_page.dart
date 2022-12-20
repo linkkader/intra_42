@@ -1,5 +1,6 @@
 // Created by linkkader on 11/11/22
 
+import 'package:extended_tabs/extended_tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,7 +46,8 @@ class _MainPageState extends ConsumerState<MainPage> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      child: Scaffold(
       key: MyDrawer.scaffoldKey,
       drawer: const MyDrawer(),
       bottomNavigationBar: BottomNavigationBar(
@@ -80,11 +82,15 @@ class _MainPageState extends ConsumerState<MainPage> with SingleTickerProviderSt
           ),
         ],
       ),
-      body: TabBarView(
+      body: ExtendedTabBarView(
         physics: const NeverScrollableScrollPhysics(),
         controller: _tabController,
+        cacheExtent: 10,
         children: views,
       ),
-    );
+    ),
+      onWillPop: () async {
+        return false;
+    },);
   }
 }

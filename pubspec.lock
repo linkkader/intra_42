@@ -253,6 +253,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.4.1"
+  extended_tabs:
+    dependency: "direct main"
+    description:
+      name: extended_tabs
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.2"
   fake_async:
     dependency: transitive
     description:
@@ -859,6 +866,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
+  sync_scroll_library:
+    dependency: transitive
+    description:
+      name: sync_scroll_library
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   syncfusion_flutter_calendar:
     dependency: "direct main"
     description:

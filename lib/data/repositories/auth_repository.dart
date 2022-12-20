@@ -1,6 +1,7 @@
 // Created by linkkader on 9/11/2022
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart' as inapp;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/core/extensions/string_ext.dart';
@@ -61,7 +62,7 @@ class AuthRepository extends AuthInterface with ProviderInterface {
   Future signOut() async {
     App.log.i("Logged start");
     inapp.CookieManager cookieManager = inapp.CookieManager.instance();
-    await cookieManager.deleteAllCookies();
+    if (!kDebugMode)await cookieManager.deleteAllCookies();
     await LocaleStorage.clearTokenIsar();
     App.log.i("Logged out successfully");
     return true;

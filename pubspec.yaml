@@ -9,6 +9,9 @@ environment:
 
 dependencies:
 
+  #cache tab bar
+  extended_tabs: ^4.0.2
+
   #icons
   flutter_launcher_icons: ^0.11.0
 

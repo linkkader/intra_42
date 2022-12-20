@@ -9,17 +9,26 @@ class RetryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      onPressed: () => onTap.call(),
-      padding: const EdgeInsets.all(0),
+    return Material(
       elevation: 0,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(1000)),
-      ),
-      color: App.colorScheme.background,
-      child: Icon(
-        Icons.refresh,
-        color: App.colorScheme.secondary,
+      color: Colors.transparent,
+      child: SizedBox(
+        width: 56,
+        height: 56,
+        child: IconButton(
+          onPressed: () {
+            onTap();
+            App.log.i("RetryButton pressed");
+          },
+          padding: const EdgeInsets.all(0),
+          iconSize: 56,
+          tooltip: 'Retry',
+          color: App.colorScheme.background,
+          icon: Icon(
+            Icons.refresh,
+            color: App.colorScheme.secondary,
+          ),
+        ),
       ),
     );
   }

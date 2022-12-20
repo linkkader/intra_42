@@ -49,4 +49,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 isar.isar
-
+android/app/build.gradle
