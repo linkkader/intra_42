@@ -36,7 +36,10 @@ class Img extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return ExtendedImage.memory(snapshot.data!, fit: fit,);
         } else {
-          return defaultLogin();
+          if (url.contains("/users/")) {
+            return defaultLogin();
+          }
+          return Container();
         }
     });
   }

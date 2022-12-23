@@ -328,6 +328,13 @@ class LocaleStorage{
     });
   }
 
+  static Future setListUser2(List<User2> users){
+    assert(instance._isInit, "LocalStorage not initialized");
+    return _isar.writeTxn(() async{
+      _isar.user2Isars.putAll(users.map((e) => User2Isar.fromFreezed(e)).toList());
+    });
+  }
+
   static User2? getUser2(int id){
     assert(instance._isInit, "LocalStorage not initialized");
     return _isar.user2Isars.getSync(id)?.toFreezed();

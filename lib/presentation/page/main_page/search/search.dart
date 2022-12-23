@@ -5,9 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intra_42/core/extensions/provider_ext.dart';
 import 'package:intra_42/data/locale_storage/locale_storage.dart';
 import 'package:intra_42/data/models/user.dart';
+import 'package:intra_42/data/models_izar/user2_isar.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
 import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/bottom_sheet.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../../data/models/user_2.dart';
 
@@ -20,16 +22,22 @@ class Search extends ConsumerStatefulWidget {
 
 class _SearchState extends ConsumerState<Search> {
   final _searchController = TextEditingController();
-  late FutureProvider<List<User>> usersProvider;
   StateProvider<List<User2>> searchProvider  = StateProvider((ref) => []);
-  late List<User2> users;
+  late List<User2> users = [];
 
   @override
   void initState() {
-    users = LocaleStorage.allUser2();
-    usersProvider = FutureProvider((ref) => ref.read(UserRepository().futureProvider).searchUser(_searchController.text));
+    LocaleStorage.isar.user2Isars.watchLazy().listen((event) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        users = LocaleStorage.allUser2();
+        ref.read(searchProvider.notifier).state = users;
+        setState(() {});
+      });
+    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      users = LocaleStorage.allUser2();
       ref.read(searchProvider.notifier).state = users;
+      setState(() {});
     });
     super.initState();
   }
@@ -79,7 +87,13 @@ class _SearchState extends ConsumerState<Search> {
           ),
         ),
       ),
-      body: Column(
+      body: users.isEmpty
+          ?
+      Center(
+        child: LoadingAnimationWidget.prograssiveDots(color: App.colorScheme.primary, size: 100,),
+      )
+          :
+      Column(
         children: [
           Expanded(child: Consumer(
             builder: (context, ref, child) {

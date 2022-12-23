@@ -1,7 +1,10 @@
 // Created by linkkader on 9/11/2022
 
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart' as inapp;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intra_42/core/extensions/string_ext.dart';
@@ -21,6 +24,7 @@ class AuthRepository extends AuthInterface with ProviderInterface {
   bool _isInit = false;
   late Api _api;
   Provider<AuthRepository>? _pr;
+  Timer? _refreshTimer;
 
   static final AuthRepository _instance = AuthRepository._internal();
   AuthRepository._internal();
@@ -105,7 +109,18 @@ class AuthRepository extends AuthInterface with ProviderInterface {
         await LocaleStorage.setUser(element.copyWith(location: null));
       }
     }
-    return UserRepository().me().then((value) => true).catchError((e) => false);
+    return UserRepository().me().then((value) {
+      if (_refreshTimer != null) _refreshTimer!.cancel();
+      _refreshTimer = Timer.periodic(const Duration(minutes: 30), (timer) async {
+        try{
+          await refreshToken();
+        }catch(_){
+          App.log.i("Refresh token failed");
+          ScaffoldMessenger.of(App.context).showSnackBar(SnackBar(content: Text("error while refreshing token $_"), duration: const Duration(seconds: 1)));
+        }
+      });
+      return true;
+    }).catchError((e) => false);
   }
 
   @override

@@ -48,101 +48,103 @@ class _StartPageState extends ConsumerState<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-          children: [
-            Expanded(child: Padding(
-              padding: const EdgeInsets.all(70.0),
-              child: SvgPicture.asset(AppSvg.logo, height: double.infinity, width: double.infinity,),
-            )),
-            Row(
-              children: [
-                Consumer(
-                  builder: (context, ref, child) {
-                    if (ref.watch(loadingProvider)) {
-                      return Row(
-                        children: [
-                          const SizedBox(width: 20),
-                          CircularProgressIndicator(color: App.colorScheme.secondary,)
-                        ],
-                      );
-                    }
-                    return MaterialButton(
-                      onPressed: () async {
-                        ref.read(loadingProvider.notifier).state = true;
-                        bool isCode = false;
-                        await SignInPage(
-                          onCodeIntercepted: (code, context) async {
-                            isCode = true;
-                            AuthRepository().validateCode(code)
-                                .then((value) {
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(child: Padding(
+                padding: const EdgeInsets.all(70.0),
+                child: SvgPicture.asset(AppSvg.logo, height: double.infinity, width: double.infinity,),
+              )),
+              Row(
+                children: [
+                  Consumer(
+                    builder: (context, ref, child) {
+                      if (ref.watch(loadingProvider)) {
+                        return Row(
+                          children: [
+                            const SizedBox(width: 20),
+                            CircularProgressIndicator(color: App.colorScheme.secondary,)
+                          ],
+                        );
+                      }
+                      return MaterialButton(
+                        onPressed: () async {
+                          ref.read(loadingProvider.notifier).state = true;
+                          bool isCode = false;
+                          await SignInPage(
+                            onCodeIntercepted: (code, context) async {
                               isCode = true;
-                              if (value) {
-                                const MainPage().navigate(context: this.context, clearStack: true);
-                              }
-                              ref.watch(loadingProvider.notifier).state = false;
-                            }).catchError((e) {
-                              App.log.e(e);
-                              ref.watch(loadingProvider.notifier).state = false;
-                            });
-                            Navigator.pop(context);
-                            ref.watch(loadingProvider.notifier).state = true;
-                          },
-                        ).navigate(context: context);
-                        ref.read(loadingProvider.notifier).state = isCode;
-                      },
-                      child: Text(
-                        App.s.sign_in,
-                        style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    );
-                  },
-                ),
-                const Spacer(),
-              ],
-            ),
-            Row(
-              children: [
-                const Spacer(),
-                MaterialButton(
-                  onPressed: (){
-                    const ApiSettings().navigate(context: context);
-                  },
-                  child: Text(
-                    App.s.api_settings,
-                    style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
+                              AuthRepository().validateCode(code)
+                                  .then((value) {
+                                isCode = true;
+                                if (value) {
+                                  const MainPage().navigate(context: this.context, clearStack: true);
+                                }
+                                ref.watch(loadingProvider.notifier).state = false;
+                              }).catchError((e) {
+                                App.log.e(e);
+                                ref.watch(loadingProvider.notifier).state = false;
+                              });
+                              Navigator.pop(context);
+                              ref.watch(loadingProvider.notifier).state = true;
+                            },
+                          ).navigate(context: context);
+                          ref.read(loadingProvider.notifier).state = isCode;
+                        },
+                        child: Text(
+                          App.s.sign_in,
+                          style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      );
+                    },
                   ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                const Spacer(),
-                MaterialButton(
-                  onPressed: (){
-                    launchUrlString("https://github.com/linkkader/Intra_42", mode: LaunchMode.externalApplication);
-                  },
-                  child: Text(
-                    App.s.github,
-                    style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
+                  const Spacer(),
+                ],
+              ),
+              Row(
+                children: [
+                  const Spacer(),
+                  MaterialButton(
+                    onPressed: (){
+                      const ApiSettings().navigate(context: context);
+                    },
+                    child: Text(
+                      App.s.api_settings,
+                      style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                const Spacer(),
-                MaterialButton(
-                  onPressed: (){
-                    const BlackHoleScreen().navigate(context: context);
-                  },
-                  child: Text(
-                    App.s.black_hole,
-                    style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
+                ],
+              ),
+              Row(
+                children: [
+                  const Spacer(),
+                  MaterialButton(
+                    onPressed: (){
+                      launchUrlString("https://github.com/linkkader/Intra_42", mode: LaunchMode.externalApplication);
+                    },
+                    child: Text(
+                      App.s.github,
+                      style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              Row(
+                children: [
+                  const Spacer(),
+                  MaterialButton(
+                    onPressed: (){
+                      const BlackHoleScreen().navigate(context: context);
+                    },
+                    child: Text(
+                      App.s.black_hole,
+                      style: GoogleFonts.openSans(color: App.colorScheme.secondary, fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         )
     );
   }

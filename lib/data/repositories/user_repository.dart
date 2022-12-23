@@ -162,20 +162,29 @@ class UserRepository extends UserInterface with ProviderInterface {
     if (lastUpdate != null && !(update.isAfter(lastUpdate))) {
 
     }
-    else{
-      var h = (await dio.get<List<int>>("https://raw.githubusercontent.com/linkkader/Intra_42/main/users.json.br", options: Options(responseType: ResponseType.bytes))).data;
+    else {
+      var h = (await dio.get<List<int>>(
+          "https://raw.githubusercontent.com/linkkader/Intra_42/main/users.json.br",
+          options: Options(responseType: ResponseType.bytes))).data;
       App.log.d(h!.length);
       LocaleStorage.setDateTime("last", update);
-      try{
+      try {
         FlutterBrotli.init();
-      } catch(_) {
+      } catch (_) {
         App.log.d("FlutterBrotli.init() failed");
       }
       data = json.decode(await FlutterBrotli.decompress(Uint8List.fromList(h)));
+      var users = <User2>[];
       for (var d in data) {
-        try{
-         await  LocaleStorage.setUser2(User2.fromJson(d));
-        }catch(_){}
+        try {
+          users.add(User2.fromJson(d));
+        } catch (_) {}
+      }
+      try{
+        await LocaleStorage.setListUser2(users);
+        App.log.d("users saved ${users.length}");
+      }catch(_){
+        App.log.d("failed to save users");
       }
     }
     // return LocaleStorage.allUser2ByCampus(campusName);

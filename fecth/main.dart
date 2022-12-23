@@ -36,6 +36,7 @@ void main() async {
     var data = await LocaleStorage().img("cookie");
     if(data == null)
     {
+      print("cookie: $cookie");
       cookie = stdin.readLineSync()!;
       Client().initApi(cookie);
       LocaleStorage().saveImg("cookie", utf8.encode(cookie));

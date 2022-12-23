@@ -19,7 +19,7 @@ void _callBackDispatcher() async{
   Workmanager().executeTask((task, inputData) async {
     print("callBackDispatcher: $task");
     switch (task) {
-    case "notification":{
+    case "intra":{
         try{
           await notificationExecution(null);
         }catch(_){
@@ -28,7 +28,7 @@ void _callBackDispatcher() async{
       }
       break;
     }
-    return Future.value(true);
+    return true;
   });
 }
 
@@ -74,7 +74,6 @@ Future notificationExecution(void data) async {
     await LocaleStorage().init();
     Client().initApi();
   }
-  await NotificationRepository().notifications();
   try{
 
     await NotificationManager.showNotification();
@@ -108,7 +107,7 @@ class NotificationManager {
     notificationPlugin.initialize(initSettings);
     Workmanager().initialize(
         _callBackDispatcher,
-        isInDebugMode: true
+        isInDebugMode: kDebugMode
     );
     if (Platform.isAndroid){
       var duration = LocaleStorage.getDuration("work_manager") ?? const Duration(minutes: 16);

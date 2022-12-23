@@ -157,11 +157,6 @@ class _DashboardState extends ConsumerState<Dashboard> with SingleTickerProvider
           }
           return Scaffold(
               backgroundColor: Colors.transparent,
-              floatingActionButton: FloatingActionButton(
-                onPressed: () async {
-                  NotificationManager().test();
-                },
-              ),
               body: Refresh(
                 onRefresh: () async {
                   var complete = Completer();
