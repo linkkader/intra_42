@@ -5,7 +5,7 @@ const kApiBaseUrl2 = 'https://api.intra.42.fr';
 const kApiBaseUrl = 'https://api.intra.42.fr/v2';
 String kSignInEndpoint = "https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-21237aece88c955fa32f7df74461d0e7837a51545d840c40bc97f42e2fa26d5f&redirect_uri=https%3A%2F%2Fzanime.app&response_type=code";
 String kRedirectUrl = "https://zanime.app";
-String kSecret = "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";
+String kSecret = "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";
 String kClientId = "u-s4t2ud-21237aece88c955fa32f7df74461d0e7837a51545d840c40bc97f42e2fa26d5f";
 
 const String kDioErrorTag = "onError";

@@ -9,6 +9,8 @@ environment:
 
 dependencies:
 
+  dart_brotli: ^0.0.3
+
   #icons
   flutter_launcher_icons: ^0.11.0
 

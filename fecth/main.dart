@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:dart_brotli/dart_brotli.dart';
+
 import '../convert_freeze_to_izar/ext/string.dart';
 import 'core/params/constants.dart';
 import 'data/api/client.dart';
@@ -71,13 +73,17 @@ void main() async {
     var all = LocaleStorage().allUsers();
     var now = DateTime.now();
     List<User2> users = [];
-
     for (var value in all) {
       if (value.login?.contains("3b3-") == true) continue;
       var blackhole =  LocaleStorage().blackHoleIsar(value.id!);
-      if ( blackhole?.bhDate != null && value.displayname != null && value.login != null && value.image?.versions?.small != null && blackhole?.bhDate != null && value.campusName != null)
+      if (value.displayname != null && value.login != null && value.image?.versions?.small != null && blackhole?.bhDate != null && value.campusName != null)
       {
-        users.add(User2(name: value.displayname!, login: value.login!, img: value.image!.versions!.small!, bhDate: blackhole!.bhDate!, campusName: value.campusName!));
+        if (blackhole?.bhDate == null){
+          users.add(User2(name: value.displayname!, login: value.login!, img: value.image!.versions!.small!, bhDate: now.add(const Duration(days: 600)), campusName: value.campusName!));
+        }
+        else{
+          users.add(User2(name: value.displayname!, login: value.login!, img: value.image!.versions!.small!, bhDate: blackhole!.bhDate!, campusName: value.campusName!));
+        }
         // users.add(User(blackHole: blackhole!.toFreezed(), firstName: value.firstName, lastName: value.lastName, login: value.login, id: value.id, updatedAt: value.updatedAt, image: Image(versions: Versions(medium: value.image?.versions?.medium)), campusName: value.campusName,));
       }
     }
@@ -91,14 +97,15 @@ void main() async {
     file2.writeAsStringSync(jsonEncode(data));
     var file = File("users.json");
     file.writeAsStringSync(jsonEncode(users));
-    var file3 = File("users2.json");
-    dynamic data2 = [];
-    for (var element in users) {
-      data2.add({"0" : element.name, "1" : element.login, "2" : element.img.substringAfter("https://cdn.intra.42.fr/users/").substringBefore("/"), "3" : element.bhDate.toIso8601String(), "4" : campusName[element.campusName]});
-    }
+    var file3 = File("users.json.br");
+    await Brotli().init();
+    var compressed = await Brotli().compress(jsonEncode(users));
+    // for (var element in users) {
+    //   data2.add({"0" : element.name, "1" : element.login, "2" : element.img.substringAfter("https://cdn.intra.42.fr/users/").substringBefore("/"), "3" : element.bhDate.toIso8601String(), "4" : campusName[element.campusName]});
+    // }
 
     // file3.writeAsStringSync(jsonEncode({"campus" : campusName, "users" : data2}));
-    // file3.writeAsBytesSync(lst);
+    file3.writeAsBytesSync(compressed);
     return;
   }
   if (read.toLowerCase() == "clear")

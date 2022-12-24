@@ -75,7 +75,7 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
                     ],),
                   ),
                   onTap: (){
-                    ref.watch(campusSelect.notifier).state = index;
+                    ref.read(campusSelect.notifier).state = index;
                     futureProvider = FutureProvider((ref) {
                       return ref.read(BlackHoleRepository().futureProvider).allBlackHoles(_campusNames.isNotEmpty ? _campusNames[ref.watch(campusSelect)] : "1337 Benguerir/Morocco",
                           onCampusName: (lst) {
@@ -184,7 +184,6 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
     return ref.watch(futureProvider)
         .when(
         error: (_, __){
@@ -196,6 +195,11 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
           );
         },
       data: (data){
+          if(data.isEmpty){
+            return Center(
+              child: Text("No black hole found", style: GoogleFonts.ptSans(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
+            );
+          }
           return Scaffold(
             backgroundColor: Colors.transparent,
             body: Container(

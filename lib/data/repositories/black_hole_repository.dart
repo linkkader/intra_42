@@ -6,6 +6,7 @@ import 'package:intra_42/data/api/api.dart';
 import 'package:intra_42/data/models/black_hole_data.dart';
 import 'package:intra_42/data/models/user_2.dart';
 import 'package:intra_42/data/repositories/user_repository.dart';
+import 'package:intra_42/main.dart';
 import '../../core/utils/pair.dart';
 import '../../domain/api_interface/black_hole_repository.dart';
 import '../locale_storage/storage_stream.dart';
@@ -48,6 +49,7 @@ class BlackHoleRepository extends BlackHoleInterface{
   @override
   Future<List<Pair<int, List<User2>>>> allBlackHoles(String campusName, {Function(List<String> lst)? onImages, Function(List<String> lst)? onCampusName}) async{
     assert(_isInit, "BlackHoleRepository not initialized");
+    App.log.d("allBlackHoles");
     Set<String> campusNames = {};
     var now = DateTime.now();
     var imagesUrls = <String>[];

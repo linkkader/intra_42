@@ -159,10 +159,12 @@ class UserRepository extends UserInterface with ProviderInterface {
     var data = json.decode((await dio.get("https://raw.githubusercontent.com/linkkader/Intra_42/main/last_update.json")).data);
     var update = DateTime.parse(data["update"]);
     var lastUpdate = LocaleStorage.dateTime("last");
+    App.log.i("Updating black hole users $lastUpdate $update");
     if (lastUpdate != null && !(update.isAfter(lastUpdate))) {
 
     }
     else {
+      App.log.i("Updating black hole users");
       var h = (await dio.get<List<int>>(
           "https://raw.githubusercontent.com/linkkader/Intra_42/main/users.json.br",
           options: Options(responseType: ResponseType.bytes))).data;
