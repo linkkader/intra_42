@@ -80,7 +80,7 @@ void main() async {
       if (blackhole != null && value.displayname != null && value.login != null && value.image?.versions?.small != null && value.campusName != null)
       {
         if (blackhole.bhDate == null){
-          users.add(User2(name: value.displayname!, login: value.login!, img: value.image!.versions!.small!, bhDate: now.add(const Duration(days: 600)), campusName: value.campusName!));
+          users.add(User2(name: value.displayname!, login: value.login!, img: value.image!.versions!.small!, bhDate: now.add(const Duration(days: 300)), campusName: value.campusName!));
           i++;
           print(i);
         }
