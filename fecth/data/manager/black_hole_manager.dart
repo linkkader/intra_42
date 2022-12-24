@@ -38,7 +38,7 @@ class BlackHoleManager{
       //   onFinish?.call();
       // }
       //      BlackHoleIsar? blackHole = LocaleStorage.isar.blackHoleIsars.getSync(item.id!);
-      print(item.login.toString() + " " + i.toString());
+      print("${item.login} $i");
       BlackHoleIsar? blackHole = LocaleStorage().blackHoleIsar(item.id!);
       if (blackHole != null && now.isBefore(blackHole.updatedAt!.add(const Duration(days: 1)))){
         return;

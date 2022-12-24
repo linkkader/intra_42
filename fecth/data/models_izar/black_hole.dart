@@ -43,5 +43,10 @@ class BlackHoleIsar {
     updatedAt: updatedAt ?? this.updatedAt,
   );
 
+  @override
+  String toString() {
+    return 'BlackHoleIsar(id: $id, isAlumni: $isAlumni, agu: $agu, aguDate: $aguDate, singularity: $singularity, bhDate: $bhDate, updatedAt: $updatedAt)';
+  }
+
 }
 

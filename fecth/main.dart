@@ -77,17 +77,9 @@ void main() async {
     for (var value in all) {
       if (value.login?.contains("3b3-") == true) continue;
       var blackhole =  LocaleStorage().blackHoleIsar(value.id!);
-      if (blackhole != null && value.displayname != null && value.login != null && value.image?.versions?.small != null && value.campusName != null)
+      if (blackhole?.bhDate != null && value.displayname != null && value.login != null && value.image?.versions?.small != null && value.campusName != null)
       {
-        if (blackhole.bhDate == null && blackhole.isAlumni == true){
-          users.add(User2(name: value.displayname!, login: value.login!, img: value.image!.versions!.small!, bhDate: now.add(const Duration(days: 300)), campusName: value.campusName!));
-          i++;
-          print(i);
-        }
-        else if (blackhole.bhDate != null){
-          users.add(User2(name: value.displayname!, login: value.login!, img: value.image!.versions!.small!, bhDate: blackhole.bhDate!, campusName: value.campusName!));
-        }
-        // users.add(User(blackHole: blackhole!.toFreezed(), firstName: value.firstName, lastName: value.lastName, login: value.login, id: value.id, updatedAt: value.updatedAt, image: Image(versions: Versions(medium: value.image?.versions?.medium)), campusName: value.campusName,));
+        users.add(User2(name: value.displayname!, login: value.login!, img: value.image!.versions!.small!, bhDate: blackhole!.bhDate!, campusName: value.campusName!));
       }
     }
     Map<String, int> campusName = {};
