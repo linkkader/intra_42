@@ -38,10 +38,10 @@ android {
         }
 
         release {
-            keyAlias 'key0'
-            keyPassword 'linkkader'
-            storeFile file('../non_play_store_keystore.jks')
-            storePassword 'linkkader'
+            keyAlias 'linkkader'
+            keyPassword 'Intra42@acouliba'
+            storeFile file('../intra_42.keystore')
+            storePassword 'Intra42@acouliba'
         }
     }
     compileOptions {
