@@ -18,22 +18,22 @@ void updateCurrent()
   // }
   if (currentApiKey == 0) {
     kClientId = "u-s4t2ud-39d6ca34279ee593d9992e6613d8194fa0c172a3b32897186c5295de2add21ea";
-    kSecret = "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";
+    kSecret = "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";
     kSignInEndpoint = "https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-39d6ca34279ee593d9992e6613d8194fa0c172a3b32897186c5295de2add21ea&redirect_uri=https%3A%2F%2Fzanime.app&response_type=code";
   }
   else if (currentApiKey == 1) {
     kClientId = "u-s4t2ud-0e0cce10225261fdc192346f26a4ddeead273ed56e5bf63e002b43c501157531";
-    kSecret = "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";
+    kSecret = "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";
     kSignInEndpoint = "https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-0e0cce10225261fdc192346f26a4ddeead273ed56e5bf63e002b43c501157531&redirect_uri=https%3A%2F%2Fzanime.app&response_type=code";
   }
   else if (currentApiKey == 2) {
     kClientId = "u-s4t2ud-c89c767ebd39761ad890c229f82b8e75113be7ce4a75b85338e16de69fad5a8d";
-    kSecret = "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";
+    kSecret = "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";
     kSignInEndpoint = "https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-c89c767ebd39761ad890c229f82b8e75113be7ce4a75b85338e16de69fad5a8d&redirect_uri=https%3A%2F%2Fzanime.app&response_type=code";
   }
   else if (currentApiKey == 3) {
     kClientId = "u-s4t2ud-90139c0ed5b00fca3a0b267c52954d7decba1369327e49de544a93ef1c9d2ab2";
-    kSecret = "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";
+    kSecret = "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";
     kSignInEndpoint = "https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-90139c0ed5b00fca3a0b267c52954d7decba1369327e49de544a93ef1c9d2ab2&redirect_uri=https%3A%2F%2Fzanime.app&response_type=code";
   }
 }
