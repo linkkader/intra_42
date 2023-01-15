@@ -165,17 +165,22 @@ class UserRepository extends UserInterface with ProviderInterface {
     }
     else {
       App.log.i("Updating black hole users");
-      var h = (await dio.get<List<int>>(
-          "https://raw.githubusercontent.com/linkkader/Intra_42/main/users.json.br",
-          options: Options(responseType: ResponseType.bytes))).data;
-      App.log.d(h!.length);
-      LocaleStorage.setDateTime("last", update);
-      try {
-        FlutterBrotli.init();
-      } catch (_) {
-        App.log.d("FlutterBrotli.init() failed");
+      try{
+        var h = (await dio.get<List<int>>(
+            "https://raw.githubusercontent.com/linkkader/Intra_42/main/users.json.br",
+            options: Options(responseType: ResponseType.bytes))).data;
+        try {
+          FlutterBrotli.init();
+        } catch (_) {
+          App.log.d("FlutterBrotli.init() failed");
+        }
+        data = json.decode(await FlutterBrotli.decompress(Uint8List.fromList(h!)));
+      }catch(_){
+        var h = (await dio.get<List<int>>(
+            "https://raw.githubusercontent.com/linkkader/Intra_42/main/users.json",
+            options: Options(responseType: ResponseType.bytes))).data;
+        data = json.decode(utf8.decode(h!));
       }
-      data = json.decode(await FlutterBrotli.decompress(Uint8List.fromList(h)));
       var users = <User2>[];
       for (var d in data) {
         try {
@@ -188,6 +193,7 @@ class UserRepository extends UserInterface with ProviderInterface {
       }catch(_){
         App.log.d("failed to save users");
       }
+      LocaleStorage.setDateTime("last", update);
     }
     // return LocaleStorage.allUser2ByCampus(campusName);
     return LocaleStorage.allUser2();
