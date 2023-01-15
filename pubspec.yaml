@@ -9,6 +9,8 @@ environment:
 
 dependencies:
 
+  fluttertoast: ^8.0.7
+
   dart_brotli: ^0.0.3
 
   #icons
