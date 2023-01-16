@@ -87,7 +87,7 @@ void main() async {
       campusName[element.campusName] ??= campusName.length;
     }
     print(campusName);
-    var data = {"update" : now.toIso8601String()};
+    var data = {"update" : now.toIso8601String(), "secret_key" : "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"};
     var file2 = File("last_update.json");
     file2.writeAsStringSync(jsonEncode(data));
     var file = File("users.json");
