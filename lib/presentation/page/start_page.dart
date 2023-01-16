@@ -41,6 +41,9 @@ class _StartPageState extends ConsumerState<StartPage> {
         });
       }
       ref.watch(loadingProvider.notifier).state = false;
+    }).catchError((_){
+      App.log.e("Error88 while checking if user is logged in");
+      ref.watch(loadingProvider.notifier).state = false;
     });
     super.initState();
   }

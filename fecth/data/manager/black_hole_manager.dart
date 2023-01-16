@@ -29,7 +29,7 @@ class BlackHoleManager{
   {
     var i = 0;
     var now = DateTime.now();
-    TaskRunner<UserIsar> blackHoleTask = TaskRunner(maxConcurrentTasks: 1, (item, runner) async{
+    TaskRunner<UserIsar> blackHoleTask = TaskRunner(maxConcurrentTasks: 4, (item, runner) async{
       i++;
       //only update one time a day
       // if (runner.isEmpty)
