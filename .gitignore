@@ -1,6 +1,3 @@
-lib/core/params/constants.dart
-
-
 # Miscellaneous
 *.class
 *.log
@@ -49,5 +46,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 isar.isar
-android/app/build.gradle
-android/app/build.gradle
+#android/app/build.gradle
+#lib/core/params/constants.dart

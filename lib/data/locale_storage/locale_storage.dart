@@ -54,6 +54,9 @@ class LocaleStorage{
     }catch(_){
       App.log.i("$debug error ${_.toString()}");
     }
+    if (LocaleStorage.getString("clientSecret") == null && LocaleStorage.getString("default_secret_key") != null){
+      kSecret = LocaleStorage.getString("default_secret_key")!;
+    }
     App.log.i("Locale Storage initialized");
 
   }

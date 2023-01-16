@@ -28,11 +28,6 @@ class LogInterceptor extends InterceptorsWrapper{
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
 
-    if (err.response?.statusCode == 401) {
-      //Todo: handle 401
-      AuthRepository().refreshToken();
-    }
-
     var data = err.response?.data;
     App.log.e(
         "$kDioErrorTag ${err.response?.statusCode} ${err.response?.realUri} ${err.response?.statusMessage} data ${data.toString().length > 400 ? data.toString().substring(0, 400) : data}");

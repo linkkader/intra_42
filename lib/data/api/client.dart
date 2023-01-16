@@ -22,6 +22,7 @@ import '../repositories/scale_repository.dart';
 import 'api.dart';
 import '../locale_storage/locale_storage.dart';
 import '../repositories/auth_repository.dart';
+import 'client_interceptor/refresh_interceptor.dart';
 import 'client_interceptor/log_interceptor.dart' as log;
 
 class Client {
@@ -32,6 +33,7 @@ class Client {
 
   Future<void> initApi() async {
     if (kDebugMode)_dio.interceptors.add(log.LogInterceptor());
+    _dio.interceptors.add(RefreshInterceptor());
     _dio.interceptors.add(LimiterInterceptor());
     if (LocaleStorage().tokenBody != null) {
       var value = LocaleStorage().tokenBody!;

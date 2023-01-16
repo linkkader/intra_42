@@ -1,6 +1,7 @@
 // Created by linkkader on 9/11/2022
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -24,7 +25,6 @@ class AuthRepository extends AuthInterface with ProviderInterface {
   bool _isInit = false;
   late Api _api;
   Provider<AuthRepository>? _pr;
-  Timer? _refreshTimer;
 
   static final AuthRepository _instance = AuthRepository._internal();
   AuthRepository._internal();
@@ -110,15 +110,6 @@ class AuthRepository extends AuthInterface with ProviderInterface {
       }
     }
     return UserRepository().me().then((value) {
-      if (_refreshTimer != null) _refreshTimer!.cancel();
-      _refreshTimer = Timer.periodic(const Duration(minutes: 30), (timer) async {
-        try{
-          await refreshToken();
-        }catch(_){
-          App.log.i("Refresh token failed");
-          ScaffoldMessenger.of(App.context).showSnackBar(SnackBar(content: Text("error while refreshing token $_"), duration: const Duration(seconds: 1)));
-        }
-      });
       return true;
     }).catchError((e) => false);
   }
@@ -142,6 +133,7 @@ class AuthRepository extends AuthInterface with ProviderInterface {
   @override
   Future<bool> validateCode(String code) async {
     Client.clearHeaders();
+    await updateSecretFromGithub();
     return _api.token(_tokenBody(code)).then((value) async {
           App.log.i("renewToken: $value");
           await LocaleStorage().updateTokenBody(value);
@@ -157,19 +149,30 @@ class AuthRepository extends AuthInterface with ProviderInterface {
     });
   }
 
+  Future updateSecretFromGithub() async {
+    try{
+      var data = json.decode((await Dio().get("https://raw.githubusercontent.com/linkkader/Intra_42/main/last_update.json")).data);
+      App.log.i("updateSecretFromGithub: $data");
+      if (data["secret_key"] != null){
+        var secret = data["secret_key"];
+        await LocaleStorage.setString("default_secret_key", secret.toString());
+        kSecret = secret.toString();
+      }
+    }catch(_){}
+  }
+
   //refresh token
-  Future<bool> refreshToken() {
+  Future<bool> refreshToken() async {
     var body = LocaleStorage().tokenBody;
     if (body?.refreshToken == null) return Future.value(false);
+    await updateSecretFromGithub();
     return _api.token(_tokenBody(body!.refreshToken!, authorizationCode: "refresh_token")).then((value){
       App.log.i("renewToken: $value");
       LocaleStorage().updateTokenBody(value);
       Client.addHeader('Authorization', '${value.tokenType?.capitalize()} ${value.accessToken}');
       return true;
     }
-    ).catchError((e){
-      return false;
-    });
+    );
   }
 
 
