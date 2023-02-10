@@ -39,6 +39,7 @@ class LocaleStorage{
     _isar = await Isar.open([TokenBodyIsarSchema, UserIsarSchema, ImgSchema, BlackHoleIsarSchema, DateTimeIsarSchema, ExpertiseIsarSchema, IntIsarSchema, StringIsarSchema, NotificationIsarSchema, ScaleTeamIsarSchema, User2IsarSchema, ProjectsUserIsarCollectionSchema],);
     _isInit = true;
 
+
     try{
       var endpoint = LocaleStorage.getString("endpoint");
       var redirectUrl = LocaleStorage.getString("redirectUrl");
