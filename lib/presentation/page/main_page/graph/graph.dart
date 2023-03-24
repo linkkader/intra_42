@@ -84,6 +84,7 @@ class _GraphState extends ConsumerState<Graph> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
+
     super.build(context);
     if (_tabController == null){
       return Material(
@@ -92,6 +93,25 @@ class _GraphState extends ConsumerState<Graph> with SingleTickerProviderStateMix
       );
     }
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (widget.user.cursusUsers?.isNotEmpty == true && widget.user.campus?.isNotEmpty == true) {
+            for (var i = 0; i < widget.user.cursusUsers!.length; i++) {
+              UserRepository().projectData(widget.user.cursusUsers![i].cursusId!, widget.user.campus!.first.id!, widget.user.login!).then((value) {
+                for(var e in value){
+                  if (e.name?.contains("CPP") == true){
+                    App.log.wtf(e);
+                  }
+                }
+                ref.read(projectsDataState)[i] = value;
+                ref.read(projectsDataState.notifier).state = ref.read(projectsDataState).copy;
+              });
+            }
+            App.log.d("Graph: init state ${widget.user.cursusUsers!.length}");
+            _tabController ??= TabController(length: widget.user.cursusUsers!.length, vsync: this);
+          }
+        },
+      ),
         body: DecoratedBox(
           decoration: const BoxDecoration(
               gradient: RadialGradient(

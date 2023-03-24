@@ -48,3 +48,4 @@ app.*.map.json
 isar.isar
 #android/app/build.gradle
 #lib/core/params/constants.dart
+#login_test

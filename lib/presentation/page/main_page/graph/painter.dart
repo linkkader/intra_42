@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intra_42/main.dart';
 import 'package:touchable/touchable.dart';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
