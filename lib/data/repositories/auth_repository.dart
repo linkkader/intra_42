@@ -7,8 +7,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart' as inapp;
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:html/parser.dart';
+import 'package:intra_42/core/extensions/int_ext.dart';
 import 'package:intra_42/core/extensions/string_ext.dart';
+import 'package:intra_42/core/extensions/webview_controller_ext.dart';
 import 'package:intra_42/core/extensions/widget_ext.dart';
 import 'package:intra_42/core/params/constants.dart';
 import 'package:intra_42/core/utils/pair.dart';
@@ -20,6 +24,7 @@ import 'package:intra_42/main.dart';
 import 'package:intra_42/presentation/page/start_page.dart';
 import '../../domain/auth_interface/auth_interface.dart';
 import '../../domain/util_interface/provider_interface.dart';
+import '../../presentation/page/auth/auto_sign_webview.dart';
 
 class AuthRepository extends AuthInterface with ProviderInterface {
   bool _isInit = false;
@@ -65,7 +70,7 @@ class AuthRepository extends AuthInterface with ProviderInterface {
   Future signOut() async {
     App.log.i("Logged start");
     inapp.CookieManager cookieManager = inapp.CookieManager.instance();
-    if (!kDebugMode)await cookieManager.deleteAllCookies();
+    await cookieManager.deleteAllCookies();
     await LocaleStorage.clearTokenIsar();
     App.log.i("Logged out successfully");
     return true;
@@ -86,6 +91,7 @@ class AuthRepository extends AuthInterface with ProviderInterface {
     try{
       c += 'user.id=${cookie.where((element) => element.name == "user.id").first.value}';
     }catch(_){}
+    App.log.wtf("updateCookies: $c");
     LocaleStorage().updateCookie(c);
     Client.addHeader("cookie", c);
     return true;
@@ -149,6 +155,8 @@ class AuthRepository extends AuthInterface with ProviderInterface {
     });
   }
 
+
+
   Future updateSecretFromGithub() async {
     try{
       var data = json.decode((await Dio().get("https://raw.githubusercontent.com/linkkader/Intra_42/main/last_update.json")).data);
@@ -161,11 +169,26 @@ class AuthRepository extends AuthInterface with ProviderInterface {
     }catch(_){}
   }
 
+  Future<bool> refreshCookie(){
+    var login = LocaleStorage.getString("login");
+    var password = LocaleStorage.getString("password");
+    if (login == null || password == null) return Future.value(false);
+    return checkCookie().then((value) async {
+      if (value) return true;
+      return autoSign(login, password);
+    }).catchError((_) => autoSign(login, password));
+  }
+
+  Future<bool> checkCookie(){
+    return Client.dio.get("https://profile.intra.42.fr/users/acouliba/locations_stats.json").then((value) => true);
+  }
+
   //refresh token
   Future<bool> refreshToken() async {
     var body = LocaleStorage().tokenBody;
     if (body?.refreshToken == null) return Future.value(false);
     await updateSecretFromGithub();
+    await refreshCookie();
     return _api.token(_tokenBody(body!.refreshToken!, authorizationCode: "refresh_token")).then((value){
       App.log.i("renewToken: $value");
       LocaleStorage().updateTokenBody(value);
@@ -210,6 +233,61 @@ class AuthRepository extends AuthInterface with ProviderInterface {
       return Pair(false, _.response?.headers["www-authenticate"]?.toString() ?? _.message);
     }
     return const Pair(false, "Something went wrong");
+  }
+
+  @override
+  Future<bool> autoSign(String email, String password) async {
+    await signOut();
+    await updateCookies();
+    await AutoSignWebView.controller.loadUrl(urlRequest: URLRequest(url: kSignIn.uri));
+    await AutoSignWebView.loading();
+    var html = await AutoSignWebView.controller.getHtml();
+    var doc = parse(html);
+    var post = Uint8List.fromList(utf8.encode("username=$email&password=$password&credentialId="));
+    var url = doc.querySelector("form")?.attributes["action"];
+    await AutoSignWebView.controller.postUrl(url: Uri.parse(url!), postData: post);
+    await AutoSignWebView.loading();
+    html = await AutoSignWebView.controller.getHtml();
+    await updateCookies();
+    App.log.i(html);
+    if ((await AutoSignWebView.controller.getUrl()).toString() != "https://profile.intra.42.fr/"){
+      throw Exception("Wrong login or password");
+    }
+    await LocaleStorage.setString("login", email);
+    await LocaleStorage.setString("password", password);
+    return true;
+
+    // await controller.loadUrl(urlRequest: URLRequest(url: kSignInEndpoint.uri));
+    // await AutoSignWebView.loading();
+    // html = await controller.getHtml();
+    // doc = parse(html);
+    // var lst = doc.querySelector("form")!.querySelectorAll("input");
+    // var data = "";
+    // for (var value in lst) {
+    //   if (data != ""){
+    //     data += "&${value.attributes["name"]}=${value.attributes["value"]}";
+    //   }
+    //   else{
+    //     data += "${value.attributes["name"]}=${value.attributes["value"]}";
+    //   }
+    // }
+    //
+    // var url2 = kOAuthAuthorize;
+    // inapp.CookieManager cookieManager = inapp.CookieManager.instance();
+    // var cookie = await cookieManager.getCookies(url:  kBaseUrl.uri);
+    // var headers = {
+    //   "Cookie": cookie.map((e) => "${e.name}=${e.value}").join("; "),
+    //   "Content-Type": "application/x-www-form-urlencoded",
+    // };
+    // var res = await Client.dio.post(url2, data: data);
+    //
+    // return false;
+    // await controller.postUrl(url: kOAuthAuthorize.uri, postData: Uint8List.fromList(utf8.encode(data)));
+    // await AutoSignWebView.loading();
+    // App.log.wtf("done $data ${await controller.getUrl()}");
+    // App.log.wtf("done ${await controller.getHtml()}");
+
+    return false;
   }
 }
 

@@ -46,55 +46,60 @@ class TextFieldWidget extends ConsumerWidget {
       }
     });
 
-    return TextFormField(
-        controller: controller,
-        obscureText: obscureText,
-        autofillHints: autofillHints == null ? [] : [autofillHints!],
-        onTap: onTap,
-        autovalidateMode: AutovalidateMode.always,
-        readOnly: onTap != null,
-        enableSuggestions: true,
-        textInputAction: TextInputAction.next,
-        onFieldSubmitted: (_){
-          App.log.d('onFieldSubmitted');
-        },
-        validator: (_){
-          if (_ == null || _.isEmpty) {
-            return null;
-          }
-          return validator?.call(_);
-        },
-        style: GoogleFonts.ptSans(
-          color: App.colorScheme.secondary,
-          fontWeight: FontWeight.bold,
-        ),
-        decoration: InputDecoration(
-          hintText: label.toLowerCase(),
-          contentPadding: EdgeInsets.zero,
-          errorText: (notifierRequired == null) ? null : (ref.watch(notifierRequired!) && ref.watch(emptyNotifier)) ? App.s.required_field : null,
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: App.colorScheme.secondary),
-          ),
-          disabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: App.colorScheme.secondary),
-          ),
-          errorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: App.colorScheme.secondary),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: App.colorScheme.secondary),
-          ),
-          focusedErrorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: App.colorScheme.secondary),
-          ),
-          hintStyle: GoogleFonts.ptSans(
-            color: App.colorScheme.secondary.withOpacity(0.5),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: TextFormField(
+          controller: controller,
+          obscureText: obscureText,
+          autofillHints: autofillHints == null ? [] : [autofillHints!],
+          onTap: onTap,
+          autovalidateMode: AutovalidateMode.always,
+          readOnly: onTap != null,
+          enableSuggestions: true,
+          textInputAction: TextInputAction.next,
+          onFieldSubmitted: (_){
+            App.log.d('onFieldSubmitted');
+          },
+          validator: (_){
+            if (_ == null || _.isEmpty) {
+              return null;
+            }
+            return validator?.call(_);
+          },
+          style: GoogleFonts.ptSans(
+            color: App.colorScheme.secondary,
             fontWeight: FontWeight.bold,
           ),
-          border: InputBorder.none,
-        ),
+          decoration: InputDecoration(
+            hintText: label.toLowerCase(),
+            contentPadding: EdgeInsets.zero,
+            errorText: (notifierRequired == null) ? null : (ref.watch(notifierRequired!) && ref.watch(emptyNotifier)) ? App.s.required_field : null,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: App.colorScheme.secondary),
+            ),
+            disabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: App.colorScheme.secondary),
+            ),
+            errorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: App.colorScheme.secondary),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: App.colorScheme.secondary),
+            ),
+            focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: App.colorScheme.secondary),
+            ),
+            hintStyle: GoogleFonts.ptSans(
+              color: App.colorScheme.secondary.withOpacity(0.5),
+              fontWeight: FontWeight.bold,
+            ),
+            border: InputBorder.none,
+          ),
 
-        cursorColor: App.colorScheme.secondary
+          cursorColor: App.colorScheme.secondary
+      ),
     );
   }
 }
+
+

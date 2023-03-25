@@ -1,4 +1,8 @@
 
+
+const kSignIn = "https://profile.intra.42.fr/users/auth/keycloak_student";
+const kOAuthAuthorize = "https://api.intra.42.fr/oauth/authorize";
+
 const kBaseUrl = 'https://intra.42.fr';
 const kApiBaseUrl2 = 'https://api.intra.42.fr';
 

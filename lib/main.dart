@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intra_42/data/api/client.dart';
 import 'package:intra_42/presentation/page/start_page.dart';
 import 'package:logger/logger.dart';
@@ -89,4 +90,8 @@ class App extends StatelessWidget {
   static String get currentLanguage => "en";//Localizations.localeOf(context).languageCode;
 
   static get constantColors  => ColorConstants();
+
+  static void toast (String message) {
+    Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_LONG);
+  }
 }

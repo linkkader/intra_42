@@ -51,3 +51,8 @@ class TextColorConstants{
 
   static const agendaName = Color(0xFF00babc);
 }
+
+class TextFieldColorConstants{
+  static const text = Colors.white;
+  static const hint = Color(0xFF808080);
+}

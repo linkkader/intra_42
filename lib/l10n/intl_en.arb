@@ -53,5 +53,8 @@
   "secret" : "Secret",
   "redirect_url" : "Redirect URL",
   "save" : "Save",
-  "reset" : "Reset"
+  "reset" : "Reset",
+  "password" : "Password",
+  "login_email" : "Login or Email",
+  "error" : "Error"
 }

@@ -20,6 +20,7 @@ class ApiSettings extends StatefulWidget {
 
 class _ApiSettingsState extends State<ApiSettings> {
 
+  StateNotifierProvider<BoolNotifier, bool> notifierObscure = StateNotifierProvider((ref) => BoolNotifier(true));
   final _endPointController = TextEditingController();
   final _secretController = TextEditingController();
   final _redirectUrlController = TextEditingController();

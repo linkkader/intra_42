@@ -62,6 +62,7 @@ class Client {
       _dio.options.headers["cookie"] = LocaleStorage().cookie;
     }
     _dio.options.headers[key] = value;
+
   }
 
   static removeHeader(String key) {
@@ -115,4 +116,5 @@ class Client {
     return _dio.options.headers;
   }
 
+  static Dio get dio => _dio;
 }

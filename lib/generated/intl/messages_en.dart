@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "days_left": MessageLookupByLibrary.simpleMessage("Days left"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "endpoint": MessageLookupByLibrary.simpleMessage("Endpoint"),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
         "evaluated_by": MessageLookupByLibrary.simpleMessage("Evaluated by"),
         "evaluation": MessageLookupByLibrary.simpleMessage("Evaluation"),
         "evaluation_phrase": MessageLookupByLibrary.simpleMessage(
@@ -60,11 +61,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "live": MessageLookupByLibrary.simpleMessage("Live"),
         "logged_off": MessageLookupByLibrary.simpleMessage("logged off"),
         "logged_on": MessageLookupByLibrary.simpleMessage("logged on"),
+        "login_email": MessageLookupByLibrary.simpleMessage("Login or Email"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logtime": MessageLookupByLibrary.simpleMessage("Logtime"),
         "logtime_format":
             MessageLookupByLibrary.simpleMessage("logtime : %d:%d"),
         "notification": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
         "points_sales": MessageLookupByLibrary.simpleMessage("Points sales"),
         "redirect_url": MessageLookupByLibrary.simpleMessage("Redirect URL"),
         "required_field": MessageLookupByLibrary.simpleMessage("required"),
