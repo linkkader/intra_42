@@ -1,6 +1,8 @@
 // Created by linkkader on 11/9/22
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../core/params/hive_constants.dart';
 part 'token_body.freezed.dart';
 part 'token_body.g.dart';
 

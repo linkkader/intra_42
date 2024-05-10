@@ -6,7 +6,6 @@ part 'user_isar.g.dart';
 
 @collection
 class UserIsar {
-  @Index(unique: true, replace: true)
   final Id isarId;
   @Index(unique: true, replace: true)
   final int? id;
@@ -16,6 +15,7 @@ class UserIsar {
   final String? firstName;
   final String? lastName;
   final String? usualFullName;
+  final String? campusName;
   @ignore
   final dynamic usualFirstName;
   final String? url;
@@ -61,10 +61,10 @@ class UserIsar {
   final List<CampusIsar>? campus;
   final List<CampusUserIsar>? campusUsers;
 
-  const UserIsar({this.email, this.login, this.firstName, this.lastName, this.usualFullName, this.usualFirstName, this.url, this.phone, this.displayname, this.kind, this.imageUrl, this.image, this.newImageUrl, this.staff, this.correctionPoint, this.poolMonth, this.poolYear, this.location, this.wallet, this.anonymizeDate, this.dataErasureDate, this.createdAt, this.updatedAt, this.alumnizedAt, this.alumni, this.active, this.groups, this.cursusUsers, this.projectsUsers, this.languagesUsers, this.achievements, this.titles, this.titlesUsers, this.partnerships, this.patroned, this.patroning, this.expertisesUsers, this.roles, this.campus, this.campusUsers, this.id, this.isarId = 0});
+  const UserIsar({this.email, this.login, this.firstName, this.lastName, this.usualFullName, this.usualFirstName, this.url, this.phone, this.displayname, this.kind, this.imageUrl, this.image, this.newImageUrl, this.staff, this.correctionPoint, this.poolMonth, this.poolYear, this.location, this.wallet, this.anonymizeDate, this.dataErasureDate, this.createdAt, this.updatedAt, this.alumnizedAt, this.alumni, this.active, this.groups, this.cursusUsers, this.projectsUsers, this.languagesUsers, this.achievements, this.titles, this.titlesUsers, this.partnerships, this.patroned, this.patroning, this.expertisesUsers, this.roles, this.campus, this.campusUsers, this.id, this.isarId = 0, this.campusName});
 
-  factory UserIsar.fromFreezed(User? objet, {int? isarId}) => UserIsar (
-    isarId: isarId ?? objet?.id ?? 0,
+  factory UserIsar.fromFreezed(User? objet) => UserIsar (
+    isarId: objet?.id ?? 0,
     id: objet?.id ?? 0,
     email: objet?.email,
     login: objet?.login,
@@ -97,10 +97,12 @@ class UserIsar {
     expertisesUsers: objet?.expertisesUsers?.map((e) => ExpertisesUserIsar.fromFreezed(e)).toList(),
     campus: objet?.campus?.map((e) => CampusIsar.fromFreezed(e)).toList(),
     campusUsers: objet?.campusUsers?.map((e) => CampusUserIsar.fromFreezed(e)).toList(),
+    campusName: objet?.campusName,
   );
 
   User toFreezed() => User(
     id: id,
+    campusName: campusName,
     email: email,
     login: login,
     firstName: firstName,
@@ -187,7 +189,6 @@ class UserIsar {
     List<CampusIsar>? campus,
     List<CampusUserIsar>? campusUsers,
   }) => UserIsar(
-    isarId: isarId ?? this.isarId,
     id: id ?? this.id,
     email: email ?? this.email,
     login: login ?? this.login,
@@ -229,6 +230,7 @@ class UserIsar {
     roles: roles ?? this.roles,
     campus: campus ?? this.campus,
     campusUsers: campusUsers ?? this.campusUsers,
+    isarId: isarId ?? this.isarId,
   );
 
 
@@ -297,6 +299,70 @@ class CampusIsar {
   const CampusIsar({this.id, this.name, this.timeZone, this.language, this.usersCount, this.vogsphereId, this.country, this.address, this.zip, this.city, this.website, this.facebook, this.twitter, this.active, this.public, this.emailExtension, this.defaultHiddenPhone, });
 
   factory CampusIsar.fromFreezed(Campus? objet) => CampusIsar (
+    id: objet?.id,
+    name: objet?.name,
+    timeZone: objet?.timeZone,
+    language: LanguageIsar.fromFreezed(objet?.language),
+    usersCount: objet?.usersCount,
+    vogsphereId: objet?.vogsphereId,
+    country: objet?.country,
+    address: objet?.address,
+    zip: objet?.zip,
+    city: objet?.city,
+    website: objet?.website,
+    facebook: objet?.facebook,
+    twitter: objet?.twitter,
+    active: objet?.active,
+    public: objet?.public,
+    emailExtension: objet?.emailExtension,
+    defaultHiddenPhone: objet?.defaultHiddenPhone,
+  );
+
+  Campus toFreezed() => Campus(
+    id: id,
+    name: name,
+    timeZone: timeZone,
+    language: language?.toFreezed(),
+    usersCount: usersCount,
+    vogsphereId: vogsphereId,
+    country: country,
+    address: address,
+    zip: zip,
+    city: city,
+    website: website,
+    facebook: facebook,
+    twitter: twitter,
+    active: active,
+    public: public,
+    emailExtension: emailExtension,
+    defaultHiddenPhone: defaultHiddenPhone,
+  );
+
+}
+
+@Collection()
+class CampusIsarCollection {
+  final Id? id;
+  final String? name;
+  final String? timeZone;
+  final LanguageIsar? language;
+  final int? usersCount;
+  final int? vogsphereId;
+  final String? country;
+  final String? address;
+  final String? zip;
+  final String? city;
+  final String? website;
+  final String? facebook;
+  final String? twitter;
+  final bool? active;
+  final bool? public;
+  final String? emailExtension;
+  final bool? defaultHiddenPhone;
+
+  const CampusIsarCollection({this.id, this.name, this.timeZone, this.language, this.usersCount, this.vogsphereId, this.country, this.address, this.zip, this.city, this.website, this.facebook, this.twitter, this.active, this.public, this.emailExtension, this.defaultHiddenPhone, });
+
+  factory CampusIsarCollection.fromFreezed(Campus? objet) => CampusIsarCollection (
     id: objet?.id,
     name: objet?.name,
     timeZone: objet?.timeZone,
@@ -745,58 +811,6 @@ class LanguagesUserIsar {
 
 }
 
-@Collection()
-class ProjectsUserIsarCollection {
-  final Id? id;
-  final int? occurrence;
-  final int? finalMark;
-  final String? status;
-  final bool? validated;
-  final int? currentTeamId;
-  final ProjectIsar? project;
-  final List<int>? cursusIds;
-  final DateTime? markedAt;
-  final bool? marked;
-  final DateTime? retriableAt;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-
-  const ProjectsUserIsarCollection({this.id, this.occurrence, this.finalMark, this.status, this.validated, this.currentTeamId, this.project, this.cursusIds, this.markedAt, this.marked, this.retriableAt, this.createdAt, this.updatedAt, });
-
-  factory ProjectsUserIsarCollection.projectUserIsar(ProjectsUserIsar? objet) => ProjectsUserIsarCollection  (
-    id: objet?.id,
-    occurrence: objet?.occurrence,
-    finalMark: objet?.finalMark,
-    status: objet?.status,
-    validated: objet?.validated,
-    currentTeamId: objet?.currentTeamId,
-    project: objet?.project,
-    cursusIds: objet?.cursusIds?.map((e) => e).toList(),
-    markedAt: objet?.markedAt,
-    marked: objet?.marked,
-    retriableAt: objet?.retriableAt,
-    createdAt: objet?.createdAt,
-    updatedAt: objet?.updatedAt,
-  );
-
-  ProjectsUserIsar toProjectUserIsar() => ProjectsUserIsar(
-    id: id,
-    occurrence: occurrence,
-    finalMark: finalMark,
-    status: status,
-    validated: validated,
-    currentTeamId: currentTeamId,
-    project: project,
-    cursusIds: cursusIds?.map((e) => e).toList(),
-    markedAt: markedAt,
-    marked: marked,
-    retriableAt: retriableAt,
-    createdAt: createdAt,
-    updatedAt: updatedAt,
-  );
-
-}
-
 @embedded
 class ProjectsUserIsar {
   final int? id;
@@ -869,6 +883,7 @@ class ProjectIsar {
     id: id,
     name: name,
     slug: slug,
+    parentId: parentId,
   );
 
 }

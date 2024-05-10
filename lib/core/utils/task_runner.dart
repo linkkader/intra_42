@@ -4,8 +4,6 @@
 
 import 'dart:collection';
 
-import 'package:intra_42/main.dart';
-
 ///queue manager
 class TaskRunner<T> {
   final Queue<T> _input = Queue();
@@ -14,7 +12,7 @@ class TaskRunner<T> {
   int runningTasks = 0;
 
   ///init queue manager
-  TaskRunner (Future Function(T item, TaskRunner<T> runner) execution,{this.maxConcurrentTasks = 1, bool startQueue = true}) {
+  TaskRunner (Future Function(T item, TaskRunner<T>) execution,{this.maxConcurrentTasks = 1, bool startQueue = true}) {
     _execution = execution;
     if (startQueue == true) {
       _startExecution();
@@ -50,6 +48,8 @@ class TaskRunner<T> {
     }
   }
 
+  int get runningTasksCount => runningTasks;
+
   bool get isRunning => runningTasks > 0;
 
   int get length => _input.length;
@@ -57,6 +57,4 @@ class TaskRunner<T> {
   bool get isEmpty => _input.isEmpty;
 
   bool get isNotEmpty => _input.isNotEmpty;
-
-  bool get isLast => isEmpty && runningTasks == 1;
 }

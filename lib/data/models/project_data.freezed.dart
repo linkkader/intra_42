@@ -12,7 +12,7 @@ part of 'project_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ProjectData _$ProjectDataFromJson(Map<String, dynamic> json) {
   return _ProjectData.fromJson(json);
@@ -156,11 +156,11 @@ class _$ProjectDataCopyWithImpl<$Res, $Val extends ProjectData>
 }
 
 /// @nodoc
-abstract class _$$_ProjectDataCopyWith<$Res>
+abstract class _$$ProjectDataImplCopyWith<$Res>
     implements $ProjectDataCopyWith<$Res> {
-  factory _$$_ProjectDataCopyWith(
-          _$_ProjectData value, $Res Function(_$_ProjectData) then) =
-      __$$_ProjectDataCopyWithImpl<$Res>;
+  factory _$$ProjectDataImplCopyWith(
+          _$ProjectDataImpl value, $Res Function(_$ProjectDataImpl) then) =
+      __$$ProjectDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -181,11 +181,11 @@ abstract class _$$_ProjectDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProjectDataCopyWithImpl<$Res>
-    extends _$ProjectDataCopyWithImpl<$Res, _$_ProjectData>
-    implements _$$_ProjectDataCopyWith<$Res> {
-  __$$_ProjectDataCopyWithImpl(
-      _$_ProjectData _value, $Res Function(_$_ProjectData) _then)
+class __$$ProjectDataImplCopyWithImpl<$Res>
+    extends _$ProjectDataCopyWithImpl<$Res, _$ProjectDataImpl>
+    implements _$$ProjectDataImplCopyWith<$Res> {
+  __$$ProjectDataImplCopyWithImpl(
+      _$ProjectDataImpl _value, $Res Function(_$ProjectDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -206,7 +206,7 @@ class __$$_ProjectDataCopyWithImpl<$Res>
     Object? description = freezed,
     Object? slug = freezed,
   }) {
-    return _then(_$_ProjectData(
+    return _then(_$ProjectDataImpl(
       state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
@@ -269,8 +269,8 @@ class __$$_ProjectDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProjectData implements _ProjectData {
-  const _$_ProjectData(
+class _$ProjectDataImpl implements _ProjectData {
+  const _$ProjectDataImpl(
       {this.state,
       @JsonKey(name: "final_mark") this.finalMark,
       this.id,
@@ -287,8 +287,8 @@ class _$_ProjectData implements _ProjectData {
       this.slug})
       : _by = by;
 
-  factory _$_ProjectData.fromJson(Map<String, dynamic> json) =>
-      _$$_ProjectDataFromJson(json);
+  factory _$ProjectDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProjectDataImplFromJson(json);
 
   @override
   final String? state;
@@ -335,10 +335,10 @@ class _$_ProjectData implements _ProjectData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProjectData &&
+            other is _$ProjectDataImpl &&
             (identical(other.state, state) || other.state == state) &&
             (identical(other.finalMark, finalMark) ||
                 other.finalMark == finalMark) &&
@@ -382,12 +382,12 @@ class _$_ProjectData implements _ProjectData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProjectDataCopyWith<_$_ProjectData> get copyWith =>
-      __$$_ProjectDataCopyWithImpl<_$_ProjectData>(this, _$identity);
+  _$$ProjectDataImplCopyWith<_$ProjectDataImpl> get copyWith =>
+      __$$ProjectDataImplCopyWithImpl<_$ProjectDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProjectDataToJson(
+    return _$$ProjectDataImplToJson(
       this,
     );
   }
@@ -408,10 +408,10 @@ abstract class _ProjectData implements ProjectData {
       final String? duration,
       final String? rules,
       final String? description,
-      final String? slug}) = _$_ProjectData;
+      final String? slug}) = _$ProjectDataImpl;
 
   factory _ProjectData.fromJson(Map<String, dynamic> json) =
-      _$_ProjectData.fromJson;
+      _$ProjectDataImpl.fromJson;
 
   @override
   String? get state;
@@ -445,7 +445,7 @@ abstract class _ProjectData implements ProjectData {
   String? get slug;
   @override
   @JsonKey(ignore: true)
-  _$$_ProjectDataCopyWith<_$_ProjectData> get copyWith =>
+  _$$ProjectDataImplCopyWith<_$ProjectDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -457,7 +457,7 @@ By _$ByFromJson(Map<String, dynamic> json) {
 mixin _$By {
   @JsonKey(name: 'parent_id')
   int? get parentId => throw _privateConstructorUsedError;
-  List<List<double>>? get points => throw _privateConstructorUsedError;
+  List<List<int>>? get points => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -470,7 +470,7 @@ abstract class $ByCopyWith<$Res> {
       _$ByCopyWithImpl<$Res, By>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'parent_id') int? parentId, List<List<double>>? points});
+      {@JsonKey(name: 'parent_id') int? parentId, List<List<int>>? points});
 }
 
 /// @nodoc
@@ -496,25 +496,25 @@ class _$ByCopyWithImpl<$Res, $Val extends By> implements $ByCopyWith<$Res> {
       points: freezed == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as List<List<double>>?,
+              as List<List<int>>?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ByCopyWith<$Res> implements $ByCopyWith<$Res> {
-  factory _$$_ByCopyWith(_$_By value, $Res Function(_$_By) then) =
-      __$$_ByCopyWithImpl<$Res>;
+abstract class _$$ByImplCopyWith<$Res> implements $ByCopyWith<$Res> {
+  factory _$$ByImplCopyWith(_$ByImpl value, $Res Function(_$ByImpl) then) =
+      __$$ByImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'parent_id') int? parentId, List<List<double>>? points});
+      {@JsonKey(name: 'parent_id') int? parentId, List<List<int>>? points});
 }
 
 /// @nodoc
-class __$$_ByCopyWithImpl<$Res> extends _$ByCopyWithImpl<$Res, _$_By>
-    implements _$$_ByCopyWith<$Res> {
-  __$$_ByCopyWithImpl(_$_By _value, $Res Function(_$_By) _then)
+class __$$ByImplCopyWithImpl<$Res> extends _$ByCopyWithImpl<$Res, _$ByImpl>
+    implements _$$ByImplCopyWith<$Res> {
+  __$$ByImplCopyWithImpl(_$ByImpl _value, $Res Function(_$ByImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -523,7 +523,7 @@ class __$$_ByCopyWithImpl<$Res> extends _$ByCopyWithImpl<$Res, _$_By>
     Object? parentId = freezed,
     Object? points = freezed,
   }) {
-    return _then(_$_By(
+    return _then(_$ByImpl(
       parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
@@ -531,27 +531,28 @@ class __$$_ByCopyWithImpl<$Res> extends _$ByCopyWithImpl<$Res, _$_By>
       points: freezed == points
           ? _value._points
           : points // ignore: cast_nullable_to_non_nullable
-              as List<List<double>>?,
+              as List<List<int>>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_By implements _By {
-  const _$_By(
+class _$ByImpl implements _By {
+  const _$ByImpl(
       {@JsonKey(name: 'parent_id') this.parentId,
-      final List<List<double>>? points})
+      final List<List<int>>? points})
       : _points = points;
 
-  factory _$_By.fromJson(Map<String, dynamic> json) => _$$_ByFromJson(json);
+  factory _$ByImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ByImplFromJson(json);
 
   @override
   @JsonKey(name: 'parent_id')
   final int? parentId;
-  final List<List<double>>? _points;
+  final List<List<int>>? _points;
   @override
-  List<List<double>>? get points {
+  List<List<int>>? get points {
     final value = _points;
     if (value == null) return null;
     if (_points is EqualUnmodifiableListView) return _points;
@@ -565,10 +566,10 @@ class _$_By implements _By {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_By &&
+            other is _$ByImpl &&
             (identical(other.parentId, parentId) ||
                 other.parentId == parentId) &&
             const DeepCollectionEquality().equals(other._points, _points));
@@ -582,12 +583,12 @@ class _$_By implements _By {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ByCopyWith<_$_By> get copyWith =>
-      __$$_ByCopyWithImpl<_$_By>(this, _$identity);
+  _$$ByImplCopyWith<_$ByImpl> get copyWith =>
+      __$$ByImplCopyWithImpl<_$ByImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ByToJson(
+    return _$$ByImplToJson(
       this,
     );
   }
@@ -596,16 +597,17 @@ class _$_By implements _By {
 abstract class _By implements By {
   const factory _By(
       {@JsonKey(name: 'parent_id') final int? parentId,
-      final List<List<double>>? points}) = _$_By;
+      final List<List<int>>? points}) = _$ByImpl;
 
-  factory _By.fromJson(Map<String, dynamic> json) = _$_By.fromJson;
+  factory _By.fromJson(Map<String, dynamic> json) = _$ByImpl.fromJson;
 
   @override
   @JsonKey(name: 'parent_id')
   int? get parentId;
   @override
-  List<List<double>>? get points;
+  List<List<int>>? get points;
   @override
   @JsonKey(ignore: true)
-  _$$_ByCopyWith<_$_By> get copyWith => throw _privateConstructorUsedError;
+  _$$ByImplCopyWith<_$ByImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

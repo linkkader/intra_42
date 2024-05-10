@@ -5,26 +5,36 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:i_42/main.dart';
+import 'package:intra_42/core/log/logger.dart';
+import 'package:intra_42/data/api/client.dart';
+import 'package:intra_42/data/locale_storage/locale_storage.dart';
+import 'package:intra_42/data/api/client_interceptor/log_interceptor.dart' as logInterceptor;
+import 'package:intra_42/data/repositories/user_repository.dart';
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+void main() async {
+  await LocaleStorage().init();
+  //todo: properly check this
+  await Client().initApi();
+  Client.addHeader('Authorization', 'Bearer f34ff8a4fb557a20a99d531a263bd6629a27a35783452c5717814bdc7661a685');
+ Client.addHeader('cookie', '_intra_42_session_production=b656cbff4ee2d88f6587a7d7853fbe88; ');
+ var log = Log();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  test("test", () async {
+    var me = await UserRepository().projectData(21, 21, "");
+    log.e(me);
+    // var headers = {
+    //   "Authorization":"12335455555",
+    //   "cookie":"_intra_42_session_production=b656cbff4ee2d88f6587a7d7853fbe88; ",
+    //   'Host' : 'projects.intra.42.fr'
+    // };
+    // var dio = Dio();
+    // dio.interceptors.add(logInterceptor.LogInterceptor());
+    // dio.options.headers = headers;
+    // var response = await dio.get('https://projects.intra.42.fr/project_data.json?cursus_id=21&campus_id=21');
+    // log.e(response.data);
   });
 }

@@ -1,15 +1,18 @@
 // Created by linkkader on 17/11/2022
 
-import 'package:intra_42/core/utils/task_runner.dart';
-import 'package:intra_42/data/locale_storage/locale_storage.dart';
-import 'package:intra_42/data/models/user.dart';
-import 'package:intra_42/data/models_izar/user_isar.dart';
-import 'package:intra_42/data/repositories/black_hole_repository.dart';
-import 'package:intra_42/data/repositories/user_repository.dart';
-import 'package:intra_42/main.dart';
-import 'package:isar/isar.dart';
+import 'dart:io';
 
+import 'package:isar/isar.dart';
+import '../../core/extensions/string_ext.dart';
+import '../../core/params/constants.dart';
+import '../../core/utils/task_runner.dart';
+import '../locale_storage/locale_storage.dart';
+import '../models/user.dart';
 import '../models_izar/black_hole.dart';
+import '../models_izar/user_isar.dart';
+import '../repositories/black_hole_repository.dart';
+import '../repositories/user_repository.dart';
+
 
 class BlackHoleManager{
   final int _userFetchCount = 30;
@@ -24,68 +27,119 @@ class BlackHoleManager{
 
   void fetchAllBlackHole({Function? onFinish})
   {
-    App.log.i("Fetching all black holes");
+    var i = 0;
     var now = DateTime.now();
-    TaskRunner<UserIsar> blackHoleTask = TaskRunner(maxConcurrentTasks: 100, (item, runner) async{
+    TaskRunner<UserIsar> blackHoleTask = TaskRunner(maxConcurrentTasks: 500, (item, runner) async{
+      i++;
+      //only update one time a day
+      // if (runner.isEmpty)
+      // {
+      //   App.log.i("All black holes updated");
+      //   onFinish?.call();
+      // }
+      //      BlackHoleIsar? blackHole = LocaleStorage.isar.blackHoleIsars.getSync(item.id!);
+      print("${item.login} $i");
       BlackHoleIsar? blackHole = LocaleStorage().blackHoleIsar(item.id!);
-      if (runner.isEmpty && runner.runningTasks == 1){
-        onFinish?.call();
-      }
       if (blackHole != null && now.isBefore(blackHole.updatedAt!.add(const Duration(days: 1)))){
+        return;
+      }
+      if (item.login?.contains("3b3") == true){
+        blackHole = BlackHoleIsar(id : item.id, updatedAt: now,);
+        // print("blachole ${runner.runningTasksCount}");
+        await LocaleStorage().updateBlackHole(blackHole);
         return;
       }
       try{
         var data = await BlackHoleRepository().blackHoleLogin(item.login!);
+        print(data);
         blackHole = BlackHoleIsar.fromFreezed(data).copyWith(id : item.id, updatedAt: now);
-        LocaleStorage().updateBlackHole(blackHole);
+        // print("blachole ${runner.runningTasksCount}");
+        await LocaleStorage().updateBlackHole(blackHole);
       }catch(_){
-        App.log.e("error78 $_}");
-      }
-      if (runner.isEmpty && runner.runningTasks == 1){
-        onFinish?.call();
+        if (!_.toString().contains("subtype of typ")) print("blachole $_");
       }
     });
     var all = LocaleStorage.isar.userIsars.where().findAllSync();
+    print(all.length);
+    // exit(0);
     blackHoleTask.addAll(all);
   }
 
-  void fetchCampusAllUser(int campusId, {Function()? onFinish}) async {
-    var usersCount = LocaleStorage().allUsers().length;
-    if(runner?.isRunning == true){
-      App.log.i("BlackHoleManager: fetchUser: already running");
-      return;
-    }
-    var last = LocaleStorage.dateTime("fetchCampusAllUser");
+  void fetchCampusAllUser({Function()? onFinish}) async {
+    // if(runner?.isRunning == true){
+      // App.log.i("BlackHoleManager: fetchUser: already running");
+      // return;
+    // }
+    print("fetchCampusAllUser ");
+    var last = LocaleStorage.dateTime("fetchCampusAllUser$currentApiKey");
     var now = DateTime.now();
+    print("last $last");
     if (last != null && now.isBefore(last.add(const Duration(days: 1)))){
-      App.log.i("BlackHoleManager: fetchUser: already updated");
+      print("BlackHoleManager: fetchUser: already updated");
       onFinish?.call();
       return;
     }
-    App.log.i("BlackHoleManager: fetchUser: starting $usersCount");
-    if (usersCount > 1){
-      onFinish?.call();
-    }
+    var allCampus = LocaleStorage.getCampus();
+    var currentCampus = LocaleStorage.getInt("currentCampus") ?? 0;
     int page = LocaleStorage.getInt("page") ?? 0;
-
+    int start = 0;
+    print("page $page $currentCampus");
+    // switch(currentApiKey){
+    //   case 0:
+    //     start = 0;
+    //     break;
+    //   case 1:
+    //     start = 1000;
+    //     break;
+    //   case 2:
+    //     start = 2000;
+    //     break;
+    //   case 3:
+    //     start = 3000;
+    //     break;
+    // }
+    List<User> all = [];
+    print("start ${start}");
     //maxConcurrentTasks 1 api limit
     runner = TaskRunner(maxConcurrentTasks: 1,(item, runner) async {
+      print("start ${item + start}");
+      print("start1 ${item}");
       List<User> lst = [];
       try{
-        lst = await UserRepository().usersCampus(campusId, page: item);
+        print("start request");
+        lst = await UserRepository().users(page: start + item, allCampus[currentCampus].id!);
+        print("end request");
+        print(lst);
         for (var element in lst) {
-          LocaleStorage().updateUser(element);
+          LocaleStorage().updateUser(element.copyWith(campusName: "${allCampus[currentCampus].website?.urlName} ${allCampus[currentCampus].name}/${allCampus[currentCampus].country}"));
         }
       }catch(_){
-        App.log.i("BlackHoleManager: error $_})");
+        print(_);
+        await Future.delayed(const Duration(milliseconds: 50));
+        runner.add(page);
+        return;
       }
+      // print(lst.last.login);
+
+      // await Future.delayed(const Duration(milliseconds: 50));
+      print("end ${item + start}");
+      print("count ${LocaleStorage.isar.userIsars.countSync()}");
+      await LocaleStorage.setInt("page", page);
       if (lst.length == _userFetchCount) {
-        LocaleStorage.setInt("page", item + 1);
+        print(all.length);
         runner.add(page++);
       }
       else{
-        onFinish?.call();
-        LocaleStorage.setDateTime("fetchCampusAllUser", DateTime.now());
+        print("endAll $currentCampus ${item + start}");
+        //onFinish?.call();
+        await LocaleStorage.setInt("page", 0);
+        currentCampus++;
+        await LocaleStorage.setInt("currentCampus", currentCampus);
+        fetchCampusAllUser();
+        if(currentCampus == allCampus.length){
+          LocaleStorage.setDateTime("fetchCampusAllUser", DateTime.now());
+          exit(0);
+        }
       }},
     );
     runner?.add(page++);
@@ -94,6 +148,5 @@ class BlackHoleManager{
   BlackHoleManager init() {
     return this;
   }
-
 
 }

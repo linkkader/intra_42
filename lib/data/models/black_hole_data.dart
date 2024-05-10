@@ -1,7 +1,6 @@
 // Created by linkkader on 17/11/2022
 
 
-import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
 
