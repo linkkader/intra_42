@@ -20,11 +20,11 @@ User2 _$User2FromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User2 {
-  String get name => throw _privateConstructorUsedError;
-  String get login => throw _privateConstructorUsedError;
-  String get img => throw _privateConstructorUsedError;
-  DateTime get bhDate => throw _privateConstructorUsedError;
-  String get campusName => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get login => throw _privateConstructorUsedError;
+  String? get img => throw _privateConstructorUsedError;
+  DateTime? get bhDate => throw _privateConstructorUsedError;
+  String? get campusName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,11 +37,11 @@ abstract class $User2CopyWith<$Res> {
       _$User2CopyWithImpl<$Res, User2>;
   @useResult
   $Res call(
-      {String name,
-      String login,
-      String img,
-      DateTime bhDate,
-      String campusName});
+      {String? name,
+      String? login,
+      String? img,
+      DateTime? bhDate,
+      String? campusName});
 }
 
 /// @nodoc
@@ -57,33 +57,33 @@ class _$User2CopyWithImpl<$Res, $Val extends User2>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? login = null,
-    Object? img = null,
-    Object? bhDate = null,
-    Object? campusName = null,
+    Object? name = freezed,
+    Object? login = freezed,
+    Object? img = freezed,
+    Object? bhDate = freezed,
+    Object? campusName = freezed,
   }) {
     return _then(_value.copyWith(
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      login: null == login
+              as String?,
+      login: freezed == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
-              as String,
-      img: null == img
+              as String?,
+      img: freezed == img
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
-              as String,
-      bhDate: null == bhDate
+              as String?,
+      bhDate: freezed == bhDate
           ? _value.bhDate
           : bhDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      campusName: null == campusName
+              as DateTime?,
+      campusName: freezed == campusName
           ? _value.campusName
           : campusName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -96,11 +96,11 @@ abstract class _$$User2ImplCopyWith<$Res> implements $User2CopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String name,
-      String login,
-      String img,
-      DateTime bhDate,
-      String campusName});
+      {String? name,
+      String? login,
+      String? img,
+      DateTime? bhDate,
+      String? campusName});
 }
 
 /// @nodoc
@@ -114,33 +114,33 @@ class __$$User2ImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? login = null,
-    Object? img = null,
-    Object? bhDate = null,
-    Object? campusName = null,
+    Object? name = freezed,
+    Object? login = freezed,
+    Object? img = freezed,
+    Object? bhDate = freezed,
+    Object? campusName = freezed,
   }) {
     return _then(_$User2Impl(
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      login: null == login
+              as String?,
+      login: freezed == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
-              as String,
-      img: null == img
+              as String?,
+      img: freezed == img
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
-              as String,
-      bhDate: null == bhDate
+              as String?,
+      bhDate: freezed == bhDate
           ? _value.bhDate
           : bhDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      campusName: null == campusName
+              as DateTime?,
+      campusName: freezed == campusName
           ? _value.campusName
           : campusName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -149,25 +149,21 @@ class __$$User2ImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$User2Impl implements _User2 {
   const _$User2Impl(
-      {required this.name,
-      required this.login,
-      required this.img,
-      required this.bhDate,
-      required this.campusName});
+      {this.name, this.login, this.img, this.bhDate, this.campusName});
 
   factory _$User2Impl.fromJson(Map<String, dynamic> json) =>
       _$$User2ImplFromJson(json);
 
   @override
-  final String name;
+  final String? name;
   @override
-  final String login;
+  final String? login;
   @override
-  final String img;
+  final String? img;
   @override
-  final DateTime bhDate;
+  final DateTime? bhDate;
   @override
-  final String campusName;
+  final String? campusName;
 
   @override
   String toString() {
@@ -208,24 +204,24 @@ class _$User2Impl implements _User2 {
 
 abstract class _User2 implements User2 {
   const factory _User2(
-      {required final String name,
-      required final String login,
-      required final String img,
-      required final DateTime bhDate,
-      required final String campusName}) = _$User2Impl;
+      {final String? name,
+      final String? login,
+      final String? img,
+      final DateTime? bhDate,
+      final String? campusName}) = _$User2Impl;
 
   factory _User2.fromJson(Map<String, dynamic> json) = _$User2Impl.fromJson;
 
   @override
-  String get name;
+  String? get name;
   @override
-  String get login;
+  String? get login;
   @override
-  String get img;
+  String? get img;
   @override
-  DateTime get bhDate;
+  DateTime? get bhDate;
   @override
-  String get campusName;
+  String? get campusName;
   @override
   @JsonKey(ignore: true)
   _$$User2ImplCopyWith<_$User2Impl> get copyWith =>

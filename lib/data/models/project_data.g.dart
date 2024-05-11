@@ -48,7 +48,7 @@ _$ByImpl _$$ByImplFromJson(Map<String, dynamic> json) => _$ByImpl(
       parentId: (json['parent_id'] as num?)?.toInt(),
       points: (json['points'] as List<dynamic>?)
           ?.map((e) =>
-              (e as List<dynamic>).map((e) => (e as num).toInt()).toList())
+              (e as List<dynamic>).map((e) => (e as num).toDouble()).toList())
           .toList(),
     );
 

@@ -26,8 +26,8 @@ abstract class ScaleTeam with _$ScaleTeam {
     @JsonKey(name: 'begin_at')
     DateTime? beginAt,
     @JsonKey(name: 'correcteds')
-    List<Correct>? correcteds,
-    Correct? corrector,
+    dynamic correcteds,
+    Corrector? corrector,
     Truant? truant,
     @JsonKey(name: 'filled_at')
     dynamic filledAt,
@@ -35,21 +35,39 @@ abstract class ScaleTeam with _$ScaleTeam {
     List<dynamic>? questionsWithAnswers,
     ScaleClass? scale,
     Team? team,
-    List<dynamic>? feedbacks,
+    List<Feedback>? feedbacks,
   }) = _Scale;
 
   factory ScaleTeam.fromJson(Map<String, dynamic> json) => _$ScaleTeamFromJson(json);
 }
 
 @freezed
-abstract class Correct with _$Correct {
-  const factory Correct({
+abstract class Feedback with _$Feedback {
+  const factory Feedback({
+    int? id,
+    Corrector? user,
+    @JsonKey(name: 'feedbackable_type')
+    String? feedbackableType,
+    @JsonKey(name: 'feedbackable_id')
+    int? feedbackableId,
+    String? comment,
+    int? rating,
+    @JsonKey(name: 'created_at')
+    DateTime? createdAt,
+  }) = _Feedback;
+
+  factory Feedback.fromJson(Map<String, dynamic> json) => _$FeedbackFromJson(json);
+}
+
+@freezed
+abstract class Corrector with _$Corrector {
+  const factory Corrector({
     int? id,
     String? login,
     String? url,
-  }) = _Correct;
+  }) = _Corrector;
 
-  factory Correct.fromJson(Map<String, dynamic> json) => _$CorrectFromJson(json);
+  factory Corrector.fromJson(Map<String, dynamic> json) => _$CorrectorFromJson(json);
 }
 
 @freezed

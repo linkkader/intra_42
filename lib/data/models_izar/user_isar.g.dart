@@ -44,149 +44,144 @@ const UserIsarSchema = CollectionSchema(
       type: IsarType.objectList,
       target: r'CampusIsar',
     ),
-    r'campusName': PropertySchema(
-      id: 5,
-      name: r'campusName',
-      type: IsarType.string,
-    ),
     r'campusUsers': PropertySchema(
-      id: 6,
+      id: 5,
       name: r'campusUsers',
       type: IsarType.objectList,
       target: r'CampusUserIsar',
     ),
     r'correctionPoint': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'correctionPoint',
       type: IsarType.long,
     ),
     r'createdAt': PropertySchema(
-      id: 8,
+      id: 7,
       name: r'createdAt',
       type: IsarType.dateTime,
     ),
     r'cursusUsers': PropertySchema(
-      id: 9,
+      id: 8,
       name: r'cursusUsers',
       type: IsarType.objectList,
       target: r'CursusUserIsar',
     ),
     r'dataErasureDate': PropertySchema(
-      id: 10,
+      id: 9,
       name: r'dataErasureDate',
       type: IsarType.dateTime,
     ),
     r'displayname': PropertySchema(
-      id: 11,
+      id: 10,
       name: r'displayname',
       type: IsarType.string,
     ),
     r'email': PropertySchema(
-      id: 12,
+      id: 11,
       name: r'email',
       type: IsarType.string,
     ),
     r'expertisesUsers': PropertySchema(
-      id: 13,
+      id: 12,
       name: r'expertisesUsers',
       type: IsarType.objectList,
       target: r'ExpertisesUserIsar',
     ),
     r'firstName': PropertySchema(
-      id: 14,
+      id: 13,
       name: r'firstName',
       type: IsarType.string,
     ),
     r'id': PropertySchema(
-      id: 15,
+      id: 14,
       name: r'id',
       type: IsarType.long,
     ),
     r'image': PropertySchema(
-      id: 16,
+      id: 15,
       name: r'image',
       type: IsarType.object,
       target: r'ImageIsar',
     ),
     r'imageUrl': PropertySchema(
-      id: 17,
+      id: 16,
       name: r'imageUrl',
       type: IsarType.string,
     ),
     r'kind': PropertySchema(
-      id: 18,
+      id: 17,
       name: r'kind',
       type: IsarType.string,
     ),
     r'languagesUsers': PropertySchema(
-      id: 19,
+      id: 18,
       name: r'languagesUsers',
       type: IsarType.objectList,
       target: r'LanguagesUserIsar',
     ),
     r'lastName': PropertySchema(
-      id: 20,
+      id: 19,
       name: r'lastName',
       type: IsarType.string,
     ),
     r'location': PropertySchema(
-      id: 21,
+      id: 20,
       name: r'location',
       type: IsarType.string,
     ),
     r'login': PropertySchema(
-      id: 22,
+      id: 21,
       name: r'login',
       type: IsarType.string,
     ),
     r'newImageUrl': PropertySchema(
-      id: 23,
+      id: 22,
       name: r'newImageUrl',
       type: IsarType.string,
     ),
     r'phone': PropertySchema(
-      id: 24,
+      id: 23,
       name: r'phone',
       type: IsarType.string,
     ),
     r'poolMonth': PropertySchema(
-      id: 25,
+      id: 24,
       name: r'poolMonth',
       type: IsarType.string,
     ),
     r'poolYear': PropertySchema(
-      id: 26,
+      id: 25,
       name: r'poolYear',
       type: IsarType.string,
     ),
     r'projectsUsers': PropertySchema(
-      id: 27,
+      id: 26,
       name: r'projectsUsers',
       type: IsarType.objectList,
       target: r'ProjectsUserIsar',
     ),
     r'staff': PropertySchema(
-      id: 28,
+      id: 27,
       name: r'staff',
       type: IsarType.bool,
     ),
     r'updatedAt': PropertySchema(
-      id: 29,
+      id: 28,
       name: r'updatedAt',
       type: IsarType.dateTime,
     ),
     r'url': PropertySchema(
-      id: 30,
+      id: 29,
       name: r'url',
       type: IsarType.string,
     ),
     r'usualFullName': PropertySchema(
-      id: 31,
+      id: 30,
       name: r'usualFullName',
       type: IsarType.string,
     ),
     r'wallet': PropertySchema(
-      id: 32,
+      id: 31,
       name: r'wallet',
       type: IsarType.long,
     )
@@ -279,12 +274,6 @@ int _userIsarEstimateSize(
               CampusIsarSchema.estimateSize(value, offsets, allOffsets);
         }
       }
-    }
-  }
-  {
-    final value = object.campusName;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
     }
   }
   {
@@ -473,64 +462,63 @@ void _userIsarSerialize(
     CampusIsarSchema.serialize,
     object.campus,
   );
-  writer.writeString(offsets[5], object.campusName);
   writer.writeObjectList<CampusUserIsar>(
-    offsets[6],
+    offsets[5],
     allOffsets,
     CampusUserIsarSchema.serialize,
     object.campusUsers,
   );
-  writer.writeLong(offsets[7], object.correctionPoint);
-  writer.writeDateTime(offsets[8], object.createdAt);
+  writer.writeLong(offsets[6], object.correctionPoint);
+  writer.writeDateTime(offsets[7], object.createdAt);
   writer.writeObjectList<CursusUserIsar>(
-    offsets[9],
+    offsets[8],
     allOffsets,
     CursusUserIsarSchema.serialize,
     object.cursusUsers,
   );
-  writer.writeDateTime(offsets[10], object.dataErasureDate);
-  writer.writeString(offsets[11], object.displayname);
-  writer.writeString(offsets[12], object.email);
+  writer.writeDateTime(offsets[9], object.dataErasureDate);
+  writer.writeString(offsets[10], object.displayname);
+  writer.writeString(offsets[11], object.email);
   writer.writeObjectList<ExpertisesUserIsar>(
-    offsets[13],
+    offsets[12],
     allOffsets,
     ExpertisesUserIsarSchema.serialize,
     object.expertisesUsers,
   );
-  writer.writeString(offsets[14], object.firstName);
-  writer.writeLong(offsets[15], object.id);
+  writer.writeString(offsets[13], object.firstName);
+  writer.writeLong(offsets[14], object.id);
   writer.writeObject<ImageIsar>(
-    offsets[16],
+    offsets[15],
     allOffsets,
     ImageIsarSchema.serialize,
     object.image,
   );
-  writer.writeString(offsets[17], object.imageUrl);
-  writer.writeString(offsets[18], object.kind);
+  writer.writeString(offsets[16], object.imageUrl);
+  writer.writeString(offsets[17], object.kind);
   writer.writeObjectList<LanguagesUserIsar>(
-    offsets[19],
+    offsets[18],
     allOffsets,
     LanguagesUserIsarSchema.serialize,
     object.languagesUsers,
   );
-  writer.writeString(offsets[20], object.lastName);
-  writer.writeString(offsets[21], object.location);
-  writer.writeString(offsets[22], object.login);
-  writer.writeString(offsets[23], object.newImageUrl);
-  writer.writeString(offsets[24], object.phone);
-  writer.writeString(offsets[25], object.poolMonth);
-  writer.writeString(offsets[26], object.poolYear);
+  writer.writeString(offsets[19], object.lastName);
+  writer.writeString(offsets[20], object.location);
+  writer.writeString(offsets[21], object.login);
+  writer.writeString(offsets[22], object.newImageUrl);
+  writer.writeString(offsets[23], object.phone);
+  writer.writeString(offsets[24], object.poolMonth);
+  writer.writeString(offsets[25], object.poolYear);
   writer.writeObjectList<ProjectsUserIsar>(
-    offsets[27],
+    offsets[26],
     allOffsets,
     ProjectsUserIsarSchema.serialize,
     object.projectsUsers,
   );
-  writer.writeBool(offsets[28], object.staff);
-  writer.writeDateTime(offsets[29], object.updatedAt);
-  writer.writeString(offsets[30], object.url);
-  writer.writeString(offsets[31], object.usualFullName);
-  writer.writeLong(offsets[32], object.wallet);
+  writer.writeBool(offsets[27], object.staff);
+  writer.writeDateTime(offsets[28], object.updatedAt);
+  writer.writeString(offsets[29], object.url);
+  writer.writeString(offsets[30], object.usualFullName);
+  writer.writeLong(offsets[31], object.wallet);
 }
 
 UserIsar _userIsarDeserialize(
@@ -555,64 +543,63 @@ UserIsar _userIsarDeserialize(
       allOffsets,
       CampusIsar(),
     ),
-    campusName: reader.readStringOrNull(offsets[5]),
     campusUsers: reader.readObjectList<CampusUserIsar>(
-      offsets[6],
+      offsets[5],
       CampusUserIsarSchema.deserialize,
       allOffsets,
       CampusUserIsar(),
     ),
-    correctionPoint: reader.readLongOrNull(offsets[7]),
-    createdAt: reader.readDateTimeOrNull(offsets[8]),
+    correctionPoint: reader.readLongOrNull(offsets[6]),
+    createdAt: reader.readDateTimeOrNull(offsets[7]),
     cursusUsers: reader.readObjectList<CursusUserIsar>(
-      offsets[9],
+      offsets[8],
       CursusUserIsarSchema.deserialize,
       allOffsets,
       CursusUserIsar(),
     ),
-    dataErasureDate: reader.readDateTimeOrNull(offsets[10]),
-    displayname: reader.readStringOrNull(offsets[11]),
-    email: reader.readStringOrNull(offsets[12]),
+    dataErasureDate: reader.readDateTimeOrNull(offsets[9]),
+    displayname: reader.readStringOrNull(offsets[10]),
+    email: reader.readStringOrNull(offsets[11]),
     expertisesUsers: reader.readObjectList<ExpertisesUserIsar>(
-      offsets[13],
+      offsets[12],
       ExpertisesUserIsarSchema.deserialize,
       allOffsets,
       ExpertisesUserIsar(),
     ),
-    firstName: reader.readStringOrNull(offsets[14]),
-    id: reader.readLongOrNull(offsets[15]),
+    firstName: reader.readStringOrNull(offsets[13]),
+    id: reader.readLongOrNull(offsets[14]),
     image: reader.readObjectOrNull<ImageIsar>(
-      offsets[16],
+      offsets[15],
       ImageIsarSchema.deserialize,
       allOffsets,
     ),
-    imageUrl: reader.readStringOrNull(offsets[17]),
+    imageUrl: reader.readStringOrNull(offsets[16]),
     isarId: id,
-    kind: reader.readStringOrNull(offsets[18]),
+    kind: reader.readStringOrNull(offsets[17]),
     languagesUsers: reader.readObjectList<LanguagesUserIsar>(
-      offsets[19],
+      offsets[18],
       LanguagesUserIsarSchema.deserialize,
       allOffsets,
       LanguagesUserIsar(),
     ),
-    lastName: reader.readStringOrNull(offsets[20]),
-    location: reader.readStringOrNull(offsets[21]),
-    login: reader.readStringOrNull(offsets[22]),
-    newImageUrl: reader.readStringOrNull(offsets[23]),
-    phone: reader.readStringOrNull(offsets[24]),
-    poolMonth: reader.readStringOrNull(offsets[25]),
-    poolYear: reader.readStringOrNull(offsets[26]),
+    lastName: reader.readStringOrNull(offsets[19]),
+    location: reader.readStringOrNull(offsets[20]),
+    login: reader.readStringOrNull(offsets[21]),
+    newImageUrl: reader.readStringOrNull(offsets[22]),
+    phone: reader.readStringOrNull(offsets[23]),
+    poolMonth: reader.readStringOrNull(offsets[24]),
+    poolYear: reader.readStringOrNull(offsets[25]),
     projectsUsers: reader.readObjectList<ProjectsUserIsar>(
-      offsets[27],
+      offsets[26],
       ProjectsUserIsarSchema.deserialize,
       allOffsets,
       ProjectsUserIsar(),
     ),
-    staff: reader.readBoolOrNull(offsets[28]),
-    updatedAt: reader.readDateTimeOrNull(offsets[29]),
-    url: reader.readStringOrNull(offsets[30]),
-    usualFullName: reader.readStringOrNull(offsets[31]),
-    wallet: reader.readLongOrNull(offsets[32]),
+    staff: reader.readBoolOrNull(offsets[27]),
+    updatedAt: reader.readDateTimeOrNull(offsets[28]),
+    url: reader.readStringOrNull(offsets[29]),
+    usualFullName: reader.readStringOrNull(offsets[30]),
+    wallet: reader.readLongOrNull(offsets[31]),
   );
   return object;
 }
@@ -645,59 +632,59 @@ P _userIsarDeserializeProp<P>(
         CampusIsar(),
       )) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
-    case 6:
       return (reader.readObjectList<CampusUserIsar>(
         offset,
         CampusUserIsarSchema.deserialize,
         allOffsets,
         CampusUserIsar(),
       )) as P;
-    case 7:
+    case 6:
       return (reader.readLongOrNull(offset)) as P;
-    case 8:
+    case 7:
       return (reader.readDateTimeOrNull(offset)) as P;
-    case 9:
+    case 8:
       return (reader.readObjectList<CursusUserIsar>(
         offset,
         CursusUserIsarSchema.deserialize,
         allOffsets,
         CursusUserIsar(),
       )) as P;
-    case 10:
+    case 9:
       return (reader.readDateTimeOrNull(offset)) as P;
+    case 10:
+      return (reader.readStringOrNull(offset)) as P;
     case 11:
       return (reader.readStringOrNull(offset)) as P;
     case 12:
-      return (reader.readStringOrNull(offset)) as P;
-    case 13:
       return (reader.readObjectList<ExpertisesUserIsar>(
         offset,
         ExpertisesUserIsarSchema.deserialize,
         allOffsets,
         ExpertisesUserIsar(),
       )) as P;
-    case 14:
+    case 13:
       return (reader.readStringOrNull(offset)) as P;
-    case 15:
+    case 14:
       return (reader.readLongOrNull(offset)) as P;
-    case 16:
+    case 15:
       return (reader.readObjectOrNull<ImageIsar>(
         offset,
         ImageIsarSchema.deserialize,
         allOffsets,
       )) as P;
+    case 16:
+      return (reader.readStringOrNull(offset)) as P;
     case 17:
       return (reader.readStringOrNull(offset)) as P;
     case 18:
-      return (reader.readStringOrNull(offset)) as P;
-    case 19:
       return (reader.readObjectList<LanguagesUserIsar>(
         offset,
         LanguagesUserIsarSchema.deserialize,
         allOffsets,
         LanguagesUserIsar(),
       )) as P;
+    case 19:
+      return (reader.readStringOrNull(offset)) as P;
     case 20:
       return (reader.readStringOrNull(offset)) as P;
     case 21:
@@ -711,23 +698,21 @@ P _userIsarDeserializeProp<P>(
     case 25:
       return (reader.readStringOrNull(offset)) as P;
     case 26:
-      return (reader.readStringOrNull(offset)) as P;
-    case 27:
       return (reader.readObjectList<ProjectsUserIsar>(
         offset,
         ProjectsUserIsarSchema.deserialize,
         allOffsets,
         ProjectsUserIsar(),
       )) as P;
-    case 28:
+    case 27:
       return (reader.readBoolOrNull(offset)) as P;
-    case 29:
+    case 28:
       return (reader.readDateTimeOrNull(offset)) as P;
+    case 29:
+      return (reader.readStringOrNull(offset)) as P;
     case 30:
       return (reader.readStringOrNull(offset)) as P;
     case 31:
-      return (reader.readStringOrNull(offset)) as P;
-    case 32:
       return (reader.readLongOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1438,154 +1423,6 @@ extension UserIsarQueryFilter
         upper,
         includeUpper,
       );
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> campusNameIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'campusName',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition>
-      campusNameIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'campusName',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> campusNameEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'campusName',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> campusNameGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'campusName',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> campusNameLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'campusName',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> campusNameBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'campusName',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> campusNameStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'campusName',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> campusNameEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'campusName',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> campusNameContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'campusName',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> campusNameMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'campusName',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> campusNameIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'campusName',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition>
-      campusNameIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'campusName',
-        value: '',
-      ));
     });
   }
 
@@ -4797,18 +4634,6 @@ extension UserIsarQuerySortBy on QueryBuilder<UserIsar, UserIsar, QSortBy> {
     });
   }
 
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> sortByCampusName() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'campusName', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> sortByCampusNameDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'campusName', Sort.desc);
-    });
-  }
-
   QueryBuilder<UserIsar, UserIsar, QAfterSortBy> sortByCorrectionPoint() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'correctionPoint', Sort.asc);
@@ -5100,18 +4925,6 @@ extension UserIsarQuerySortThenBy
     });
   }
 
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> thenByCampusName() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'campusName', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> thenByCampusNameDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'campusName', Sort.desc);
-    });
-  }
-
   QueryBuilder<UserIsar, UserIsar, QAfterSortBy> thenByCorrectionPoint() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'correctionPoint', Sort.asc);
@@ -5397,13 +5210,6 @@ extension UserIsarQueryWhereDistinct
     });
   }
 
-  QueryBuilder<UserIsar, UserIsar, QDistinct> distinctByCampusName(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'campusName', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<UserIsar, UserIsar, QDistinct> distinctByCorrectionPoint() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'correctionPoint');
@@ -5585,12 +5391,6 @@ extension UserIsarQueryProperty
     });
   }
 
-  QueryBuilder<UserIsar, String?, QQueryOperations> campusNameProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'campusName');
-    });
-  }
-
   QueryBuilder<UserIsar, List<CampusUserIsar>?, QQueryOperations>
       campusUsersProperty() {
     return QueryBuilder.apply(this, (query) {
@@ -5763,181 +5563,113 @@ extension UserIsarQueryProperty
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetCampusIsarCollectionCollection on Isar {
-  IsarCollection<CampusIsarCollection> get campusIsarCollections =>
+extension GetProjectsUserIsarCollectionCollection on Isar {
+  IsarCollection<ProjectsUserIsarCollection> get projectsUserIsarCollections =>
       this.collection();
 }
 
-const CampusIsarCollectionSchema = CollectionSchema(
-  name: r'CampusIsarCollection',
-  id: -8296053311004587231,
+const ProjectsUserIsarCollectionSchema = CollectionSchema(
+  name: r'ProjectsUserIsarCollection',
+  id: 5360900379919872250,
   properties: {
-    r'active': PropertySchema(
+    r'createdAt': PropertySchema(
       id: 0,
-      name: r'active',
-      type: IsarType.bool,
+      name: r'createdAt',
+      type: IsarType.dateTime,
     ),
-    r'address': PropertySchema(
+    r'currentTeamId': PropertySchema(
       id: 1,
-      name: r'address',
-      type: IsarType.string,
+      name: r'currentTeamId',
+      type: IsarType.long,
     ),
-    r'city': PropertySchema(
+    r'cursusIds': PropertySchema(
       id: 2,
-      name: r'city',
-      type: IsarType.string,
+      name: r'cursusIds',
+      type: IsarType.longList,
     ),
-    r'country': PropertySchema(
+    r'finalMark': PropertySchema(
       id: 3,
-      name: r'country',
-      type: IsarType.string,
+      name: r'finalMark',
+      type: IsarType.long,
     ),
-    r'defaultHiddenPhone': PropertySchema(
+    r'marked': PropertySchema(
       id: 4,
-      name: r'defaultHiddenPhone',
+      name: r'marked',
       type: IsarType.bool,
     ),
-    r'emailExtension': PropertySchema(
+    r'markedAt': PropertySchema(
       id: 5,
-      name: r'emailExtension',
-      type: IsarType.string,
+      name: r'markedAt',
+      type: IsarType.dateTime,
     ),
-    r'facebook': PropertySchema(
+    r'occurrence': PropertySchema(
       id: 6,
-      name: r'facebook',
-      type: IsarType.string,
+      name: r'occurrence',
+      type: IsarType.long,
     ),
-    r'language': PropertySchema(
+    r'project': PropertySchema(
       id: 7,
-      name: r'language',
+      name: r'project',
       type: IsarType.object,
-      target: r'LanguageIsar',
+      target: r'ProjectIsar',
     ),
-    r'name': PropertySchema(
+    r'retriableAt': PropertySchema(
       id: 8,
-      name: r'name',
-      type: IsarType.string,
+      name: r'retriableAt',
+      type: IsarType.dateTime,
     ),
-    r'public': PropertySchema(
+    r'status': PropertySchema(
       id: 9,
-      name: r'public',
-      type: IsarType.bool,
+      name: r'status',
+      type: IsarType.string,
     ),
-    r'timeZone': PropertySchema(
+    r'updatedAt': PropertySchema(
       id: 10,
-      name: r'timeZone',
-      type: IsarType.string,
+      name: r'updatedAt',
+      type: IsarType.dateTime,
     ),
-    r'twitter': PropertySchema(
+    r'validated': PropertySchema(
       id: 11,
-      name: r'twitter',
-      type: IsarType.string,
-    ),
-    r'usersCount': PropertySchema(
-      id: 12,
-      name: r'usersCount',
-      type: IsarType.long,
-    ),
-    r'vogsphereId': PropertySchema(
-      id: 13,
-      name: r'vogsphereId',
-      type: IsarType.long,
-    ),
-    r'website': PropertySchema(
-      id: 14,
-      name: r'website',
-      type: IsarType.string,
-    ),
-    r'zip': PropertySchema(
-      id: 15,
-      name: r'zip',
-      type: IsarType.string,
+      name: r'validated',
+      type: IsarType.bool,
     )
   },
-  estimateSize: _campusIsarCollectionEstimateSize,
-  serialize: _campusIsarCollectionSerialize,
-  deserialize: _campusIsarCollectionDeserialize,
-  deserializeProp: _campusIsarCollectionDeserializeProp,
+  estimateSize: _projectsUserIsarCollectionEstimateSize,
+  serialize: _projectsUserIsarCollectionSerialize,
+  deserialize: _projectsUserIsarCollectionDeserialize,
+  deserializeProp: _projectsUserIsarCollectionDeserializeProp,
   idName: r'id',
   indexes: {},
   links: {},
-  embeddedSchemas: {r'LanguageIsar': LanguageIsarSchema},
-  getId: _campusIsarCollectionGetId,
-  getLinks: _campusIsarCollectionGetLinks,
-  attach: _campusIsarCollectionAttach,
+  embeddedSchemas: {r'ProjectIsar': ProjectIsarSchema},
+  getId: _projectsUserIsarCollectionGetId,
+  getLinks: _projectsUserIsarCollectionGetLinks,
+  attach: _projectsUserIsarCollectionAttach,
   version: '3.1.0+1',
 );
 
-int _campusIsarCollectionEstimateSize(
-  CampusIsarCollection object,
+int _projectsUserIsarCollectionEstimateSize(
+  ProjectsUserIsarCollection object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
   {
-    final value = object.address;
+    final value = object.cursusIds;
     if (value != null) {
-      bytesCount += 3 + value.length * 3;
+      bytesCount += 3 + value.length * 8;
     }
   }
   {
-    final value = object.city;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.country;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.emailExtension;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.facebook;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.language;
+    final value = object.project;
     if (value != null) {
       bytesCount += 3 +
-          LanguageIsarSchema.estimateSize(
-              value, allOffsets[LanguageIsar]!, allOffsets);
+          ProjectIsarSchema.estimateSize(
+              value, allOffsets[ProjectIsar]!, allOffsets);
     }
   }
   {
-    final value = object.name;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.timeZone;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.twitter;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.website;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.zip;
+    final value = object.status;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -5945,68 +5677,60 @@ int _campusIsarCollectionEstimateSize(
   return bytesCount;
 }
 
-void _campusIsarCollectionSerialize(
-  CampusIsarCollection object,
+void _projectsUserIsarCollectionSerialize(
+  ProjectsUserIsarCollection object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeBool(offsets[0], object.active);
-  writer.writeString(offsets[1], object.address);
-  writer.writeString(offsets[2], object.city);
-  writer.writeString(offsets[3], object.country);
-  writer.writeBool(offsets[4], object.defaultHiddenPhone);
-  writer.writeString(offsets[5], object.emailExtension);
-  writer.writeString(offsets[6], object.facebook);
-  writer.writeObject<LanguageIsar>(
+  writer.writeDateTime(offsets[0], object.createdAt);
+  writer.writeLong(offsets[1], object.currentTeamId);
+  writer.writeLongList(offsets[2], object.cursusIds);
+  writer.writeLong(offsets[3], object.finalMark);
+  writer.writeBool(offsets[4], object.marked);
+  writer.writeDateTime(offsets[5], object.markedAt);
+  writer.writeLong(offsets[6], object.occurrence);
+  writer.writeObject<ProjectIsar>(
     offsets[7],
     allOffsets,
-    LanguageIsarSchema.serialize,
-    object.language,
+    ProjectIsarSchema.serialize,
+    object.project,
   );
-  writer.writeString(offsets[8], object.name);
-  writer.writeBool(offsets[9], object.public);
-  writer.writeString(offsets[10], object.timeZone);
-  writer.writeString(offsets[11], object.twitter);
-  writer.writeLong(offsets[12], object.usersCount);
-  writer.writeLong(offsets[13], object.vogsphereId);
-  writer.writeString(offsets[14], object.website);
-  writer.writeString(offsets[15], object.zip);
+  writer.writeDateTime(offsets[8], object.retriableAt);
+  writer.writeString(offsets[9], object.status);
+  writer.writeDateTime(offsets[10], object.updatedAt);
+  writer.writeBool(offsets[11], object.validated);
 }
 
-CampusIsarCollection _campusIsarCollectionDeserialize(
+ProjectsUserIsarCollection _projectsUserIsarCollectionDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = CampusIsarCollection(
-    active: reader.readBoolOrNull(offsets[0]),
-    address: reader.readStringOrNull(offsets[1]),
-    city: reader.readStringOrNull(offsets[2]),
-    country: reader.readStringOrNull(offsets[3]),
-    defaultHiddenPhone: reader.readBoolOrNull(offsets[4]),
-    emailExtension: reader.readStringOrNull(offsets[5]),
-    facebook: reader.readStringOrNull(offsets[6]),
+  final object = ProjectsUserIsarCollection(
+    createdAt: reader.readDateTimeOrNull(offsets[0]),
+    currentTeamId: reader.readLongOrNull(offsets[1]),
+    cursusIds: reader.readLongList(offsets[2]),
+    finalMark: reader.readLongOrNull(offsets[3]),
     id: id,
-    language: reader.readObjectOrNull<LanguageIsar>(
+    marked: reader.readBoolOrNull(offsets[4]),
+    markedAt: reader.readDateTimeOrNull(offsets[5]),
+    occurrence: reader.readLongOrNull(offsets[6]),
+    project: reader.readObjectOrNull<ProjectIsar>(
       offsets[7],
-      LanguageIsarSchema.deserialize,
+      ProjectIsarSchema.deserialize,
       allOffsets,
     ),
-    name: reader.readStringOrNull(offsets[8]),
-    public: reader.readBoolOrNull(offsets[9]),
-    timeZone: reader.readStringOrNull(offsets[10]),
-    twitter: reader.readStringOrNull(offsets[11]),
-    usersCount: reader.readLongOrNull(offsets[12]),
-    vogsphereId: reader.readLongOrNull(offsets[13]),
-    website: reader.readStringOrNull(offsets[14]),
-    zip: reader.readStringOrNull(offsets[15]),
+    retriableAt: reader.readDateTimeOrNull(offsets[8]),
+    status: reader.readStringOrNull(offsets[9]),
+    updatedAt: reader.readDateTimeOrNull(offsets[10]),
+    validated: reader.readBoolOrNull(offsets[11]),
   );
   return object;
 }
 
-P _campusIsarCollectionDeserializeProp<P>(
+P _projectsUserIsarCollectionDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -6014,72 +5738,64 @@ P _campusIsarCollectionDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 1:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 2:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongList(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 4:
       return (reader.readBoolOrNull(offset)) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 6:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 7:
-      return (reader.readObjectOrNull<LanguageIsar>(
+      return (reader.readObjectOrNull<ProjectIsar>(
         offset,
-        LanguageIsarSchema.deserialize,
+        ProjectIsarSchema.deserialize,
         allOffsets,
       )) as P;
     case 8:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 9:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 10:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 11:
-      return (reader.readStringOrNull(offset)) as P;
-    case 12:
-      return (reader.readLongOrNull(offset)) as P;
-    case 13:
-      return (reader.readLongOrNull(offset)) as P;
-    case 14:
-      return (reader.readStringOrNull(offset)) as P;
-    case 15:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
-Id _campusIsarCollectionGetId(CampusIsarCollection object) {
+Id _projectsUserIsarCollectionGetId(ProjectsUserIsarCollection object) {
   return object.id ?? Isar.autoIncrement;
 }
 
-List<IsarLinkBase<dynamic>> _campusIsarCollectionGetLinks(
-    CampusIsarCollection object) {
+List<IsarLinkBase<dynamic>> _projectsUserIsarCollectionGetLinks(
+    ProjectsUserIsarCollection object) {
   return [];
 }
 
-void _campusIsarCollectionAttach(
-    IsarCollection<dynamic> col, Id id, CampusIsarCollection object) {}
+void _projectsUserIsarCollectionAttach(
+    IsarCollection<dynamic> col, Id id, ProjectsUserIsarCollection object) {}
 
-extension CampusIsarCollectionQueryWhereSort
-    on QueryBuilder<CampusIsarCollection, CampusIsarCollection, QWhere> {
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterWhere>
-      anyId() {
+extension ProjectsUserIsarCollectionQueryWhereSort on QueryBuilder<
+    ProjectsUserIsarCollection, ProjectsUserIsarCollection, QWhere> {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension CampusIsarCollectionQueryWhere
-    on QueryBuilder<CampusIsarCollection, CampusIsarCollection, QWhereClause> {
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterWhereClause>
-      idEqualTo(Id id) {
+extension ProjectsUserIsarCollectionQueryWhere on QueryBuilder<
+    ProjectsUserIsarCollection, ProjectsUserIsarCollection, QWhereClause> {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -6088,8 +5804,8 @@ extension CampusIsarCollectionQueryWhere
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterWhereClause>
-      idNotEqualTo(Id id) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterWhereClause> idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -6111,8 +5827,8 @@ extension CampusIsarCollectionQueryWhere
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterWhereClause>
-      idGreaterThan(Id id, {bool include = false}) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterWhereClause> idGreaterThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.greaterThan(lower: id, includeLower: include),
@@ -6120,8 +5836,8 @@ extension CampusIsarCollectionQueryWhere
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterWhereClause>
-      idLessThan(Id id, {bool include = false}) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterWhereClause> idLessThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.lessThan(upper: id, includeUpper: include),
@@ -6129,8 +5845,8 @@ extension CampusIsarCollectionQueryWhere
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterWhereClause>
-      idBetween(
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterWhereClause> idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -6147,845 +5863,394 @@ extension CampusIsarCollectionQueryWhere
   }
 }
 
-extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
-    CampusIsarCollection, QFilterCondition> {
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> activeIsNull() {
+extension ProjectsUserIsarCollectionQueryFilter on QueryBuilder<
+    ProjectsUserIsarCollection, ProjectsUserIsarCollection, QFilterCondition> {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> createdAtIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'active',
+        property: r'createdAt',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> activeIsNotNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> createdAtIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'active',
+        property: r'createdAt',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> activeEqualTo(bool? value) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> createdAtEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'active',
+        property: r'createdAt',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> addressIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'address',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> addressIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'address',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> addressEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'address',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> addressGreaterThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> createdAtGreaterThan(
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'address',
+        property: r'createdAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> addressLessThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> createdAtLessThan(
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'address',
+        property: r'createdAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> addressBetween(
-    String? lower,
-    String? upper, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> createdAtBetween(
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'address',
+        property: r'createdAt',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> addressStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'address',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> addressEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'address',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      addressContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'address',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      addressMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'address',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> addressIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'address',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> addressIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'address',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> cityIsNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> currentTeamIdIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'city',
+        property: r'currentTeamId',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> cityIsNotNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> currentTeamIdIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'city',
+        property: r'currentTeamId',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> cityEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> currentTeamIdEqualTo(int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'city',
+        property: r'currentTeamId',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> cityGreaterThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> currentTeamIdGreaterThan(
+    int? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'city',
+        property: r'currentTeamId',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> cityLessThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> currentTeamIdLessThan(
+    int? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'city',
+        property: r'currentTeamId',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> cityBetween(
-    String? lower,
-    String? upper, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> currentTeamIdBetween(
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'city',
+        property: r'currentTeamId',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> cityStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'city',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> cityEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'city',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      cityContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'city',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      cityMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'city',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> cityIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'city',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> cityIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'city',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> countryIsNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'country',
+        property: r'cursusIds',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> countryIsNotNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'country',
+        property: r'cursusIds',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> countryEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsElementEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'country',
+        property: r'cursusIds',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> countryGreaterThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsElementGreaterThan(
+    int value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'country',
+        property: r'cursusIds',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> countryLessThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsElementLessThan(
+    int value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'country',
+        property: r'cursusIds',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> countryBetween(
-    String? lower,
-    String? upper, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsElementBetween(
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'country',
+        property: r'cursusIds',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> countryStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'country',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'cursusIds',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> countryEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'country',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'cursusIds',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      countryContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'country',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.listLength(
+        r'cursusIds',
+        0,
+        false,
+        999999,
+        true,
+      );
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      countryMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'country',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> countryIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'country',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> countryIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'country',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> defaultHiddenPhoneIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'defaultHiddenPhone',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> defaultHiddenPhoneIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'defaultHiddenPhone',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> defaultHiddenPhoneEqualTo(bool? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'defaultHiddenPhone',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> emailExtensionIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'emailExtension',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> emailExtensionIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'emailExtension',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> emailExtensionEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'emailExtension',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> emailExtensionGreaterThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsLengthLessThan(
+    int length, {
     bool include = false,
-    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'cursusIds',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'cursusIds',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> cursusIdsLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'cursusIds',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> finalMarkIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'finalMark',
+      ));
+    });
+  }
+
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> finalMarkIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'finalMark',
+      ));
+    });
+  }
+
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> finalMarkEqualTo(int? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'finalMark',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> finalMarkGreaterThan(
+    int? value, {
+    bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'emailExtension',
+        property: r'finalMark',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> emailExtensionLessThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> finalMarkLessThan(
+    int? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'emailExtension',
+        property: r'finalMark',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> emailExtensionBetween(
-    String? lower,
-    String? upper, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> finalMarkBetween(
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'emailExtension',
+        property: r'finalMark',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> emailExtensionStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'emailExtension',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> emailExtensionEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'emailExtension',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      emailExtensionContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'emailExtension',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      emailExtensionMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'emailExtension',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> emailExtensionIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'emailExtension',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> emailExtensionIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'emailExtension',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> facebookIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'facebook',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> facebookIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'facebook',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> facebookEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'facebook',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> facebookGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'facebook',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> facebookLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'facebook',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> facebookBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'facebook',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> facebookStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'facebook',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> facebookEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'facebook',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      facebookContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'facebook',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      facebookMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'facebook',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> facebookIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'facebook',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> facebookIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'facebook',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
       QAfterFilterCondition> idIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -6994,7 +6259,7 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
       QAfterFilterCondition> idIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -7003,7 +6268,7 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
       QAfterFilterCondition> idEqualTo(Id? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -7013,7 +6278,7 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
       QAfterFilterCondition> idGreaterThan(
     Id? value, {
     bool include = false,
@@ -7027,7 +6292,7 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
       QAfterFilterCondition> idLessThan(
     Id? value, {
     bool include = false,
@@ -7041,7 +6306,7 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
       QAfterFilterCondition> idBetween(
     Id? lower,
     Id? upper, {
@@ -7059,578 +6324,166 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> languageIsNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> markedIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'language',
+        property: r'marked',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> languageIsNotNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> markedIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'language',
+        property: r'marked',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> nameIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'name',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> nameIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'name',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> nameEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> markedEqualTo(bool? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
+        property: r'marked',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> nameGreaterThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> markedAtIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'markedAt',
+      ));
+    });
+  }
+
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> markedAtIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'markedAt',
+      ));
+    });
+  }
+
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> markedAtEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'markedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> markedAtGreaterThan(
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'name',
+        property: r'markedAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> nameLessThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> markedAtLessThan(
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'name',
+        property: r'markedAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> nameBetween(
-    String? lower,
-    String? upper, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> markedAtBetween(
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'name',
+        property: r'markedAt',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> nameStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> nameEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      nameContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      nameMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'name',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> nameIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> nameIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'name',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> publicIsNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> occurrenceIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'public',
+        property: r'occurrence',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> publicIsNotNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> occurrenceIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'public',
+        property: r'occurrence',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> publicEqualTo(bool? value) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> occurrenceEqualTo(int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'public',
+        property: r'occurrence',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> timeZoneIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'timeZone',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> timeZoneIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'timeZone',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> timeZoneEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'timeZone',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> timeZoneGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'timeZone',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> timeZoneLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'timeZone',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> timeZoneBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'timeZone',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> timeZoneStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'timeZone',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> timeZoneEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'timeZone',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      timeZoneContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'timeZone',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      timeZoneMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'timeZone',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> timeZoneIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'timeZone',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> timeZoneIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'timeZone',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> twitterIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'twitter',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> twitterIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'twitter',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> twitterEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'twitter',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> twitterGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'twitter',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> twitterLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'twitter',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> twitterBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'twitter',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> twitterStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'twitter',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> twitterEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'twitter',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      twitterContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'twitter',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      twitterMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'twitter',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> twitterIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'twitter',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> twitterIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'twitter',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> usersCountIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'usersCount',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> usersCountIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'usersCount',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> usersCountEqualTo(int? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'usersCount',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> usersCountGreaterThan(
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> occurrenceGreaterThan(
     int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'usersCount',
+        property: r'occurrence',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> usersCountLessThan(
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> occurrenceLessThan(
     int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'usersCount',
+        property: r'occurrence',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> usersCountBetween(
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> occurrenceBetween(
     int? lower,
     int? upper, {
     bool includeLower = true,
@@ -7638,7 +6491,7 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'usersCount',
+        property: r'occurrence',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -7647,72 +6500,90 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> vogsphereIdIsNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> projectIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'vogsphereId',
+        property: r'project',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> vogsphereIdIsNotNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> projectIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'vogsphereId',
+        property: r'project',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> vogsphereIdEqualTo(int? value) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> retriableAtIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'retriableAt',
+      ));
+    });
+  }
+
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> retriableAtIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'retriableAt',
+      ));
+    });
+  }
+
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> retriableAtEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'vogsphereId',
+        property: r'retriableAt',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> vogsphereIdGreaterThan(
-    int? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> retriableAtGreaterThan(
+    DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'vogsphereId',
+        property: r'retriableAt',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> vogsphereIdLessThan(
-    int? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> retriableAtLessThan(
+    DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'vogsphereId',
+        property: r'retriableAt',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> vogsphereIdBetween(
-    int? lower,
-    int? upper, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> retriableAtBetween(
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'vogsphereId',
+        property: r'retriableAt',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -7721,40 +6592,40 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> websiteIsNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> statusIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'website',
+        property: r'status',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> websiteIsNotNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> statusIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'website',
+        property: r'status',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> websiteEqualTo(
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> statusEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'website',
+        property: r'status',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> websiteGreaterThan(
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> statusGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -7762,15 +6633,15 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'website',
+        property: r'status',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> websiteLessThan(
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> statusLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -7778,15 +6649,15 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'website',
+        property: r'status',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> websiteBetween(
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> statusBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -7795,7 +6666,7 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'website',
+        property: r'status',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -7805,909 +6676,663 @@ extension CampusIsarCollectionQueryFilter on QueryBuilder<CampusIsarCollection,
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> websiteStartsWith(
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> statusStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'website',
+        property: r'status',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> websiteEndsWith(
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> statusEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'website',
+        property: r'status',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
           QAfterFilterCondition>
-      websiteContains(String value, {bool caseSensitive = true}) {
+      statusContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'website',
+        property: r'status',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
           QAfterFilterCondition>
-      websiteMatches(String pattern, {bool caseSensitive = true}) {
+      statusMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'website',
+        property: r'status',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> websiteIsEmpty() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> statusIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'website',
+        property: r'status',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> websiteIsNotEmpty() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> statusIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'website',
+        property: r'status',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> zipIsNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> updatedAtIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'zip',
+        property: r'updatedAt',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> zipIsNotNull() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> updatedAtIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'zip',
+        property: r'updatedAt',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> zipEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> updatedAtEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'zip',
+        property: r'updatedAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> zipGreaterThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> updatedAtGreaterThan(
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'zip',
+        property: r'updatedAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> zipLessThan(
-    String? value, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> updatedAtLessThan(
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'zip',
+        property: r'updatedAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> zipBetween(
-    String? lower,
-    String? upper, {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> updatedAtBetween(
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'zip',
+        property: r'updatedAt',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> zipStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> validatedIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'zip',
-        value: value,
-        caseSensitive: caseSensitive,
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'validated',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> zipEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> validatedIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'zip',
-        value: value,
-        caseSensitive: caseSensitive,
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'validated',
       ));
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      zipContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'zip',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-          QAfterFilterCondition>
-      zipMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'zip',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> zipIsEmpty() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> validatedEqualTo(bool? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'zip',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> zipIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'zip',
-        value: '',
+        property: r'validated',
+        value: value,
       ));
     });
   }
 }
 
-extension CampusIsarCollectionQueryObject on QueryBuilder<CampusIsarCollection,
-    CampusIsarCollection, QFilterCondition> {
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection,
-      QAfterFilterCondition> language(FilterQuery<LanguageIsar> q) {
+extension ProjectsUserIsarCollectionQueryObject on QueryBuilder<
+    ProjectsUserIsarCollection, ProjectsUserIsarCollection, QFilterCondition> {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterFilterCondition> project(FilterQuery<ProjectIsar> q) {
     return QueryBuilder.apply(this, (query) {
-      return query.object(q, r'language');
+      return query.object(q, r'project');
     });
   }
 }
 
-extension CampusIsarCollectionQueryLinks on QueryBuilder<CampusIsarCollection,
-    CampusIsarCollection, QFilterCondition> {}
+extension ProjectsUserIsarCollectionQueryLinks on QueryBuilder<
+    ProjectsUserIsarCollection, ProjectsUserIsarCollection, QFilterCondition> {}
 
-extension CampusIsarCollectionQuerySortBy
-    on QueryBuilder<CampusIsarCollection, CampusIsarCollection, QSortBy> {
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByActive() {
+extension ProjectsUserIsarCollectionQuerySortBy on QueryBuilder<
+    ProjectsUserIsarCollection, ProjectsUserIsarCollection, QSortBy> {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'active', Sort.asc);
+      return query.addSortBy(r'createdAt', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByActiveDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'active', Sort.desc);
+      return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByAddress() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByCurrentTeamId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'address', Sort.asc);
+      return query.addSortBy(r'currentTeamId', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByAddressDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByCurrentTeamIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'address', Sort.desc);
+      return query.addSortBy(r'currentTeamId', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByCity() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByFinalMark() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'city', Sort.asc);
+      return query.addSortBy(r'finalMark', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByCityDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByFinalMarkDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'city', Sort.desc);
+      return query.addSortBy(r'finalMark', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByCountry() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByMarked() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'country', Sort.asc);
+      return query.addSortBy(r'marked', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByCountryDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByMarkedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'country', Sort.desc);
+      return query.addSortBy(r'marked', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByDefaultHiddenPhone() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByMarkedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'defaultHiddenPhone', Sort.asc);
+      return query.addSortBy(r'markedAt', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByDefaultHiddenPhoneDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByMarkedAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'defaultHiddenPhone', Sort.desc);
+      return query.addSortBy(r'markedAt', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByEmailExtension() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByOccurrence() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'emailExtension', Sort.asc);
+      return query.addSortBy(r'occurrence', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByEmailExtensionDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByOccurrenceDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'emailExtension', Sort.desc);
+      return query.addSortBy(r'occurrence', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByFacebook() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByRetriableAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'facebook', Sort.asc);
+      return query.addSortBy(r'retriableAt', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByFacebookDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByRetriableAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'facebook', Sort.desc);
+      return query.addSortBy(r'retriableAt', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByName() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByStatus() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'name', Sort.asc);
+      return query.addSortBy(r'status', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByNameDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByStatusDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'name', Sort.desc);
+      return query.addSortBy(r'status', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByPublic() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByUpdatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'public', Sort.asc);
+      return query.addSortBy(r'updatedAt', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByPublicDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByUpdatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'public', Sort.desc);
+      return query.addSortBy(r'updatedAt', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByTimeZone() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByValidated() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'timeZone', Sort.asc);
+      return query.addSortBy(r'validated', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByTimeZoneDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> sortByValidatedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'timeZone', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByTwitter() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'twitter', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByTwitterDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'twitter', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByUsersCount() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'usersCount', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByUsersCountDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'usersCount', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByVogsphereId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'vogsphereId', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByVogsphereIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'vogsphereId', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByWebsite() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'website', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByWebsiteDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'website', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByZip() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'zip', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      sortByZipDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'zip', Sort.desc);
+      return query.addSortBy(r'validated', Sort.desc);
     });
   }
 }
 
-extension CampusIsarCollectionQuerySortThenBy
-    on QueryBuilder<CampusIsarCollection, CampusIsarCollection, QSortThenBy> {
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByActive() {
+extension ProjectsUserIsarCollectionQuerySortThenBy on QueryBuilder<
+    ProjectsUserIsarCollection, ProjectsUserIsarCollection, QSortThenBy> {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'active', Sort.asc);
+      return query.addSortBy(r'createdAt', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByActiveDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'active', Sort.desc);
+      return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByAddress() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByCurrentTeamId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'address', Sort.asc);
+      return query.addSortBy(r'currentTeamId', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByAddressDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByCurrentTeamIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'address', Sort.desc);
+      return query.addSortBy(r'currentTeamId', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByCity() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByFinalMark() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'city', Sort.asc);
+      return query.addSortBy(r'finalMark', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByCityDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByFinalMarkDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'city', Sort.desc);
+      return query.addSortBy(r'finalMark', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByCountry() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'country', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByCountryDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'country', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByDefaultHiddenPhone() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'defaultHiddenPhone', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByDefaultHiddenPhoneDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'defaultHiddenPhone', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByEmailExtension() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'emailExtension', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByEmailExtensionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'emailExtension', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByFacebook() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'facebook', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByFacebookDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'facebook', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenById() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByIdDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByName() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByMarked() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'name', Sort.asc);
+      return query.addSortBy(r'marked', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByNameDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByMarkedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'name', Sort.desc);
+      return query.addSortBy(r'marked', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByPublic() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByMarkedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'public', Sort.asc);
+      return query.addSortBy(r'markedAt', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByPublicDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByMarkedAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'public', Sort.desc);
+      return query.addSortBy(r'markedAt', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByTimeZone() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByOccurrence() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'timeZone', Sort.asc);
+      return query.addSortBy(r'occurrence', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByTimeZoneDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByOccurrenceDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'timeZone', Sort.desc);
+      return query.addSortBy(r'occurrence', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByTwitter() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByRetriableAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'twitter', Sort.asc);
+      return query.addSortBy(r'retriableAt', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByTwitterDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByRetriableAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'twitter', Sort.desc);
+      return query.addSortBy(r'retriableAt', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByUsersCount() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByStatus() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'usersCount', Sort.asc);
+      return query.addSortBy(r'status', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByUsersCountDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByStatusDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'usersCount', Sort.desc);
+      return query.addSortBy(r'status', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByVogsphereId() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByUpdatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'vogsphereId', Sort.asc);
+      return query.addSortBy(r'updatedAt', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByVogsphereIdDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByUpdatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'vogsphereId', Sort.desc);
+      return query.addSortBy(r'updatedAt', Sort.desc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByWebsite() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByValidated() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'website', Sort.asc);
+      return query.addSortBy(r'validated', Sort.asc);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByWebsiteDesc() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QAfterSortBy> thenByValidatedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'website', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByZip() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'zip', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QAfterSortBy>
-      thenByZipDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'zip', Sort.desc);
+      return query.addSortBy(r'validated', Sort.desc);
     });
   }
 }
 
-extension CampusIsarCollectionQueryWhereDistinct
-    on QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct> {
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByActive() {
+extension ProjectsUserIsarCollectionQueryWhereDistinct on QueryBuilder<
+    ProjectsUserIsarCollection, ProjectsUserIsarCollection, QDistinct> {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QDistinct> distinctByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'active');
+      return query.addDistinctBy(r'createdAt');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByAddress({bool caseSensitive = true}) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QDistinct> distinctByCurrentTeamId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'address', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'currentTeamId');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByCity({bool caseSensitive = true}) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QDistinct> distinctByCursusIds() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'city', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'cursusIds');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByCountry({bool caseSensitive = true}) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QDistinct> distinctByFinalMark() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'country', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'finalMark');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByDefaultHiddenPhone() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QDistinct> distinctByMarked() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'defaultHiddenPhone');
+      return query.addDistinctBy(r'marked');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByEmailExtension({bool caseSensitive = true}) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QDistinct> distinctByMarkedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'emailExtension',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'markedAt');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByFacebook({bool caseSensitive = true}) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QDistinct> distinctByOccurrence() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'facebook', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'occurrence');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByName({bool caseSensitive = true}) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QDistinct> distinctByRetriableAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'retriableAt');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByPublic() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QDistinct> distinctByStatus({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'public');
+      return query.addDistinctBy(r'status', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByTimeZone({bool caseSensitive = true}) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QDistinct> distinctByUpdatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'timeZone', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'updatedAt');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByTwitter({bool caseSensitive = true}) {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectsUserIsarCollection,
+      QDistinct> distinctByValidated() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'twitter', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByUsersCount() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'usersCount');
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByVogsphereId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'vogsphereId');
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByWebsite({bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'website', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, CampusIsarCollection, QDistinct>
-      distinctByZip({bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'zip', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'validated');
     });
   }
 }
 
-extension CampusIsarCollectionQueryProperty on QueryBuilder<
-    CampusIsarCollection, CampusIsarCollection, QQueryProperty> {
-  QueryBuilder<CampusIsarCollection, int, QQueryOperations> idProperty() {
+extension ProjectsUserIsarCollectionQueryProperty on QueryBuilder<
+    ProjectsUserIsarCollection, ProjectsUserIsarCollection, QQueryProperty> {
+  QueryBuilder<ProjectsUserIsarCollection, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, bool?, QQueryOperations> activeProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, DateTime?, QQueryOperations>
+      createdAtProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'active');
+      return query.addPropertyName(r'createdAt');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, String?, QQueryOperations>
-      addressProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, int?, QQueryOperations>
+      currentTeamIdProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'address');
+      return query.addPropertyName(r'currentTeamId');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, String?, QQueryOperations> cityProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, List<int>?, QQueryOperations>
+      cursusIdsProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'city');
+      return query.addPropertyName(r'cursusIds');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, String?, QQueryOperations>
-      countryProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, int?, QQueryOperations>
+      finalMarkProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'country');
+      return query.addPropertyName(r'finalMark');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, bool?, QQueryOperations>
-      defaultHiddenPhoneProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, bool?, QQueryOperations>
+      markedProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'defaultHiddenPhone');
+      return query.addPropertyName(r'marked');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, String?, QQueryOperations>
-      emailExtensionProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, DateTime?, QQueryOperations>
+      markedAtProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'emailExtension');
+      return query.addPropertyName(r'markedAt');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, String?, QQueryOperations>
-      facebookProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, int?, QQueryOperations>
+      occurrenceProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'facebook');
+      return query.addPropertyName(r'occurrence');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, LanguageIsar?, QQueryOperations>
-      languageProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, ProjectIsar?, QQueryOperations>
+      projectProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'language');
+      return query.addPropertyName(r'project');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, String?, QQueryOperations> nameProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, DateTime?, QQueryOperations>
+      retriableAtProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'name');
+      return query.addPropertyName(r'retriableAt');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, bool?, QQueryOperations> publicProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, String?, QQueryOperations>
+      statusProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'public');
+      return query.addPropertyName(r'status');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, String?, QQueryOperations>
-      timeZoneProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, DateTime?, QQueryOperations>
+      updatedAtProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'timeZone');
+      return query.addPropertyName(r'updatedAt');
     });
   }
 
-  QueryBuilder<CampusIsarCollection, String?, QQueryOperations>
-      twitterProperty() {
+  QueryBuilder<ProjectsUserIsarCollection, bool?, QQueryOperations>
+      validatedProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'twitter');
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, int?, QQueryOperations>
-      usersCountProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'usersCount');
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, int?, QQueryOperations>
-      vogsphereIdProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'vogsphereId');
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, String?, QQueryOperations>
-      websiteProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'website');
-    });
-  }
-
-  QueryBuilder<CampusIsarCollection, String?, QQueryOperations> zipProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'zip');
+      return query.addPropertyName(r'validated');
     });
   }
 }

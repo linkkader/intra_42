@@ -24,12 +24,10 @@ _$ScaleImpl _$$ScaleImplFromJson(Map<String, dynamic> json) => _$ScaleImpl(
       beginAt: json['begin_at'] == null
           ? null
           : DateTime.parse(json['begin_at'] as String),
-      correcteds: (json['correcteds'] as List<dynamic>?)
-          ?.map((e) => Correct.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      correcteds: json['correcteds'],
       corrector: json['corrector'] == null
           ? null
-          : Correct.fromJson(json['corrector'] as Map<String, dynamic>),
+          : Corrector.fromJson(json['corrector'] as Map<String, dynamic>),
       truant: json['truant'] == null
           ? null
           : Truant.fromJson(json['truant'] as Map<String, dynamic>),
@@ -41,7 +39,9 @@ _$ScaleImpl _$$ScaleImplFromJson(Map<String, dynamic> json) => _$ScaleImpl(
       team: json['team'] == null
           ? null
           : Team.fromJson(json['team'] as Map<String, dynamic>),
-      feedbacks: json['feedbacks'] as List<dynamic>?,
+      feedbacks: (json['feedbacks'] as List<dynamic>?)
+          ?.map((e) => Feedback.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$ScaleImplToJson(_$ScaleImpl instance) =>
@@ -65,14 +65,40 @@ Map<String, dynamic> _$$ScaleImplToJson(_$ScaleImpl instance) =>
       'feedbacks': instance.feedbacks,
     };
 
-_$CorrectImpl _$$CorrectImplFromJson(Map<String, dynamic> json) =>
-    _$CorrectImpl(
+_$FeedbackImpl _$$FeedbackImplFromJson(Map<String, dynamic> json) =>
+    _$FeedbackImpl(
+      id: (json['id'] as num?)?.toInt(),
+      user: json['user'] == null
+          ? null
+          : Corrector.fromJson(json['user'] as Map<String, dynamic>),
+      feedbackableType: json['feedbackable_type'] as String?,
+      feedbackableId: (json['feedbackable_id'] as num?)?.toInt(),
+      comment: json['comment'] as String?,
+      rating: (json['rating'] as num?)?.toInt(),
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+    );
+
+Map<String, dynamic> _$$FeedbackImplToJson(_$FeedbackImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'user': instance.user,
+      'feedbackable_type': instance.feedbackableType,
+      'feedbackable_id': instance.feedbackableId,
+      'comment': instance.comment,
+      'rating': instance.rating,
+      'created_at': instance.createdAt?.toIso8601String(),
+    };
+
+_$CorrectorImpl _$$CorrectorImplFromJson(Map<String, dynamic> json) =>
+    _$CorrectorImpl(
       id: (json['id'] as num?)?.toInt(),
       login: json['login'] as String?,
       url: json['url'] as String?,
     );
 
-Map<String, dynamic> _$$CorrectImplToJson(_$CorrectImpl instance) =>
+Map<String, dynamic> _$$CorrectorImplToJson(_$CorrectorImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'login': instance.login,

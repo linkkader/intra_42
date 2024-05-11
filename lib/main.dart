@@ -1,159 +1,94 @@
+// Created by linkkader on 8/11/2022
 
-import 'dart:async';
-import 'dart:convert';
-import 'dart:ffi';
-import 'dart:io';
-
-import 'package:dart_brotli/dart_brotli.dart';
-import 'package:intra_42/core/extensions/int_ext.dart';
-
-import 'core/params/constants.dart';
-import 'data/api/client.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intra_42/data/api/client.dart';
+import 'package:intra_42/presentation/page/start_page.dart';
+import 'package:logger/logger.dart';
+import 'core/log/log_filter.dart';
+import 'core/log/logger.dart';
+import 'core/params/colors.dart';
 import 'data/locale_storage/locale_storage.dart';
-import 'data/manager/black_hole_manager.dart';
-import 'data/models/user.dart';
-import 'data/models/user_2.dart';
-import 'data/models_izar/pref_isar.dart';
-import 'data/models_izar/user_isar.dart';
-import 'data/repositories/user_repository.dart';
+import 'data/manager/notification_manager.dart';
+import 'generated/l10n.dart';
+import 'l10n/l10n.dart';
 
 
-
-void main() async {
-
-
-  var cookie = "";
-
-  var read = stdin.readLineSync()!;
-  updateCurrent();
-
-  var code = "1";
-
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  //todo: properly check this
   await LocaleStorage().init();
+  //todo: properly check this
+  await Client().initApi();
+  NotificationManager.start();
+  runApp(const App());
+}
 
-  Client().initApi(cookie);
-  if (read.toLowerCase() == "blackhole")
-  {
-    var data = await LocaleStorage().img("cookie");
-    print(utf8.decode(data!.data));
-    if(data == null)
-    {
-      print("cookie: $cookie");
-      cookie = stdin.readLineSync()!;
-      Client().initApi(cookie);
-      LocaleStorage().saveImg("cookie", utf8.encode(cookie));
-    }
-    else
-    {
-      cookie = utf8.decode(data.data);
-      Client().initApi(cookie);
-    }
-    var completer = Completer();
-    LocaleStorage().saveImg("cookie", utf8.encode(cookie));
+class NavigationService {
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+}
 
-    BlackHoleManager().fetchAllBlackHole();
-    print("end");
-    await 500000.sleep();
-    await completer.future;
+class App extends StatelessWidget {
+
+  static final Log _logger = Log();
+
+  const App({Key? key}) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return ProviderScope(
+      child: Consumer(
+        builder: (context, ref, child) {
+          return MaterialApp(
+              themeMode: ThemeMode.light,
+              navigatorKey: NavigationService.navigatorKey,
+              supportedLocales: L10n.all,
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate
+              ],
+              theme: ThemeData(
+                useMaterial3: false,
+                scaffoldBackgroundColor: ColorConstants.kBackgroundColor,
+                backgroundColor: ColorConstants.kBackgroundColor,
+                colorScheme: const ColorScheme.light().copyWith(
+                  primary: ColorConstants.primary,
+                  secondary: ColorConstants.secondary,
+                  tertiary: ColorConstants.tertiary,
+                  background: ColorConstants.kBackgroundColor,
+                  onPrimary: Colors.white,
+                ),
+                primaryColor: Colors.white,
+              ),
+              home: const StartPage());
+        },
+      ),
+    );
   }
 
-  if (read.toLowerCase() == "cookie")
-  {
-    cookie = stdin.readLineSync()!;
-    print(cookie);
-    print(utf8.encode(cookie));
-    Client().initApi(cookie);
-    LocaleStorage().saveImg("cookie", utf8.encode(cookie));
-    return;
-  }
-  if (read.toLowerCase() == "all")
-  {
-    var all = LocaleStorage().allUsers();
-    print(all.length);
-    return;
-  }
-  if (read.toLowerCase() == "json")
-  {
-    var all = LocaleStorage().allUsers();
-    var now = DateTime.now();
-    List<User2> users = [];
-    var i = 0;
-    for (var value in all) {
-      if (value.login?.contains("3b3-") == true) continue;
-      var blackhole =  LocaleStorage().blackHoleIsar(value.id!);
-      if (blackhole?.bhDate != null && value.displayname != null && value.login != null && value.image?.versions?.small != null && value.campusName != null)
-      {
-        users.add(User2(name: value.displayname!, login: value.login!, img: value.image!.versions!.small!, bhDate: blackhole!.bhDate!, campusName: value.campusName!));
-      }
-    }
-    Map<String, int> campusName = {};
-    for (var element in users) {
-      campusName[element.campusName] ??= campusName.length;
-    }
-    print(campusName);
-    var data = {"update" : now.toIso8601String(), "secret_key" : "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"};
-    var file2 = File("last_update.json");
-    file2.writeAsStringSync(jsonEncode(data));
-    var file = File("users.json");
-    file.writeAsStringSync(jsonEncode(users));
-    var file3 = File("users.json.br");
-    await Brotli().init();
-    var compressed = await Brotli().compress(jsonEncode(users));
-    // for (var element in users) {
-    //   data2.add({"0" : element.name, "1" : element.login, "2" : element.img.substringAfter("https://cdn.intra.42.fr/users/").substringBefore("/"), "3" : element.bhDate.toIso8601String(), "4" : campusName[element.campusName]});
-    // }
+  static BuildContext get context => NavigationService.navigatorKey.currentContext!;
 
-    // file3.writeAsStringSync(jsonEncode({"campus" : campusName, "users" : data2}));
-    file3.writeAsBytesSync(compressed);
-    return;
-  }
-  if (read.toLowerCase() == "clear")
-  {
-    print("clear");
-    print(LocaleStorage.isar.intIsars.countSync());
-    await LocaleStorage.isar.writeTxn(() async {
-      await LocaleStorage.isar.dateTimeIsars.clear();
-      await LocaleStorage.isar.intIsars.clear();
-    });
-    return;
-  }
-  if (read.toLowerCase() == "clearuser")
-  {
-    print("clear");
-    print(LocaleStorage.isar.intIsars.countSync());
-    await LocaleStorage.isar.writeTxn(() async {
-      await LocaleStorage.isar.userIsars.clear();
-    });
-    return;
-  }
-  if (read.toLowerCase() == "campus")
-  {
-    print("campus");
-    print(LocaleStorage.isar.campusIsarCollections.countSync());
-    UserRepository().allCampus();
-    var completer = Completer();
-    await Completer().future;
-    return;
-  }
-  if (read.toLowerCase() == "refresh")
-  {
-    code = stdin.readLineSync()!;
-    // currentApiKey = int.tryParse(stdin.readLineSync()!) ?? 0;
-    updateCurrent();
-    Client().initApi(cookie);
-    var a = await UserRepository().refreshToken(code, force: true);
+  static ThemeData get theme => Theme.of(context);
 
-    return;
-  }
-  // var a = await UserRepository().refreshToken(code);
-  //
-  // print(a);
+  static TextTheme get textTheme => Theme.of(context).textTheme;
 
-  var completer = Completer();
-  BlackHoleManager().fetchCampusAllUser(onFinish: () {
-    // completer.complete();
-  },);
-  var all = LocaleStorage().allUsers();
-  await 5000.sleep();
-  await completer.future;
+  static ColorScheme get colorScheme => theme.colorScheme;
+
+  static S get s =>  NavigationService.navigatorKey.currentContext != null ? S.of(context) : S.current;
+
+  static Log get log => _logger;
+
+  static double get width => MediaQuery.of(context).size.width;
+
+  static double get height => MediaQuery.of(context).size.height;
+
+  static String get currentLanguage => "en";//Localizations.localeOf(context).languageCode;
+
+  static get constantColors  => ColorConstants();
 }

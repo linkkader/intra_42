@@ -6,7 +6,7 @@ part 'token_body_isar.g.dart';
 
 @collection
 class TokenBodyIsar {
-  final Id id;
+  final Id id = 0;
   final String? accessToken;
   final String? tokenType;
   final int? expiresIn;
@@ -14,10 +14,9 @@ class TokenBodyIsar {
   final String? scope;
   final int? createdAt;
 
-  const TokenBodyIsar({this.accessToken, this.tokenType, this.expiresIn, this.refreshToken, this.scope, this.createdAt, required this.id});
+  const TokenBodyIsar({this.accessToken, this.tokenType, this.expiresIn, this.refreshToken, this.scope, this.createdAt, });
 
-  factory TokenBodyIsar.fromFreezed(TokenBody? objet, int current) => TokenBodyIsar (
-    id: current,
+  factory TokenBodyIsar.fromFreezed(TokenBody? objet) => TokenBodyIsar (
     accessToken: objet?.accessToken,
     tokenType: objet?.tokenType,
     expiresIn: objet?.expiresIn,

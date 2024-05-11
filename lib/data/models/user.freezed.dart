@@ -23,7 +23,6 @@ mixin _$User {
   int? get id => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get login => throw _privateConstructorUsedError;
-  String? get campusName => throw _privateConstructorUsedError;
   @JsonKey(name: "first_name")
   String? get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: "last_name")
@@ -31,7 +30,7 @@ mixin _$User {
   @JsonKey(name: "usual_full_name")
   String? get usualFullName => throw _privateConstructorUsedError;
   @JsonKey(name: "usual_first_name")
-  dynamic get usualFirstName => throw _privateConstructorUsedError;
+  dynamic? get usualFirstName => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   @JsonKey(name: "displayname")
@@ -60,7 +59,7 @@ mixin _$User {
   @JsonKey(name: "updated_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "alumnized_at")
-  dynamic get alumnizedAt => throw _privateConstructorUsedError;
+  dynamic? get alumnizedAt => throw _privateConstructorUsedError;
   bool? get alumni => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
   List<dynamic>? get groups => throw _privateConstructorUsedError;
@@ -84,7 +83,6 @@ mixin _$User {
   List<Campus>? get campus => throw _privateConstructorUsedError;
   @JsonKey(name: "campus_users")
   List<CampusUser>? get campusUsers => throw _privateConstructorUsedError;
-  BlackHoleData? get blackHole => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -100,11 +98,10 @@ abstract class $UserCopyWith<$Res> {
       {int? id,
       String? email,
       String? login,
-      String? campusName,
       @JsonKey(name: "first_name") String? firstName,
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "usual_full_name") String? usualFullName,
-      @JsonKey(name: "usual_first_name") dynamic usualFirstName,
+      @JsonKey(name: "usual_first_name") dynamic? usualFirstName,
       String? url,
       String? phone,
       @JsonKey(name: "displayname") String? displayname,
@@ -122,7 +119,7 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: "dataErasure_date") DateTime? dataErasureDate,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt,
-      @JsonKey(name: "alumnized_at") dynamic alumnizedAt,
+      @JsonKey(name: "alumnized_at") dynamic? alumnizedAt,
       bool? alumni,
       bool? active,
       List<dynamic>? groups,
@@ -138,11 +135,9 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: "expertises_users") List<ExpertisesUser>? expertisesUsers,
       List<dynamic>? roles,
       List<Campus>? campus,
-      @JsonKey(name: "campus_users") List<CampusUser>? campusUsers,
-      BlackHoleData? blackHole});
+      @JsonKey(name: "campus_users") List<CampusUser>? campusUsers});
 
   $ImageCopyWith<$Res>? get image;
-  $BlackHoleDataCopyWith<$Res>? get blackHole;
 }
 
 /// @nodoc
@@ -161,7 +156,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? id = freezed,
     Object? email = freezed,
     Object? login = freezed,
-    Object? campusName = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? usualFullName = freezed,
@@ -200,7 +194,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? roles = freezed,
     Object? campus = freezed,
     Object? campusUsers = freezed,
-    Object? blackHole = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -214,10 +207,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       login: freezed == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
-              as String?,
-      campusName: freezed == campusName
-          ? _value.campusName
-          : campusName // ignore: cast_nullable_to_non_nullable
               as String?,
       firstName: freezed == firstName
           ? _value.firstName
@@ -234,7 +223,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       usualFirstName: freezed == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -306,7 +295,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       alumnizedAt: freezed == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       alumni: freezed == alumni
           ? _value.alumni
           : alumni // ignore: cast_nullable_to_non_nullable
@@ -371,10 +360,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.campusUsers
           : campusUsers // ignore: cast_nullable_to_non_nullable
               as List<CampusUser>?,
-      blackHole: freezed == blackHole
-          ? _value.blackHole
-          : blackHole // ignore: cast_nullable_to_non_nullable
-              as BlackHoleData?,
     ) as $Val);
   }
 
@@ -387,18 +372,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 
     return $ImageCopyWith<$Res>(_value.image!, (value) {
       return _then(_value.copyWith(image: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BlackHoleDataCopyWith<$Res>? get blackHole {
-    if (_value.blackHole == null) {
-      return null;
-    }
-
-    return $BlackHoleDataCopyWith<$Res>(_value.blackHole!, (value) {
-      return _then(_value.copyWith(blackHole: value) as $Val);
     });
   }
 }
@@ -414,11 +387,10 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       {int? id,
       String? email,
       String? login,
-      String? campusName,
       @JsonKey(name: "first_name") String? firstName,
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "usual_full_name") String? usualFullName,
-      @JsonKey(name: "usual_first_name") dynamic usualFirstName,
+      @JsonKey(name: "usual_first_name") dynamic? usualFirstName,
       String? url,
       String? phone,
       @JsonKey(name: "displayname") String? displayname,
@@ -436,7 +408,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: "dataErasure_date") DateTime? dataErasureDate,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt,
-      @JsonKey(name: "alumnized_at") dynamic alumnizedAt,
+      @JsonKey(name: "alumnized_at") dynamic? alumnizedAt,
       bool? alumni,
       bool? active,
       List<dynamic>? groups,
@@ -452,13 +424,10 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: "expertises_users") List<ExpertisesUser>? expertisesUsers,
       List<dynamic>? roles,
       List<Campus>? campus,
-      @JsonKey(name: "campus_users") List<CampusUser>? campusUsers,
-      BlackHoleData? blackHole});
+      @JsonKey(name: "campus_users") List<CampusUser>? campusUsers});
 
   @override
   $ImageCopyWith<$Res>? get image;
-  @override
-  $BlackHoleDataCopyWith<$Res>? get blackHole;
 }
 
 /// @nodoc
@@ -474,7 +443,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? email = freezed,
     Object? login = freezed,
-    Object? campusName = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? usualFullName = freezed,
@@ -513,7 +481,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? roles = freezed,
     Object? campus = freezed,
     Object? campusUsers = freezed,
-    Object? blackHole = freezed,
   }) {
     return _then(_$UserImpl(
       id: freezed == id
@@ -527,10 +494,6 @@ class __$$UserImplCopyWithImpl<$Res>
       login: freezed == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
-              as String?,
-      campusName: freezed == campusName
-          ? _value.campusName
-          : campusName // ignore: cast_nullable_to_non_nullable
               as String?,
       firstName: freezed == firstName
           ? _value.firstName
@@ -547,7 +510,7 @@ class __$$UserImplCopyWithImpl<$Res>
       usualFirstName: freezed == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -619,7 +582,7 @@ class __$$UserImplCopyWithImpl<$Res>
       alumnizedAt: freezed == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       alumni: freezed == alumni
           ? _value.alumni
           : alumni // ignore: cast_nullable_to_non_nullable
@@ -684,10 +647,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value._campusUsers
           : campusUsers // ignore: cast_nullable_to_non_nullable
               as List<CampusUser>?,
-      blackHole: freezed == blackHole
-          ? _value.blackHole
-          : blackHole // ignore: cast_nullable_to_non_nullable
-              as BlackHoleData?,
     ));
   }
 }
@@ -699,7 +658,6 @@ class _$UserImpl implements _User {
       {this.id,
       this.email,
       this.login,
-      this.campusName,
       @JsonKey(name: "first_name") this.firstName,
       @JsonKey(name: "last_name") this.lastName,
       @JsonKey(name: "usual_full_name") this.usualFullName,
@@ -739,8 +697,7 @@ class _$UserImpl implements _User {
       final List<ExpertisesUser>? expertisesUsers,
       final List<dynamic>? roles,
       final List<Campus>? campus,
-      @JsonKey(name: "campus_users") final List<CampusUser>? campusUsers,
-      this.blackHole})
+      @JsonKey(name: "campus_users") final List<CampusUser>? campusUsers})
       : _groups = groups,
         _cursusUsers = cursusUsers,
         _projectsUsers = projectsUsers,
@@ -766,8 +723,6 @@ class _$UserImpl implements _User {
   @override
   final String? login;
   @override
-  final String? campusName;
-  @override
   @JsonKey(name: "first_name")
   final String? firstName;
   @override
@@ -778,7 +733,7 @@ class _$UserImpl implements _User {
   final String? usualFullName;
   @override
   @JsonKey(name: "usual_first_name")
-  final dynamic usualFirstName;
+  final dynamic? usualFirstName;
   @override
   final String? url;
   @override
@@ -825,7 +780,7 @@ class _$UserImpl implements _User {
   final DateTime? updatedAt;
   @override
   @JsonKey(name: "alumnized_at")
-  final dynamic alumnizedAt;
+  final dynamic? alumnizedAt;
   @override
   final bool? alumni;
   @override
@@ -977,11 +932,8 @@ class _$UserImpl implements _User {
   }
 
   @override
-  final BlackHoleData? blackHole;
-
-  @override
   String toString() {
-    return 'User(id: $id, email: $email, login: $login, campusName: $campusName, firstName: $firstName, lastName: $lastName, usualFullName: $usualFullName, usualFirstName: $usualFirstName, url: $url, phone: $phone, displayname: $displayname, kind: $kind, imageUrl: $imageUrl, image: $image, newImageUrl: $newImageUrl, staff: $staff, correctionPoint: $correctionPoint, poolMonth: $poolMonth, poolYear: $poolYear, location: $location, wallet: $wallet, anonymizeDate: $anonymizeDate, dataErasureDate: $dataErasureDate, createdAt: $createdAt, updatedAt: $updatedAt, alumnizedAt: $alumnizedAt, alumni: $alumni, active: $active, groups: $groups, cursusUsers: $cursusUsers, projectsUsers: $projectsUsers, languagesUsers: $languagesUsers, achievements: $achievements, titles: $titles, titlesUsers: $titlesUsers, partnerships: $partnerships, patroned: $patroned, patroning: $patroning, expertisesUsers: $expertisesUsers, roles: $roles, campus: $campus, campusUsers: $campusUsers, blackHole: $blackHole)';
+    return 'User(id: $id, email: $email, login: $login, firstName: $firstName, lastName: $lastName, usualFullName: $usualFullName, usualFirstName: $usualFirstName, url: $url, phone: $phone, displayname: $displayname, kind: $kind, imageUrl: $imageUrl, image: $image, newImageUrl: $newImageUrl, staff: $staff, correctionPoint: $correctionPoint, poolMonth: $poolMonth, poolYear: $poolYear, location: $location, wallet: $wallet, anonymizeDate: $anonymizeDate, dataErasureDate: $dataErasureDate, createdAt: $createdAt, updatedAt: $updatedAt, alumnizedAt: $alumnizedAt, alumni: $alumni, active: $active, groups: $groups, cursusUsers: $cursusUsers, projectsUsers: $projectsUsers, languagesUsers: $languagesUsers, achievements: $achievements, titles: $titles, titlesUsers: $titlesUsers, partnerships: $partnerships, patroned: $patroned, patroning: $patroning, expertisesUsers: $expertisesUsers, roles: $roles, campus: $campus, campusUsers: $campusUsers)';
   }
 
   @override
@@ -992,8 +944,6 @@ class _$UserImpl implements _User {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.login, login) || other.login == login) &&
-            (identical(other.campusName, campusName) ||
-                other.campusName == campusName) &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
@@ -1056,9 +1006,7 @@ class _$UserImpl implements _User {
             const DeepCollectionEquality().equals(other._roles, _roles) &&
             const DeepCollectionEquality().equals(other._campus, _campus) &&
             const DeepCollectionEquality()
-                .equals(other._campusUsers, _campusUsers) &&
-            (identical(other.blackHole, blackHole) ||
-                other.blackHole == blackHole));
+                .equals(other._campusUsers, _campusUsers));
   }
 
   @JsonKey(ignore: true)
@@ -1068,7 +1016,6 @@ class _$UserImpl implements _User {
         id,
         email,
         login,
-        campusName,
         firstName,
         lastName,
         usualFullName,
@@ -1106,8 +1053,7 @@ class _$UserImpl implements _User {
         const DeepCollectionEquality().hash(_expertisesUsers),
         const DeepCollectionEquality().hash(_roles),
         const DeepCollectionEquality().hash(_campus),
-        const DeepCollectionEquality().hash(_campusUsers),
-        blackHole
+        const DeepCollectionEquality().hash(_campusUsers)
       ]);
 
   @JsonKey(ignore: true)
@@ -1129,11 +1075,10 @@ abstract class _User implements User {
       {final int? id,
       final String? email,
       final String? login,
-      final String? campusName,
       @JsonKey(name: "first_name") final String? firstName,
       @JsonKey(name: "last_name") final String? lastName,
       @JsonKey(name: "usual_full_name") final String? usualFullName,
-      @JsonKey(name: "usual_first_name") final dynamic usualFirstName,
+      @JsonKey(name: "usual_first_name") final dynamic? usualFirstName,
       final String? url,
       final String? phone,
       @JsonKey(name: "displayname") final String? displayname,
@@ -1151,7 +1096,7 @@ abstract class _User implements User {
       @JsonKey(name: "dataErasure_date") final DateTime? dataErasureDate,
       @JsonKey(name: "created_at") final DateTime? createdAt,
       @JsonKey(name: "updated_at") final DateTime? updatedAt,
-      @JsonKey(name: "alumnized_at") final dynamic alumnizedAt,
+      @JsonKey(name: "alumnized_at") final dynamic? alumnizedAt,
       final bool? alumni,
       final bool? active,
       final List<dynamic>? groups,
@@ -1169,8 +1114,8 @@ abstract class _User implements User {
       final List<ExpertisesUser>? expertisesUsers,
       final List<dynamic>? roles,
       final List<Campus>? campus,
-      @JsonKey(name: "campus_users") final List<CampusUser>? campusUsers,
-      final BlackHoleData? blackHole}) = _$UserImpl;
+      @JsonKey(name: "campus_users")
+      final List<CampusUser>? campusUsers}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -1180,8 +1125,6 @@ abstract class _User implements User {
   String? get email;
   @override
   String? get login;
-  @override
-  String? get campusName;
   @override
   @JsonKey(name: "first_name")
   String? get firstName;
@@ -1193,7 +1136,7 @@ abstract class _User implements User {
   String? get usualFullName;
   @override
   @JsonKey(name: "usual_first_name")
-  dynamic get usualFirstName;
+  dynamic? get usualFirstName;
   @override
   String? get url;
   @override
@@ -1240,7 +1183,7 @@ abstract class _User implements User {
   DateTime? get updatedAt;
   @override
   @JsonKey(name: "alumnized_at")
-  dynamic get alumnizedAt;
+  dynamic? get alumnizedAt;
   @override
   bool? get alumni;
   @override
@@ -1279,8 +1222,6 @@ abstract class _User implements User {
   @override
   @JsonKey(name: "campus_users")
   List<CampusUser>? get campusUsers;
-  @override
-  BlackHoleData? get blackHole;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
@@ -3460,7 +3401,7 @@ mixin _$UserClass {
   @JsonKey(name: "usual_full_name")
   String? get usualFullName => throw _privateConstructorUsedError;
   @JsonKey(name: "usual_first_name")
-  dynamic get usualFirstName => throw _privateConstructorUsedError;
+  dynamic? get usualFirstName => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   @JsonKey(name: "displayname")
@@ -3489,7 +3430,7 @@ mixin _$UserClass {
   @JsonKey(name: "updated_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "alumnized_at")
-  dynamic get alumnizedAt => throw _privateConstructorUsedError;
+  dynamic? get alumnizedAt => throw _privateConstructorUsedError;
   bool? get alumni => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
 
@@ -3511,7 +3452,7 @@ abstract class $UserClassCopyWith<$Res> {
       @JsonKey(name: "first_name") String? firstName,
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "usual_full_name") String? usualFullName,
-      @JsonKey(name: "usual_first_name") dynamic usualFirstName,
+      @JsonKey(name: "usual_first_name") dynamic? usualFirstName,
       String? url,
       String? phone,
       @JsonKey(name: "displayname") String? displayName,
@@ -3529,7 +3470,7 @@ abstract class $UserClassCopyWith<$Res> {
       @JsonKey(name: "dataErasure_date") DateTime? dataErasureDate,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt,
-      @JsonKey(name: "alumnized_at") dynamic alumnizedAt,
+      @JsonKey(name: "alumnized_at") dynamic? alumnizedAt,
       bool? alumni,
       bool? active});
 
@@ -3605,7 +3546,7 @@ class _$UserClassCopyWithImpl<$Res, $Val extends UserClass>
       usualFirstName: freezed == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -3677,7 +3618,7 @@ class _$UserClassCopyWithImpl<$Res, $Val extends UserClass>
       alumnizedAt: freezed == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       alumni: freezed == alumni
           ? _value.alumni
           : alumni // ignore: cast_nullable_to_non_nullable
@@ -3717,7 +3658,7 @@ abstract class _$$UserClassImplCopyWith<$Res>
       @JsonKey(name: "first_name") String? firstName,
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "usual_full_name") String? usualFullName,
-      @JsonKey(name: "usual_first_name") dynamic usualFirstName,
+      @JsonKey(name: "usual_first_name") dynamic? usualFirstName,
       String? url,
       String? phone,
       @JsonKey(name: "displayname") String? displayName,
@@ -3735,7 +3676,7 @@ abstract class _$$UserClassImplCopyWith<$Res>
       @JsonKey(name: "dataErasure_date") DateTime? dataErasureDate,
       @JsonKey(name: "created_at") DateTime? createdAt,
       @JsonKey(name: "updated_at") DateTime? updatedAt,
-      @JsonKey(name: "alumnized_at") dynamic alumnizedAt,
+      @JsonKey(name: "alumnized_at") dynamic? alumnizedAt,
       bool? alumni,
       bool? active});
 
@@ -3810,7 +3751,7 @@ class __$$UserClassImplCopyWithImpl<$Res>
       usualFirstName: freezed == usualFirstName
           ? _value.usualFirstName
           : usualFirstName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -3882,7 +3823,7 @@ class __$$UserClassImplCopyWithImpl<$Res>
       alumnizedAt: freezed == alumnizedAt
           ? _value.alumnizedAt
           : alumnizedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as dynamic?,
       alumni: freezed == alumni
           ? _value.alumni
           : alumni // ignore: cast_nullable_to_non_nullable
@@ -3947,7 +3888,7 @@ class _$UserClassImpl implements _UserClass {
   final String? usualFullName;
   @override
   @JsonKey(name: "usual_first_name")
-  final dynamic usualFirstName;
+  final dynamic? usualFirstName;
   @override
   final String? url;
   @override
@@ -3994,7 +3935,7 @@ class _$UserClassImpl implements _UserClass {
   final DateTime? updatedAt;
   @override
   @JsonKey(name: "alumnized_at")
-  final dynamic alumnizedAt;
+  final dynamic? alumnizedAt;
   @override
   final bool? alumni;
   @override
@@ -4110,7 +4051,7 @@ abstract class _UserClass implements UserClass {
       @JsonKey(name: "first_name") final String? firstName,
       @JsonKey(name: "last_name") final String? lastName,
       @JsonKey(name: "usual_full_name") final String? usualFullName,
-      @JsonKey(name: "usual_first_name") final dynamic usualFirstName,
+      @JsonKey(name: "usual_first_name") final dynamic? usualFirstName,
       final String? url,
       final String? phone,
       @JsonKey(name: "displayname") final String? displayName,
@@ -4128,7 +4069,7 @@ abstract class _UserClass implements UserClass {
       @JsonKey(name: "dataErasure_date") final DateTime? dataErasureDate,
       @JsonKey(name: "created_at") final DateTime? createdAt,
       @JsonKey(name: "updated_at") final DateTime? updatedAt,
-      @JsonKey(name: "alumnized_at") final dynamic alumnizedAt,
+      @JsonKey(name: "alumnized_at") final dynamic? alumnizedAt,
       final bool? alumni,
       final bool? active}) = _$UserClassImpl;
 
@@ -4152,7 +4093,7 @@ abstract class _UserClass implements UserClass {
   String? get usualFullName;
   @override
   @JsonKey(name: "usual_first_name")
-  dynamic get usualFirstName;
+  dynamic? get usualFirstName;
   @override
   String? get url;
   @override
@@ -4199,7 +4140,7 @@ abstract class _UserClass implements UserClass {
   DateTime? get updatedAt;
   @override
   @JsonKey(name: "alumnized_at")
-  dynamic get alumnizedAt;
+  dynamic? get alumnizedAt;
   @override
   bool? get alumni;
   @override
@@ -5099,6 +5040,7 @@ mixin _$ProjectsUser {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: "updated_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  List<Team>? get teams => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -5125,7 +5067,8 @@ abstract class $ProjectsUserCopyWith<$Res> {
       bool? marked,
       @JsonKey(name: "retriable_at") DateTime? retriableAt,
       @JsonKey(name: "created_at") DateTime? createdAt,
-      @JsonKey(name: "updated_at") DateTime? updatedAt});
+      @JsonKey(name: "updated_at") DateTime? updatedAt,
+      List<Team>? teams});
 
   $ProjectCopyWith<$Res>? get project;
 }
@@ -5156,6 +5099,7 @@ class _$ProjectsUserCopyWithImpl<$Res, $Val extends ProjectsUser>
     Object? retriableAt = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? teams = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -5210,6 +5154,10 @@ class _$ProjectsUserCopyWithImpl<$Res, $Val extends ProjectsUser>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      teams: freezed == teams
+          ? _value.teams
+          : teams // ignore: cast_nullable_to_non_nullable
+              as List<Team>?,
     ) as $Val);
   }
 
@@ -5247,7 +5195,8 @@ abstract class _$$ProjectsUserImplCopyWith<$Res>
       bool? marked,
       @JsonKey(name: "retriable_at") DateTime? retriableAt,
       @JsonKey(name: "created_at") DateTime? createdAt,
-      @JsonKey(name: "updated_at") DateTime? updatedAt});
+      @JsonKey(name: "updated_at") DateTime? updatedAt,
+      List<Team>? teams});
 
   @override
   $ProjectCopyWith<$Res>? get project;
@@ -5277,6 +5226,7 @@ class __$$ProjectsUserImplCopyWithImpl<$Res>
     Object? retriableAt = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? teams = freezed,
   }) {
     return _then(_$ProjectsUserImpl(
       id: freezed == id
@@ -5331,6 +5281,10 @@ class __$$ProjectsUserImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      teams: freezed == teams
+          ? _value._teams
+          : teams // ignore: cast_nullable_to_non_nullable
+              as List<Team>?,
     ));
   }
 }
@@ -5351,8 +5305,10 @@ class _$ProjectsUserImpl implements _ProjectsUser {
       this.marked,
       @JsonKey(name: "retriable_at") this.retriableAt,
       @JsonKey(name: "created_at") this.createdAt,
-      @JsonKey(name: "updated_at") this.updatedAt})
-      : _cursusIds = cursusIds;
+      @JsonKey(name: "updated_at") this.updatedAt,
+      final List<Team>? teams})
+      : _cursusIds = cursusIds,
+        _teams = teams;
 
   factory _$ProjectsUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProjectsUserImplFromJson(json);
@@ -5398,10 +5354,19 @@ class _$ProjectsUserImpl implements _ProjectsUser {
   @override
   @JsonKey(name: "updated_at")
   final DateTime? updatedAt;
+  final List<Team>? _teams;
+  @override
+  List<Team>? get teams {
+    final value = _teams;
+    if (value == null) return null;
+    if (_teams is EqualUnmodifiableListView) return _teams;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'ProjectsUser(id: $id, occurrence: $occurrence, finalMark: $finalMark, status: $status, validated: $validated, currentTeamId: $currentTeamId, project: $project, cursusIds: $cursusIds, markedAt: $markedAt, marked: $marked, retriableAt: $retriableAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProjectsUser(id: $id, occurrence: $occurrence, finalMark: $finalMark, status: $status, validated: $validated, currentTeamId: $currentTeamId, project: $project, cursusIds: $cursusIds, markedAt: $markedAt, marked: $marked, retriableAt: $retriableAt, createdAt: $createdAt, updatedAt: $updatedAt, teams: $teams)';
   }
 
   @override
@@ -5430,7 +5395,8 @@ class _$ProjectsUserImpl implements _ProjectsUser {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            const DeepCollectionEquality().equals(other._teams, _teams));
   }
 
   @JsonKey(ignore: true)
@@ -5449,7 +5415,8 @@ class _$ProjectsUserImpl implements _ProjectsUser {
       marked,
       retriableAt,
       createdAt,
-      updatedAt);
+      updatedAt,
+      const DeepCollectionEquality().hash(_teams));
 
   @JsonKey(ignore: true)
   @override
@@ -5467,20 +5434,20 @@ class _$ProjectsUserImpl implements _ProjectsUser {
 
 abstract class _ProjectsUser implements ProjectsUser {
   const factory _ProjectsUser(
-          {final int? id,
-          final int? occurrence,
-          @JsonKey(name: "final_mark") final int? finalMark,
-          final String? status,
-          final bool? validated,
-          @JsonKey(name: "current_team_id") final int? currentTeamId,
-          final Project? project,
-          @JsonKey(name: "cursus_ids") final List<int>? cursusIds,
-          @JsonKey(name: "marked_at") final DateTime? markedAt,
-          final bool? marked,
-          @JsonKey(name: "retriable_at") final DateTime? retriableAt,
-          @JsonKey(name: "created_at") final DateTime? createdAt,
-          @JsonKey(name: "updated_at") final DateTime? updatedAt}) =
-      _$ProjectsUserImpl;
+      {final int? id,
+      final int? occurrence,
+      @JsonKey(name: "final_mark") final int? finalMark,
+      final String? status,
+      final bool? validated,
+      @JsonKey(name: "current_team_id") final int? currentTeamId,
+      final Project? project,
+      @JsonKey(name: "cursus_ids") final List<int>? cursusIds,
+      @JsonKey(name: "marked_at") final DateTime? markedAt,
+      final bool? marked,
+      @JsonKey(name: "retriable_at") final DateTime? retriableAt,
+      @JsonKey(name: "created_at") final DateTime? createdAt,
+      @JsonKey(name: "updated_at") final DateTime? updatedAt,
+      final List<Team>? teams}) = _$ProjectsUserImpl;
 
   factory _ProjectsUser.fromJson(Map<String, dynamic> json) =
       _$ProjectsUserImpl.fromJson;
@@ -5519,6 +5486,8 @@ abstract class _ProjectsUser implements ProjectsUser {
   @JsonKey(name: "updated_at")
   DateTime? get updatedAt;
   @override
+  List<Team>? get teams;
+  @override
   @JsonKey(ignore: true)
   _$$ProjectsUserImplCopyWith<_$ProjectsUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -5533,8 +5502,24 @@ mixin _$Project {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get slug => throw _privateConstructorUsedError;
-  @JsonKey(name: "parent_id")
-  dynamic get parentId => throw _privateConstructorUsedError;
+  dynamic get parent => throw _privateConstructorUsedError;
+  List<dynamic>? get children => throw _privateConstructorUsedError;
+  List<dynamic>? get attachments => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at")
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "updated_at")
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  bool? get exam => throw _privateConstructorUsedError;
+  @JsonKey(name: "git_id")
+  int? get gitId => throw _privateConstructorUsedError;
+  String? get repository => throw _privateConstructorUsedError;
+  String? get recommendation => throw _privateConstructorUsedError;
+  List<Cursus>? get cursus => throw _privateConstructorUsedError;
+  List<Campus>? get campus => throw _privateConstructorUsedError;
+  List<dynamic>? get videos => throw _privateConstructorUsedError;
+  @JsonKey(name: "project_sessions")
+  List<ProjectSession>? get projectSessions =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -5550,7 +5535,20 @@ abstract class $ProjectCopyWith<$Res> {
       {int? id,
       String? name,
       String? slug,
-      @JsonKey(name: "parent_id") dynamic parentId});
+      dynamic parent,
+      List<dynamic>? children,
+      List<dynamic>? attachments,
+      @JsonKey(name: "created_at") DateTime? createdAt,
+      @JsonKey(name: "updated_at") DateTime? updatedAt,
+      bool? exam,
+      @JsonKey(name: "git_id") int? gitId,
+      String? repository,
+      String? recommendation,
+      List<Cursus>? cursus,
+      List<Campus>? campus,
+      List<dynamic>? videos,
+      @JsonKey(name: "project_sessions")
+      List<ProjectSession>? projectSessions});
 }
 
 /// @nodoc
@@ -5569,7 +5567,19 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
     Object? id = freezed,
     Object? name = freezed,
     Object? slug = freezed,
-    Object? parentId = freezed,
+    Object? parent = freezed,
+    Object? children = freezed,
+    Object? attachments = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? exam = freezed,
+    Object? gitId = freezed,
+    Object? repository = freezed,
+    Object? recommendation = freezed,
+    Object? cursus = freezed,
+    Object? campus = freezed,
+    Object? videos = freezed,
+    Object? projectSessions = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -5584,10 +5594,58 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
               as String?,
-      parentId: freezed == parentId
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
+      parent: freezed == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      children: freezed == children
+          ? _value.children
+          : children // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      attachments: freezed == attachments
+          ? _value.attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      exam: freezed == exam
+          ? _value.exam
+          : exam // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      gitId: freezed == gitId
+          ? _value.gitId
+          : gitId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      repository: freezed == repository
+          ? _value.repository
+          : repository // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recommendation: freezed == recommendation
+          ? _value.recommendation
+          : recommendation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cursus: freezed == cursus
+          ? _value.cursus
+          : cursus // ignore: cast_nullable_to_non_nullable
+              as List<Cursus>?,
+      campus: freezed == campus
+          ? _value.campus
+          : campus // ignore: cast_nullable_to_non_nullable
+              as List<Campus>?,
+      videos: freezed == videos
+          ? _value.videos
+          : videos // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      projectSessions: freezed == projectSessions
+          ? _value.projectSessions
+          : projectSessions // ignore: cast_nullable_to_non_nullable
+              as List<ProjectSession>?,
     ) as $Val);
   }
 }
@@ -5603,7 +5661,20 @@ abstract class _$$ProjectImplCopyWith<$Res> implements $ProjectCopyWith<$Res> {
       {int? id,
       String? name,
       String? slug,
-      @JsonKey(name: "parent_id") dynamic parentId});
+      dynamic parent,
+      List<dynamic>? children,
+      List<dynamic>? attachments,
+      @JsonKey(name: "created_at") DateTime? createdAt,
+      @JsonKey(name: "updated_at") DateTime? updatedAt,
+      bool? exam,
+      @JsonKey(name: "git_id") int? gitId,
+      String? repository,
+      String? recommendation,
+      List<Cursus>? cursus,
+      List<Campus>? campus,
+      List<dynamic>? videos,
+      @JsonKey(name: "project_sessions")
+      List<ProjectSession>? projectSessions});
 }
 
 /// @nodoc
@@ -5620,7 +5691,19 @@ class __$$ProjectImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? slug = freezed,
-    Object? parentId = freezed,
+    Object? parent = freezed,
+    Object? children = freezed,
+    Object? attachments = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? exam = freezed,
+    Object? gitId = freezed,
+    Object? repository = freezed,
+    Object? recommendation = freezed,
+    Object? cursus = freezed,
+    Object? campus = freezed,
+    Object? videos = freezed,
+    Object? projectSessions = freezed,
   }) {
     return _then(_$ProjectImpl(
       id: freezed == id
@@ -5635,10 +5718,58 @@ class __$$ProjectImplCopyWithImpl<$Res>
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
               as String?,
-      parentId: freezed == parentId
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
+      parent: freezed == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      children: freezed == children
+          ? _value._children
+          : children // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      attachments: freezed == attachments
+          ? _value._attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      exam: freezed == exam
+          ? _value.exam
+          : exam // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      gitId: freezed == gitId
+          ? _value.gitId
+          : gitId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      repository: freezed == repository
+          ? _value.repository
+          : repository // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recommendation: freezed == recommendation
+          ? _value.recommendation
+          : recommendation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cursus: freezed == cursus
+          ? _value._cursus
+          : cursus // ignore: cast_nullable_to_non_nullable
+              as List<Cursus>?,
+      campus: freezed == campus
+          ? _value._campus
+          : campus // ignore: cast_nullable_to_non_nullable
+              as List<Campus>?,
+      videos: freezed == videos
+          ? _value._videos
+          : videos // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      projectSessions: freezed == projectSessions
+          ? _value._projectSessions
+          : projectSessions // ignore: cast_nullable_to_non_nullable
+              as List<ProjectSession>?,
     ));
   }
 }
@@ -5650,7 +5781,26 @@ class _$ProjectImpl implements _Project {
       {this.id,
       this.name,
       this.slug,
-      @JsonKey(name: "parent_id") this.parentId});
+      this.parent,
+      final List<dynamic>? children,
+      final List<dynamic>? attachments,
+      @JsonKey(name: "created_at") this.createdAt,
+      @JsonKey(name: "updated_at") this.updatedAt,
+      this.exam,
+      @JsonKey(name: "git_id") this.gitId,
+      this.repository,
+      this.recommendation,
+      final List<Cursus>? cursus,
+      final List<Campus>? campus,
+      final List<dynamic>? videos,
+      @JsonKey(name: "project_sessions")
+      final List<ProjectSession>? projectSessions})
+      : _children = children,
+        _attachments = attachments,
+        _cursus = cursus,
+        _campus = campus,
+        _videos = videos,
+        _projectSessions = projectSessions;
 
   factory _$ProjectImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProjectImplFromJson(json);
@@ -5662,12 +5812,86 @@ class _$ProjectImpl implements _Project {
   @override
   final String? slug;
   @override
-  @JsonKey(name: "parent_id")
-  final dynamic parentId;
+  final dynamic parent;
+  final List<dynamic>? _children;
+  @override
+  List<dynamic>? get children {
+    final value = _children;
+    if (value == null) return null;
+    if (_children is EqualUnmodifiableListView) return _children;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<dynamic>? _attachments;
+  @override
+  List<dynamic>? get attachments {
+    final value = _attachments;
+    if (value == null) return null;
+    if (_attachments is EqualUnmodifiableListView) return _attachments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  @JsonKey(name: "created_at")
+  final DateTime? createdAt;
+  @override
+  @JsonKey(name: "updated_at")
+  final DateTime? updatedAt;
+  @override
+  final bool? exam;
+  @override
+  @JsonKey(name: "git_id")
+  final int? gitId;
+  @override
+  final String? repository;
+  @override
+  final String? recommendation;
+  final List<Cursus>? _cursus;
+  @override
+  List<Cursus>? get cursus {
+    final value = _cursus;
+    if (value == null) return null;
+    if (_cursus is EqualUnmodifiableListView) return _cursus;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Campus>? _campus;
+  @override
+  List<Campus>? get campus {
+    final value = _campus;
+    if (value == null) return null;
+    if (_campus is EqualUnmodifiableListView) return _campus;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<dynamic>? _videos;
+  @override
+  List<dynamic>? get videos {
+    final value = _videos;
+    if (value == null) return null;
+    if (_videos is EqualUnmodifiableListView) return _videos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<ProjectSession>? _projectSessions;
+  @override
+  @JsonKey(name: "project_sessions")
+  List<ProjectSession>? get projectSessions {
+    final value = _projectSessions;
+    if (value == null) return null;
+    if (_projectSessions is EqualUnmodifiableListView) return _projectSessions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'Project(id: $id, name: $name, slug: $slug, parentId: $parentId)';
+    return 'Project(id: $id, name: $name, slug: $slug, parent: $parent, children: $children, attachments: $attachments, createdAt: $createdAt, updatedAt: $updatedAt, exam: $exam, gitId: $gitId, repository: $repository, recommendation: $recommendation, cursus: $cursus, campus: $campus, videos: $videos, projectSessions: $projectSessions)';
   }
 
   @override
@@ -5678,13 +5902,47 @@ class _$ProjectImpl implements _Project {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.slug, slug) || other.slug == slug) &&
-            const DeepCollectionEquality().equals(other.parentId, parentId));
+            const DeepCollectionEquality().equals(other.parent, parent) &&
+            const DeepCollectionEquality().equals(other._children, _children) &&
+            const DeepCollectionEquality()
+                .equals(other._attachments, _attachments) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.exam, exam) || other.exam == exam) &&
+            (identical(other.gitId, gitId) || other.gitId == gitId) &&
+            (identical(other.repository, repository) ||
+                other.repository == repository) &&
+            (identical(other.recommendation, recommendation) ||
+                other.recommendation == recommendation) &&
+            const DeepCollectionEquality().equals(other._cursus, _cursus) &&
+            const DeepCollectionEquality().equals(other._campus, _campus) &&
+            const DeepCollectionEquality().equals(other._videos, _videos) &&
+            const DeepCollectionEquality()
+                .equals(other._projectSessions, _projectSessions));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, slug,
-      const DeepCollectionEquality().hash(parentId));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      slug,
+      const DeepCollectionEquality().hash(parent),
+      const DeepCollectionEquality().hash(_children),
+      const DeepCollectionEquality().hash(_attachments),
+      createdAt,
+      updatedAt,
+      exam,
+      gitId,
+      repository,
+      recommendation,
+      const DeepCollectionEquality().hash(_cursus),
+      const DeepCollectionEquality().hash(_campus),
+      const DeepCollectionEquality().hash(_videos),
+      const DeepCollectionEquality().hash(_projectSessions));
 
   @JsonKey(ignore: true)
   @override
@@ -5705,7 +5963,20 @@ abstract class _Project implements Project {
       {final int? id,
       final String? name,
       final String? slug,
-      @JsonKey(name: "parent_id") final dynamic parentId}) = _$ProjectImpl;
+      final dynamic parent,
+      final List<dynamic>? children,
+      final List<dynamic>? attachments,
+      @JsonKey(name: "created_at") final DateTime? createdAt,
+      @JsonKey(name: "updated_at") final DateTime? updatedAt,
+      final bool? exam,
+      @JsonKey(name: "git_id") final int? gitId,
+      final String? repository,
+      final String? recommendation,
+      final List<Cursus>? cursus,
+      final List<Campus>? campus,
+      final List<dynamic>? videos,
+      @JsonKey(name: "project_sessions")
+      final List<ProjectSession>? projectSessions}) = _$ProjectImpl;
 
   factory _Project.fromJson(Map<String, dynamic> json) = _$ProjectImpl.fromJson;
 
@@ -5716,10 +5987,1012 @@ abstract class _Project implements Project {
   @override
   String? get slug;
   @override
-  @JsonKey(name: "parent_id")
-  dynamic get parentId;
+  dynamic get parent;
+  @override
+  List<dynamic>? get children;
+  @override
+  List<dynamic>? get attachments;
+  @override
+  @JsonKey(name: "created_at")
+  DateTime? get createdAt;
+  @override
+  @JsonKey(name: "updated_at")
+  DateTime? get updatedAt;
+  @override
+  bool? get exam;
+  @override
+  @JsonKey(name: "git_id")
+  int? get gitId;
+  @override
+  String? get repository;
+  @override
+  String? get recommendation;
+  @override
+  List<Cursus>? get cursus;
+  @override
+  List<Campus>? get campus;
+  @override
+  List<dynamic>? get videos;
+  @override
+  @JsonKey(name: "project_sessions")
+  List<ProjectSession>? get projectSessions;
   @override
   @JsonKey(ignore: true)
   _$$ProjectImplCopyWith<_$ProjectImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ProjectSession _$ProjectSessionFromJson(Map<String, dynamic> json) {
+  return _ProjectSession.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ProjectSession {
+  int? get id => throw _privateConstructorUsedError;
+  bool? get solo => throw _privateConstructorUsedError;
+  @JsonKey(name: "begin_at")
+  dynamic get beginAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "end_at")
+  dynamic get endAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "estimate_time")
+  String? get estimateTime => throw _privateConstructorUsedError;
+  int? get difficulty => throw _privateConstructorUsedError;
+  List<String>? get objectives => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: "duration_days")
+  dynamic get durationDays => throw _privateConstructorUsedError;
+  @JsonKey(name: "terminating_after")
+  dynamic get terminatingAfter => throw _privateConstructorUsedError;
+  @JsonKey(name: "project_id")
+  int? get projectId => throw _privateConstructorUsedError;
+  @JsonKey(name: "campus_id")
+  int? get campusId => throw _privateConstructorUsedError;
+  @JsonKey(name: "cursus_id")
+  int? get cursusId => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at")
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "updated_at")
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "max_people")
+  dynamic get maxPeople => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_subscriptable")
+  bool? get isSubscriptable => throw _privateConstructorUsedError;
+  List<Scale>? get scales => throw _privateConstructorUsedError;
+  List<Upload>? get uploads => throw _privateConstructorUsedError;
+  @JsonKey(name: "team_behaviour")
+  String? get teamBehaviour => throw _privateConstructorUsedError;
+  String? get commit => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ProjectSessionCopyWith<ProjectSession> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProjectSessionCopyWith<$Res> {
+  factory $ProjectSessionCopyWith(
+          ProjectSession value, $Res Function(ProjectSession) then) =
+      _$ProjectSessionCopyWithImpl<$Res, ProjectSession>;
+  @useResult
+  $Res call(
+      {int? id,
+      bool? solo,
+      @JsonKey(name: "begin_at") dynamic beginAt,
+      @JsonKey(name: "end_at") dynamic endAt,
+      @JsonKey(name: "estimate_time") String? estimateTime,
+      int? difficulty,
+      List<String>? objectives,
+      String? description,
+      @JsonKey(name: "duration_days") dynamic durationDays,
+      @JsonKey(name: "terminating_after") dynamic terminatingAfter,
+      @JsonKey(name: "project_id") int? projectId,
+      @JsonKey(name: "campus_id") int? campusId,
+      @JsonKey(name: "cursus_id") int? cursusId,
+      @JsonKey(name: "created_at") DateTime? createdAt,
+      @JsonKey(name: "updated_at") DateTime? updatedAt,
+      @JsonKey(name: "max_people") dynamic maxPeople,
+      @JsonKey(name: "is_subscriptable") bool? isSubscriptable,
+      List<Scale>? scales,
+      List<Upload>? uploads,
+      @JsonKey(name: "team_behaviour") String? teamBehaviour,
+      String? commit});
+}
+
+/// @nodoc
+class _$ProjectSessionCopyWithImpl<$Res, $Val extends ProjectSession>
+    implements $ProjectSessionCopyWith<$Res> {
+  _$ProjectSessionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? solo = freezed,
+    Object? beginAt = freezed,
+    Object? endAt = freezed,
+    Object? estimateTime = freezed,
+    Object? difficulty = freezed,
+    Object? objectives = freezed,
+    Object? description = freezed,
+    Object? durationDays = freezed,
+    Object? terminatingAfter = freezed,
+    Object? projectId = freezed,
+    Object? campusId = freezed,
+    Object? cursusId = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? maxPeople = freezed,
+    Object? isSubscriptable = freezed,
+    Object? scales = freezed,
+    Object? uploads = freezed,
+    Object? teamBehaviour = freezed,
+    Object? commit = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      solo: freezed == solo
+          ? _value.solo
+          : solo // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      beginAt: freezed == beginAt
+          ? _value.beginAt
+          : beginAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      endAt: freezed == endAt
+          ? _value.endAt
+          : endAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      estimateTime: freezed == estimateTime
+          ? _value.estimateTime
+          : estimateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      difficulty: freezed == difficulty
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as int?,
+      objectives: freezed == objectives
+          ? _value.objectives
+          : objectives // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      durationDays: freezed == durationDays
+          ? _value.durationDays
+          : durationDays // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      terminatingAfter: freezed == terminatingAfter
+          ? _value.terminatingAfter
+          : terminatingAfter // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      projectId: freezed == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      campusId: freezed == campusId
+          ? _value.campusId
+          : campusId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cursusId: freezed == cursusId
+          ? _value.cursusId
+          : cursusId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      maxPeople: freezed == maxPeople
+          ? _value.maxPeople
+          : maxPeople // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isSubscriptable: freezed == isSubscriptable
+          ? _value.isSubscriptable
+          : isSubscriptable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      scales: freezed == scales
+          ? _value.scales
+          : scales // ignore: cast_nullable_to_non_nullable
+              as List<Scale>?,
+      uploads: freezed == uploads
+          ? _value.uploads
+          : uploads // ignore: cast_nullable_to_non_nullable
+              as List<Upload>?,
+      teamBehaviour: freezed == teamBehaviour
+          ? _value.teamBehaviour
+          : teamBehaviour // ignore: cast_nullable_to_non_nullable
+              as String?,
+      commit: freezed == commit
+          ? _value.commit
+          : commit // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ProjectSessionImplCopyWith<$Res>
+    implements $ProjectSessionCopyWith<$Res> {
+  factory _$$ProjectSessionImplCopyWith(_$ProjectSessionImpl value,
+          $Res Function(_$ProjectSessionImpl) then) =
+      __$$ProjectSessionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      bool? solo,
+      @JsonKey(name: "begin_at") dynamic beginAt,
+      @JsonKey(name: "end_at") dynamic endAt,
+      @JsonKey(name: "estimate_time") String? estimateTime,
+      int? difficulty,
+      List<String>? objectives,
+      String? description,
+      @JsonKey(name: "duration_days") dynamic durationDays,
+      @JsonKey(name: "terminating_after") dynamic terminatingAfter,
+      @JsonKey(name: "project_id") int? projectId,
+      @JsonKey(name: "campus_id") int? campusId,
+      @JsonKey(name: "cursus_id") int? cursusId,
+      @JsonKey(name: "created_at") DateTime? createdAt,
+      @JsonKey(name: "updated_at") DateTime? updatedAt,
+      @JsonKey(name: "max_people") dynamic maxPeople,
+      @JsonKey(name: "is_subscriptable") bool? isSubscriptable,
+      List<Scale>? scales,
+      List<Upload>? uploads,
+      @JsonKey(name: "team_behaviour") String? teamBehaviour,
+      String? commit});
+}
+
+/// @nodoc
+class __$$ProjectSessionImplCopyWithImpl<$Res>
+    extends _$ProjectSessionCopyWithImpl<$Res, _$ProjectSessionImpl>
+    implements _$$ProjectSessionImplCopyWith<$Res> {
+  __$$ProjectSessionImplCopyWithImpl(
+      _$ProjectSessionImpl _value, $Res Function(_$ProjectSessionImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? solo = freezed,
+    Object? beginAt = freezed,
+    Object? endAt = freezed,
+    Object? estimateTime = freezed,
+    Object? difficulty = freezed,
+    Object? objectives = freezed,
+    Object? description = freezed,
+    Object? durationDays = freezed,
+    Object? terminatingAfter = freezed,
+    Object? projectId = freezed,
+    Object? campusId = freezed,
+    Object? cursusId = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? maxPeople = freezed,
+    Object? isSubscriptable = freezed,
+    Object? scales = freezed,
+    Object? uploads = freezed,
+    Object? teamBehaviour = freezed,
+    Object? commit = freezed,
+  }) {
+    return _then(_$ProjectSessionImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      solo: freezed == solo
+          ? _value.solo
+          : solo // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      beginAt: freezed == beginAt
+          ? _value.beginAt
+          : beginAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      endAt: freezed == endAt
+          ? _value.endAt
+          : endAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      estimateTime: freezed == estimateTime
+          ? _value.estimateTime
+          : estimateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      difficulty: freezed == difficulty
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as int?,
+      objectives: freezed == objectives
+          ? _value._objectives
+          : objectives // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      durationDays: freezed == durationDays
+          ? _value.durationDays
+          : durationDays // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      terminatingAfter: freezed == terminatingAfter
+          ? _value.terminatingAfter
+          : terminatingAfter // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      projectId: freezed == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      campusId: freezed == campusId
+          ? _value.campusId
+          : campusId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cursusId: freezed == cursusId
+          ? _value.cursusId
+          : cursusId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      maxPeople: freezed == maxPeople
+          ? _value.maxPeople
+          : maxPeople // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isSubscriptable: freezed == isSubscriptable
+          ? _value.isSubscriptable
+          : isSubscriptable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      scales: freezed == scales
+          ? _value._scales
+          : scales // ignore: cast_nullable_to_non_nullable
+              as List<Scale>?,
+      uploads: freezed == uploads
+          ? _value._uploads
+          : uploads // ignore: cast_nullable_to_non_nullable
+              as List<Upload>?,
+      teamBehaviour: freezed == teamBehaviour
+          ? _value.teamBehaviour
+          : teamBehaviour // ignore: cast_nullable_to_non_nullable
+              as String?,
+      commit: freezed == commit
+          ? _value.commit
+          : commit // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ProjectSessionImpl implements _ProjectSession {
+  const _$ProjectSessionImpl(
+      {this.id,
+      this.solo,
+      @JsonKey(name: "begin_at") this.beginAt,
+      @JsonKey(name: "end_at") this.endAt,
+      @JsonKey(name: "estimate_time") this.estimateTime,
+      this.difficulty,
+      final List<String>? objectives,
+      this.description,
+      @JsonKey(name: "duration_days") this.durationDays,
+      @JsonKey(name: "terminating_after") this.terminatingAfter,
+      @JsonKey(name: "project_id") this.projectId,
+      @JsonKey(name: "campus_id") this.campusId,
+      @JsonKey(name: "cursus_id") this.cursusId,
+      @JsonKey(name: "created_at") this.createdAt,
+      @JsonKey(name: "updated_at") this.updatedAt,
+      @JsonKey(name: "max_people") this.maxPeople,
+      @JsonKey(name: "is_subscriptable") this.isSubscriptable,
+      final List<Scale>? scales,
+      final List<Upload>? uploads,
+      @JsonKey(name: "team_behaviour") this.teamBehaviour,
+      this.commit})
+      : _objectives = objectives,
+        _scales = scales,
+        _uploads = uploads;
+
+  factory _$ProjectSessionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProjectSessionImplFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final bool? solo;
+  @override
+  @JsonKey(name: "begin_at")
+  final dynamic beginAt;
+  @override
+  @JsonKey(name: "end_at")
+  final dynamic endAt;
+  @override
+  @JsonKey(name: "estimate_time")
+  final String? estimateTime;
+  @override
+  final int? difficulty;
+  final List<String>? _objectives;
+  @override
+  List<String>? get objectives {
+    final value = _objectives;
+    if (value == null) return null;
+    if (_objectives is EqualUnmodifiableListView) return _objectives;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? description;
+  @override
+  @JsonKey(name: "duration_days")
+  final dynamic durationDays;
+  @override
+  @JsonKey(name: "terminating_after")
+  final dynamic terminatingAfter;
+  @override
+  @JsonKey(name: "project_id")
+  final int? projectId;
+  @override
+  @JsonKey(name: "campus_id")
+  final int? campusId;
+  @override
+  @JsonKey(name: "cursus_id")
+  final int? cursusId;
+  @override
+  @JsonKey(name: "created_at")
+  final DateTime? createdAt;
+  @override
+  @JsonKey(name: "updated_at")
+  final DateTime? updatedAt;
+  @override
+  @JsonKey(name: "max_people")
+  final dynamic maxPeople;
+  @override
+  @JsonKey(name: "is_subscriptable")
+  final bool? isSubscriptable;
+  final List<Scale>? _scales;
+  @override
+  List<Scale>? get scales {
+    final value = _scales;
+    if (value == null) return null;
+    if (_scales is EqualUnmodifiableListView) return _scales;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Upload>? _uploads;
+  @override
+  List<Upload>? get uploads {
+    final value = _uploads;
+    if (value == null) return null;
+    if (_uploads is EqualUnmodifiableListView) return _uploads;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  @JsonKey(name: "team_behaviour")
+  final String? teamBehaviour;
+  @override
+  final String? commit;
+
+  @override
+  String toString() {
+    return 'ProjectSession(id: $id, solo: $solo, beginAt: $beginAt, endAt: $endAt, estimateTime: $estimateTime, difficulty: $difficulty, objectives: $objectives, description: $description, durationDays: $durationDays, terminatingAfter: $terminatingAfter, projectId: $projectId, campusId: $campusId, cursusId: $cursusId, createdAt: $createdAt, updatedAt: $updatedAt, maxPeople: $maxPeople, isSubscriptable: $isSubscriptable, scales: $scales, uploads: $uploads, teamBehaviour: $teamBehaviour, commit: $commit)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProjectSessionImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.solo, solo) || other.solo == solo) &&
+            const DeepCollectionEquality().equals(other.beginAt, beginAt) &&
+            const DeepCollectionEquality().equals(other.endAt, endAt) &&
+            (identical(other.estimateTime, estimateTime) ||
+                other.estimateTime == estimateTime) &&
+            (identical(other.difficulty, difficulty) ||
+                other.difficulty == difficulty) &&
+            const DeepCollectionEquality()
+                .equals(other._objectives, _objectives) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality()
+                .equals(other.durationDays, durationDays) &&
+            const DeepCollectionEquality()
+                .equals(other.terminatingAfter, terminatingAfter) &&
+            (identical(other.projectId, projectId) ||
+                other.projectId == projectId) &&
+            (identical(other.campusId, campusId) ||
+                other.campusId == campusId) &&
+            (identical(other.cursusId, cursusId) ||
+                other.cursusId == cursusId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            const DeepCollectionEquality().equals(other.maxPeople, maxPeople) &&
+            (identical(other.isSubscriptable, isSubscriptable) ||
+                other.isSubscriptable == isSubscriptable) &&
+            const DeepCollectionEquality().equals(other._scales, _scales) &&
+            const DeepCollectionEquality().equals(other._uploads, _uploads) &&
+            (identical(other.teamBehaviour, teamBehaviour) ||
+                other.teamBehaviour == teamBehaviour) &&
+            (identical(other.commit, commit) || other.commit == commit));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        solo,
+        const DeepCollectionEquality().hash(beginAt),
+        const DeepCollectionEquality().hash(endAt),
+        estimateTime,
+        difficulty,
+        const DeepCollectionEquality().hash(_objectives),
+        description,
+        const DeepCollectionEquality().hash(durationDays),
+        const DeepCollectionEquality().hash(terminatingAfter),
+        projectId,
+        campusId,
+        cursusId,
+        createdAt,
+        updatedAt,
+        const DeepCollectionEquality().hash(maxPeople),
+        isSubscriptable,
+        const DeepCollectionEquality().hash(_scales),
+        const DeepCollectionEquality().hash(_uploads),
+        teamBehaviour,
+        commit
+      ]);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProjectSessionImplCopyWith<_$ProjectSessionImpl> get copyWith =>
+      __$$ProjectSessionImplCopyWithImpl<_$ProjectSessionImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ProjectSessionImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ProjectSession implements ProjectSession {
+  const factory _ProjectSession(
+      {final int? id,
+      final bool? solo,
+      @JsonKey(name: "begin_at") final dynamic beginAt,
+      @JsonKey(name: "end_at") final dynamic endAt,
+      @JsonKey(name: "estimate_time") final String? estimateTime,
+      final int? difficulty,
+      final List<String>? objectives,
+      final String? description,
+      @JsonKey(name: "duration_days") final dynamic durationDays,
+      @JsonKey(name: "terminating_after") final dynamic terminatingAfter,
+      @JsonKey(name: "project_id") final int? projectId,
+      @JsonKey(name: "campus_id") final int? campusId,
+      @JsonKey(name: "cursus_id") final int? cursusId,
+      @JsonKey(name: "created_at") final DateTime? createdAt,
+      @JsonKey(name: "updated_at") final DateTime? updatedAt,
+      @JsonKey(name: "max_people") final dynamic maxPeople,
+      @JsonKey(name: "is_subscriptable") final bool? isSubscriptable,
+      final List<Scale>? scales,
+      final List<Upload>? uploads,
+      @JsonKey(name: "team_behaviour") final String? teamBehaviour,
+      final String? commit}) = _$ProjectSessionImpl;
+
+  factory _ProjectSession.fromJson(Map<String, dynamic> json) =
+      _$ProjectSessionImpl.fromJson;
+
+  @override
+  int? get id;
+  @override
+  bool? get solo;
+  @override
+  @JsonKey(name: "begin_at")
+  dynamic get beginAt;
+  @override
+  @JsonKey(name: "end_at")
+  dynamic get endAt;
+  @override
+  @JsonKey(name: "estimate_time")
+  String? get estimateTime;
+  @override
+  int? get difficulty;
+  @override
+  List<String>? get objectives;
+  @override
+  String? get description;
+  @override
+  @JsonKey(name: "duration_days")
+  dynamic get durationDays;
+  @override
+  @JsonKey(name: "terminating_after")
+  dynamic get terminatingAfter;
+  @override
+  @JsonKey(name: "project_id")
+  int? get projectId;
+  @override
+  @JsonKey(name: "campus_id")
+  int? get campusId;
+  @override
+  @JsonKey(name: "cursus_id")
+  int? get cursusId;
+  @override
+  @JsonKey(name: "created_at")
+  DateTime? get createdAt;
+  @override
+  @JsonKey(name: "updated_at")
+  DateTime? get updatedAt;
+  @override
+  @JsonKey(name: "max_people")
+  dynamic get maxPeople;
+  @override
+  @JsonKey(name: "is_subscriptable")
+  bool? get isSubscriptable;
+  @override
+  List<Scale>? get scales;
+  @override
+  List<Upload>? get uploads;
+  @override
+  @JsonKey(name: "team_behaviour")
+  String? get teamBehaviour;
+  @override
+  String? get commit;
+  @override
+  @JsonKey(ignore: true)
+  _$$ProjectSessionImplCopyWith<_$ProjectSessionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Scale _$ScaleFromJson(Map<String, dynamic> json) {
+  return _Scale.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Scale {
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "correction_number")
+  int? get correctionNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_primary")
+  bool? get isPrimary => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ScaleCopyWith<Scale> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ScaleCopyWith<$Res> {
+  factory $ScaleCopyWith(Scale value, $Res Function(Scale) then) =
+      _$ScaleCopyWithImpl<$Res, Scale>;
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: "correction_number") int? correctionNumber,
+      @JsonKey(name: "is_primary") bool? isPrimary});
+}
+
+/// @nodoc
+class _$ScaleCopyWithImpl<$Res, $Val extends Scale>
+    implements $ScaleCopyWith<$Res> {
+  _$ScaleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? correctionNumber = freezed,
+    Object? isPrimary = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      correctionNumber: freezed == correctionNumber
+          ? _value.correctionNumber
+          : correctionNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isPrimary: freezed == isPrimary
+          ? _value.isPrimary
+          : isPrimary // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ScaleImplCopyWith<$Res> implements $ScaleCopyWith<$Res> {
+  factory _$$ScaleImplCopyWith(
+          _$ScaleImpl value, $Res Function(_$ScaleImpl) then) =
+      __$$ScaleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: "correction_number") int? correctionNumber,
+      @JsonKey(name: "is_primary") bool? isPrimary});
+}
+
+/// @nodoc
+class __$$ScaleImplCopyWithImpl<$Res>
+    extends _$ScaleCopyWithImpl<$Res, _$ScaleImpl>
+    implements _$$ScaleImplCopyWith<$Res> {
+  __$$ScaleImplCopyWithImpl(
+      _$ScaleImpl _value, $Res Function(_$ScaleImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? correctionNumber = freezed,
+    Object? isPrimary = freezed,
+  }) {
+    return _then(_$ScaleImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      correctionNumber: freezed == correctionNumber
+          ? _value.correctionNumber
+          : correctionNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isPrimary: freezed == isPrimary
+          ? _value.isPrimary
+          : isPrimary // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ScaleImpl implements _Scale {
+  const _$ScaleImpl(
+      {this.id,
+      @JsonKey(name: "correction_number") this.correctionNumber,
+      @JsonKey(name: "is_primary") this.isPrimary});
+
+  factory _$ScaleImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ScaleImplFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  @JsonKey(name: "correction_number")
+  final int? correctionNumber;
+  @override
+  @JsonKey(name: "is_primary")
+  final bool? isPrimary;
+
+  @override
+  String toString() {
+    return 'Scale(id: $id, correctionNumber: $correctionNumber, isPrimary: $isPrimary)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ScaleImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.correctionNumber, correctionNumber) ||
+                other.correctionNumber == correctionNumber) &&
+            (identical(other.isPrimary, isPrimary) ||
+                other.isPrimary == isPrimary));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, correctionNumber, isPrimary);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ScaleImplCopyWith<_$ScaleImpl> get copyWith =>
+      __$$ScaleImplCopyWithImpl<_$ScaleImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ScaleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Scale implements Scale {
+  const factory _Scale(
+      {final int? id,
+      @JsonKey(name: "correction_number") final int? correctionNumber,
+      @JsonKey(name: "is_primary") final bool? isPrimary}) = _$ScaleImpl;
+
+  factory _Scale.fromJson(Map<String, dynamic> json) = _$ScaleImpl.fromJson;
+
+  @override
+  int? get id;
+  @override
+  @JsonKey(name: "correction_number")
+  int? get correctionNumber;
+  @override
+  @JsonKey(name: "is_primary")
+  bool? get isPrimary;
+  @override
+  @JsonKey(ignore: true)
+  _$$ScaleImplCopyWith<_$ScaleImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Upload _$UploadFromJson(Map<String, dynamic> json) {
+  return _Upload.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Upload {
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $UploadCopyWith<Upload> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UploadCopyWith<$Res> {
+  factory $UploadCopyWith(Upload value, $Res Function(Upload) then) =
+      _$UploadCopyWithImpl<$Res, Upload>;
+  @useResult
+  $Res call({int? id, String? name});
+}
+
+/// @nodoc
+class _$UploadCopyWithImpl<$Res, $Val extends Upload>
+    implements $UploadCopyWith<$Res> {
+  _$UploadCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$UploadImplCopyWith<$Res> implements $UploadCopyWith<$Res> {
+  factory _$$UploadImplCopyWith(
+          _$UploadImpl value, $Res Function(_$UploadImpl) then) =
+      __$$UploadImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? id, String? name});
+}
+
+/// @nodoc
+class __$$UploadImplCopyWithImpl<$Res>
+    extends _$UploadCopyWithImpl<$Res, _$UploadImpl>
+    implements _$$UploadImplCopyWith<$Res> {
+  __$$UploadImplCopyWithImpl(
+      _$UploadImpl _value, $Res Function(_$UploadImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_$UploadImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$UploadImpl implements _Upload {
+  const _$UploadImpl({this.id, this.name});
+
+  factory _$UploadImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UploadImplFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final String? name;
+
+  @override
+  String toString() {
+    return 'Upload(id: $id, name: $name)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UploadImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UploadImplCopyWith<_$UploadImpl> get copyWith =>
+      __$$UploadImplCopyWithImpl<_$UploadImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$UploadImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Upload implements Upload {
+  const factory _Upload({final int? id, final String? name}) = _$UploadImpl;
+
+  factory _Upload.fromJson(Map<String, dynamic> json) = _$UploadImpl.fromJson;
+
+  @override
+  int? get id;
+  @override
+  String? get name;
+  @override
+  @JsonKey(ignore: true)
+  _$$UploadImplCopyWith<_$UploadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

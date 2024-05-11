@@ -457,7 +457,7 @@ By _$ByFromJson(Map<String, dynamic> json) {
 mixin _$By {
   @JsonKey(name: 'parent_id')
   int? get parentId => throw _privateConstructorUsedError;
-  List<List<int>>? get points => throw _privateConstructorUsedError;
+  List<List<double>>? get points => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -470,7 +470,7 @@ abstract class $ByCopyWith<$Res> {
       _$ByCopyWithImpl<$Res, By>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'parent_id') int? parentId, List<List<int>>? points});
+      {@JsonKey(name: 'parent_id') int? parentId, List<List<double>>? points});
 }
 
 /// @nodoc
@@ -496,7 +496,7 @@ class _$ByCopyWithImpl<$Res, $Val extends By> implements $ByCopyWith<$Res> {
       points: freezed == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as List<List<int>>?,
+              as List<List<double>>?,
     ) as $Val);
   }
 }
@@ -508,7 +508,7 @@ abstract class _$$ByImplCopyWith<$Res> implements $ByCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'parent_id') int? parentId, List<List<int>>? points});
+      {@JsonKey(name: 'parent_id') int? parentId, List<List<double>>? points});
 }
 
 /// @nodoc
@@ -531,7 +531,7 @@ class __$$ByImplCopyWithImpl<$Res> extends _$ByCopyWithImpl<$Res, _$ByImpl>
       points: freezed == points
           ? _value._points
           : points // ignore: cast_nullable_to_non_nullable
-              as List<List<int>>?,
+              as List<List<double>>?,
     ));
   }
 }
@@ -541,7 +541,7 @@ class __$$ByImplCopyWithImpl<$Res> extends _$ByCopyWithImpl<$Res, _$ByImpl>
 class _$ByImpl implements _By {
   const _$ByImpl(
       {@JsonKey(name: 'parent_id') this.parentId,
-      final List<List<int>>? points})
+      final List<List<double>>? points})
       : _points = points;
 
   factory _$ByImpl.fromJson(Map<String, dynamic> json) =>
@@ -550,9 +550,9 @@ class _$ByImpl implements _By {
   @override
   @JsonKey(name: 'parent_id')
   final int? parentId;
-  final List<List<int>>? _points;
+  final List<List<double>>? _points;
   @override
-  List<List<int>>? get points {
+  List<List<double>>? get points {
     final value = _points;
     if (value == null) return null;
     if (_points is EqualUnmodifiableListView) return _points;
@@ -597,7 +597,7 @@ class _$ByImpl implements _By {
 abstract class _By implements By {
   const factory _By(
       {@JsonKey(name: 'parent_id') final int? parentId,
-      final List<List<int>>? points}) = _$ByImpl;
+      final List<List<double>>? points}) = _$ByImpl;
 
   factory _By.fromJson(Map<String, dynamic> json) = _$ByImpl.fromJson;
 
@@ -605,7 +605,7 @@ abstract class _By implements By {
   @JsonKey(name: 'parent_id')
   int? get parentId;
   @override
-  List<List<int>>? get points;
+  List<List<double>>? get points;
   @override
   @JsonKey(ignore: true)
   _$$ByImplCopyWith<_$ByImpl> get copyWith =>

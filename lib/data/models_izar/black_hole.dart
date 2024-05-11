@@ -1,7 +1,8 @@
 // Created by linkkader on 17/11/2022
 
+import 'package:intra_42/core/extensions/string_ext.dart';
 import 'package:isar/isar.dart';
-import '../../core/extensions/string_ext.dart';
+
 import '../models/black_hole_data.dart';
 
 part 'black_hole.g.dart';
@@ -42,11 +43,6 @@ class BlackHoleIsar {
     bhDate: bhDate ?? this.bhDate,
     updatedAt: updatedAt ?? this.updatedAt,
   );
-
-  @override
-  String toString() {
-    return 'BlackHoleIsar(id: $id, isAlumni: $isAlumni, agu: $agu, aguDate: $aguDate, singularity: $singularity, bhDate: $bhDate, updatedAt: $updatedAt)';
-  }
 
 }
 

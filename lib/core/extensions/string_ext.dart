@@ -1,4 +1,6 @@
 // Created by linkkader on 9/9/2022
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:intra_42/main.dart';
 
 extension StringExtension on String {
 
@@ -58,6 +60,8 @@ extension StringExtension on String {
 
   //to uri
   Uri get uri => Uri.parse(this);
+
+  WebUri get webUri => WebUri.uri(uri);
 
   bool emailValidator() {
     if (isEmpty) return false;
@@ -132,19 +136,6 @@ extension StringExtension on String {
       return true;
     } catch (e) {
       return false;
-    }
-  }
-
-  //substringAfterBefore
-
-  String substringAfterBefore(String str1, String str2) {
-    if (isEmpty) return "";
-    if (str1.isEmpty) return this;
-    if (str2.isEmpty) return this;
-    if (contains(str1) && contains(str2)) {
-      return substring(indexOf(str1) + str1.length, indexOf(str2));
-    } else {
-      return this;
     }
   }
 

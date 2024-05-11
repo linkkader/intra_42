@@ -35,8 +35,8 @@ mixin _$ScaleTeam {
   @JsonKey(name: 'begin_at')
   DateTime? get beginAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'correcteds')
-  List<Correct>? get correcteds => throw _privateConstructorUsedError;
-  Correct? get corrector => throw _privateConstructorUsedError;
+  dynamic get correcteds => throw _privateConstructorUsedError;
+  Corrector? get corrector => throw _privateConstructorUsedError;
   Truant? get truant => throw _privateConstructorUsedError;
   @JsonKey(name: 'filled_at')
   dynamic get filledAt => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ mixin _$ScaleTeam {
   List<dynamic>? get questionsWithAnswers => throw _privateConstructorUsedError;
   ScaleClass? get scale => throw _privateConstructorUsedError;
   Team? get team => throw _privateConstructorUsedError;
-  List<dynamic>? get feedbacks => throw _privateConstructorUsedError;
+  List<Feedback>? get feedbacks => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -67,18 +67,18 @@ abstract class $ScaleTeamCopyWith<$Res> {
       @JsonKey(name: 'final_mark') dynamic finalMark,
       Flag? flag,
       @JsonKey(name: 'begin_at') DateTime? beginAt,
-      @JsonKey(name: 'correcteds') List<Correct>? correcteds,
-      Correct? corrector,
+      @JsonKey(name: 'correcteds') dynamic correcteds,
+      Corrector? corrector,
       Truant? truant,
       @JsonKey(name: 'filled_at') dynamic filledAt,
       @JsonKey(name: 'questions_with_answers')
       List<dynamic>? questionsWithAnswers,
       ScaleClass? scale,
       Team? team,
-      List<dynamic>? feedbacks});
+      List<Feedback>? feedbacks});
 
   $FlagCopyWith<$Res>? get flag;
-  $CorrectCopyWith<$Res>? get corrector;
+  $CorrectorCopyWith<$Res>? get corrector;
   $TruantCopyWith<$Res>? get truant;
   $ScaleClassCopyWith<$Res>? get scale;
   $TeamCopyWith<$Res>? get team;
@@ -155,11 +155,11 @@ class _$ScaleTeamCopyWithImpl<$Res, $Val extends ScaleTeam>
       correcteds: freezed == correcteds
           ? _value.correcteds
           : correcteds // ignore: cast_nullable_to_non_nullable
-              as List<Correct>?,
+              as dynamic,
       corrector: freezed == corrector
           ? _value.corrector
           : corrector // ignore: cast_nullable_to_non_nullable
-              as Correct?,
+              as Corrector?,
       truant: freezed == truant
           ? _value.truant
           : truant // ignore: cast_nullable_to_non_nullable
@@ -183,7 +183,7 @@ class _$ScaleTeamCopyWithImpl<$Res, $Val extends ScaleTeam>
       feedbacks: freezed == feedbacks
           ? _value.feedbacks
           : feedbacks // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Feedback>?,
     ) as $Val);
   }
 
@@ -201,12 +201,12 @@ class _$ScaleTeamCopyWithImpl<$Res, $Val extends ScaleTeam>
 
   @override
   @pragma('vm:prefer-inline')
-  $CorrectCopyWith<$Res>? get corrector {
+  $CorrectorCopyWith<$Res>? get corrector {
     if (_value.corrector == null) {
       return null;
     }
 
-    return $CorrectCopyWith<$Res>(_value.corrector!, (value) {
+    return $CorrectorCopyWith<$Res>(_value.corrector!, (value) {
       return _then(_value.copyWith(corrector: value) as $Val);
     });
   }
@@ -265,20 +265,20 @@ abstract class _$$ScaleImplCopyWith<$Res> implements $ScaleTeamCopyWith<$Res> {
       @JsonKey(name: 'final_mark') dynamic finalMark,
       Flag? flag,
       @JsonKey(name: 'begin_at') DateTime? beginAt,
-      @JsonKey(name: 'correcteds') List<Correct>? correcteds,
-      Correct? corrector,
+      @JsonKey(name: 'correcteds') dynamic correcteds,
+      Corrector? corrector,
       Truant? truant,
       @JsonKey(name: 'filled_at') dynamic filledAt,
       @JsonKey(name: 'questions_with_answers')
       List<dynamic>? questionsWithAnswers,
       ScaleClass? scale,
       Team? team,
-      List<dynamic>? feedbacks});
+      List<Feedback>? feedbacks});
 
   @override
   $FlagCopyWith<$Res>? get flag;
   @override
-  $CorrectCopyWith<$Res>? get corrector;
+  $CorrectorCopyWith<$Res>? get corrector;
   @override
   $TruantCopyWith<$Res>? get truant;
   @override
@@ -354,13 +354,13 @@ class __$$ScaleImplCopyWithImpl<$Res>
           : beginAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       correcteds: freezed == correcteds
-          ? _value._correcteds
+          ? _value.correcteds
           : correcteds // ignore: cast_nullable_to_non_nullable
-              as List<Correct>?,
+              as dynamic,
       corrector: freezed == corrector
           ? _value.corrector
           : corrector // ignore: cast_nullable_to_non_nullable
-              as Correct?,
+              as Corrector?,
       truant: freezed == truant
           ? _value.truant
           : truant // ignore: cast_nullable_to_non_nullable
@@ -384,7 +384,7 @@ class __$$ScaleImplCopyWithImpl<$Res>
       feedbacks: freezed == feedbacks
           ? _value._feedbacks
           : feedbacks // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Feedback>?,
     ));
   }
 }
@@ -402,7 +402,7 @@ class _$ScaleImpl implements _Scale {
       @JsonKey(name: 'final_mark') this.finalMark,
       this.flag,
       @JsonKey(name: 'begin_at') this.beginAt,
-      @JsonKey(name: 'correcteds') final List<Correct>? correcteds,
+      @JsonKey(name: 'correcteds') this.correcteds,
       this.corrector,
       this.truant,
       @JsonKey(name: 'filled_at') this.filledAt,
@@ -410,9 +410,8 @@ class _$ScaleImpl implements _Scale {
       final List<dynamic>? questionsWithAnswers,
       this.scale,
       this.team,
-      final List<dynamic>? feedbacks})
-      : _correcteds = correcteds,
-        _questionsWithAnswers = questionsWithAnswers,
+      final List<Feedback>? feedbacks})
+      : _questionsWithAnswers = questionsWithAnswers,
         _feedbacks = feedbacks;
 
   factory _$ScaleImpl.fromJson(Map<String, dynamic> json) =>
@@ -441,19 +440,11 @@ class _$ScaleImpl implements _Scale {
   @override
   @JsonKey(name: 'begin_at')
   final DateTime? beginAt;
-  final List<Correct>? _correcteds;
   @override
   @JsonKey(name: 'correcteds')
-  List<Correct>? get correcteds {
-    final value = _correcteds;
-    if (value == null) return null;
-    if (_correcteds is EqualUnmodifiableListView) return _correcteds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  final dynamic correcteds;
   @override
-  final Correct? corrector;
+  final Corrector? corrector;
   @override
   final Truant? truant;
   @override
@@ -475,9 +466,9 @@ class _$ScaleImpl implements _Scale {
   final ScaleClass? scale;
   @override
   final Team? team;
-  final List<dynamic>? _feedbacks;
+  final List<Feedback>? _feedbacks;
   @override
-  List<dynamic>? get feedbacks {
+  List<Feedback>? get feedbacks {
     final value = _feedbacks;
     if (value == null) return null;
     if (_feedbacks is EqualUnmodifiableListView) return _feedbacks;
@@ -507,7 +498,7 @@ class _$ScaleImpl implements _Scale {
             (identical(other.flag, flag) || other.flag == flag) &&
             (identical(other.beginAt, beginAt) || other.beginAt == beginAt) &&
             const DeepCollectionEquality()
-                .equals(other._correcteds, _correcteds) &&
+                .equals(other.correcteds, correcteds) &&
             (identical(other.corrector, corrector) ||
                 other.corrector == corrector) &&
             (identical(other.truant, truant) || other.truant == truant) &&
@@ -533,7 +524,7 @@ class _$ScaleImpl implements _Scale {
       const DeepCollectionEquality().hash(finalMark),
       flag,
       beginAt,
-      const DeepCollectionEquality().hash(_correcteds),
+      const DeepCollectionEquality().hash(correcteds),
       corrector,
       truant,
       const DeepCollectionEquality().hash(filledAt),
@@ -567,15 +558,15 @@ abstract class _Scale implements ScaleTeam {
       @JsonKey(name: 'final_mark') final dynamic finalMark,
       final Flag? flag,
       @JsonKey(name: 'begin_at') final DateTime? beginAt,
-      @JsonKey(name: 'correcteds') final List<Correct>? correcteds,
-      final Correct? corrector,
+      @JsonKey(name: 'correcteds') final dynamic correcteds,
+      final Corrector? corrector,
       final Truant? truant,
       @JsonKey(name: 'filled_at') final dynamic filledAt,
       @JsonKey(name: 'questions_with_answers')
       final List<dynamic>? questionsWithAnswers,
       final ScaleClass? scale,
       final Team? team,
-      final List<dynamic>? feedbacks}) = _$ScaleImpl;
+      final List<Feedback>? feedbacks}) = _$ScaleImpl;
 
   factory _Scale.fromJson(Map<String, dynamic> json) = _$ScaleImpl.fromJson;
 
@@ -604,9 +595,9 @@ abstract class _Scale implements ScaleTeam {
   DateTime? get beginAt;
   @override
   @JsonKey(name: 'correcteds')
-  List<Correct>? get correcteds;
+  dynamic get correcteds;
   @override
-  Correct? get corrector;
+  Corrector? get corrector;
   @override
   Truant? get truant;
   @override
@@ -620,40 +611,330 @@ abstract class _Scale implements ScaleTeam {
   @override
   Team? get team;
   @override
-  List<dynamic>? get feedbacks;
+  List<Feedback>? get feedbacks;
   @override
   @JsonKey(ignore: true)
   _$$ScaleImplCopyWith<_$ScaleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-Correct _$CorrectFromJson(Map<String, dynamic> json) {
-  return _Correct.fromJson(json);
+Feedback _$FeedbackFromJson(Map<String, dynamic> json) {
+  return _Feedback.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Correct {
+mixin _$Feedback {
+  int? get id => throw _privateConstructorUsedError;
+  Corrector? get user => throw _privateConstructorUsedError;
+  @JsonKey(name: 'feedbackable_type')
+  String? get feedbackableType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'feedbackable_id')
+  int? get feedbackableId => throw _privateConstructorUsedError;
+  String? get comment => throw _privateConstructorUsedError;
+  int? get rating => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FeedbackCopyWith<Feedback> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FeedbackCopyWith<$Res> {
+  factory $FeedbackCopyWith(Feedback value, $Res Function(Feedback) then) =
+      _$FeedbackCopyWithImpl<$Res, Feedback>;
+  @useResult
+  $Res call(
+      {int? id,
+      Corrector? user,
+      @JsonKey(name: 'feedbackable_type') String? feedbackableType,
+      @JsonKey(name: 'feedbackable_id') int? feedbackableId,
+      String? comment,
+      int? rating,
+      @JsonKey(name: 'created_at') DateTime? createdAt});
+
+  $CorrectorCopyWith<$Res>? get user;
+}
+
+/// @nodoc
+class _$FeedbackCopyWithImpl<$Res, $Val extends Feedback>
+    implements $FeedbackCopyWith<$Res> {
+  _$FeedbackCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? user = freezed,
+    Object? feedbackableType = freezed,
+    Object? feedbackableId = freezed,
+    Object? comment = freezed,
+    Object? rating = freezed,
+    Object? createdAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as Corrector?,
+      feedbackableType: freezed == feedbackableType
+          ? _value.feedbackableType
+          : feedbackableType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      feedbackableId: freezed == feedbackableId
+          ? _value.feedbackableId
+          : feedbackableId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CorrectorCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $CorrectorCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$FeedbackImplCopyWith<$Res>
+    implements $FeedbackCopyWith<$Res> {
+  factory _$$FeedbackImplCopyWith(
+          _$FeedbackImpl value, $Res Function(_$FeedbackImpl) then) =
+      __$$FeedbackImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      Corrector? user,
+      @JsonKey(name: 'feedbackable_type') String? feedbackableType,
+      @JsonKey(name: 'feedbackable_id') int? feedbackableId,
+      String? comment,
+      int? rating,
+      @JsonKey(name: 'created_at') DateTime? createdAt});
+
+  @override
+  $CorrectorCopyWith<$Res>? get user;
+}
+
+/// @nodoc
+class __$$FeedbackImplCopyWithImpl<$Res>
+    extends _$FeedbackCopyWithImpl<$Res, _$FeedbackImpl>
+    implements _$$FeedbackImplCopyWith<$Res> {
+  __$$FeedbackImplCopyWithImpl(
+      _$FeedbackImpl _value, $Res Function(_$FeedbackImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? user = freezed,
+    Object? feedbackableType = freezed,
+    Object? feedbackableId = freezed,
+    Object? comment = freezed,
+    Object? rating = freezed,
+    Object? createdAt = freezed,
+  }) {
+    return _then(_$FeedbackImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as Corrector?,
+      feedbackableType: freezed == feedbackableType
+          ? _value.feedbackableType
+          : feedbackableType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      feedbackableId: freezed == feedbackableId
+          ? _value.feedbackableId
+          : feedbackableId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$FeedbackImpl implements _Feedback {
+  const _$FeedbackImpl(
+      {this.id,
+      this.user,
+      @JsonKey(name: 'feedbackable_type') this.feedbackableType,
+      @JsonKey(name: 'feedbackable_id') this.feedbackableId,
+      this.comment,
+      this.rating,
+      @JsonKey(name: 'created_at') this.createdAt});
+
+  factory _$FeedbackImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FeedbackImplFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final Corrector? user;
+  @override
+  @JsonKey(name: 'feedbackable_type')
+  final String? feedbackableType;
+  @override
+  @JsonKey(name: 'feedbackable_id')
+  final int? feedbackableId;
+  @override
+  final String? comment;
+  @override
+  final int? rating;
+  @override
+  @JsonKey(name: 'created_at')
+  final DateTime? createdAt;
+
+  @override
+  String toString() {
+    return 'Feedback(id: $id, user: $user, feedbackableType: $feedbackableType, feedbackableId: $feedbackableId, comment: $comment, rating: $rating, createdAt: $createdAt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FeedbackImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.feedbackableType, feedbackableType) ||
+                other.feedbackableType == feedbackableType) &&
+            (identical(other.feedbackableId, feedbackableId) ||
+                other.feedbackableId == feedbackableId) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, user, feedbackableType,
+      feedbackableId, comment, rating, createdAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FeedbackImplCopyWith<_$FeedbackImpl> get copyWith =>
+      __$$FeedbackImplCopyWithImpl<_$FeedbackImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$FeedbackImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Feedback implements Feedback {
+  const factory _Feedback(
+      {final int? id,
+      final Corrector? user,
+      @JsonKey(name: 'feedbackable_type') final String? feedbackableType,
+      @JsonKey(name: 'feedbackable_id') final int? feedbackableId,
+      final String? comment,
+      final int? rating,
+      @JsonKey(name: 'created_at') final DateTime? createdAt}) = _$FeedbackImpl;
+
+  factory _Feedback.fromJson(Map<String, dynamic> json) =
+      _$FeedbackImpl.fromJson;
+
+  @override
+  int? get id;
+  @override
+  Corrector? get user;
+  @override
+  @JsonKey(name: 'feedbackable_type')
+  String? get feedbackableType;
+  @override
+  @JsonKey(name: 'feedbackable_id')
+  int? get feedbackableId;
+  @override
+  String? get comment;
+  @override
+  int? get rating;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$FeedbackImplCopyWith<_$FeedbackImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Corrector _$CorrectorFromJson(Map<String, dynamic> json) {
+  return _Corrector.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Corrector {
   int? get id => throw _privateConstructorUsedError;
   String? get login => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CorrectCopyWith<Correct> get copyWith => throw _privateConstructorUsedError;
+  $CorrectorCopyWith<Corrector> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CorrectCopyWith<$Res> {
-  factory $CorrectCopyWith(Correct value, $Res Function(Correct) then) =
-      _$CorrectCopyWithImpl<$Res, Correct>;
+abstract class $CorrectorCopyWith<$Res> {
+  factory $CorrectorCopyWith(Corrector value, $Res Function(Corrector) then) =
+      _$CorrectorCopyWithImpl<$Res, Corrector>;
   @useResult
   $Res call({int? id, String? login, String? url});
 }
 
 /// @nodoc
-class _$CorrectCopyWithImpl<$Res, $Val extends Correct>
-    implements $CorrectCopyWith<$Res> {
-  _$CorrectCopyWithImpl(this._value, this._then);
+class _$CorrectorCopyWithImpl<$Res, $Val extends Corrector>
+    implements $CorrectorCopyWith<$Res> {
+  _$CorrectorCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -685,21 +966,22 @@ class _$CorrectCopyWithImpl<$Res, $Val extends Correct>
 }
 
 /// @nodoc
-abstract class _$$CorrectImplCopyWith<$Res> implements $CorrectCopyWith<$Res> {
-  factory _$$CorrectImplCopyWith(
-          _$CorrectImpl value, $Res Function(_$CorrectImpl) then) =
-      __$$CorrectImplCopyWithImpl<$Res>;
+abstract class _$$CorrectorImplCopyWith<$Res>
+    implements $CorrectorCopyWith<$Res> {
+  factory _$$CorrectorImplCopyWith(
+          _$CorrectorImpl value, $Res Function(_$CorrectorImpl) then) =
+      __$$CorrectorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? id, String? login, String? url});
 }
 
 /// @nodoc
-class __$$CorrectImplCopyWithImpl<$Res>
-    extends _$CorrectCopyWithImpl<$Res, _$CorrectImpl>
-    implements _$$CorrectImplCopyWith<$Res> {
-  __$$CorrectImplCopyWithImpl(
-      _$CorrectImpl _value, $Res Function(_$CorrectImpl) _then)
+class __$$CorrectorImplCopyWithImpl<$Res>
+    extends _$CorrectorCopyWithImpl<$Res, _$CorrectorImpl>
+    implements _$$CorrectorImplCopyWith<$Res> {
+  __$$CorrectorImplCopyWithImpl(
+      _$CorrectorImpl _value, $Res Function(_$CorrectorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -709,7 +991,7 @@ class __$$CorrectImplCopyWithImpl<$Res>
     Object? login = freezed,
     Object? url = freezed,
   }) {
-    return _then(_$CorrectImpl(
+    return _then(_$CorrectorImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -728,11 +1010,11 @@ class __$$CorrectImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CorrectImpl implements _Correct {
-  const _$CorrectImpl({this.id, this.login, this.url});
+class _$CorrectorImpl implements _Corrector {
+  const _$CorrectorImpl({this.id, this.login, this.url});
 
-  factory _$CorrectImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CorrectImplFromJson(json);
+  factory _$CorrectorImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CorrectorImplFromJson(json);
 
   @override
   final int? id;
@@ -743,14 +1025,14 @@ class _$CorrectImpl implements _Correct {
 
   @override
   String toString() {
-    return 'Correct(id: $id, login: $login, url: $url)';
+    return 'Corrector(id: $id, login: $login, url: $url)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CorrectImpl &&
+            other is _$CorrectorImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.url, url) || other.url == url));
@@ -763,22 +1045,25 @@ class _$CorrectImpl implements _Correct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CorrectImplCopyWith<_$CorrectImpl> get copyWith =>
-      __$$CorrectImplCopyWithImpl<_$CorrectImpl>(this, _$identity);
+  _$$CorrectorImplCopyWith<_$CorrectorImpl> get copyWith =>
+      __$$CorrectorImplCopyWithImpl<_$CorrectorImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CorrectImplToJson(
+    return _$$CorrectorImplToJson(
       this,
     );
   }
 }
 
-abstract class _Correct implements Correct {
-  const factory _Correct(
-      {final int? id, final String? login, final String? url}) = _$CorrectImpl;
+abstract class _Corrector implements Corrector {
+  const factory _Corrector(
+      {final int? id,
+      final String? login,
+      final String? url}) = _$CorrectorImpl;
 
-  factory _Correct.fromJson(Map<String, dynamic> json) = _$CorrectImpl.fromJson;
+  factory _Corrector.fromJson(Map<String, dynamic> json) =
+      _$CorrectorImpl.fromJson;
 
   @override
   int? get id;
@@ -788,7 +1073,7 @@ abstract class _Correct implements Correct {
   String? get url;
   @override
   @JsonKey(ignore: true)
-  _$$CorrectImplCopyWith<_$CorrectImpl> get copyWith =>
+  _$$CorrectorImplCopyWith<_$CorrectorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -6,8 +6,9 @@ part of 'expertise.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Expertise _$$_ExpertiseFromJson(Map<String, dynamic> json) => _$_Expertise(
-      id: json['id'] as int?,
+_$ExpertiseImpl _$$ExpertiseImplFromJson(Map<String, dynamic> json) =>
+    _$ExpertiseImpl(
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       slug: json['slug'] as String?,
       url: json['url'] as String?,
@@ -18,7 +19,7 @@ _$_Expertise _$$_ExpertiseFromJson(Map<String, dynamic> json) => _$_Expertise(
       expertisesUsersUrl: json['expertises_users_url'] as String?,
     );
 
-Map<String, dynamic> _$$_ExpertiseToJson(_$_Expertise instance) =>
+Map<String, dynamic> _$$ExpertiseImplToJson(_$ExpertiseImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

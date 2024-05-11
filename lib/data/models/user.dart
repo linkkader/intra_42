@@ -3,9 +3,10 @@
 //     final user = userFromJson(jsonString);
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intra_42/data/models/scale_team.dart';
 import 'dart:convert';
 
-import 'black_hole_data.dart';
+import 'package:intra_42/data/models_izar/user_isar.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
@@ -16,7 +17,6 @@ abstract class User with _$User {
     int? id,
     String? email,
     String? login,
-    String? campusName,
     @JsonKey(name: "first_name")
     String? firstName,
     @JsonKey(name: "last_name")
@@ -24,7 +24,7 @@ abstract class User with _$User {
     @JsonKey(name: "usual_full_name")
     String? usualFullName,
     @JsonKey(name: "usual_first_name")
-    dynamic usualFirstName,
+    dynamic? usualFirstName,
     String? url,
     String? phone,
     @JsonKey(name: "displayname")
@@ -53,7 +53,7 @@ abstract class User with _$User {
     @JsonKey(name: "updated_at")
     DateTime? updatedAt,
     @JsonKey(name: "alumnized_at")
-    dynamic alumnizedAt,
+    dynamic? alumnizedAt,
     bool? alumni,
     bool? active,
     List<dynamic>? groups,
@@ -76,7 +76,6 @@ abstract class User with _$User {
     List<Campus>? campus,
     @JsonKey(name: "campus_users")
     List<CampusUser>? campusUsers,
-    BlackHoleData? blackHole,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -241,7 +240,7 @@ abstract class UserClass with _$UserClass {
     @JsonKey(name: "usual_full_name")
     String? usualFullName,
     @JsonKey(name: "usual_first_name")
-    dynamic usualFirstName,
+    dynamic? usualFirstName,
     String? url,
     String? phone,
     @JsonKey(name: "displayname")
@@ -270,7 +269,7 @@ abstract class UserClass with _$UserClass {
     @JsonKey(name: "updated_at")
     DateTime? updatedAt,
     @JsonKey(name: "alumnized_at")
-    dynamic alumnizedAt,
+    dynamic? alumnizedAt,
     bool? alumni,
     bool? active,
   }) = _UserClass;
@@ -357,6 +356,7 @@ abstract class ProjectsUser with _$ProjectsUser {
     DateTime? createdAt,
     @JsonKey(name: "updated_at")
     DateTime? updatedAt,
+    List<Team>? teams,
   }) = _ProjectsUser;
 
   factory ProjectsUser.fromJson(Map<String, dynamic> json) => _$ProjectsUserFromJson(json);
@@ -370,10 +370,89 @@ abstract class Project with _$Project {
     int? id,
     String? name,
     String? slug,
-    @JsonKey(name: "parent_id")
-    dynamic parentId,
+    dynamic parent,
+    List<dynamic>? children,
+    List<dynamic>? attachments,
+    @JsonKey(name: "created_at")
+    DateTime? createdAt,
+    @JsonKey(name: "updated_at")
+    DateTime? updatedAt,
+    bool? exam,
+    @JsonKey(name: "git_id")
+    int? gitId,
+    String? repository,
+    String? recommendation,
+    List<Cursus>? cursus,
+    List<Campus>? campus,
+    List<dynamic>? videos,
+    @JsonKey(name: "project_sessions")
+    List<ProjectSession>? projectSessions,
   }) = _Project;
 
   factory Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
 }
 
+@freezed
+abstract class ProjectSession with _$ProjectSession {
+  const factory ProjectSession({
+    int? id,
+    bool? solo,
+    @JsonKey(name: "begin_at")
+    dynamic beginAt,
+    @JsonKey(name: "end_at")
+    dynamic endAt,
+    @JsonKey(name: "estimate_time")
+    String? estimateTime,
+    int? difficulty,
+    List<String>? objectives,
+    String? description,
+    @JsonKey(name: "duration_days")
+    dynamic durationDays,
+    @JsonKey(name: "terminating_after")
+    dynamic terminatingAfter,
+    @JsonKey(name: "project_id")
+    int? projectId,
+    @JsonKey(name: "campus_id")
+    int? campusId,
+    @JsonKey(name: "cursus_id")
+    int? cursusId,
+    @JsonKey(name: "created_at")
+    DateTime? createdAt,
+    @JsonKey(name: "updated_at")
+    DateTime? updatedAt,
+    @JsonKey(name: "max_people")
+    dynamic maxPeople,
+    @JsonKey(name: "is_subscriptable")
+    bool? isSubscriptable,
+    List<Scale>? scales,
+    List<Upload>? uploads,
+    @JsonKey(name: "team_behaviour")
+    String? teamBehaviour,
+    String? commit,
+  }) = _ProjectSession;
+
+  factory ProjectSession.fromJson(Map<String, dynamic> json) => _$ProjectSessionFromJson(json);
+}
+
+@freezed
+abstract class Scale with _$Scale {
+  const factory Scale({
+    int? id,
+    @JsonKey(name: "correction_number")
+    int? correctionNumber,
+    @JsonKey(name: "is_primary")
+    bool? isPrimary,
+  }) = _Scale;
+
+  factory Scale.fromJson(Map<String, dynamic> json) => _$ScaleFromJson(json);
+}
+
+@freezed
+abstract class Upload with _$Upload {
+  const factory Upload({
+    int? id,
+    String? name,
+  }) = _Upload;
+
+  factory Upload.fromJson(Map<String, dynamic> json) => _$UploadFromJson(json);
+}

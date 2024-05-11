@@ -119,7 +119,6 @@ TokenBodyIsar _tokenBodyIsarDeserialize(
     accessToken: reader.readStringOrNull(offsets[0]),
     createdAt: reader.readLongOrNull(offsets[1]),
     expiresIn: reader.readLongOrNull(offsets[2]),
-    id: id,
     refreshToken: reader.readStringOrNull(offsets[3]),
     scope: reader.readStringOrNull(offsets[4]),
     tokenType: reader.readStringOrNull(offsets[5]),

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'expertise.dart';
 
@@ -12,7 +12,7 @@ part of 'expertise.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Expertise _$ExpertiseFromJson(Map<String, dynamic> json) {
   return _Expertise.fromJson(json);
@@ -106,10 +106,11 @@ class _$ExpertiseCopyWithImpl<$Res, $Val extends Expertise>
 }
 
 /// @nodoc
-abstract class _$$_ExpertiseCopyWith<$Res> implements $ExpertiseCopyWith<$Res> {
-  factory _$$_ExpertiseCopyWith(
-          _$_Expertise value, $Res Function(_$_Expertise) then) =
-      __$$_ExpertiseCopyWithImpl<$Res>;
+abstract class _$$ExpertiseImplCopyWith<$Res>
+    implements $ExpertiseCopyWith<$Res> {
+  factory _$$ExpertiseImplCopyWith(
+          _$ExpertiseImpl value, $Res Function(_$ExpertiseImpl) then) =
+      __$$ExpertiseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,11 +124,11 @@ abstract class _$$_ExpertiseCopyWith<$Res> implements $ExpertiseCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ExpertiseCopyWithImpl<$Res>
-    extends _$ExpertiseCopyWithImpl<$Res, _$_Expertise>
-    implements _$$_ExpertiseCopyWith<$Res> {
-  __$$_ExpertiseCopyWithImpl(
-      _$_Expertise _value, $Res Function(_$_Expertise) _then)
+class __$$ExpertiseImplCopyWithImpl<$Res>
+    extends _$ExpertiseCopyWithImpl<$Res, _$ExpertiseImpl>
+    implements _$$ExpertiseImplCopyWith<$Res> {
+  __$$ExpertiseImplCopyWithImpl(
+      _$ExpertiseImpl _value, $Res Function(_$ExpertiseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -141,7 +142,7 @@ class __$$_ExpertiseCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? expertisesUsersUrl = freezed,
   }) {
-    return _then(_$_Expertise(
+    return _then(_$ExpertiseImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -176,8 +177,8 @@ class __$$_ExpertiseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Expertise implements _Expertise {
-  const _$_Expertise(
+class _$ExpertiseImpl implements _Expertise {
+  const _$ExpertiseImpl(
       {this.id,
       this.name,
       this.slug,
@@ -186,8 +187,8 @@ class _$_Expertise implements _Expertise {
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'expertises_users_url') this.expertisesUsersUrl});
 
-  factory _$_Expertise.fromJson(Map<String, dynamic> json) =>
-      _$$_ExpertiseFromJson(json);
+  factory _$ExpertiseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ExpertiseImplFromJson(json);
 
   @override
   final int? id;
@@ -212,10 +213,10 @@ class _$_Expertise implements _Expertise {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Expertise &&
+            other is _$ExpertiseImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.slug, slug) || other.slug == slug) &&
@@ -235,12 +236,12 @@ class _$_Expertise implements _Expertise {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ExpertiseCopyWith<_$_Expertise> get copyWith =>
-      __$$_ExpertiseCopyWithImpl<_$_Expertise>(this, _$identity);
+  _$$ExpertiseImplCopyWith<_$ExpertiseImpl> get copyWith =>
+      __$$ExpertiseImplCopyWithImpl<_$ExpertiseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ExpertiseToJson(
+    return _$$ExpertiseImplToJson(
       this,
     );
   }
@@ -253,13 +254,12 @@ abstract class _Expertise implements Expertise {
       final String? slug,
       final String? url,
       final String? kind,
-      @JsonKey(name: 'created_at')
-          final DateTime? createdAt,
+      @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'expertises_users_url')
-          final String? expertisesUsersUrl}) = _$_Expertise;
+      final String? expertisesUsersUrl}) = _$ExpertiseImpl;
 
   factory _Expertise.fromJson(Map<String, dynamic> json) =
-      _$_Expertise.fromJson;
+      _$ExpertiseImpl.fromJson;
 
   @override
   int? get id;
@@ -279,6 +279,6 @@ abstract class _Expertise implements Expertise {
   String? get expertisesUsersUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_ExpertiseCopyWith<_$_Expertise> get copyWith =>
+  _$$ExpertiseImplCopyWith<_$ExpertiseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

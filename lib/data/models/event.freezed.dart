@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'event.dart';
 
@@ -12,7 +12,7 @@ part of 'event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Event _$EventFromJson(Map<String, dynamic> json) {
   return _Event.fromJson(json);
@@ -62,24 +62,16 @@ abstract class $EventCopyWith<$Res> {
       String? description,
       String? location,
       String? kind,
-      @JsonKey(name: 'max_people')
-          int? maxPeople,
-      @JsonKey(name: 'nbr_subscribers')
-          int? nbrSubscribers,
-      @JsonKey(name: 'begin_at')
-          DateTime? beginAt,
-      @JsonKey(name: 'end_at')
-          DateTime? endAt,
-      @JsonKey(name: 'campus_ids')
-          List<int>? campusIds,
-      @JsonKey(name: 'cursus_ids')
-          List<int>? cursusIds,
-      @JsonKey(name: 'created_at')
-          DateTime? createdAt,
-      @JsonKey(name: 'updated_at')
-          DateTime? updatedAt,
+      @JsonKey(name: 'max_people') int? maxPeople,
+      @JsonKey(name: 'nbr_subscribers') int? nbrSubscribers,
+      @JsonKey(name: 'begin_at') DateTime? beginAt,
+      @JsonKey(name: 'end_at') DateTime? endAt,
+      @JsonKey(name: 'campus_ids') List<int>? campusIds,
+      @JsonKey(name: 'cursus_ids') List<int>? cursusIds,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'prohibition_of_cancellation')
-          int? prohibitionOfCancellation,
+      int? prohibitionOfCancellation,
       Waitlist? waitlist,
       List<Theme>? themes});
 
@@ -198,9 +190,10 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
 }
 
 /// @nodoc
-abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
-  factory _$$_EventCopyWith(_$_Event value, $Res Function(_$_Event) then) =
-      __$$_EventCopyWithImpl<$Res>;
+abstract class _$$EventImplCopyWith<$Res> implements $EventCopyWith<$Res> {
+  factory _$$EventImplCopyWith(
+          _$EventImpl value, $Res Function(_$EventImpl) then) =
+      __$$EventImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -209,24 +202,16 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       String? description,
       String? location,
       String? kind,
-      @JsonKey(name: 'max_people')
-          int? maxPeople,
-      @JsonKey(name: 'nbr_subscribers')
-          int? nbrSubscribers,
-      @JsonKey(name: 'begin_at')
-          DateTime? beginAt,
-      @JsonKey(name: 'end_at')
-          DateTime? endAt,
-      @JsonKey(name: 'campus_ids')
-          List<int>? campusIds,
-      @JsonKey(name: 'cursus_ids')
-          List<int>? cursusIds,
-      @JsonKey(name: 'created_at')
-          DateTime? createdAt,
-      @JsonKey(name: 'updated_at')
-          DateTime? updatedAt,
+      @JsonKey(name: 'max_people') int? maxPeople,
+      @JsonKey(name: 'nbr_subscribers') int? nbrSubscribers,
+      @JsonKey(name: 'begin_at') DateTime? beginAt,
+      @JsonKey(name: 'end_at') DateTime? endAt,
+      @JsonKey(name: 'campus_ids') List<int>? campusIds,
+      @JsonKey(name: 'cursus_ids') List<int>? cursusIds,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'prohibition_of_cancellation')
-          int? prohibitionOfCancellation,
+      int? prohibitionOfCancellation,
       Waitlist? waitlist,
       List<Theme>? themes});
 
@@ -235,9 +220,11 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
-    implements _$$_EventCopyWith<$Res> {
-  __$$_EventCopyWithImpl(_$_Event _value, $Res Function(_$_Event) _then)
+class __$$EventImplCopyWithImpl<$Res>
+    extends _$EventCopyWithImpl<$Res, _$EventImpl>
+    implements _$$EventImplCopyWith<$Res> {
+  __$$EventImplCopyWithImpl(
+      _$EventImpl _value, $Res Function(_$EventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -260,7 +247,7 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
     Object? waitlist = freezed,
     Object? themes = freezed,
   }) {
-    return _then(_$_Event(
+    return _then(_$EventImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -331,39 +318,31 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Event implements _Event {
-  const _$_Event(
+class _$EventImpl implements _Event {
+  const _$EventImpl(
       {this.id,
       this.name,
       this.description,
       this.location,
       this.kind,
-      @JsonKey(name: 'max_people')
-          this.maxPeople,
-      @JsonKey(name: 'nbr_subscribers')
-          this.nbrSubscribers,
-      @JsonKey(name: 'begin_at')
-          this.beginAt,
-      @JsonKey(name: 'end_at')
-          this.endAt,
-      @JsonKey(name: 'campus_ids')
-          final List<int>? campusIds,
-      @JsonKey(name: 'cursus_ids')
-          final List<int>? cursusIds,
-      @JsonKey(name: 'created_at')
-          this.createdAt,
-      @JsonKey(name: 'updated_at')
-          this.updatedAt,
+      @JsonKey(name: 'max_people') this.maxPeople,
+      @JsonKey(name: 'nbr_subscribers') this.nbrSubscribers,
+      @JsonKey(name: 'begin_at') this.beginAt,
+      @JsonKey(name: 'end_at') this.endAt,
+      @JsonKey(name: 'campus_ids') final List<int>? campusIds,
+      @JsonKey(name: 'cursus_ids') final List<int>? cursusIds,
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt,
       @JsonKey(name: 'prohibition_of_cancellation')
-          this.prohibitionOfCancellation,
+      this.prohibitionOfCancellation,
       this.waitlist,
       final List<Theme>? themes})
       : _campusIds = campusIds,
         _cursusIds = cursusIds,
         _themes = themes;
 
-  factory _$_Event.fromJson(Map<String, dynamic> json) =>
-      _$$_EventFromJson(json);
+  factory _$EventImpl.fromJson(Map<String, dynamic> json) =>
+      _$$EventImplFromJson(json);
 
   @override
   final int? id;
@@ -393,6 +372,7 @@ class _$_Event implements _Event {
   List<int>? get campusIds {
     final value = _campusIds;
     if (value == null) return null;
+    if (_campusIds is EqualUnmodifiableListView) return _campusIds;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -403,6 +383,7 @@ class _$_Event implements _Event {
   List<int>? get cursusIds {
     final value = _cursusIds;
     if (value == null) return null;
+    if (_cursusIds is EqualUnmodifiableListView) return _cursusIds;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -423,6 +404,7 @@ class _$_Event implements _Event {
   List<Theme>? get themes {
     final value = _themes;
     if (value == null) return null;
+    if (_themes is EqualUnmodifiableListView) return _themes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -433,10 +415,10 @@ class _$_Event implements _Event {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Event &&
+            other is _$EventImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
@@ -490,12 +472,12 @@ class _$_Event implements _Event {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EventCopyWith<_$_Event> get copyWith =>
-      __$$_EventCopyWithImpl<_$_Event>(this, _$identity);
+  _$$EventImplCopyWith<_$EventImpl> get copyWith =>
+      __$$EventImplCopyWithImpl<_$EventImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EventToJson(
+    return _$$EventImplToJson(
       this,
     );
   }
@@ -508,28 +490,20 @@ abstract class _Event implements Event {
       final String? description,
       final String? location,
       final String? kind,
-      @JsonKey(name: 'max_people')
-          final int? maxPeople,
-      @JsonKey(name: 'nbr_subscribers')
-          final int? nbrSubscribers,
-      @JsonKey(name: 'begin_at')
-          final DateTime? beginAt,
-      @JsonKey(name: 'end_at')
-          final DateTime? endAt,
-      @JsonKey(name: 'campus_ids')
-          final List<int>? campusIds,
-      @JsonKey(name: 'cursus_ids')
-          final List<int>? cursusIds,
-      @JsonKey(name: 'created_at')
-          final DateTime? createdAt,
-      @JsonKey(name: 'updated_at')
-          final DateTime? updatedAt,
+      @JsonKey(name: 'max_people') final int? maxPeople,
+      @JsonKey(name: 'nbr_subscribers') final int? nbrSubscribers,
+      @JsonKey(name: 'begin_at') final DateTime? beginAt,
+      @JsonKey(name: 'end_at') final DateTime? endAt,
+      @JsonKey(name: 'campus_ids') final List<int>? campusIds,
+      @JsonKey(name: 'cursus_ids') final List<int>? cursusIds,
+      @JsonKey(name: 'created_at') final DateTime? createdAt,
+      @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       @JsonKey(name: 'prohibition_of_cancellation')
-          final int? prohibitionOfCancellation,
+      final int? prohibitionOfCancellation,
       final Waitlist? waitlist,
-      final List<Theme>? themes}) = _$_Event;
+      final List<Theme>? themes}) = _$EventImpl;
 
-  factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
+  factory _Event.fromJson(Map<String, dynamic> json) = _$EventImpl.fromJson;
 
   @override
   int? get id;
@@ -574,7 +548,7 @@ abstract class _Event implements Event {
   List<Theme>? get themes;
   @override
   @JsonKey(ignore: true)
-  _$$_EventCopyWith<_$_Event> get copyWith =>
+  _$$EventImplCopyWith<_$EventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -648,9 +622,10 @@ class _$ThemeCopyWithImpl<$Res, $Val extends Theme>
 }
 
 /// @nodoc
-abstract class _$$_ThemeCopyWith<$Res> implements $ThemeCopyWith<$Res> {
-  factory _$$_ThemeCopyWith(_$_Theme value, $Res Function(_$_Theme) then) =
-      __$$_ThemeCopyWithImpl<$Res>;
+abstract class _$$ThemeImplCopyWith<$Res> implements $ThemeCopyWith<$Res> {
+  factory _$$ThemeImplCopyWith(
+          _$ThemeImpl value, $Res Function(_$ThemeImpl) then) =
+      __$$ThemeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -661,9 +636,11 @@ abstract class _$$_ThemeCopyWith<$Res> implements $ThemeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ThemeCopyWithImpl<$Res> extends _$ThemeCopyWithImpl<$Res, _$_Theme>
-    implements _$$_ThemeCopyWith<$Res> {
-  __$$_ThemeCopyWithImpl(_$_Theme _value, $Res Function(_$_Theme) _then)
+class __$$ThemeImplCopyWithImpl<$Res>
+    extends _$ThemeCopyWithImpl<$Res, _$ThemeImpl>
+    implements _$$ThemeImplCopyWith<$Res> {
+  __$$ThemeImplCopyWithImpl(
+      _$ThemeImpl _value, $Res Function(_$ThemeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -674,7 +651,7 @@ class __$$_ThemeCopyWithImpl<$Res> extends _$ThemeCopyWithImpl<$Res, _$_Theme>
     Object? createdAt = freezed,
     Object? updated_at = freezed,
   }) {
-    return _then(_$_Theme(
+    return _then(_$ThemeImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -697,15 +674,15 @@ class __$$_ThemeCopyWithImpl<$Res> extends _$ThemeCopyWithImpl<$Res, _$_Theme>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Theme implements _Theme {
-  const _$_Theme(
+class _$ThemeImpl implements _Theme {
+  const _$ThemeImpl(
       {this.id,
       this.name,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updatedAt') this.updated_at});
 
-  factory _$_Theme.fromJson(Map<String, dynamic> json) =>
-      _$$_ThemeFromJson(json);
+  factory _$ThemeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ThemeImplFromJson(json);
 
   @override
   final int? id;
@@ -724,10 +701,10 @@ class _$_Theme implements _Theme {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Theme &&
+            other is _$ThemeImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.createdAt, createdAt) ||
@@ -743,12 +720,12 @@ class _$_Theme implements _Theme {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ThemeCopyWith<_$_Theme> get copyWith =>
-      __$$_ThemeCopyWithImpl<_$_Theme>(this, _$identity);
+  _$$ThemeImplCopyWith<_$ThemeImpl> get copyWith =>
+      __$$ThemeImplCopyWithImpl<_$ThemeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ThemeToJson(
+    return _$$ThemeImplToJson(
       this,
     );
   }
@@ -759,9 +736,9 @@ abstract class _Theme implements Theme {
       {final int? id,
       final String? name,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
-      @JsonKey(name: 'updatedAt') final DateTime? updated_at}) = _$_Theme;
+      @JsonKey(name: 'updatedAt') final DateTime? updated_at}) = _$ThemeImpl;
 
-  factory _Theme.fromJson(Map<String, dynamic> json) = _$_Theme.fromJson;
+  factory _Theme.fromJson(Map<String, dynamic> json) = _$ThemeImpl.fromJson;
 
   @override
   int? get id;
@@ -775,7 +752,7 @@ abstract class _Theme implements Theme {
   DateTime? get updated_at;
   @override
   @JsonKey(ignore: true)
-  _$$_ThemeCopyWith<_$_Theme> get copyWith =>
+  _$$ThemeImplCopyWith<_$ThemeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -859,10 +836,11 @@ class _$WaitlistCopyWithImpl<$Res, $Val extends Waitlist>
 }
 
 /// @nodoc
-abstract class _$$_WaitlistCopyWith<$Res> implements $WaitlistCopyWith<$Res> {
-  factory _$$_WaitlistCopyWith(
-          _$_Waitlist value, $Res Function(_$_Waitlist) then) =
-      __$$_WaitlistCopyWithImpl<$Res>;
+abstract class _$$WaitlistImplCopyWith<$Res>
+    implements $WaitlistCopyWith<$Res> {
+  factory _$$WaitlistImplCopyWith(
+          _$WaitlistImpl value, $Res Function(_$WaitlistImpl) then) =
+      __$$WaitlistImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -874,11 +852,11 @@ abstract class _$$_WaitlistCopyWith<$Res> implements $WaitlistCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_WaitlistCopyWithImpl<$Res>
-    extends _$WaitlistCopyWithImpl<$Res, _$_Waitlist>
-    implements _$$_WaitlistCopyWith<$Res> {
-  __$$_WaitlistCopyWithImpl(
-      _$_Waitlist _value, $Res Function(_$_Waitlist) _then)
+class __$$WaitlistImplCopyWithImpl<$Res>
+    extends _$WaitlistCopyWithImpl<$Res, _$WaitlistImpl>
+    implements _$$WaitlistImplCopyWith<$Res> {
+  __$$WaitlistImplCopyWithImpl(
+      _$WaitlistImpl _value, $Res Function(_$WaitlistImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -890,7 +868,7 @@ class __$$_WaitlistCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$_Waitlist(
+    return _then(_$WaitlistImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -917,16 +895,16 @@ class __$$_WaitlistCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Waitlist implements _Waitlist {
-  const _$_Waitlist(
+class _$WaitlistImpl implements _Waitlist {
+  const _$WaitlistImpl(
       {this.id,
       @JsonKey(name: 'waitlistable_id') this.waitlistableId,
       @JsonKey(name: 'waitlistable_type') this.waitlistableType,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
 
-  factory _$_Waitlist.fromJson(Map<String, dynamic> json) =>
-      _$$_WaitlistFromJson(json);
+  factory _$WaitlistImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WaitlistImplFromJson(json);
 
   @override
   final int? id;
@@ -949,10 +927,10 @@ class _$_Waitlist implements _Waitlist {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Waitlist &&
+            other is _$WaitlistImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.waitlistableId, waitlistableId) ||
                 other.waitlistableId == waitlistableId) &&
@@ -972,12 +950,12 @@ class _$_Waitlist implements _Waitlist {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_WaitlistCopyWith<_$_Waitlist> get copyWith =>
-      __$$_WaitlistCopyWithImpl<_$_Waitlist>(this, _$identity);
+  _$$WaitlistImplCopyWith<_$WaitlistImpl> get copyWith =>
+      __$$WaitlistImplCopyWithImpl<_$WaitlistImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_WaitlistToJson(
+    return _$$WaitlistImplToJson(
       this,
     );
   }
@@ -989,9 +967,10 @@ abstract class _Waitlist implements Waitlist {
       @JsonKey(name: 'waitlistable_id') final int? waitlistableId,
       @JsonKey(name: 'waitlistable_type') final String? waitlistableType,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
-      @JsonKey(name: 'updated_at') final DateTime? updatedAt}) = _$_Waitlist;
+      @JsonKey(name: 'updated_at') final DateTime? updatedAt}) = _$WaitlistImpl;
 
-  factory _Waitlist.fromJson(Map<String, dynamic> json) = _$_Waitlist.fromJson;
+  factory _Waitlist.fromJson(Map<String, dynamic> json) =
+      _$WaitlistImpl.fromJson;
 
   @override
   int? get id;
@@ -1009,6 +988,6 @@ abstract class _Waitlist implements Waitlist {
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_WaitlistCopyWith<_$_Waitlist> get copyWith =>
+  _$$WaitlistImplCopyWith<_$WaitlistImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
