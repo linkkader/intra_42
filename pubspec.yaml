@@ -2,7 +2,7 @@ name: intra_42
 description: Intra 42 app
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 0.0.5+5
+version: 0.0.6+6
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
