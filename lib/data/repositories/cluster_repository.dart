@@ -20,7 +20,7 @@ import '../locale_storage/locale_storage.dart';
 import '../manager/image_manager.dart';
 import '../models_izar/user_isar.dart';
 
-class ClusterRepository extends ClusterInterface with ProviderInterface {
+class ClusterRepository extends ClusterInterface {
   late Api _api;
   bool _isInit = false;
   Provider<ClusterRepository>? _pr;
@@ -71,8 +71,6 @@ class ClusterRepository extends ClusterInterface with ProviderInterface {
     for (var value in elements) {
       items.add(EmptyCluster(id: value.attr("id"), x: value.attr("x").toInt() + diffX, y: value.attr("y").toInt() + diffY, height: value.attr("height").toInt(), width: value.attr("width").toInt(), isText: false));
     }
-    App.log.i(items.length);
-
     elements = doc.querySelectorAll("text");
     for (var value in elements) {
       var id = value.text;

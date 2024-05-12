@@ -9,7 +9,7 @@ import '../../domain/util_interface/provider_interface.dart';
 import '../api/api.dart';
 import '../models/user.dart';
 
-class ProjectRepository extends ProjectInterface with ProviderInterface {
+class ProjectRepository extends ProjectInterface {
   late Api _api;
   bool _isInit = false;
   Provider<ProjectRepository>? _pr;

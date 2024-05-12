@@ -94,21 +94,16 @@ class LocaleStorage{
   Future updateTokenBody(TokenBody value) async{
     _isar.writeTxn(() async{
       var check = await _isar.tokenBodyIsars.put(TokenBodyIsar.fromFreezed(value));
-      App.log.i("$debug updateTokenBody success: $check");
     }).onError((error, stackTrace) {
-      App.log.e("$debug updateTokenBody error: $error");
     });
   }
 
   Future updateMe(User value) async{
-    App.log.i("$debug updateMe: $value");
     await _isar.writeTxn(() async{
       var v = UserIsar.fromFreezed(value);
       v = v.copyWith(isarId: 0);
       var id = await _isar.userIsars.put(v);
-      App.log.i("$debug me updateUser success $id vid ${v.isarId}");
     }).onError((error, stackTrace) {
-      App.log.e("$debug updateUser error: $error $stackTrace");
     });
   }
 
@@ -197,10 +192,7 @@ class LocaleStorage{
     if (user != null){
       return _isar.writeTxn(() async{
         _isar.userIsars.put(UserIsar.fromFreezed(user.copyWith(location: location)));
-        App.log.i("$debug updateUserLocation success");
-      }).catchError((error, stackTrace) {
-        App.log.e("$debug updateUserLocation error: $error $stackTrace");
-      });
+      }).catchError((error, stackTrace) {});
     }
   }
 

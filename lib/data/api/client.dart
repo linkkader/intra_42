@@ -32,7 +32,7 @@ class Client {
   factory Client() => _instance;
 
   Future<void> initApi() async {
-    if (kDebugMode)_dio.interceptors.add(log.LogInterceptor());
+    if (kDebugMode && false)_dio.interceptors.add(log.LogInterceptor());
     _dio.interceptors.add(RefreshInterceptor());
     _dio.interceptors.add(LimiterInterceptor());
     if (LocaleStorage().tokenBody != null) {

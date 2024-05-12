@@ -5,17 +5,16 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 0.0.5+5
 
 environment:
-  sdk: ">=2.17.1 <3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  es_compression: ^2.0.11
 
   fluttertoast: ^8.0.7
 
   dart_brotli: 0.0.3
 
   #icons
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: any
 
   #loading
   loading_animation_widget: ^1.2.0+3
@@ -32,7 +31,7 @@ dependencies:
   #url launcher
   url_launcher: ^6.1.5
 
-  image: ^4.1.7
+  image: 3.3.0
 
   #web socket
   web_socket_channel: ^2.2.0

@@ -49,7 +49,6 @@ class BlackHoleRepository extends BlackHoleInterface{
   @override
   Future<List<Pair<int, List<User2>>>> allBlackHoles(String campusName, {Function(List<String> lst)? onImages, Function(List<String> lst)? onCampusName}) async{
     assert(_isInit, "BlackHoleRepository not initialized");
-    App.log.d("allBlackHoles");
     Set<String> campusNames = {};
     var now = DateTime.now();
     var imagesUrls = <String>[];

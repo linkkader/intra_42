@@ -32,7 +32,7 @@ import 'package:intra_42/core/extensions/element_ext.dart';
 import '../models/user_2.dart';
 
 ///todo: too many functions, split into smaller classes
-class UserRepository extends UserInterface with ProviderInterface {
+class UserRepository extends UserInterface {
   late Api _api;
   bool _isInit = false;
   Provider<UserRepository>? _pr;
@@ -167,7 +167,6 @@ class UserRepository extends UserInterface with ProviderInterface {
     var data = json.decode((await dio.get("https://raw.githubusercontent.com/linkkader/Intra_42/main/last_update.json")).data);
     var update = DateTime.parse(data["update"]);
     var lastUpdate = LocaleStorage.dateTime("last");
-    App.log.i("Updating black hole users $lastUpdate $update");
     if (lastUpdate != null && !(update.isAfter(lastUpdate))) {
 
     }
@@ -197,9 +196,7 @@ class UserRepository extends UserInterface with ProviderInterface {
       }
       try{
         await LocaleStorage.setListUser2(users);
-        App.log.d("users saved ${users.length}");
       }catch(_){
-        App.log.d("failed to save users");
       }
       LocaleStorage.setDateTime("last", update);
     }

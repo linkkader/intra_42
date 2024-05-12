@@ -147,7 +147,6 @@ class _ClusterState extends ConsumerState<BlackHoleScreen> with SingleTickerProv
     var campusName = "1337 Benguerir/Morocco";
     try{
       campusName = "${me!.campus!.first.website!.urlName} ${me.campus!.first.name}/${me.campus!.first.country}";
-      App.log.i("campusName: $campusName");
     }catch(_){}
 
     futureProvider = FutureProvider((ref) {

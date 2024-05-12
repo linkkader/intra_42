@@ -21,7 +21,7 @@ import 'package:intra_42/presentation/page/start_page.dart';
 import '../../domain/auth_interface/auth_interface.dart';
 import '../../domain/util_interface/provider_interface.dart';
 
-class AuthRepository extends AuthInterface with ProviderInterface {
+class AuthRepository extends AuthInterface {
   bool _isInit = false;
   late Api _api;
   Provider<AuthRepository>? _pr;
@@ -94,7 +94,6 @@ class AuthRepository extends AuthInterface with ProviderInterface {
   @override
   Future<bool> isUserLoggedIn() async {
     assert(_isInit, "AuthRepository not initialized");
-    App.log.i("isUserLoggedIn");
     if (LocaleStorage().tokenBody == null) return false;
     var bool = await refreshToken();
     if (bool == false) return false;
@@ -152,7 +151,6 @@ class AuthRepository extends AuthInterface with ProviderInterface {
   Future updateSecretFromGithub() async {
     try{
       var data = json.decode((await Dio().get("https://raw.githubusercontent.com/linkkader/Intra_42/main/last_update.json")).data);
-      App.log.i("updateSecretFromGithub: $data");
       if (data["secret_key"] != null){
         var secret = data["secret_key"];
         await LocaleStorage.setString("default_secret_key", secret.toString());
@@ -167,7 +165,6 @@ class AuthRepository extends AuthInterface with ProviderInterface {
     if (body?.refreshToken == null) return Future.value(false);
     await updateSecretFromGithub();
     return _api.token(_tokenBody(body!.refreshToken!, authorizationCode: "refresh_token")).then((value){
-      App.log.i("renewToken: $value");
       LocaleStorage().updateTokenBody(value);
       Client.addHeader('Authorization', '${value.tokenType?.capitalize()} ${value.accessToken}');
       return true;

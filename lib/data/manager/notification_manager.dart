@@ -115,9 +115,7 @@ class NotificationManager {
         "intra", "intra",
         frequency: duration,
       ).then((value) {
-        App.log.i("Workmanager registered");
       }).catchError((_){
-        App.log.e("Workmanager register failed $_");
       });
     }else{
       Timer.periodic(const Duration(minutes: 15), (timer) {

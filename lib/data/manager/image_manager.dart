@@ -16,7 +16,8 @@ import '../../core/utils/task_runner.dart';
 
 
 Uint8List cropImage(Uint8List data) {
-  var crop = image.copyCropCircle(image.decodeImage(data)!);
+  var img = image.decodeImage(data)!;
+  var crop = image.copyCropCircle(img);
   return Uint8List.fromList(image.encodePng(crop));
 }
 
